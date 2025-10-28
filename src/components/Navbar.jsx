@@ -278,8 +278,6 @@ const ModernNavbar = () => {
           </div>
         </div>
       </nav>
-
-      {/* Mobile Menu Overlay - sliding drawer */}
       {/* Mobile Menu Overlay - sliding drawer */}
       <div
         className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gray-900/95 backdrop-blur-md shadow-xl z-50 transform transition-transform duration-300 ${
