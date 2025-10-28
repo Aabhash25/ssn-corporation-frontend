@@ -7,9 +7,8 @@ import {
   BriefcaseIcon,
   AcademicCapIcon,
   HandRaisedIcon,
-  SparklesIcon,
-  ArrowRightIcon,
   RocketLaunchIcon,
+  ArrowRightIcon,
 } from "@heroicons/react/24/outline";
 
 // Google Fonts
@@ -58,12 +57,12 @@ const JoinOurTeam = () => {
     <>
       <FontsStyle />
       <div className="overflow-x-hidden text-gray-800 relative">
-        <section className="relative flex flex-col justify-start py-6 sm:py-8 lg:py-10 bg-gradient-to-br from-white via-gray-50 to-orange-50 min-h-screen">
+        <section className="relative flex flex-col justify-start py-6 sm:py-8 lg:py-10 bg-gradient-to-br ...">
           {/* Animated background */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-1/4 left-1/4 w-48 sm:w-64 md:w-72 h-48 sm:h-64 md:h-72 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-48 sm:w-56 md:w-64 h-48 sm:h-56 md:h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-3/4 left-1/2 w-40 sm:w-48 md:w-56 h-40 sm:h-48 md:h-56 bg-purple-500/8 rounded-full blur-3xl animate-pulse delay-2000"></div>
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-0 w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-0 right-0 w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute top-1/2 left-1/2 w-24 sm:w-32 md:w-40 h-24 sm:h-32 md:h-40 bg-purple-500/8 rounded-full blur-3xl animate-pulse delay-2000 -translate-x-1/2 -translate-y-1/2"></div>
           </div>
 
           <div className="relative z-10 w-full px-4 sm:px-6 md:px-8 lg:px-12">
