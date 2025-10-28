@@ -1,0 +1,13 @@
+@import "tailwindcss";
+html, body {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section, div {
+  /* overflow-x: hidden; */
+}

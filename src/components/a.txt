@@ -1,0 +1,29 @@
+const projects = [
+  {
+    id: 1,
+    name: "Empire Tower",
+    image: "/CustomVacationHome.jpg",
+    description: "High-rise commercial building in New York.",
+    year: 2022,
+    lat: 40.748817,
+    lng: -73.985428,
+  },
+  {
+    id: 2,
+    name: "Silicon Valley Hub",
+    image: "/GamesDayMensHealthConstruction.jpg",
+    description: "Modern tech campus in California.",
+    year: 2023,
+    lat: 37.387474,
+    lng: -122.057543,
+  },
+  {
+    id: 3,
+    name: "Chicago Industrial Park",
+    image: "/ParkRestRoomBuilding.jpg",
+    description: "Large industrial facility in Chicago.",
+    year: 2024,
+    lat: 41.878113,
+    lng: -87.629799,
+  },
+];
