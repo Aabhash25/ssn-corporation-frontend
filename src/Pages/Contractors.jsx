@@ -95,7 +95,7 @@ const Contractors = () => {
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://media.istockphoto.com/id/586066898/photo/reporting-to-contractor-at-construction-site.webp?a=1&b=1&s=612x612&w=0&k=20&c=XBn2fcTRRpOgiL5haLypmuyk8zH0c-0wlt5QfJPpddw="
+            src="/contractorback.jpg"
             alt="Construction Site"
             className="w-full h-full object-cover"
           />
@@ -193,7 +193,7 @@ const Contractors = () => {
             transition={{ delay: 0.6 }}
           >
             <img
-              src="https://media.istockphoto.com/id/586066898/photo/reporting-to-contractor-at-construction-site.webp?a=1&b=1&s=612x612&w=0&k=20&c=XBn2fcTRRpOgiL5haLypmuyk8zH0c-0wlt5QfJPpddw="
+              src="/contractor.jpg"
               alt="Contracting Preview"
               className="w-full h-full object-cover"
             />

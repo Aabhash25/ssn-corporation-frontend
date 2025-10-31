@@ -75,8 +75,8 @@ const ufcResources = [
 
 const OpenResources = () => {
   return (
-    <ConstructionLayout variant="default">
-      <div className="max-w-7xl mx-auto px-6 py-24">
+    <>
+      <div className="max-w-7xl mx-auto px-6 py-24 pt-42">
         {/* Page Header */}
         <motion.h1
           className="text-5xl sm:text-6xl font-playfair font-bold text-gray-900 text-center mb-6"
@@ -169,7 +169,7 @@ const OpenResources = () => {
           font-family: "Roboto", sans-serif;
         }
       `}</style>
-    </ConstructionLayout>
+    </>
   );
 };
 

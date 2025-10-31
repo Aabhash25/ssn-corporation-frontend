@@ -12,58 +12,59 @@ const ResearchAndDevelopment = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
-    <div className="w-full min-h-screen pt-32 pb-8 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-7xl mx-auto px-6 py-8 relative z-10 text-gray-900">
+    <div className="w-full min-h-screen pt-42 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
+      <div className="max-w-7xl mx-auto">
         {/* Page Header */}
-        <h1 className="text-5xl sm:text-6xl font-playfair font-bold mb-6 text-center">
-          Research & Development
-        </h1>
-        <p className="text-lg sm:text-xl font-roboto mb-12 leading-relaxed text-center">
-          Our R&D team is dedicated to building AI-driven solutions for quantity
-          take-off, cost estimation, and efficient construction planning. We
-          harness computer vision, deep learning, and automation to deliver
-          faster, more accurate, and cost-efficient projects.
-        </p>
+        <div className="text-center mb-16 px-4">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-playfair font-bold mb-6 text-gray-900">
+            Research And Development
+          </h1>
+        </div>
 
         {/* Two-column Layout */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-16">
+        <div className="grid lg:grid-cols-[1.2fr_1.8fr] gap-12 lg:gap-16 items-center mb-20 px-4">
           {/* Left Column */}
-          <div className="space-y-8">
-            <h2 className="text-4xl lg:text-5xl font-playfair font-bold text-gray-900 leading-tight">
+          <div className="space-y-8 order-2 lg:order-1">
+            <h2 className="text-3xl lg:text-4xl font-playfair font-bold text-gray-900 leading-tight">
               AI-Powered Quantity Take-Off And Cost Estimation
             </h2>
 
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 border border-transparent hover:border-gray-200">
-                <div className="flex-shrink-0 w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mt-1">
-                  <FaBrain className="text-blue-600 text-lg" />
+            <div className="space-y-4">
+              <div className="flex items-start gap-4 p-6 rounded-xl bg-gray-50 border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <FaBrain className="text-blue-600 text-xl" />
                 </div>
-                <p className="text-gray-700 text-lg leading-relaxed pt-1 font-roboto">
-                  Our AI-enabled product automatically analyzes 2D building
-                  plans to extract elements and generate accurate quantity
-                  takeoffs.
-                </p>
+                <div>
+                  <p className="text-gray-700 text-base leading-relaxed font-roboto">
+                    Our AI-enabled product automatically analyzes 2D building
+                    plans to extract elements and generate accurate quantity
+                    takeoffs.
+                  </p>
+                </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 border border-transparent hover:border-gray-200">
-                <div className="flex-shrink-0 w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mt-1">
-                  <FaRocket className="text-green-600 text-lg" />
+              <div className="flex items-start gap-4 p-6 rounded-xl bg-gray-50 border border-gray-100 hover:border-green-200 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <FaRocket className="text-green-600 text-xl" />
                 </div>
-                <p className="text-gray-700 text-lg leading-relaxed pt-1 font-roboto">
-                  It reduces manual effort, minimizes errors, and speeds up
-                  project planning.
-                </p>
+                <div>
+                  <p className="text-gray-700 text-base leading-relaxed font-roboto">
+                    Reduces manual effort by 80%, minimizes errors, and
+                    accelerates project planning timelines.
+                  </p>
+                </div>
               </div>
 
-              <div className="flex items-start gap-4 p-4 rounded-xl hover:bg-gray-50 transition-all duration-300 border border-transparent hover:border-gray-200">
-                <div className="flex-shrink-0 w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mt-1">
-                  <FaChartLine className="text-purple-600 text-lg" />
+              <div className="flex items-start gap-4 p-6 rounded-xl bg-gray-50 border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <FaChartLine className="text-purple-600 text-xl" />
                 </div>
-                <p className="text-gray-700 text-lg leading-relaxed pt-1 font-roboto">
-                  By integrating real-time cost data, we provide precise
-                  material and cost estimates, empowering construction teams to
-                  make informed decisions.
-                </p>
+                <div>
+                  <p className="text-gray-700 text-base leading-relaxed font-roboto">
+                    Integrating real-time cost data to provide precise material
+                    estimates and empower data-driven decision making.
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -71,7 +72,7 @@ const ResearchAndDevelopment = () => {
             <div className="pt-4">
               <a
                 href="/quantity-takeoff"
-                className="group inline-flex items-center gap-4 px-8 py-4 bg-blue-600 text-white rounded-lg font-roboto font-semibold text-lg hover:bg-blue-700 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 transform"
+                className="group inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-xl font-roboto font-semibold text-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
               >
                 <span>Visit Quantity Takeoff</span>
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
@@ -79,17 +80,16 @@ const ResearchAndDevelopment = () => {
             </div>
           </div>
 
-          {/* Right Column - Image */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+          {/* Right Column - Full Image */}
+          <div className="relative order-1 lg:order-2 w-full">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 w-full max-w-[900px] mx-auto">
               <img
-                src="/ai.png"
+                src="/research.png"
                 alt="AI analyzing construction blueprints in our R&D lab"
-                className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
+                className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-700"
                 loading="lazy"
               />
-
-              <div className="absolute bottom-4 left-4 bg-white bg-opacity-90 backdrop-blur-sm px-4 py-3 rounded-lg text-gray-800 font-roboto shadow-md">
+              <div className="absolute bottom-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-3 rounded-xl text-gray-800 font-roboto font-medium shadow-lg">
                 AI-powered blueprint analysis
               </div>
             </div>
@@ -97,31 +97,71 @@ const ResearchAndDevelopment = () => {
         </div>
 
         {/* Stats Section */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-0">
-          {[
-            { number: "95%", label: "Accuracy Rate" },
-            { number: "10x", label: "Faster Processing" },
-            { number: "50%", label: "Cost Reduction" },
-            { number: "24/7", label: "AI Analysis" },
-          ].map((stat, index) => (
-            <div
-              key={index}
-              className="text-center p-6 rounded-xl border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 cursor-pointer"
-              onMouseEnter={() => setHoveredCard(index)}
-              onMouseLeave={() => setHoveredCard(null)}
-            >
-              <div
-                className={`text-3xl lg:text-4xl font-playfair font-bold text-gray-900 transition-all duration-300 ${
-                  hoveredCard === index ? "scale-110" : ""
-                }`}
-              >
-                {stat.number}
-              </div>
-              <div className="text-gray-600 font-roboto font-medium mt-2">
-                {stat.label}
-              </div>
-            </div>
-          ))}
+        <div className="bg-gray-50 rounded-2xl p-8 lg:p-12 mx-4">
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-playfair font-bold text-gray-900 mb-4">
+              Proven Results
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto font-roboto">
+              Our AI solutions deliver measurable improvements across key
+              performance indicators
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                number: "95%",
+                label: "Accuracy Rate",
+                icon: FaChartLine,
+                color: "text-green-600",
+              },
+              {
+                number: "10x",
+                label: "Faster Processing",
+                icon: FaRocket,
+                color: "text-blue-600",
+              },
+              {
+                number: "50%",
+                label: "Cost Reduction",
+                icon: FaBrain,
+                color: "text-purple-600",
+              },
+              {
+                number: "24/7",
+                label: "AI Analysis",
+                icon: FaLightbulb,
+                color: "text-orange-600",
+              },
+            ].map((stat, index) => {
+              const IconComponent = stat.icon;
+              return (
+                <div
+                  key={index}
+                  className="text-center p-6 rounded-xl bg-white border border-gray-200 hover:border-blue-300 hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <IconComponent className={`text-2xl ${stat.color}`} />
+                    </div>
+                  </div>
+                  <div
+                    className={`text-2xl lg:text-3xl font-playfair font-bold text-gray-900 transition-all duration-300 ${
+                      hoveredCard === index ? "scale-110" : ""
+                    }`}
+                  >
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-600 font-roboto font-medium mt-2">
+                    {stat.label}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 

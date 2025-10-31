@@ -136,7 +136,7 @@ const Engineers = () => {
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&auto=format&fit=crop&q=80"
+            src="/22.jpg"
             alt="Modern Architecture"
             className="w-full h-full object-cover"
           />
@@ -229,7 +229,7 @@ const Engineers = () => {
             transition={{ delay: 0.6 }}
           >
             <img
-              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&auto=format&fit=crop&q=60"
+              src="/21.jpg"
               alt="Engineering Preview"
               className="w-full h-full object-cover"
             />

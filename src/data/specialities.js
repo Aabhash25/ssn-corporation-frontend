@@ -3,7 +3,7 @@ export const specialities = [
     title: "Architectural Design",
     icon: "🏛️",
     image:
-      "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=600&auto=format&fit=crop&q=60",
+      "/GamesDayMensHealth7.png",
     description: [
       "SSN Engineers has proven skills to transform spaces with innovative building design for residential, commercial, and specialized facilities including healthcare, industrial, and educational environments.",
       [
@@ -54,7 +54,7 @@ export const specialities = [
     title: "Subsurface Investigation and Geotechnical Laboratory Testing",
     icon: "🌍",
     image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=60",
+      "",
     description: [
       "Comprehensive subsurface investigation and geotechnical testing services.",
       [
@@ -71,7 +71,7 @@ export const specialities = [
     title: "Geotechnical Evaluation and Design",
     icon: "🧱",
     image:
-      "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&auto=format&fit=crop&q=60",
+      "geotech.jpg",
     description: [
       "Comprehensive geotechnical engineering services for various projects.",
       [
@@ -89,7 +89,7 @@ export const specialities = [
     title: "MEP Design",
     icon: "⚡",
     image:
-      "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=600&auto=format&fit=crop&q=60",
+      "/mep.png",
     description: [
       "Comprehensive MEP (Mechanical, Electrical, Plumbing) design services.",
       [
@@ -103,27 +103,10 @@ export const specialities = [
     ],
   },
   {
-    title: "Construction Support and Material Testing",
-    icon: "🧪",
-    image:
-      "https://images.unsplash.com/photo-1581092334707-7b2c97c6aa8f?w=600&auto=format&fit=crop&q=60",
-    description: [
-      "Comprehensive construction support and material testing services.",
-      [
-        "Soil, aggregate, asphalt, and concrete laboratory testing",
-        "Masonry and concrete masonry unit (CMU) testing",
-        "Concrete and asphalt field inspections",
-        "Soil field testing and field inspection",
-        "Retaining wall construction inspection",
-        "Asphalt subgrade, base, binder and surface installation monitoring",
-      ],
-    ],
-  },
-  {
     title: "Instrumentation and Monitoring",
     icon: "📡",
     image:
-      "https://images.unsplash.com/photo-1561553873-e8491a564d6a?w=600&auto=format&fit=crop&q=60",
+      "26.jpg",
     description: [
       "Comprehensive instrumentation and monitoring services.",
       [

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import ConstructionLayout from "../Layout/ConstructionLayout";
 
 const prequalificationDocs = [
   {
@@ -44,34 +43,26 @@ const Business = () => {
     note: "",
     file: null,
   });
-
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: files ? files[0] : value }));
   };
 
-  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const fd = new FormData();
-    Object.keys(formData).forEach((key) => {
-      if (formData[key]) fd.append(key, formData[key]);
-    });
+    Object.keys(formData).forEach(
+      (key) => formData[key] && fd.append(key, formData[key])
+    );
 
     try {
       const res = await fetch("https://api.ssnbuilders.com/api/submit/", {
         method: "POST",
         body: fd,
       });
-
       if (res.ok) {
         setModalMessage("Prequalification form submitted successfully!");
         setModalOpen(true);
@@ -96,27 +87,25 @@ const Business = () => {
   };
 
   return (
-    <ConstructionLayout variant="default">
-      <div className="max-w-7xl mx-auto px-6 py-24 relative z-10 text-gray-900">
-        {/* Page Header */}
-        <h1 className="text-5xl sm:text-6xl font-playfair font-bold mb-6 text-center">
-          Work With SSN Corporation
-        </h1>
-        <p className="text-lg sm:text-xl font-roboto mb-12 leading-relaxed text-center">
-          SSN Corporation values our relationships with subcontractors,
-          suppliers, and collaborators/partners, and continuously seeks ways to
-          assist you in participating in our projects. Below you will find
-          information and links to help you become our Subcontractor, Supplier,
-          or collaborator/partner.
-        </p>
+    <div className="w-full px-4 sm:px-6 lg:px-12 py-24 text-gray-900 pt-42">
+      {/* Page Header */}
+      <h1 className="text-5xl sm:text-6xl font-playfair font-bold mb-6 text-center">
+        Work With SSN Corporation
+      </h1>
+      <p className="text-lg sm:text-xl font-roboto mb-12 leading-relaxed text-center">
+        SSN Corporation values our relationships with subcontractors, suppliers,
+        and collaborators/partners...
+      </p>
 
-        {/* Prequalification Docs Table */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-playfair font-bold mb-4">
+      {/* Full-width Two-column Layout */}
+      <div className="flex flex-col lg:flex-row gap-12 w-full">
+        {/* Table Container */}
+        <div className="flex-1">
+          <h2 className="text-3xl font-playfair font-bold mb-4 text-center lg:text-left">
             Prequalification Documents
           </h2>
-          <div className="overflow-x-auto mt-4">
-            <table className="min-w-full bg-white/90 rounded-2xl text-gray-900 shadow-lg">
+          <div className="overflow-x-auto rounded-2xl shadow-lg">
+            <table className="min-w-full table-auto bg-white/90 text-gray-900">
               <thead className="bg-gray-200">
                 <tr>
                   <th className="px-4 py-3 text-left font-playfair">
@@ -144,15 +133,15 @@ const Business = () => {
               </tbody>
             </table>
           </div>
-        </section>
+        </div>
 
-        {/* Prequalification Form */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-playfair font-bold mb-6 text-center">
+        {/* Form Container */}
+        <div className="flex-1">
+          <h2 className="text-3xl font-playfair font-bold mb-6 text-center lg:text-left">
             Prequalification Form
           </h2>
           <form
-            className="max-w-3xl mx-auto bg-white/90 p-8 rounded-2xl shadow-lg grid gap-6"
+            className="bg-white/90 p-8 rounded-2xl shadow-lg grid gap-6"
             onSubmit={handleSubmit}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -183,6 +172,7 @@ const Business = () => {
                 />
               </div>
             </div>
+
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 Email Address*
@@ -196,6 +186,7 @@ const Business = () => {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
               />
             </div>
+
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 Phone Number*
@@ -209,6 +200,7 @@ const Business = () => {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
               />
             </div>
+
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 Company
@@ -221,6 +213,7 @@ const Business = () => {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
               />
             </div>
+
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 Note*
@@ -234,6 +227,7 @@ const Business = () => {
                 rows={4}
               ></textarea>
             </div>
+
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 File
@@ -242,12 +236,13 @@ const Business = () => {
                 type="file"
                 name="file"
                 onChange={handleChange}
-                className="w-full"
+                className="block w-full text-gray-700 bg-gray-100 border border-gray-300 rounded-lg px-3 py-2 cursor-pointer"
               />
               <p className="text-sm text-gray-500 mt-1">
                 Max. file size: 25 MB.
               </p>
             </div>
+
             <button
               type="submit"
               className="px-6 py-3 bg-orange-600 text-white font-roboto font-semibold rounded-xl hover:bg-orange-700 transition"
@@ -255,25 +250,26 @@ const Business = () => {
               Submit
             </button>
           </form>
-        </section>
-
-        {/* Modal */}
-        {modalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-xl shadow-xl text-center max-w-sm">
-              <h2 className="text-xl font-bold mb-2">Notification</h2>
-              <p className="mb-4">{modalMessage}</p>
-              <button
-                className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md"
-                onClick={() => setModalOpen(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        )}
+        </div>
       </div>
 
+      {/* Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-xl shadow-xl text-center max-w-sm">
+            <h2 className="text-xl font-bold mb-2">Notification</h2>
+            <p className="mb-4">{modalMessage}</p>
+            <button
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md"
+              onClick={() => setModalOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Fonts */}
       <style jsx>{`
         .font-playfair {
           font-family: "Playfair Display", serif;
@@ -282,7 +278,7 @@ const Business = () => {
           font-family: "Roboto", sans-serif;
         }
       `}</style>
-    </ConstructionLayout>
+    </div>
   );
 };
 

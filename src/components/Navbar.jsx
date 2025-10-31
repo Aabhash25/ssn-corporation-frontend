@@ -155,16 +155,16 @@ const ModernNavbar = () => {
 
       {/* Main Navbar */}
       <nav
-        className={`fixed w-full transition-all duration-500 ${navBg} z-40`}
+        className={`fixed w-full transition-all duration-500 ${navBg} z-50`}
         style={{
           top: isDesktop ? "56px" : "0px",
         }}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center h-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center h-24 px-6 lg:px-8">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center font-playfair text-3xl lg:text-4xl font-bold"
+            className="flex items-center font-playfair text-3xl lg:text-4xl font-bold flex-shrink-0"
           >
             <img
               src="/logo.png"
@@ -173,8 +173,11 @@ const ModernNavbar = () => {
             />
           </Link>
 
+          {/* Spacer to push nav links right */}
+          <div className="flex-1 min-w-[200px]"></div>
+
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-10 font-oswald text-2xl">
+          <div className="hidden lg:flex items-center space-x-10 font-oswald text-2xl whitespace-nowrap">
             <Link className={`transition-colors ${linkStyle}`} to="/about">
               About Us
             </Link>
@@ -255,10 +258,12 @@ const ModernNavbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center ml-auto flex-shrink-0">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`focus:outline-none p-3 rounded-md transition-all duration-300 ${linkStyle}`}
+              className={`focus:outline-none p-3 rounded-md transition-all duration-300 ${
+                isLandingPage && !scrolled ? "text-white" : "text-gray-900"
+              }`}
             >
               <svg
                 className="w-8 h-8"

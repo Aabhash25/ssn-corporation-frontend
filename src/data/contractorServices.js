@@ -36,7 +36,7 @@
       description:
 "At SSN Corporation , we believe that a home is more than just a structure—it’s a sanctuary where life unfolds, memories are made, and dreams come true. Our Residential Construction Services are designed to bring your vision to life, whether you’re building a custom dream home, renovating an existing space, or developing a residential community. With a focus on quality, innovation, and sustainability, we create living spaces that are as unique as you are.",
       image:
-        "https://images.unsplash.com/photo-1499750264616-eca69646ae17?w=600&auto=format&fit=crop&q=60",
+        "newconstruction.jpg",
       icon: "🏠",
       features: [
         "Custom Home Building",
@@ -52,7 +52,7 @@
 "At SSN Corporation , we specialize in creating commercial spaces that are not only visually stunning but also highly functional and aligned with your business goals. Whether you’re planning an office complex, retail store, hospitality facility, or industrial building, our team of experts ensures that every project is executed with precision, efficiency, and innovation. From concept to completion, we deliver spaces that enhance productivity, attract customers, and elevate your brand.",
 
       image:
-        "https://plus.unsplash.com/premium_photo-1680281937048-735543c5c0f7?w=600&auto=format&fit=crop&q=60",
+        "/CarolinaMurganTemple4.jpg",
       icon: "🏢",
       features: [
         "Office Buildings Design & Construction",
@@ -64,11 +64,11 @@
       ],
     },
     {
-      title: "Commercial Upfit",
+      title: "Commercial Space Upfit",
       description:
 "At SSN Corporation , we specialize in transforming tired, outdated, or inefficient commercial spaces into dynamic environments that drive business success. Whether you’re looking to modernize an office, revamp a retail store, or upgrade an industrial facility, our Commercial Space Uplift Services are designed to breathe new life into your property. From aesthetic enhancements to operational improvements, we deliver solutions that align with your business goals and elevate your brand.",
       image:
-        "https://images.unsplash.com/photo-1712758602405-f8aa7de86cef?w=600&auto=format&fit=crop&q=60",
+        "/GroceryDurham1.png",
       icon: "🔄",
       features: [
         "Interior Renovations",
@@ -100,7 +100,7 @@
       description:
 "We are in the process of building our team for Utility Construction",
       image:
-        "https://images.unsplash.com/photo-1605027581722-173d57ce506a?w=600&auto=format&fit=crop&q=60",
+        "/utility.jpg",
       icon: "🔌",
       features: [
       ],

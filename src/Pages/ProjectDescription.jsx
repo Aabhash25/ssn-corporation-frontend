@@ -17,7 +17,6 @@ const ProjectDescription = () => {
       <p className="pt-[100px] text-center text-gray-600">Project not found.</p>
     );
 
-  // Auto slide for hero images
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
@@ -51,39 +50,16 @@ const ProjectDescription = () => {
                 key={currentImageIndex}
                 src={project.images[currentImageIndex]}
                 alt={project.name}
-                initial={{ opacity: 0, scale: 1.05 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05 }}
-                transition={{ duration: 1 }}
-                className="absolute inset-0 w-full h-full object-cover rounded-b-3xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.9 }}
+                className="absolute inset-0 w-full h-full object-cover rounded-b-3xl will-change-transform"
               />
             </AnimatePresence>
 
             {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent rounded-b-3xl"></div>
-
-            {/* Text overlay */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-8 text-center">
-              <motion.h1
-                key={currentImageIndex}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.8 }}
-                className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-xl mb-2 font-[Playfair_Display]"
-              >
-                {project.name}
-              </motion.h1>
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 drop-shadow-lg max-w-3xl"
-              >
-                {project.description}
-              </motion.p>
-            </div>
 
             {/* Nav Buttons */}
             {project.images.length > 1 && (
@@ -148,23 +124,23 @@ const ProjectDescription = () => {
               </h3>
               <div className="space-y-3 sm:space-y-4 text-gray-700 text-sm sm:text-base">
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-900">Category:</span>
+                  <span className="font-semibold">Category:</span>{" "}
                   <span>{project.category}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-900">Client:</span>
+                  <span className="font-semibold">Client:</span>{" "}
                   <span>{project.client || "N/A"}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-900">Status:</span>
+                  <span className="font-semibold">Status:</span>{" "}
                   <span>{project.status}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-900">Year:</span>
+                  <span className="font-semibold">Year:</span>{" "}
                   <span>{project.year}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="font-semibold text-gray-900">Location:</span>
+                  <span className="font-semibold">Location:</span>{" "}
                   <span>{project.location}</span>
                 </div>
               </div>
@@ -191,7 +167,7 @@ const ProjectDescription = () => {
                   <img
                     src={img}
                     alt={`${project.name} - ${index + 1}`}
-                    className="w-full h-36 sm:h-52 md:h-64 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                    className="w-full h-36 sm:h-52 md:h-64 object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out will-change-transform"
                   />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="text-white text-sm sm:text-lg font-medium tracking-wide">
@@ -230,12 +206,12 @@ const ProjectDescription = () => {
 
             <motion.img
               key={currentImageIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
               src={project.images[currentImageIndex]}
               alt={project.name}
-              className="max-h-[75vh] sm:max-h-[85vh] max-w-[90vw] sm:max-w-[95vw] object-contain rounded-lg shadow-2xl"
+              className="max-h-[75vh] sm:max-h-[85vh] max-w-[90vw] sm:max-w-[95vw] object-contain rounded-lg shadow-2xl will-change-transform"
             />
 
             <button

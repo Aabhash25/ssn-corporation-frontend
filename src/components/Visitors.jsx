@@ -10,7 +10,7 @@ const Visitors = () => {
       subtitle: "Smart construction tools & CAD workflows",
       description:
         "Discover smart construction solutions, accurate estimations, and AI-powered tools tailored to streamline engineering workflows.",
-      img: "/eng.png",
+      img: "/check.jpg",
       icon: <FaDraftingCompass className="text-lg" />,
       link: "/engineers",
     },

@@ -26,7 +26,6 @@ const ProposalPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prev) => ({
@@ -35,11 +34,9 @@ const ProposalPage = () => {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const fd = new FormData();
-
     Object.keys(formData).forEach((key) => {
       if (formData[key]) fd.append(key, formData[key]);
     });
@@ -47,10 +44,7 @@ const ProposalPage = () => {
     try {
       const res = await fetch(
         "https://api.ssnbuilders.com/api/proposal/submit/",
-        {
-          method: "POST",
-          body: fd,
-        }
+        { method: "POST", body: fd }
       );
 
       if (res.ok) {
@@ -87,53 +81,54 @@ const ProposalPage = () => {
   };
 
   return (
-    <ConstructionLayout variant="default">
-      <div className="max-w-5xl mx-auto px-6 py-24 text-gray-900 relative z-10">
-        {/* Page Header */}
-        <h1 className="text-5xl sm:text-6xl font-playfair font-bold mb-6 text-center">
-          Submit Your Proposal
-        </h1>
-        <p className="text-lg sm:text-xl font-roboto mb-12 leading-relaxed text-center">
-          We welcome your project proposals. Please fill out the form below.
-        </p>
+    <div className="max-w-6xl mx-auto px-6 py-24 text-gray-900 relative z-10 pt-42">
+      {/* Page Header */}
+      <h1 className="text-5xl sm:text-6xl font-playfair font-bold mb-4 text-center">
+        Submit Your Proposal
+      </h1>
+      <p className="text-lg sm:text-xl font-roboto mb-12 leading-relaxed text-center text-gray-700">
+        We welcome your project proposals. Please fill out the form below.
+      </p>
 
-        {/* Proposal Form */}
-        <form
-          className="bg-white/90 p-8 rounded-2xl shadow-lg grid gap-6"
-          onSubmit={handleSubmit}
-        >
-          {/* Your Information */}
-          <h2 className="text-3xl font-playfair font-bold mb-6">
-            Your Information
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label className="block font-roboto font-semibold mb-2">
-                First Name *
-              </label>
-              <input
-                type="text"
-                name="first_name"
-                value={formData.first_name}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-                required
-              />
-            </div>
-            <div>
-              <label className="block font-roboto font-semibold mb-2">
-                Last Name *
-              </label>
-              <input
-                type="text"
-                name="last_name"
-                value={formData.last_name}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-                required
-              />
-            </div>
+      {/* Proposal Form */}
+      <form
+        className="bg-white/95 p-8 rounded-3xl shadow-xl grid gap-6 sm:gap-8"
+        onSubmit={handleSubmit}
+      >
+        {/* Your Information */}
+        <h2 className="text-3xl font-playfair font-bold mb-6">
+          Your Information
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div>
+            <label className="block font-roboto font-semibold mb-2">
+              First Name *
+            </label>
+            <input
+              type="text"
+              name="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
+              required
+            />
           </div>
+
+          <div>
+            <label className="block font-roboto font-semibold mb-2">
+              Last Name *
+            </label>
+            <input
+              type="text"
+              name="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
+              required
+            />
+          </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Email *
@@ -143,10 +138,11 @@ const ProposalPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
               required
             />
           </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Phone *
@@ -156,10 +152,11 @@ const ProposalPage = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
               required
             />
           </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Company Name
@@ -169,9 +166,10 @@ const ProposalPage = () => {
               name="company_name"
               value={formData.company_name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             />
           </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Company Website
@@ -181,14 +179,17 @@ const ProposalPage = () => {
               name="company_website"
               value={formData.company_website}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             />
           </div>
+        </div>
 
-          {/* Project Information */}
-          <h2 className="text-3xl font-playfair font-bold mb-6 mt-8">
-            Your Project
-          </h2>
+        {/* Project Information */}
+        <h2 className="text-3xl font-playfair font-bold mb-6 mt-8">
+          Your Project
+        </h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Project Name
@@ -198,9 +199,10 @@ const ProposalPage = () => {
               name="project_name"
               value={formData.project_name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             />
           </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Address
@@ -210,51 +212,51 @@ const ProposalPage = () => {
               name="address"
               value={formData.address}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-              <label className="block font-roboto font-semibold mb-2">
-                City
-              </label>
-              <input
-                type="text"
-                name="city"
-                value={formData.city}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-              />
-            </div>
-            <div>
-              <label className="block font-roboto font-semibold mb-2">
-                State
-              </label>
-              <select
-                name="state"
-                value={formData.state}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-              >
-                <option value="">Select State</option>
-                <option>North Carolina</option>
-                <option>Georgia</option>
-                <option>Virginia</option>
-              </select>
-            </div>
-            <div>
-              <label className="block font-roboto font-semibold mb-2">
-                Zip Code
-              </label>
-              <input
-                type="text"
-                name="zip_code"
-                value={formData.zip_code}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-              />
-            </div>
+
+          <div>
+            <label className="block font-roboto font-semibold mb-2">City</label>
+            <input
+              type="text"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
+            />
           </div>
+
+          <div>
+            <label className="block font-roboto font-semibold mb-2">
+              State
+            </label>
+            <select
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
+            >
+              <option value="">Select State</option>
+              <option>North Carolina</option>
+              <option>Georgia</option>
+              <option>Virginia</option>
+            </select>
+          </div>
+
+          <div>
+            <label className="block font-roboto font-semibold mb-2">
+              Zip Code
+            </label>
+            <input
+              type="text"
+              name="zip_code"
+              value={formData.zip_code}
+              onChange={handleChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
+            />
+          </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Project Owner/Developer *
@@ -264,11 +266,12 @@ const ProposalPage = () => {
               name="project_owner"
               value={formData.project_owner}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
               required
             />
           </div>
-          <div>
+
+          <div className="md:col-span-2 lg:col-span-3">
             <label className="block font-roboto font-semibold mb-2">
               Project Description
             </label>
@@ -277,11 +280,13 @@ const ProposalPage = () => {
               name="project_description"
               value={formData.project_description}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             ></textarea>
           </div>
+        </div>
 
-          {/* Attachment */}
+        {/* Attachment and Referral in multi-column */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Attachment Name
@@ -291,9 +296,10 @@ const ProposalPage = () => {
               name="attachment_name"
               value={formData.attachment_name}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             />
           </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Attachment File
@@ -306,7 +312,6 @@ const ProposalPage = () => {
             />
           </div>
 
-          {/* Referral */}
           <div>
             <label className="block font-roboto font-semibold mb-2">
               How did you hear about us?
@@ -315,7 +320,7 @@ const ProposalPage = () => {
               name="referral_source"
               value={formData.referral_source}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             >
               <option value="">Select Referral Source</option>
               <option>Friend</option>
@@ -324,6 +329,7 @@ const ProposalPage = () => {
               <option>Other</option>
             </select>
           </div>
+
           <div>
             <label className="block font-roboto font-semibold mb-2">
               Who did you refer us?
@@ -333,24 +339,24 @@ const ProposalPage = () => {
               name="referred_by"
               value={formData.referred_by}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             />
           </div>
+        </div>
 
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="px-6 py-3 bg-orange-600 text-white font-roboto font-semibold rounded-xl hover:bg-orange-700 transition"
-          >
-            Submit Proposal
-          </button>
-        </form>
-      </div>
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full md:w-auto px-6 py-3 bg-orange-600 text-white font-roboto font-semibold rounded-2xl hover:bg-orange-700 transition text-center mt-6"
+        >
+          Submit Proposal
+        </button>
+      </form>
 
       {/* Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-xl shadow-xl text-center max-w-sm">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-2xl shadow-xl text-center max-w-sm mx-4">
             <h2 className="text-xl font-bold mb-2">Notification</h2>
             <p className="mb-4">{modalMessage}</p>
             <button
@@ -363,7 +369,6 @@ const ProposalPage = () => {
         </div>
       )}
 
-      {/* Fonts */}
       <style jsx>{`
         .font-playfair {
           font-family: "Playfair Display", serif;
@@ -372,7 +377,7 @@ const ProposalPage = () => {
           font-family: "Roboto", sans-serif;
         }
       `}</style>
-    </ConstructionLayout>
+    </div>
   );
 };
 

@@ -3,7 +3,7 @@ export const services = [
     title: "Land Development and Planning",
     icon: "🗺️",
     image:
-      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&auto=format&fit=crop&q=60",
+      "/19.jpg",
     description:
       "SSN Engineers is expert in land development and planning services for sustainable growth and smart infrastructure solutions. From site selection to permitting, we guide your project every step of the way. We can help with the following:",
     features: [
@@ -19,7 +19,7 @@ export const services = [
     title: "Building Design",
     icon: "🏢",
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=60",
+      "/MorisvilleCommercial2.jpg",
     description:
       "SSN Engineers has proven skills to transform spaces with innovative building design for residential, commercial, and specialized facilities including healthcare, industrial, and educational environments. The key areas are:",
     features: [
@@ -65,7 +65,7 @@ export const services = [
     title: "Subsurface Investigation",
     icon: "🌍",
     image:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=60",
+      "/subsurface.jpg",
     description:
       "We offer field investigation services to assess subsurface conditions for construction and engineering projects.",
     features: [
@@ -81,7 +81,7 @@ export const services = [
     title: "Instrumentation and Monitoring",
     icon: "📡",
     image:
-      "https://images.unsplash.com/photo-1561553873-e8491a564d6a?w=600&auto=format&fit=crop&q=60",
+      "26.jpg",
     description:
       "Real-time instrumentation and monitoring solutions for construction sites and structures to ensure safety and performance.",
     features: [
@@ -99,7 +99,7 @@ export const services = [
     title: "Construction Management",
     icon: "👷‍♂️",
     image:
-      "https://images.unsplash.com/photo-1590650046871-92c887180603?w=600&auto=format&fit=crop&q=60",
+      "/10.png",
     description:
       "End-to-end construction management ensuring projects are delivered on time, within budget, and to the highest quality standards.",
     features: [
@@ -115,7 +115,7 @@ export const services = [
     title: "Construction Support and Material Testing",
     icon: "🧱",
     image:
-      "https://images.unsplash.com/photo-1581092334707-7b2c97c6aa8f?w=600&auto=format&fit=crop&q=60",
+      "material_testing.jpg",
     description:
       "SSN Engineers delivers expert laboratory and field material testing for construction and development projects. From concrete and asphalt testing to special inspections, we ensure compliance with plan specifications and regulatory standards. We can deliver the following support:",
     features: [

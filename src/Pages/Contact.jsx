@@ -5,7 +5,6 @@ import {
   PhoneIcon,
   EnvelopeIcon,
 } from "@heroicons/react/24/outline";
-import ConstructionLayout from "../Layout/ConstructionLayout";
 import { motion } from "framer-motion";
 
 const Contact = () => {
@@ -43,25 +42,25 @@ const Contact = () => {
     {
       title: "Head Office",
       location: "Holly Springs, NC",
-      phone: "(919) 579-1490",
+      phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
       title: "Satellite Office",
       location: "Lawrenceville, GA",
-      phone: "(919) 579-1490",
+      phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
       title: "Satellite Office",
       location: "Philadelphia, PA",
-      phone: "(919) 579-1490",
+      phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
       title: "Satellite Office",
       location: "Mount Laurel, NJ",
-      phone: "(919) 579-1490",
+      phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
     },
   ];
@@ -72,8 +71,8 @@ const Contact = () => {
   };
 
   return (
-    <ConstructionLayout variant="default">
-      <div className="max-w-7xl mx-auto px-6 sm:px-12 py-18">
+    <>
+      <div className="max-w-7xl mx-auto px-6 sm:px-12 py-18 pt-42">
         {/* Hero */}
         <motion.div
           className="text-center mb-12"
@@ -193,7 +192,7 @@ const Contact = () => {
           font-family: "Playfair Display", serif;
         }
       `}</style>
-    </ConstructionLayout>
+    </>
   );
 };
 

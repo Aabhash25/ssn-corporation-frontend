@@ -4,7 +4,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const services = [
   {
-    image: "/BrassTap5.jpg",
+    image: "/7.png",
     title: "Commercial Building Construction",
     description:
       "Complete commercial construction solutions from planning to completion",
@@ -16,8 +16,7 @@ const services = [
       "Custom residential projects with attention to detail and quality",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1542626991-cbc4e32524cc?w=800&auto=format&fit=crop&q=60",
+    image: "/14.jpg",
     title: "Construction Management",
     description:
       "Professional project oversight ensuring timely and budget-conscious delivery",
@@ -29,7 +28,7 @@ const services = [
     description: "Comprehensive planning, design, and feasibility studies",
   },
   {
-    image: "/LandDevelopment3.jpg",
+    image: "/utilityconstruction.jpg",
     title: "Utility Construction",
     description:
       "Infrastructure development including roads, utilities, and site preparation",
@@ -40,9 +39,8 @@ const services = [
     description: "Ground-up site development and preparation services",
   },
   {
-    image:
-      "https://plus.unsplash.com/premium-photo-1751620467222-9b616288ce60?w=800&auto=format&fit=crop&q=60",
-    title: "Commercial Space Uplift",
+    image: "1.jpg",
+    title: "Commercial Space Upfit",
     description: "Renovation and modernization of existing commercial spaces",
   },
 ];
