@@ -2,9 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { specialities } from "../data/specialities";
-import { services } from "../data/services";
-
+import { contractorServices } from "../data/contractorServices";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
@@ -16,16 +14,8 @@ const scaleUp = {
 };
 
 const Contractors = () => {
-  const [selectedSpeciality, setSelectedSpeciality] = useState(null);
   const [selectedService, setSelectedService] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
-
-  const openModal = (speciality) => {
-    setSelectedSpeciality(speciality);
-    setIsModalOpen(true);
-    document.body.style.overflow = "hidden";
-  };
 
   const openServiceModal = (service) => {
     setSelectedService(service);
@@ -34,15 +24,14 @@ const Contractors = () => {
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
     setIsServiceModalOpen(false);
     setTimeout(() => {
-      setSelectedSpeciality(null);
       setSelectedService(null);
     }, 300);
     document.body.style.overflow = "unset";
   };
 
+  // Kept renderDescription for consistency, though it's unused now.
   const renderDescription = (description) => {
     return description.map((item, index) => {
       if (Array.isArray(item)) {
@@ -99,110 +88,9 @@ const Contractors = () => {
     );
   };
 
-  const contractorServices = [
-    {
-      title: "Pre-Construction Services",
-      description:
-        "Our pre-construction services lay the strategic foundation for project success. We conduct comprehensive feasibility studies, site evaluations, conceptual estimating, value engineering, constructability reviews, and risk assessments long before ground is broken.",
-      image:
-        "https://images.unsplash.com/photo-1718680219650-d81cdf2408e2?w=600&auto=format&fit=crop&q=60",
-      icon: "📋",
-      features: [
-        "Feasibility Studies",
-        "Value Engineering",
-        "Risk Assessments",
-        "Stakeholder Coordination",
-      ],
-    },
-    {
-      title: "Construction Management",
-      description:
-        "We provide end-to-end construction management that prioritizes quality, safety, schedule adherence, and budget control. Acting as your owner’s representative or integrated project partner.",
-      image:
-        "https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600&auto=format&fit=crop&q=60",
-      icon: "🏗️",
-      features: [
-        "Subcontractor Coordination",
-        "Quality Assurance",
-        "Safety Compliance",
-        "Progress Reporting",
-      ],
-    },
-    {
-      title: "Residential Building Construction",
-      description:
-        "From custom single-family homes to multi-unit developments, we bring precision, craftsmanship, and innovation to every residential project.",
-      image:
-        "https://images.unsplash.com/photo-1499750264616-eca69646ae17?w=600&auto=format&fit=crop&q=60",
-      icon: "🏠",
-      features: [
-        "Structural Framing",
-        "MEP Rough-Ins",
-        "Energy Efficiency",
-        "Quality Inspections",
-      ],
-    },
-    {
-      title: "Commercial Building Construction",
-      description:
-        "We specialize in delivering high-quality commercial facilities—including office buildings, retail centers, medical clinics, hospitality venues, and light industrial warehouses.",
-      image:
-        "https://plus.unsplash.com/premium_photo-1680281937048-735543c5c0f7?w=600&auto=format&fit=crop&q=60",
-      icon: "🏢",
-      features: [
-        "MEP Systems Coordination",
-        "Fire Protection",
-        "Accessibility Compliance",
-        "Sustainable Finishes",
-      ],
-    },
-    {
-      title: "Commercial Space Uplift",
-      description:
-        "Revitalizing underperforming or outdated commercial interiors is a core strength of our team. We transform existing spaces through strategic renovations and modernization.",
-      image:
-        "https://images.unsplash.com/photo-1712758602405-f8aa7de86cef?w=600&auto=format&fit=crop&q=60",
-      icon: "🔄",
-      features: [
-        "Layout Reconfiguration",
-        "HVAC Upgrades",
-        "Phased Work Schedules",
-        "ROI Maximization",
-      ],
-    },
-    {
-      title: "Site Development Construction",
-      description:
-        "Our site development services transform raw land into fully functional, permitted, and infrastructure-ready parcels. We manage all civil elements.",
-      image:
-        "https://images.unsplash.com/photo-1706977527005-c430d7f977ce?w=600&auto=format&fit=crop&q=60",
-      icon: "🌍",
-      features: [
-        "Earthwork & Grading",
-        "Stormwater Management",
-        "Utility Coordination",
-        "Erosion Control",
-      ],
-    },
-    {
-      title: "Utility Construction",
-      description:
-        "We design and install critical underground and above-ground utility infrastructure with precision and reliability.",
-      image:
-        "https://images.unsplash.com/photo-1605027581722-173d57ce506a?w=600&auto=format&fit=crop&q=60",
-      icon: "🔌",
-      features: [
-        "Water Distribution",
-        "Sewer Lines",
-        "Trenchless Technologies",
-        "Pressure Testing",
-      ],
-    },
-  ];
-
   return (
     <div className="bg-gradient-to-br from-gray-50 to-gray-100 w-full min-h-screen">
-      {/* Modern Hero Section */}
+      {/* Modern Hero Section - (Content omitted for brevity) */}
       <section className="relative w-full pt-[160px] pb-[80px] overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 z-0">
@@ -345,7 +233,8 @@ const Contractors = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-6 lg:gap-8">
+          {/* Service Cards Grid (4 Columns) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
             {contractorServices.map((service, index) => (
               <motion.div
                 key={index}
@@ -354,58 +243,38 @@ const Contractors = () => {
                 whileInView="visible"
                 variants={fadeUp}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.2 }}
+                transition={{ delay: index * 0.1 }}
                 onClick={() => openServiceModal(service)}
               >
-                <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 h-full">
-                  <div className="relative overflow-hidden">
+                <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 h-full flex flex-col">
+                  {/* Card Image and Title Area */}
+                  <div className="relative overflow-hidden flex-shrink-0">
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                      <span className="text-3xl">{service.icon}</span>
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
+                      <span className="text-2xl">{service.icon}</span>
                     </div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="font-playfair font-bold text-2xl sm:text-3xl text-white mb-2">
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-playfair font-bold text-xl sm:text-2xl text-white mb-1 line-clamp-2">
                         {service.title}
                       </h3>
-                      <div className="flex items-center text-white/90 group-hover:text-orange-300 transition-colors duration-300">
-                        <span className="font-semibold">Explore Service</span>
-                        <motion.span
-                          className="ml-2"
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          →
-                        </motion.span>
-                      </div>
                     </div>
                   </div>
 
-                  <div className="p-6">
-                    <p className="text-gray-600 text-lg leading-relaxed mb-4">
+                  {/* Card Content (Description and New Simple Button) */}
+                  <div className="p-4 flex flex-col justify-between flex-grow">
+                    <p className="text-gray-600 text-base leading-relaxed line-clamp-3 mb-4 flex-grow">
                       {service.description}
                     </p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.features
-                        .slice(0, 3)
-                        .map((feature, featureIndex) => (
-                          <span
-                            key={featureIndex}
-                            className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium"
-                          >
-                            {feature}
-                          </span>
-                        ))}
-                      {service.features.length > 3 && (
-                        <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">
-                          +{service.features.length - 3} more
-                        </span>
-                      )}
-                    </div>
+
+                    {/* NEW SIMPLE BUTTON */}
+                    <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
+                      Explore Service
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -414,7 +283,7 @@ const Contractors = () => {
         </div>
       </section>
 
-      {/* Service Modal */}
+      {/* Service Modal (Retained with Top-Right Red Close Button) */}
       <AnimatePresence>
         {isServiceModalOpen && selectedService && (
           <>
@@ -433,7 +302,28 @@ const Contractors = () => {
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ type: "spring", damping: 25 }}
             >
-              <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+              <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col relative">
+                {/* Close Button at Top Right */}
+                <motion.button
+                  onClick={closeModal}
+                  className="absolute top-4 right-4 z-20 bg-red-600 text-white rounded-full p-2.5 shadow-xl transition-all duration-300 transform hover:scale-110 hover:bg-red-700"
+                  whileHover={{ rotate: 90 }}
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </motion.button>
+
                 {/* Modal Header with Image */}
                 <div className="relative h-64">
                   <img
@@ -455,26 +345,6 @@ const Contractors = () => {
                           {selectedService.title}
                         </h2>
                       </div>
-
-                      <motion.button
-                        onClick={closeModal}
-                        className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-xl p-3 transition-all duration-300 transform hover:scale-110"
-                        whileHover={{ rotate: 90 }}
-                      >
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </motion.button>
                     </div>
                   </div>
                 </div>
@@ -511,118 +381,6 @@ const Contractors = () => {
                       >
                         Start Your Project
                       </Link>
-                      <button
-                        onClick={closeModal}
-                        className="px-8 py-3 text-lg font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                      >
-                        Close
-                      </button>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Specialities Modal */}
-      <AnimatePresence>
-        {isModalOpen && selectedSpeciality && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeModal}
-            />
-
-            <motion.div
-              className="fixed inset-4 md:inset-10 lg:inset-20 z-50 flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ type: "spring", damping: 25 }}
-            >
-              <div className="bg-white rounded-3xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
-                {/* Modal Header with Image */}
-                <div className="relative h-64 md:h-80">
-                  <img
-                    src={selectedSpeciality.image}
-                    alt={selectedSpeciality.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 inline-block mb-3">
-                          <span className="text-3xl">
-                            {selectedSpeciality.icon}
-                          </span>
-                        </div>
-                        <h2 className="font-playfair font-bold text-3xl md:text-4xl text-white">
-                          {selectedSpeciality.title}
-                        </h2>
-                      </div>
-
-                      <motion.button
-                        onClick={closeModal}
-                        className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-xl p-3 transition-all duration-300 transform hover:scale-110"
-                        whileHover={{ rotate: 90 }}
-                      >
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </motion.button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Modal Content */}
-                <div className="flex-1 overflow-y-auto">
-                  <div className="p-6 md:p-8">
-                    <motion.div
-                      className="prose prose-lg max-w-none"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      {renderDescription(selectedSpeciality.description)}
-                    </motion.div>
-
-                    {/* Action Buttons */}
-                    <motion.div
-                      className="flex flex-wrap gap-4 mt-8 pt-6 border-t border-gray-200"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      <Link
-                        to="/contact"
-                        className="px-8 py-3 text-lg font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                        onClick={closeModal}
-                      >
-                        Get Started
-                      </Link>
-                      <button
-                        onClick={closeModal}
-                        className="px-8 py-3 text-lg font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                      >
-                        Close
-                      </button>
                     </motion.div>
                   </div>
                 </div>
@@ -640,9 +398,9 @@ const Contractors = () => {
         .font-playfair {
           font-family: "Playfair Display", serif;
         }
-        .line-clamp-2 {
+        .line-clamp-3 { /* Changed from line-clamp-2 for slightly more description */
           display: -webkit-box;
-          -webkit-line-clamp: 2;
+          -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }

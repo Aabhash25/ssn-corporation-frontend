@@ -1,21 +1,19 @@
 "use client";
 import React from "react";
-import CountUp from "react-countup";
-import { useInView } from "react-intersection-observer";
-import { motion } from "framer-motion";
 import {
-  BuildingOfficeIcon,
-  WrenchScrewdriverIcon,
-  CpuChipIcon,
-  HomeModernIcon,
-  ArrowTrendingUpIcon,
-} from "@heroicons/react/24/outline";
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
+import { ArrowTrendingUpIcon } from "@heroicons/react/24/outline";
 
 // Google Fonts
 const FontsStyle = () => (
   <style jsx global>{`
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
-
     .font-roboto {
       font-family: "Roboto", sans-serif;
     }
@@ -27,147 +25,94 @@ const FontsStyle = () => (
 
 // Stats data
 const stats2024 = [
-  {
-    label: "Total Projects",
-    value: 42,
-    icon: BuildingOfficeIcon,
-    color: "orange",
-  },
-  {
-    label: "Engineering & Construction",
-    value: 28,
-    icon: WrenchScrewdriverIcon,
-    color: "green",
-  },
-  { label: "Only Engineering", value: 8, icon: CpuChipIcon, color: "blue" },
-  {
-    label: "Only Construction",
-    value: 6,
-    icon: HomeModernIcon,
-    color: "purple",
-  },
+  { label: "Total Projects", value: 42, color: "#F97316" }, // orange
+  { label: "Engineering & Construction", value: 28, color: "#10B981" }, // green
+  { label: "Only Engineering", value: 8, color: "#3B82F6" }, // blue
+  { label: "Only Construction", value: 6, color: "#8B5CF6" }, // purple
 ];
 
 const stats2025 = [
-  {
-    label: "Total Projects",
-    value: 65,
-    icon: BuildingOfficeIcon,
-    color: "orange",
-  },
-  {
-    label: "Engineering & Construction",
-    value: 40,
-    icon: WrenchScrewdriverIcon,
-    color: "green",
-  },
-  { label: "Only Engineering", value: 15, icon: CpuChipIcon, color: "blue" },
-  {
-    label: "Only Construction",
-    value: 10,
-    icon: HomeModernIcon,
-    color: "purple",
-  },
+  { label: "Total Projects", value: 65, color: "#F97316" },
+  { label: "Engineering & Construction", value: 40, color: "#10B981" },
+  { label: "Only Engineering", value: 15, color: "#3B82F6" },
+  { label: "Only Construction", value: 10, color: "#8B5CF6" },
 ];
 
-const colorClasses = {
-  orange: "bg-orange-50 text-orange-500",
-  green: "bg-green-50 text-green-500",
-  blue: "bg-blue-50 text-blue-500",
-  purple: "bg-purple-50 text-purple-500",
-};
-
-const Statistics = () => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
-
-  const renderStats = (stats, isProjected = false) =>
-    stats.map((stat, idx) => {
-      const Icon = stat.icon;
-      return (
-        <motion.div
-          key={idx}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: idx * 0.15 }}
-          className="flex-1 min-w-[250px] max-w-full bg-white rounded-2xl shadow-lg p-6 sm:p-8 flex flex-col items-center gap-4 text-center border border-gray-100 hover:shadow-2xl transition"
-        >
-          <div className={`p-4 rounded-full ${colorClasses[stat.color]}`}>
-            <Icon className="w-7 h-7" />
-          </div>
-          <p className="text-4xl sm:text-5xl font-playfair font-bold text-gray-900">
-            {inView ? (
-              <CountUp
-                end={stat.value}
-                duration={2.5}
-                suffix={isProjected ? "+" : ""}
-              />
-            ) : (
-              0
-            )}
-          </p>
-          <p className="font-roboto text-gray-700 text-base sm:text-lg">
-            {stat.label}
-          </p>
-          {isProjected && (
-            <div className="mt-2 text-xs sm:text-sm font-semibold text-white bg-gray-900 px-3 py-1 rounded-full">
-              PROJECTED
-            </div>
-          )}
-        </motion.div>
-      );
-    });
-
+const StatisticsPie = () => {
   return (
     <>
       <FontsStyle />
-      <section
-        ref={ref}
-        className="relative py-2 sm:py-8 lg:py-10 bg-gray-50 w-full overflow-hidden"
-      >
-        <div className="max-w-full mx-auto px-3 sm:px-4 lg:px-6 text-center">
+      <section className="relative py-12 bg-gray-50 w-full overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 text-center">
           {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="mb-8 sm:mb-10"
-          >
+          <div className="mb-12">
             <div className="flex justify-center mb-4">
               <div className="p-4 sm:p-5 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full inline-flex shadow-lg">
                 <ArrowTrendingUpIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
               </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-2">
-              Our Achievements & Projections
+            <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-2">
+              Our Achievements And Projections
             </h2>
             <p className="text-sm sm:text-base md:text-lg font-roboto text-gray-700 max-w-3xl mx-auto leading-relaxed">
-              Growing stronger every year, delivering quality projects with
-              professional engineering and construction services.
+              Visual representation of our achievements and projected growth.
             </p>
-          </motion.div>
+          </div>
 
-          {/* Stats Full Width */}
-          <div className="flex flex-col gap-4 sm:gap-6 w-full">
-            {/* 2024 Stats */}
-            <div className="w-full">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-playfair font-bold text-orange-500 mb-2 text-center">
+          {/* Pie Charts */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* 2024 Pie */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg">
+              <h3 className="text-xl sm:text-2xl font-playfair font-bold mb-4 text-orange-500">
                 2024 Achievements
               </h3>
-              <div className="flex gap-3 overflow-x-auto">
-                {renderStats(stats2024)}
-              </div>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={stats2024}
+                    dataKey="value"
+                    nameKey="label"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={100}
+                    fill="#8884d8"
+                    label
+                  >
+                    {stats2024.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
 
-            {/* 2025 Stats */}
-            <div className="w-full">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-playfair font-bold text-blue-500 mb-2 text-center">
+            {/* 2025 Pie */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg">
+              <h3 className="text-xl sm:text-2xl font-playfair font-bold mb-4 text-blue-500">
                 2025 Projections
               </h3>
-              <div className="flex gap-3 overflow-x-auto">
-                {renderStats(stats2025, true)}
-              </div>
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={stats2025}
+                    dataKey="value"
+                    nameKey="label"
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={100}
+                    fill="#8884d8"
+                    label
+                  >
+                    {stats2025.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>
@@ -176,4 +121,101 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
+export default StatisticsPie;
+
+// "use client";
+// import React from "react";
+// import {
+//   BarChart,
+//   Bar,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+//   ResponsiveContainer,
+// } from "recharts";
+// import { ArrowTrendingUpIcon } from "@heroicons/react/24/outline";
+
+// // Google Fonts
+// const FontsStyle = () => (
+//   <style jsx global>{`
+//     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
+//     .font-roboto {
+//       font-family: "Roboto", sans-serif;
+//     }
+//     .font-playfair {
+//       font-family: "Playfair Display", serif;
+//     }
+//   `}</style>
+// );
+
+// // Combined stats data
+// const combinedStats = [
+//   {
+//     label: "Total Projects",
+//     2024: 42,
+//     2025: 65,
+//   },
+//   {
+//     label: "Engineering & Construction",
+//     2024: 28,
+//     2025: 40,
+//   },
+//   {
+//     label: "Only Engineering",
+//     2024: 8,
+//     2025: 15,
+//   },
+//   {
+//     label: "Only Construction",
+//     2024: 6,
+//     2025: 10,
+//   },
+// ];
+
+// const StatisticsBar = () => {
+//   return (
+//     <>
+//       <FontsStyle />
+//       <section className="relative py-12 bg-gray-50 w-full overflow-hidden">
+//         <div className="max-w-6xl mx-auto px-4 text-center">
+//           {/* Header */}
+//           <div className="mb-12">
+//             <div className="flex justify-center mb-4">
+//               <div className="p-4 sm:p-5 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full inline-flex shadow-lg">
+//                 <ArrowTrendingUpIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+//               </div>
+//             </div>
+//             <h2 className="text-4xl sm:text-5xl font-playfair font-bold mb-2">
+//               Our Achievements & Projections
+//             </h2>
+//             <p className="text-sm sm:text-base md:text-lg font-roboto text-gray-700 max-w-3xl mx-auto leading-relaxed">
+//               Compare our 2024 achievements with 2025 projected growth.
+//             </p>
+//           </div>
+
+//           {/* Combined Bar Chart */}
+//           <div className="bg-white rounded-2xl p-6 shadow-lg">
+//             <ResponsiveContainer width="100%" height={400}>
+//               <BarChart
+//                 data={combinedStats}
+//                 margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+//               >
+//                 <CartesianGrid strokeDasharray="3 3" />
+//                 <XAxis dataKey="label" tick={{ fontSize: 14 }} />
+//                 <YAxis />
+//                 <Tooltip />
+//                 <Legend verticalAlign="top" height={36} />
+//                 <Bar dataKey="2024" fill="#F97316" name="2024 Achievements" />
+//                 <Bar dataKey="2025" fill="#3B82F6" name="2025 Projections" />
+//               </BarChart>
+//             </ResponsiveContainer>
+//           </div>
+//         </div>
+//       </section>
+//     </>
+//   );
+// };
+
+// export default StatisticsBar;

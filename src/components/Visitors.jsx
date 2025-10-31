@@ -6,11 +6,11 @@ import { FaDraftingCompass, FaHardHat } from "react-icons/fa";
 const Visitors = () => {
   const cards = [
     {
-      title: " Design Engineers",
+      title: " Design Engineer",
       subtitle: "Smart construction tools & CAD workflows",
       description:
         "Discover smart construction solutions, accurate estimations, and AI-powered tools tailored to streamline engineering workflows.",
-      img: "https://media.istockphoto.com/id/1176843801/photo/engineer-working-on-desktop-computer-screen-showing-cad-software-with-engine-3d-model-her.webp?a=1&b=1&s=612x612&w=0&k=20&c=eI7nLCARVOjJflAli3OuDEiTqJWfjdEICkJqFcfnY5A=",
+      img: "/eng.png",
       icon: <FaDraftingCompass className="text-lg" />,
       link: "/engineers",
     },
@@ -55,7 +55,7 @@ const Visitors = () => {
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-roboto text-gray-600">
             <span className="font-semibold text-orange-600">
               {" "}
-              Design Engineers
+              Design Engineer
             </span>{" "}
             and{" "}
             <span className="font-semibold text-orange-600">

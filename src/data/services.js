@@ -1,18 +1,18 @@
- export const services = [
+export const services = [
   {
     title: "Land Development and Planning",
     icon: "🗺️",
     image:
       "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&auto=format&fit=crop&q=60",
     description:
-      "Comprehensive land development services from concept to construction with expertise in site planning, grading, and infrastructure design.",
+      "SSN Engineers is expert in land development and planning services for sustainable growth and smart infrastructure solutions. From site selection to permitting, we guide your project every step of the way. We can help with the following:",
     features: [
-      "Site Engineering Concepts & Planning",
-      "Stormwater Management",
-      "Erosion and Sediment Control",
-      "Infrastructure Design",
-      "Permitting and Approvals",
-      "Public Meeting Coordination",
+      "Site selection and feasibility analysis",
+      "Zoning and land use regulations",
+      "Infrastructure and utility planning",
+      "Urban design and architectural planning",
+      "Regulatory compliance and permitting process",
+      "Development phasing and project timeline",
     ],
   },
   {
@@ -21,14 +21,13 @@
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&auto=format&fit=crop&q=60",
     description:
-      "Innovative architectural and structural design solutions that blend aesthetic appeal with practical functionality and sustainability.",
+      "SSN Engineers has proven skills to transform spaces with innovative building design for residential, commercial, and specialized facilities including healthcare, industrial, and educational environments. The key areas are:",
     features: [
-      "Architectural Design Development",
-      "Structural Engineering",
-      "3D Modeling and Visualization",
-      "Sustainable Design Solutions",
-      "Code Compliance Review",
-      "Construction Documentation",
+      "Residential and commercial development",
+      "Healthcare facilities",
+      "Infrastructure and utility planning",
+      "Industrial and manufacturing facilities",
+      "Educational facilities",
     ],
   },
   {
@@ -37,30 +36,99 @@
     image:
       "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&auto=format&fit=crop&q=60",
     description:
-      "Strategic facility planning and design services that optimize space utilization, workflow efficiency, and operational performance.",
+      "We provide comprehensive facility planning and design for essential infrastructure and recreation. From water treatment to power generation, we deliver tailored, sustainable solutions. We can help you in the following areas:",
     features: [
-      "Space Planning and Optimization",
-      "Workflow Analysis",
-      "Facility Layout Design",
-      "Operational Efficiency Studies",
-      "Future Expansion Planning",
-      "Technology Integration",
+      "Water treatment facilities",
+      "Waste/sewage management facilities",
+      "Solar/wind power generation facilities",
+      "Sports and recreation facilities",
+    ],
+  },
+  {
+    title: "Specialty Structure Planning and Design",
+    icon: "🏗️",
+    image:
+      "https://images.unsplash.com/photo-1581092160607-3b84c1e1c8e4?w=600&auto=format&fit=crop&q=60",
+    description:
+      "We offer specialty design solutions for advanced infrastructure and environmental challenges. From trenchless technology to water resources and acoustic control, we deliver innovative and sustainable results. We can help you with the following:",
+    features: [
+      "Trenchless technology planning and design",
+      "Pavement evaluation and design",
+      "Water resources planning and design",
+      "Acoustic and noise control design",
+      "Structural health monitoring system",
+      "Environmental remediation design",
+      "Lighting and illumination design",
+    ],
+  },
+  {
+    title: "Subsurface Investigation",
+    icon: "🌍",
+    image:
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&auto=format&fit=crop&q=60",
+    description:
+      "We offer field investigation services to assess subsurface conditions for construction and engineering projects.",
+    features: [
+      "Dynamic cone penetration (DCP) test",
+      "Pavement coring",
+      "Hand auger and sampling",
+      "Light weight deflectometer (LWD) test",
+      "Field density test",
+      "Field infiltration test",
+    ],
+  },
+  {
+    title: "Instrumentation and Monitoring",
+    icon: "📡",
+    image:
+      "https://images.unsplash.com/photo-1561553873-e8491a564d6a?w=600&auto=format&fit=crop&q=60",
+    description:
+      "Real-time instrumentation and monitoring solutions for construction sites and structures to ensure safety and performance.",
+    features: [
+      "Crack gauge / crack meter",
+      "Seismograph installation and vibration monitoring",
+      "Piezometer / vibrating wire piezometer installation",
+      "Inclinometer installation",
+      "Tiltmeter installation",
+      "Settlement plate installation",
+      "Strain gauge and strain meter installation and monitoring",
+      "Load cell / pressure cell installation and monitoring",
     ],
   },
   {
     title: "Construction Management",
     icon: "👷‍♂️",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1590650046871-92c887180603?w=600&auto=format&fit=crop&q=60",
     description:
       "End-to-end construction management ensuring projects are delivered on time, within budget, and to the highest quality standards.",
     features: [
-      "Project Planning and Scheduling",
-      "Budget Management",
-      "Quality Control",
-      "Risk Management",
-      "Contractor Coordination",
-      "Progress Monitoring",
+      "Project planning and scheduling",
+      "Budget management",
+      "Quality control",
+      "Risk management",
+      "Contractor coordination",
+      "Progress monitoring",
+    ],
+  },
+  {
+    title: "Construction Support and Material Testing",
+    icon: "🧱",
+    image:
+      "https://images.unsplash.com/photo-1581092334707-7b2c97c6aa8f?w=600&auto=format&fit=crop&q=60",
+    description:
+      "SSN Engineers delivers expert laboratory and field material testing for construction and development projects. From concrete and asphalt testing to special inspections, we ensure compliance with plan specifications and regulatory standards. We can deliver the following support:",
+    features: [
+      "Soil, aggregate, asphalt, and concrete laboratory testing",
+      "Masonry and concrete masonry unit (CMU) testing",
+      "Concrete and asphalt field inspections",
+      "Soil field testing and field inspection",
+      "Retaining wall construction inspection",
+      "Asphalt subgrade, base, binder, and surface installation monitoring",
+      "Site stripping, undercutting, and subgrade evaluation",
+      "Fill monitoring with nuclear gauge, sand cone, or drive tubes",
+      "Proof roll monitoring and testing",
+      "Geotechnical instrumentation installation including VWP and settlement plate",
     ],
   },
 ];

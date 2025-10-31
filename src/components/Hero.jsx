@@ -25,7 +25,7 @@ const Hero = () => {
   };
 
   const textVariant = {
-    hidden: { opacity: 0, y: 20, scale: 0.98 }, // Reduced y movement from 30 to 20
+    hidden: { opacity: 0, y: 20, scale: 0.98 },
     visible: {
       opacity: 1,
       y: 0,
@@ -69,7 +69,7 @@ const Hero = () => {
 
   useEffect(() => {
     const video = document.createElement("video");
-    video.src = "/new.mp4";
+    video.src = "/heroVideo.mp4";
     video.preload = "auto";
     video.onloadeddata = () => setVideoLoaded(true);
     video.load();
@@ -100,21 +100,25 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative h-screen flex flex-col justify-center items-center text-white overflow-hidden">
+    <section className="relative h-screen flex flex-col justify-center items-center text-white overflow-hidden bg-black">
       {/* Background Video */}
       {videoLoaded && (
         <div
           className="absolute inset-0 w-full h-full cursor-pointer"
           onClick={togglePlay}
         >
-          <video
+          <motion.video
             ref={videoRef}
-            src="/new.mp4"
+            src="/heroVideo.mp4"
+            poster="/heroPoster.jpg"
             loop
             muted={isMuted}
             playsInline
             autoPlay
             preload="auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
             className="w-full h-full object-cover brightness-75"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60"></div>

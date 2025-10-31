@@ -43,29 +43,29 @@ const Engineers = () => {
     document.body.style.overflow = "unset";
   };
 
+  /**
+   * Renders the descriptive content for Specialities.
+   * Standardized to use the exact same visual style as services.
+   */
   const renderDescription = (description) => {
-    return description.map((item, index) => {
+    // Determine the list items from the array or nested arrays
+    let listItems = [];
+    let paragraphs = [];
+
+    description.forEach((item) => {
       if (Array.isArray(item)) {
-        return (
-          <ul key={index} className="space-y-3 mt-6">
-            {item.map((listItem, listIndex) => (
-              <motion.li
-                key={listIndex}
-                className="flex items-start space-x-3 text-gray-700 leading-relaxed"
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 + listIndex * 0.05 }}
-              >
-                <span className="text-orange-500 flex-shrink-0 mt-1.5">•</span>
-                <span className="text-base">{listItem}</span>
-              </motion.li>
-            ))}
-          </ul>
-        );
+        listItems = listItems.concat(item);
       } else {
-        return (
+        paragraphs.push(item);
+      }
+    });
+
+    return (
+      <>
+        {/* Render paragraphs first */}
+        {paragraphs.map((item, index) => (
           <motion.p
-            key={index}
+            key={`p-${index}`}
             className="mt-4 text-gray-700 text-base leading-relaxed"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -73,35 +73,65 @@ const Engineers = () => {
           >
             {item}
           </motion.p>
-        );
-      }
-    });
+        ))}
+
+        {/* Render all list items with unified style */}
+        {listItems.length > 0 && (
+          <ul className="space-y-3 mt-6">
+            {listItems.map((listItem, listIndex) => (
+              <motion.li
+                key={`li-${listIndex}`}
+                // UNIFIED STYLING FOR BOTH SECTIONS
+                className="flex items-start space-x-3 text-gray-700 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-200"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  delay: paragraphs.length * 0.1 + listIndex * 0.05,
+                }}
+              >
+                {/* UNIFIED ORANGE CIRCLE BULLET */}
+                <span className="text-orange-500 flex-shrink-0 mt-1.5 text-xl font-bold">
+                  •
+                </span>
+                <span className="text-base font-medium">{listItem}</span>
+              </motion.li>
+            ))}
+          </ul>
+        )}
+      </>
+    );
   };
 
+  /**
+   * Renders the features for Services.
+   * Standardized to use the exact same visual style as specialities.
+   */
   const renderServiceFeatures = (features) => {
     return (
-      <div className="space-y-3 mt-6">
+      <ul className="space-y-3 mt-6">
         {features.map((feature, index) => (
-          <motion.div
+          <motion.li
             key={index}
-            className="flex items-start space-x-3 p-4 bg-gray-50 rounded-xl hover:bg-orange-50 transition-colors duration-300 border border-gray-200"
+            // UNIFIED STYLING FOR BOTH SECTIONS
+            className="flex items-start space-x-3 text-gray-700 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-200"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <div className="flex-shrink-0 w-2 h-2 bg-orange-500 rounded-full mt-1.5"></div>
-            <span className="text-gray-700 text-base leading-relaxed font-medium">
-              {feature}
+            {/* UNIFIED ORANGE CIRCLE BULLET */}
+            <span className="text-orange-500 flex-shrink-0 mt-1.5 text-xl font-bold">
+              •
             </span>
-          </motion.div>
+            <span className="text-base font-medium">{feature}</span>
+          </motion.li>
         ))}
-      </div>
+      </ul>
     );
   };
 
   return (
     <div className="bg-gradient-to-br from-gray-50 to-gray-100 w-full min-h-screen">
-      {/* Modern Hero Section */}
+      {/* Modern Hero Section - (Content omitted for brevity) */}
       <section className="relative w-full pt-[160px] pb-[80px] overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 z-0">
@@ -114,7 +144,7 @@ const Engineers = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-gray-900/30"></div>
         </div>
 
-        {/* Hero Content */}
+        {/* Hero Content - (Content omitted for brevity) */}
         <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-6 sm:px-10 lg:px-16 gap-10 lg:gap-20">
           {/* Left Content */}
           <motion.div
@@ -191,7 +221,7 @@ const Engineers = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Image Box - hidden on mobile */}
+          {/* Right Image Box - (Content omitted for brevity) */}
           <motion.div
             className="hidden lg:block relative w-[450px] xl:w-[600px] aspect-square rounded-xl overflow-hidden shadow-2xl mt-12 lg:mt-0 transition-transform duration-500 hover:scale-105"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -217,7 +247,7 @@ const Engineers = () => {
       </section>
 
       {/* Services Section */}
-      <section className="py-12 px-6 sm:px-12 lg:px-16 xl:px-20">
+      <section className="py-12 px-6 sm:px-12 lg:px-16 xl:px-20 bg-white">
         <div className="max-w-[1600px] mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -236,12 +266,14 @@ const Engineers = () => {
               Comprehensive Engineering Solutions
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From initial concept to final construction, we deliver innovative
-              solutions that exceed expectations and stand the test of time.
+              As a multidisciplinary engineering firm, we can connect you to the
+              resources, expertise and creative problem solving to address your
+              challenges and move your project forward.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-6 lg:gap-8">
+          {/* Service Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={index}
@@ -250,58 +282,36 @@ const Engineers = () => {
                 whileInView="visible"
                 variants={fadeUp}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.2 }}
+                transition={{ delay: index * 0.1 }}
                 onClick={() => openServiceModal(service)}
               >
-                <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 h-full">
-                  <div className="relative overflow-hidden">
+                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full border border-gray-100 flex flex-col">
+                  <div className="relative overflow-hidden flex-shrink-0">
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                    <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
-                      <span className="text-3xl">{service.icon}</span>
-                    </div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="font-playfair font-bold text-2xl sm:text-3xl text-white mb-2">
-                        {service.title}
-                      </h3>
-                      <div className="flex items-center text-white/90 group-hover:text-orange-300 transition-colors duration-300">
-                        <span className="font-semibold">Explore Service</span>
-                        <motion.span
-                          className="ml-2"
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          →
-                        </motion.span>
-                      </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
+                      <span className="text-2xl">{service.icon}</span>
                     </div>
                   </div>
 
-                  <div className="p-6">
-                    <p className="text-gray-600 text-lg leading-relaxed mb-4">
-                      {service.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {service.features
-                        .slice(0, 3)
-                        .map((feature, featureIndex) => (
-                          <span
-                            key={featureIndex}
-                            className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium"
-                          >
-                            {feature}
-                          </span>
-                        ))}
-                      {service.features.length > 3 && (
-                        <span className="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm font-medium">
-                          +{service.features.length - 3} more
-                        </span>
-                      )}
+                  <div className="p-6 flex flex-col justify-between flex-grow">
+                    <div>
+                      <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
+                        {service.title}
+                      </h3>
+                      <p className="text-gray-600 line-clamp-2 mb-4 flex-grow">
+                        {service.description}
+                      </p>
                     </div>
+
+                    {/* NEW SIMPLE BUTTON FOR SERVICES */}
+                    <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
+                      Explore Service
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -330,11 +340,12 @@ const Engineers = () => {
               Specialized Engineering Disciplines
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Deep expertise across multiple engineering disciplines to provide
-              comprehensive solutions for your most complex challenges.
+              We Have the Expert In-House Team Specializing in Architecture,
+              Engineering, and Comprehensive Design Solutions
             </p>
           </motion.div>
 
+          {/* Specialities Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
             {specialities.map((speciality, index) => (
               <motion.div
@@ -347,8 +358,8 @@ const Engineers = () => {
                 transition={{ delay: index * 0.1 }}
                 onClick={() => openModal(speciality)}
               >
-                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full border border-gray-100">
-                  <div className="relative overflow-hidden">
+                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full border border-gray-100 flex flex-col">
+                  <div className="relative overflow-hidden flex-shrink-0">
                     <img
                       src={speciality.image}
                       alt={speciality.title}
@@ -360,25 +371,22 @@ const Engineers = () => {
                     </div>
                   </div>
 
-                  <div className="p-6">
-                    <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
-                      {speciality.title}
-                    </h3>
-                    <p className="text-gray-600 line-clamp-2 mb-4">
-                      {typeof speciality.description[0] === "string"
-                        ? speciality.description[0]
-                        : "Click to explore our comprehensive services..."}
-                    </p>
-                    <div className="flex items-center text-orange-500 font-semibold group-hover:text-orange-600 transition-colors duration-300">
-                      <span>Explore Services</span>
-                      <motion.span
-                        className="ml-2"
-                        animate={{ x: [0, 5, 0] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      >
-                        →
-                      </motion.span>
+                  <div className="p-6 flex flex-col justify-between flex-grow">
+                    <div>
+                      <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
+                        {speciality.title}
+                      </h3>
+                      <p className="text-gray-600 line-clamp-2 mb-4 flex-grow">
+                        {typeof speciality.description[0] === "string"
+                          ? speciality.description[0]
+                          : "Click to explore our comprehensive services..."}
+                      </p>
                     </div>
+
+                    {/* NEW SIMPLE BUTTON FOR SPECIALITIES */}
+                    <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
+                      Explore Service
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -387,10 +395,12 @@ const Engineers = () => {
         </div>
       </section>
 
-      {/* Service Modal */}
+      {/* Unified Modal Component for Specialities & Services - (Content omitted for brevity) */}
       <AnimatePresence>
-        {isServiceModalOpen && selectedService && (
+        {(isModalOpen && selectedSpeciality) ||
+        (isServiceModalOpen && selectedService) ? (
           <>
+            {/* Backdrop */}
             <motion.div
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
               initial={{ opacity: 0 }}
@@ -399,118 +409,7 @@ const Engineers = () => {
               onClick={closeModal}
             />
 
-            <motion.div
-              className="fixed inset-4 md:inset-10 lg:inset-20 z-50 flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ type: "spring", damping: 25 }}
-            >
-              <div className="bg-white rounded-3xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
-                {/* Modal Header with Image */}
-                <div className="relative h-64">
-                  <img
-                    src={selectedService.image}
-                    alt={selectedService.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 inline-block mb-3">
-                          <span className="text-3xl">
-                            {selectedService.icon}
-                          </span>
-                        </div>
-                        <h2 className="font-playfair font-bold text-3xl md:text-4xl text-white">
-                          {selectedService.title}
-                        </h2>
-                      </div>
-
-                      <motion.button
-                        onClick={closeModal}
-                        className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-xl p-3 transition-all duration-300 transform hover:scale-110"
-                        whileHover={{ rotate: 90 }}
-                      >
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </motion.button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Modal Content */}
-                <div className="flex-1 overflow-y-auto">
-                  <div className="p-6 md:p-8">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
-                    >
-                      <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                        {selectedService.description}
-                      </p>
-
-                      <h3 className="font-playfair font-bold text-2xl text-gray-900 mb-4">
-                        Key Features & Services
-                      </h3>
-                      {renderServiceFeatures(selectedService.features)}
-                    </motion.div>
-
-                    {/* Action Buttons */}
-                    <motion.div
-                      className="flex flex-wrap gap-4 mt-8 pt-6 border-t border-gray-200"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 }}
-                    >
-                      <Link
-                        to="/contact"
-                        className="px-8 py-3 text-lg font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                        onClick={closeModal}
-                      >
-                        Start Your Project
-                      </Link>
-                      <button
-                        onClick={closeModal}
-                        className="px-8 py-3 text-lg font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
-                      >
-                        Close
-                      </button>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Specialities Modal */}
-      <AnimatePresence>
-        {isModalOpen && selectedSpeciality && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeModal}
-            />
-
+            {/* Modal Box */}
             <motion.div
               className="fixed inset-4 md:inset-10 lg:inset-20 z-50 flex items-center justify-center"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -522,58 +421,62 @@ const Engineers = () => {
                 {/* Modal Header with Image */}
                 <div className="relative h-64 md:h-80">
                   <img
-                    src={selectedSpeciality.image}
-                    alt={selectedSpeciality.title}
+                    src={
+                      selectedSpeciality
+                        ? selectedSpeciality.image
+                        : selectedService.image
+                    }
+                    alt={
+                      selectedSpeciality
+                        ? selectedSpeciality.title
+                        : selectedService.title
+                    }
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
-                  <div className="absolute bottom-6 left-6 right-6">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 inline-block mb-3">
-                          <span className="text-3xl">
-                            {selectedSpeciality.icon}
-                          </span>
-                        </div>
-                        <h2 className="font-playfair font-bold text-3xl md:text-4xl text-white">
-                          {selectedSpeciality.title}
-                        </h2>
-                      </div>
-
-                      <motion.button
-                        onClick={closeModal}
-                        className="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white rounded-xl p-3 transition-all duration-300 transform hover:scale-110"
-                        whileHover={{ rotate: 90 }}
-                      >
-                        <svg
-                          className="w-6 h-6"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M6 18L18 6M6 6l12 12"
-                          />
-                        </svg>
-                      </motion.button>
-                    </div>
-                  </div>
+                  {/* Top Right Close Button */}
+                  <motion.button
+                    onClick={closeModal}
+                    className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 transform hover:scale-110 z-50"
+                    whileHover={{ rotate: 90 }}
+                  >
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </motion.button>
                 </div>
 
-                {/* Modal Content */}
+                {/* Modal Content - Unified Structure */}
                 <div className="flex-1 overflow-y-auto">
                   <div className="p-6 md:p-8">
+                    {/* Title */}
+                    <h2 className="font-playfair font-bold text-3xl md:text-4xl text-gray-900 mb-4">
+                      {selectedSpeciality
+                        ? selectedSpeciality.title
+                        : selectedService.title}
+                    </h2>
+
+                    {/* Description / Features */}
                     <motion.div
                       className="prose prose-lg max-w-none"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 }}
                     >
-                      {renderDescription(selectedSpeciality.description)}
+                      {selectedSpeciality
+                        ? renderDescription(selectedSpeciality.description)
+                        : renderServiceFeatures(selectedService.features)}
                     </motion.div>
 
                     {/* Action Buttons */}
@@ -602,7 +505,7 @@ const Engineers = () => {
               </div>
             </motion.div>
           </>
-        )}
+        ) : null}
       </AnimatePresence>
 
       {/* Fonts */}

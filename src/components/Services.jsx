@@ -41,7 +41,7 @@ const services = [
   },
   {
     image:
-      "https://plus.unsplash.com/premium_photo-1751620467222-9b616288ce60?w=800&auto=format&fit=crop&q=60",
+      "https://plus.unsplash.com/premium-photo-1751620467222-9b616288ce60?w=800&auto=format&fit=crop&q=60",
     title: "Commercial Space Uplift",
     description: "Renovation and modernization of existing commercial spaces",
   },
@@ -64,19 +64,19 @@ const Services = () => {
     return () => window.removeEventListener("resize", updateSlidesPerView);
   }, []);
 
+  // Calculate the highest index that allows all visible cards to remain in view.
+  const maxIndex = Math.max(0, services.length - slidesPerView);
+
   // Move slides right
   const nextSlide = () => {
-    const maxIndex = services.length - slidesPerView;
-    if (currentIndex < maxIndex) {
-      setCurrentIndex((prev) => prev + 1);
-    }
+    // Ensure we don't go beyond the calculated max index
+    setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
   };
 
   // Move slides left
   const prevSlide = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1);
-    }
+    // Ensure we don't go below index 0.
+    setCurrentIndex((prev) => Math.max(prev - 1, 0));
   };
 
   return (
@@ -104,18 +104,20 @@ const Services = () => {
 
       {/* Slider */}
       <div className="relative w-[95%] mx-auto overflow-hidden rounded-3xl">
+        {/* Track element */}
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{
-            transform: `translateX(-${(currentIndex * 100) / slidesPerView}%)`,
-            width: `${(services.length / slidesPerView) * 100}%`,
+            transform: `translateX(-${currentIndex * (100 / slidesPerView)}%)`,
           }}
         >
           {services.map((service, index) => (
             <div
               key={index}
               className="flex-shrink-0 px-3"
-              style={{ width: `${100 / services.length}%` }}
+              style={{
+                width: `${100 / slidesPerView}%`,
+              }}
             >
               <div className="group relative bg-white rounded-2xl h-full shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-2xl">
                 <div className="w-full h-72 relative overflow-hidden rounded-t-2xl">
@@ -161,9 +163,9 @@ const Services = () => {
         <button
           onClick={nextSlide}
           aria-label="Next Slide"
-          disabled={currentIndex >= services.length - slidesPerView}
+          disabled={currentIndex >= maxIndex}
           className={`absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 ${
-            currentIndex >= services.length - slidesPerView
+            currentIndex >= maxIndex
               ? "opacity-40 cursor-not-allowed"
               : "hover:scale-110"
           } bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-orange-600 z-10`}

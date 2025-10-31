@@ -196,17 +196,17 @@ const Licenses = () => {
                 </div>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-2 sm:mb-4">
-                Our{" "}
+                Where We{" "}
                 <span className="bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent">
-                  Licenses
+                  Serve
                 </span>
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-700 font-roboto max-w-3xl mx-auto leading-relaxed">
-                Fully licensed and certified to serve clients across the United
-                States with
+                Licensed professional Engineers and General Contractors serving
+                across the
                 <span className="font-semibold text-blue-600">
                   {" "}
-                  professional engineering
+                  United States
                 </span>{" "}
                 and
                 <span className="font-semibold text-green-600">
@@ -215,48 +215,6 @@ const Licenses = () => {
                 </span>
                 .
               </p>
-            </motion.div>
-
-            {/* License Cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10 max-w-6xl mx-auto"
-            >
-              {licenses.map((info) => (
-                <div
-                  key={info.type}
-                  className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                    <div
-                      className="p-2 sm:p-3 rounded-lg"
-                      style={{ backgroundColor: `${info.color}20` }}
-                    >
-                      <info.icon
-                        className="w-5 sm:w-6 h-5 sm:h-6"
-                        style={{ color: info.color }}
-                      />
-                    </div>
-                    <div>
-                      <h3 className="font-playfair font-bold text-md sm:text-lg text-gray-900">
-                        {info.type}
-                      </h3>
-                      <p
-                        className="text-xl sm:text-2xl font-bold"
-                        style={{ color: info.color }}
-                      >
-                        {info.states.length} States
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 text-xs sm:text-sm">
-                    {info.description}
-                  </p>
-                </div>
-              ))}
             </motion.div>
 
             {/* Interactive Map */}
@@ -355,14 +313,9 @@ const Licenses = () => {
                         className="w-3 h-3 sm:w-4 sm:h-4 rounded-full"
                         style={{ backgroundColor: info.color }}
                       />
-                      <div>
-                        <span className="font-semibold text-gray-900 text-xs sm:text-sm">
-                          {info.type}
-                        </span>
-                        <span className="text-gray-600 text-[10px] sm:text-xs ml-1">
-                          ({info.states.length} states)
-                        </span>
-                      </div>
+                      <span className="font-semibold text-gray-900 text-xs sm:text-sm">
+                        {info.type}
+                      </span>
                     </div>
                   ))}
                 </div>

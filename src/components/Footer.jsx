@@ -57,10 +57,12 @@ const Footer = () => {
           <div className="flex items-start gap-3 text-gray-400 mt-2">
             <FaMapMarkerAlt className="text-orange-400 mt-1" />
             <div>
-              <p>5540 Centerview Drive,</p>
-              <p>Raleigh, NC 27606, USA</p>
+              <address className="not-italic">
+                <p>5540 Centerview Dr, Ste #304</p>
+                <p>Raleigh, NC 27606 NC</p>
+              </address>
               <a
-                href="https://www.google.com/maps?q=Raleigh+NC+27606"
+                href="https://www.google.com/maps?q=5540+Centerview+Dr+Raleigh+NC+27606"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-orange-400 text-sm hover:underline"
