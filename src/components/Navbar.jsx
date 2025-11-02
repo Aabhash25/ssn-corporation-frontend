@@ -103,10 +103,10 @@ const ModernNavbar = () => {
               <FaEnvelope /> contact@ssncorporation.com
             </a>
             <a
-              href="tel:+19197030222"
+              href="tel:+19195791490"
               className="flex items-center gap-2 hover:text-yellow-400 transition-colors"
             >
-              <FaPhoneAlt /> +1 (919) 703-0222
+              <FaPhoneAlt /> (919) 579-1490
             </a>
           </div>
 
@@ -155,16 +155,16 @@ const ModernNavbar = () => {
 
       {/* Main Navbar */}
       <nav
-        className={`fixed w-full transition-all duration-500 ${navBg} z-50`}
+        className={`fixed w-full transition-all duration-500 ${navBg} z-40`}
         style={{
           top: isDesktop ? "56px" : "0px",
         }}
       >
-        <div className="max-w-7xl mx-auto flex items-center h-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex justify-between items-center h-24 px-6 lg:px-8">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center font-playfair text-3xl lg:text-4xl font-bold flex-shrink-0"
+            className="flex items-center font-playfair text-3xl lg:text-4xl font-bold -ml-3 lg:-ml-6"
           >
             <img
               src="/logo.png"
@@ -173,11 +173,8 @@ const ModernNavbar = () => {
             />
           </Link>
 
-          {/* Spacer to push nav links right */}
-          <div className="flex-1 min-w-[200px]"></div>
-
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-10 font-oswald text-2xl whitespace-nowrap">
+          <div className="hidden lg:flex items-center space-x-10 font-oswald text-2xl">
             <Link className={`transition-colors ${linkStyle}`} to="/about">
               About Us
             </Link>
@@ -239,14 +236,15 @@ const ModernNavbar = () => {
               )}
             </div>
 
-            <Link className={`transition-colors ${linkStyle}`} to="/career">
-              Careers
-            </Link>
             <Link
               className={`transition-colors ${linkStyle}`}
               to="/research-and-development"
             >
               Research & Development
+            </Link>
+
+            <Link className={`transition-colors ${linkStyle}`} to="/career">
+              Careers
             </Link>
 
             <Link
@@ -258,12 +256,10 @@ const ModernNavbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center ml-auto flex-shrink-0">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`focus:outline-none p-3 rounded-md transition-all duration-300 ${
-                isLandingPage && !scrolled ? "text-white" : "text-gray-900"
-              }`}
+              className={`focus:outline-none p-3 rounded-md transition-all duration-300 ${linkStyle}`}
             >
               <svg
                 className="w-8 h-8"
@@ -282,6 +278,8 @@ const ModernNavbar = () => {
           </div>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay - sliding drawer */}
       {/* Mobile Menu Overlay - sliding drawer */}
       <div
         className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gray-900/95 backdrop-blur-md shadow-xl z-50 transform transition-transform duration-300 ${
@@ -318,10 +316,10 @@ const ModernNavbar = () => {
               <FaEnvelope /> contact@ssncorporation.com
             </a>
             <a
-              href="tel:+19197030222"
+              href="tel:+19195791490"
               className="flex items-center gap-2 text-sm text-white hover:text-yellow-400"
             >
-              <FaPhoneAlt /> +1 (919) 703-0222
+              <FaPhoneAlt /> (919) 579-1490
             </a>
           </div>
 
@@ -392,6 +390,14 @@ const ModernNavbar = () => {
                 </div>
               )}
             </div>
+
+            <Link
+              to="/research-and-development"
+              className="text-2xl text-white hover:text-yellow-400 font-semibold"
+              onClick={() => setIsOpen(false)}
+            >
+              Research & Development
+            </Link>
 
             <Link
               to="/career"
