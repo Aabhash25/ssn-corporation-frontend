@@ -2,6 +2,20 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+// Fonts Component
+const FontsStyle = () => (
+  <style jsx global>{`
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
+
+    .font-playfair {
+      font-family: "Playfair Display", serif;
+    }
+    .font-roboto {
+      font-family: "Roboto", sans-serif;
+    }
+  `}</style>
+);
+
 // Motion Variants
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -15,12 +29,14 @@ const itemVariants = {
 
 const ConstructionMaterialTesting = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-50 font-roboto">
+      <FontsStyle />
+
       {/* Hero Section */}
       <div
         className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center"
         style={{
-          backgroundImage: "url('/construction-bg.jpg')", // place image in public folder
+          backgroundImage: "url('/10.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -46,14 +62,19 @@ const ConstructionMaterialTesting = () => {
       >
         <motion.p
           variants={itemVariants}
-          className="text-gray-700 text-lg md:text-xl leading-relaxed max-w-4xl mx-auto mb-8 font-roboto"
+          className="text-gray-700 text-lg md:text-xl leading-relaxed max-w-3xl mx-auto text-center mb-8 font-roboto"
         >
-          At SSN Corporation, our Construction Material Testing division ensures
-          the quality and durability of every material used in your project. We
-          provide comprehensive testing services to guarantee safety,
-          compliance, and long-lasting performance.
+          At{" "}
+          <span className="font-playfair font-semibold text-orange-500">
+            SSN Corporation
+          </span>
+          , our Construction Material Testing division ensures the quality and
+          durability of every material used in your project. We provide
+          comprehensive testing services to guarantee safety, compliance, and
+          long-lasting performance.
         </motion.p>
 
+        {/* Testing Cards */}
         <motion.div
           className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
@@ -80,7 +101,7 @@ const ConstructionMaterialTesting = () => {
               <h3 className="text-xl font-playfair font-semibold mb-2">
                 {test.title}
               </h3>
-              <p className="text-gray-600 font-roboto">{test.desc}</p>
+              <p className="text-gray-600">{test.desc}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -95,7 +116,7 @@ const ConstructionMaterialTesting = () => {
           <h3 className="text-3xl font-playfair font-bold mb-4">
             Ensure Material Quality
           </h3>
-          <p className="text-lg font-roboto mb-6">
+          <p className="text-lg mb-6">
             Partner with SSN Corporation to guarantee that your construction
             materials meet the highest standards of quality and safety.
           </p>
@@ -104,18 +125,6 @@ const ConstructionMaterialTesting = () => {
           </button>
         </motion.div>
       </motion.section>
-
-      {/* Fonts */}
-      <style jsx>{`
-        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
-
-        .font-playfair {
-          font-family: "Playfair Display", serif;
-        }
-        .font-roboto {
-          font-family: "Roboto", sans-serif;
-        }
-      `}</style>
     </div>
   );
 };

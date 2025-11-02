@@ -9,6 +9,19 @@ import {
   FaIndustry,
 } from "react-icons/fa";
 
+// Google Fonts
+const FontsStyle = () => (
+  <style jsx global>{`
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
+    .font-roboto {
+      font-family: "Roboto", sans-serif;
+    }
+    .font-playfair {
+      font-family: "Playfair Display", serif;
+    }
+  `}</style>
+);
+
 const capabilitiesList = [
   {
     title: "Turnkey Construction Services",
@@ -54,15 +67,17 @@ const itemVariants = {
 };
 
 const Construction = () => (
-  <div className="w-full min-h-screen">
+  <div className="w-full min-h-screen font-roboto">
+    <FontsStyle />
+
     {/* Hero Section */}
-    <div className="relative w-full h-[70vh] md:h-[80vh] bg-[url('https://plus.unsplash.com/premium_photo-1681691912442-68c4179c530c?w=1500&auto=format&fit=crop&q=80')] bg-cover bg-center flex items-center justify-center">
+    <div className="relative w-full h-[70vh] md:h-[80vh] bg-[url('/ConstructionExcellence.jpg')] bg-cover bg-center flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60"></div>
       <motion.h1
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative text-white text-5xl md:text-6xl font-bold text-center px-4"
+        className="relative text-white text-5xl md:text-6xl font-playfair font-bold text-center px-4"
       >
         Construction Excellence
       </motion.h1>
@@ -79,11 +94,15 @@ const Construction = () => (
       >
         <motion.p
           variants={itemVariants}
-          className="text-gray-700 text-lg md:text-xl leading-relaxed md:leading-loose max-w-3xl lg:max-w-4xl mx-auto text-center px-4 sm:px-6"
+          className="text-gray-700 text-lg md:text-xl leading-relaxed md:leading-loose max-w-3xl lg:max-w-4xl mx-auto text-center px-4 sm:px-6 font-roboto"
         >
-          At SSN Corporation, we transform blueprints into reality. With
-          precision, safety, and innovation, we deliver construction projects
-          that stand the test of time.
+          At{" "}
+          <span className="font-playfair font-semibold text-orange-500">
+            SSN Corporation
+          </span>
+          , we transform blueprints into reality. With precision, safety, and
+          innovation, we deliver construction projects that stand the test of
+          time.
         </motion.p>
       </motion.section>
 
@@ -94,7 +113,7 @@ const Construction = () => (
         whileInView="visible"
         variants={containerVariants}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-12">
           Our Capabilities
         </h2>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -107,8 +126,10 @@ const Construction = () => (
               <div className="w-16 h-16 flex items-center justify-center rounded-full bg-orange-100 text-orange-600 text-3xl">
                 {cap.icon}
               </div>
-              <h3 className="text-xl md:text-2xl font-semibold">{cap.title}</h3>
-              <p className="text-gray-600">{cap.desc}</p>
+              <h3 className="text-xl md:text-2xl font-playfair font-semibold">
+                {cap.title}
+              </h3>
+              <p className="text-gray-600 font-roboto">{cap.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -121,7 +142,7 @@ const Construction = () => (
         whileInView="visible"
         variants={containerVariants}
       >
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-12">
           Why Choose Us?
         </h2>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid sm:grid-cols-1 md:grid-cols-2 gap-6">
@@ -132,7 +153,7 @@ const Construction = () => (
               className="flex items-start space-x-4 bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-md hover:scale-105 transition"
             >
               <FaCheckCircle className="text-green-600 w-6 h-6 mt-1" />
-              <p className="text-gray-700 text-lg">{reason}</p>
+              <p className="text-gray-700 text-lg font-roboto">{reason}</p>
             </motion.div>
           ))}
         </div>
@@ -149,10 +170,10 @@ const Construction = () => (
           variants={itemVariants}
           className="max-w-[1400px] mx-auto px-6 md:px-12 bg-gradient-to-r from-orange-500 to-red-500 text-white rounded-3xl p-12 shadow-2xl text-center"
         >
-          <h3 className="text-3xl md:text-4xl font-bold mb-4">
+          <h3 className="text-3xl md:text-4xl font-playfair font-bold mb-4">
             Let’s Build Together
           </h3>
-          <p className="text-lg md:text-xl mb-6">
+          <p className="text-lg md:text-xl mb-6 font-roboto">
             Partner with SSN Corporation for construction that blends
             reliability, innovation, and excellence.
           </p>

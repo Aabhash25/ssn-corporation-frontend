@@ -54,7 +54,7 @@ export const specialities = [
     title: "Subsurface Investigation and Geotechnical Laboratory Testing",
     icon: "🌍",
     image:
-      "",
+      "/SubsurfaceInvestigation.jpg",
     description: [
       "Comprehensive subsurface investigation and geotechnical testing services.",
       [
@@ -71,7 +71,7 @@ export const specialities = [
     title: "Geotechnical Evaluation and Design",
     icon: "🧱",
     image:
-      "geotech.jpg",
+      "/geotech.jpg",
     description: [
       "Comprehensive geotechnical engineering services for various projects.",
       [
@@ -106,7 +106,7 @@ export const specialities = [
     title: "Instrumentation and Monitoring",
     icon: "📡",
     image:
-      "26.jpg",
+      "/InstrumentationMonitoring.jpg",
     description: [
       "Comprehensive instrumentation and monitoring services.",
       [

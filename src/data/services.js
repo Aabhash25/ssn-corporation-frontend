@@ -34,7 +34,7 @@ export const services = [
     title: "Facility Planning and Design",
     icon: "🏭",
     image:
-      "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&auto=format&fit=crop&q=60",
+      "/FacilityPlanningDesign.png",
     description:
       "We provide comprehensive facility planning and design for essential infrastructure and recreation. From water treatment to power generation, we deliver tailored, sustainable solutions. We can help you in the following areas:",
     features: [
@@ -48,7 +48,7 @@ export const services = [
     title: "Specialty Structure Planning and Design",
     icon: "🏗️",
     image:
-      "https://images.unsplash.com/photo-1581092160607-3b84c1e1c8e4?w=600&auto=format&fit=crop&q=60",
+      "/SpecialtyStructurePlanningAndDesign.png",
     description:
       "We offer specialty design solutions for advanced infrastructure and environmental challenges. From trenchless technology to water resources and acoustic control, we deliver innovative and sustainable results. We can help you with the following:",
     features: [
@@ -65,7 +65,7 @@ export const services = [
     title: "Subsurface Investigation",
     icon: "🌍",
     image:
-      "/subsurface.jpg",
+      "/SubsurfaceInvestigation.jpg",
     description:
       "We offer field investigation services to assess subsurface conditions for construction and engineering projects.",
     features: [
@@ -81,7 +81,7 @@ export const services = [
     title: "Instrumentation and Monitoring",
     icon: "📡",
     image:
-      "26.jpg",
+      "/InstrumentationAndMonitoring.jpg",
     description:
       "Real-time instrumentation and monitoring solutions for construction sites and structures to ensure safety and performance.",
     features: [
@@ -115,7 +115,7 @@ export const services = [
     title: "Construction Support and Material Testing",
     icon: "🧱",
     image:
-      "material_testing.jpg",
+      "/ConstructionSupportAndMaterialTesting.jpg",
     description:
       "SSN Engineers delivers expert laboratory and field material testing for construction and development projects. From concrete and asphalt testing to special inspections, we ensure compliance with plan specifications and regulatory standards. We can deliver the following support:",
     features: [

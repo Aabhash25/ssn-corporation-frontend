@@ -22,8 +22,7 @@ const services = [
       "Professional project oversight ensuring timely and budget-conscious delivery",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1605152276897-4f618f831968?w=800&auto=format&fit=crop&q=60",
+    image: "/PreConstructionService.jpg",
     title: "Pre Construction Services",
     description: "Comprehensive planning, design, and feasibility studies",
   },

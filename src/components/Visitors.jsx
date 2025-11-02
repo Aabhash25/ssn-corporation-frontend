@@ -10,7 +10,7 @@ const Visitors = () => {
       subtitle: "Smart construction tools & CAD workflows",
       description:
         "Discover smart construction solutions, accurate estimations, and AI-powered tools tailored to streamline engineering workflows.",
-      img: "/check.jpg",
+      img: "/DesignEngineer.jpg",
       icon: <FaDraftingCompass className="text-lg" />,
       link: "/engineers",
     },
@@ -19,7 +19,7 @@ const Visitors = () => {
       subtitle: "Real-time estimates & project coordination",
       description:
         "Gain real-time project insights, accurate material estimates, and optimized workflows designed to simplify contractor project management.",
-      img: "https://plus.unsplash.com/premium_photo-1681823654441-5e2c0ad4e7ea?w=500&auto=format&fit=crop&q=60",
+      img: "/GeneralContractor.png",
       icon: <FaHardHat className="text-lg" />,
       link: "/contractors",
     },

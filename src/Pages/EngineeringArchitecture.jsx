@@ -9,6 +9,19 @@ import {
   FaProjectDiagram,
 } from "react-icons/fa";
 
+// Google Fonts
+const FontsStyle = () => (
+  <style jsx global>{`
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+    .font-roboto {
+      font-family: "Roboto", sans-serif;
+    }
+    .font-playfair {
+      font-family: "Playfair Display", serif;
+    }
+  `}</style>
+);
+
 const expertiseList = [
   {
     title: "Architectural Design & Planning",
@@ -71,7 +84,9 @@ const itemVariants = {
 
 const EngineeringArchitecture = () => {
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen font-roboto">
+      <FontsStyle />
+
       {/* Hero Section */}
       <div className="relative w-full h-[70vh] md:h-[80vh] bg-[url('/GroceryDurham1.png')] bg-cover bg-center flex items-center justify-center">
         <div className="absolute inset-0 bg-black/50"></div>
@@ -79,7 +94,7 @@ const EngineeringArchitecture = () => {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
-          className="relative text-white text-4xl md:text-6xl font-bold text-center px-4"
+          className="relative text-white text-4xl md:text-6xl font-playfair font-bold text-center px-4"
         >
           Engineering & Architecture
         </motion.h1>
@@ -99,19 +114,36 @@ const EngineeringArchitecture = () => {
             variants={itemVariants}
             className="text-gray-700 text-lg md:text-xl max-w-4xl mx-auto leading-relaxed"
           >
-            At SSN Corporation, our Engineering and Architecture division
-            delivers innovative, sustainable, and future-ready solutions
-            tailored to modern infrastructure and development.
+            At{" "}
+            <span className="font-playfair font-semibold text-orange-500">
+              SSN Corporation
+            </span>
+            , our Engineering and Architecture division delivers innovative,
+            sustainable, and future-ready solutions tailored to modern
+            infrastructure and development.
           </motion.p>
         </motion.section>
 
-        {/* Expertise Cards */}
+        {/* Expertise Section */}
         <motion.section
           className="w-full bg-gradient-to-r from-blue-50 via-white to-indigo-50 py-16"
           initial="hidden"
           whileInView="visible"
           variants={containerVariants}
         >
+          {/* Section Header */}
+          <div className="max-w-[1400px] mx-auto px-6 md:px-12 text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-4">
+              Our Expertise
+            </h2>
+            <p className="text-gray-700 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+              We deliver end-to-end engineering and architectural solutions
+              across multiple domains, ensuring quality, innovation, and
+              sustainability.
+            </p>
+          </div>
+
+          {/* Expertise Cards */}
           <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {expertiseList.map((item, idx) => (
               <motion.div
@@ -122,7 +154,7 @@ const EngineeringArchitecture = () => {
                 <div className="w-16 h-16 flex items-center justify-center rounded-full bg-orange-100 text-orange-600 text-3xl">
                   {item.icon}
                 </div>
-                <h3 className="text-xl md:text-2xl font-semibold">
+                <h3 className="text-xl md:text-2xl font-playfair font-semibold">
                   {item.title}
                 </h3>
                 <p className="text-gray-600">{item.desc}</p>
@@ -138,7 +170,7 @@ const EngineeringArchitecture = () => {
           whileInView="visible"
           variants={containerVariants}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-12">
             Industries We Serve
           </h2>
           <div className="max-w-[1400px] mx-auto px-6 md:px-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -156,7 +188,7 @@ const EngineeringArchitecture = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none"></div>
                 <div className="absolute inset-0 flex items-end justify-center p-4 pointer-events-none">
-                  <h3 className="text-white font-semibold text-lg md:text-xl text-center drop-shadow-lg">
+                  <h3 className="text-white font-playfair font-semibold text-lg md:text-xl text-center drop-shadow-lg">
                     {industry.name}
                   </h3>
                 </div>
@@ -167,7 +199,7 @@ const EngineeringArchitecture = () => {
 
         {/* Closing Statement */}
         <motion.section className="w-full py-16 bg-white/80 backdrop-blur-md">
-          <p className="max-w-[1400px] mx-auto px-6 md:px-12 text-gray-700 text-lg md:text-xl text-center leading-relaxed">
+          <p className="max-w-[1400px] mx-auto px-6 md:px-12 text-gray-700 text-lg md:text-xl text-center leading-relaxed font-roboto">
             Our commitment lies in excellence — designing tomorrow's
             infrastructure with today's innovation. Whether it's a high-rise
             building or an industrial complex, SSN Corporation ensures every
