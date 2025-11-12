@@ -94,7 +94,7 @@ const Business = () => {
       </h1>
       <p className="text-lg sm:text-xl font-roboto mb-12 leading-relaxed text-center">
         SSN Corporation values our relationships with subcontractors, suppliers,
-        and collaborators/partners...
+        and collaborators/partners
       </p>
 
       {/* Full-width Two-column Layout */}

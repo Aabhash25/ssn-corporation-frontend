@@ -24,27 +24,27 @@ const FontsStyle = () => (
 
 const expertiseList = [
   {
-    title: "Architectural Design & Planning",
+    title: "Architectural Design and Planning",
     desc: "From commercial complexes to residential developments, we create spaces that blend aesthetics, utility, and sustainability.",
     icon: <FaDraftingCompass className="text-orange-500 w-10 h-10" />,
   },
   {
-    title: "Civil & Structural Engineering",
+    title: "Civil and Structural Engineering",
     desc: "Ensuring robust foundation, durability, and safety in every project through advanced engineering techniques.",
     icon: <FaBuilding className="text-blue-500 w-10 h-10" />,
   },
   {
-    title: "Mechanical, Electrical & Plumbing (MEP) Systems",
+    title: "Mechanical, Electrical and Plumbing (MEP) Systems",
     desc: "Comprehensive MEP design and integration for smart and energy-efficient buildings.",
     icon: <FaCogs className="text-green-500 w-10 h-10" />,
   },
   {
-    title: "Sustainable & Green Building Solutions",
+    title: "Sustainable and Green Building Solutions",
     desc: "We incorporate eco-friendly materials and renewable technologies to meet global sustainability standards.",
     icon: <FaLeaf className="text-teal-500 w-10 h-10" />,
   },
   {
-    title: "Project Management & Consultancy",
+    title: "Project Management and Consultancy",
     desc: "End-to-end support from feasibility studies to construction supervision, ensuring timely delivery within budget.",
     icon: <FaProjectDiagram className="text-red-500 w-10 h-10" />,
   },
@@ -52,22 +52,22 @@ const expertiseList = [
 
 const industriesList = [
   {
-    name: "Residential & Commercial Real Estate",
+    name: "Residential and Commercial Real Estate",
     image:
       "https://images.unsplash.com/photo-1506092309076-af15fb0051e3?w=800&auto=format&fit=crop&q=60",
   },
   {
-    name: "Healthcare & Educational Infrastructure",
+    name: "Healthcare and Educational Infrastructure",
     image:
       "https://images.unsplash.com/photo-1632833239869-a37e3a5806d2?w=800&auto=format&fit=crop&q=60",
   },
   {
-    name: "Industrial & Manufacturing Facilities",
+    name: "Industrial and Manufacturing Facilities",
     image:
       "https://images.unsplash.com/photo-1588011930968-eadac80e6a5a?w=800&auto=format&fit=crop&q=60",
   },
   {
-    name: "Government & Public Sector Projects",
+    name: "Government and Public Sector Projects",
     image:
       "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&auto=format&fit=crop&q=60",
   },
@@ -88,7 +88,7 @@ const EngineeringArchitecture = () => {
       <FontsStyle />
 
       {/* Hero Section */}
-      <div className="relative w-full h-[70vh] md:h-[80vh] bg-[url('/GroceryDurham1.png')] bg-cover bg-center flex items-center justify-center">
+      <div className="relative w-full h-[70vh] md:h-[80vh] bg-[url('/GroceryDurham1.webp')] bg-cover bg-center flex items-center justify-center">
         <div className="absolute inset-0 bg-black/50"></div>
         <motion.h1
           initial={{ opacity: 0, y: 60 }}
@@ -96,7 +96,7 @@ const EngineeringArchitecture = () => {
           transition={{ duration: 1 }}
           className="relative text-white text-4xl md:text-6xl font-playfair font-bold text-center px-4"
         >
-          Engineering & Architecture
+          Planner and Engineer
         </motion.h1>
       </div>
 
@@ -118,7 +118,7 @@ const EngineeringArchitecture = () => {
             <span className="font-playfair font-semibold text-orange-500">
               SSN Corporation
             </span>
-            , our Engineering and Architecture division delivers innovative,
+            , our Planning and Engineering division delivers innovative,
             sustainable, and future-ready solutions tailored to modern
             infrastructure and development.
           </motion.p>

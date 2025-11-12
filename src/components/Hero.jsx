@@ -38,7 +38,7 @@ const Hero = () => {
     <motion.span
       key={idx}
       variants={textVariant}
-      className={`inline-block mr-3 ${word.color} font-oswald font-bold heading-shadow`}
+      className={`inline-block mr-3 ${word.color} font-playfair font-bold heading-shadow`}
     >
       {word.text}
     </motion.span>
@@ -69,7 +69,7 @@ const Hero = () => {
 
   useEffect(() => {
     const video = document.createElement("video");
-    video.src = "/heroVideo.mp4";
+    video.src = "/heroVideo-web.mp4";
     video.preload = "auto";
     video.onloadeddata = () => setVideoLoaded(true);
     video.load();
@@ -109,7 +109,7 @@ const Hero = () => {
         >
           <motion.video
             ref={videoRef}
-            src="/heroVideo.mp4"
+            src="/heroVideo-web.mp4"
             poster="/heroPoster.jpg"
             loop
             muted={isMuted}
@@ -150,7 +150,7 @@ const Hero = () => {
           toggleMute();
         }}
         aria-label={isMuted ? "Unmute video" : "Mute video"}
-        className="absolute bottom-6 right-6 z-20 bg-gray-900/80 hover:bg-gray-900 p-3 rounded-full text-yellow-500 transition shadow-lg"
+        className="absolute bottom-6 right-6 z-20 bg-gray-900/80 hover:bg-gray-900 p-3 rounded-full text-yellow-500 transition shadow-lg hover:shadow-xl"
       >
         {isMuted ? <FaVolumeMute size={20} /> : <FaVolumeUp size={20} />}
       </button>
@@ -162,16 +162,18 @@ const Hero = () => {
         initial="hidden"
         animate="visible"
       >
-        <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight mb-6 leading-tight">
+        <motion.h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair font-extrabold uppercase tracking-tight mb-6 leading-tight">
           {headingWords}
         </motion.h1>
 
         <motion.p
-          className="text-lg sm:text-xl md:text-2xl font-light text-gray-100 mb-10 max-w-3xl mx-auto leading-relaxed text-shadow"
-          variants={textVariant}
+          className="text-white text-lg sm:text-xl md:text-2xl font-roboto mb-10 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          We deliver excellence in design, engineering, construction, and
-          innovation for your dream projects.
+          We deliver excellence in innovative planning,design,engineering and
+          construction for your dream project.
         </motion.p>
 
         <motion.div
@@ -180,13 +182,13 @@ const Hero = () => {
         >
           <Link
             to="/portfolio"
-            className="px-8 py-4 bg-yellow-500 text-gray-900 hover:bg-yellow-600 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105"
+            className="px-8 py-4 bg-yellow-500 text-gray-900 hover:bg-yellow-600 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl font-roboto"
           >
             Explore Our Work
           </Link>
           <Link
             to="/contact"
-            className="px-8 py-4 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105"
+            className="px-8 py-4 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl font-roboto"
           >
             Get In Touch
           </Link>
@@ -195,7 +197,9 @@ const Hero = () => {
 
       <style jsx>{`
         .heading-shadow {
-          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+          text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+          letter-spacing: 2px;
+          line-height: 1.1;
         }
         .text-shadow {
           text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);

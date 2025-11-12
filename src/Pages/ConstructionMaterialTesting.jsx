@@ -36,7 +36,7 @@ const ConstructionMaterialTesting = () => {
       <div
         className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center"
         style={{
-          backgroundImage: "url('/10.png')",
+          backgroundImage: "url('/10.webp')",
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

@@ -15,38 +15,23 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-200 py-16 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* Company Info with Logo and BBB */}
+        {/* Company Info with Logo */}
         <div>
-          <div className="flex items-center gap-4 mb-4">
+          <div className="mb-4">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="SSN Corporation Logo"
               className="h-20 w-auto object-contain"
             />
-            <a
-              href="https://www.bbb.org/us/nc/your-company-bbb-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                src="/bbb.png"
-                alt="BBB Accredited Business"
-                className="h-14 w-auto object-contain"
-              />
-            </a>
           </div>
 
           <h2 className="text-2xl font-playfair font-bold mb-2">
             SSN Corporation
           </h2>
-          <p className="text-gray-400 text-sm mb-4">
-            Delivering innovative engineering and construction solutions across
-            the nation with integrity and excellence.
-          </p>
 
           <div className="flex items-center gap-3 text-gray-400 mb-2">
             <FaPhoneAlt className="text-orange-400" />{" "}
-            <span>(919) 579-1490</span>
+            <span>+1 (919) 703-0222</span>
           </div>
           <div className="flex items-center gap-3 text-gray-400 mb-2">
             <FaEnvelope className="text-orange-400" />{" "}
@@ -59,7 +44,7 @@ const Footer = () => {
             <div>
               <address className="not-italic">
                 <p>5540 Centerview Dr, Ste #304</p>
-                <p>Raleigh, NC 27606 NC</p>
+                <p>Raleigh, NC 27606</p>
               </address>
               <a
                 href="https://www.google.com/maps?q=5540+Centerview+Dr+Raleigh+NC+27606"

@@ -103,10 +103,10 @@ const ModernNavbar = () => {
               <FaEnvelope /> contact@ssncorporation.com
             </a>
             <a
-              href="tel:+19195791490"
+              href="tel: (919) 703-0222"
               className="flex items-center gap-2 hover:text-yellow-400 transition-colors"
             >
-              <FaPhoneAlt /> (919) 579-1490
+              <FaPhoneAlt /> (919) 703-0222
             </a>
           </div>
 
@@ -167,7 +167,7 @@ const ModernNavbar = () => {
             className="flex items-center font-playfair text-3xl lg:text-4xl font-bold -ml-3 lg:-ml-6"
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="SSN Logo"
               className="h-20 w-auto hover:scale-110 transition-transform duration-300"
             />
@@ -216,7 +216,7 @@ const ModernNavbar = () => {
                     className="flex items-center px-6 py-3 text-xl font-oswald hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-l-4 border-transparent hover:border-yellow-500"
                   >
                     <FaRulerCombined className="mr-3 text-yellow-600" />
-                    Engineering & Architecture
+                    Planner & Engineer
                   </Link>
                   <Link
                     to="/construction"
@@ -316,10 +316,11 @@ const ModernNavbar = () => {
               <FaEnvelope /> contact@ssncorporation.com
             </a>
             <a
-              href="tel:+19195791490"
+              href="tel:9197030222"
               className="flex items-center gap-2 text-sm text-white hover:text-yellow-400"
             >
-              <FaPhoneAlt /> (919) 579-1490
+              <FaPhoneAlt />
+              (919) 703-0222
             </a>
           </div>
 

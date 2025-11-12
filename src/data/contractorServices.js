@@ -4,7 +4,7 @@
       description:
 "At SSN Corporation , we understand that the key to a successful construction project lies in meticulous planning and preparation. Our Pre-Construction Services are designed to ensure that every aspect of your project is thoroughly evaluated, planned, and optimized before ground is broken. From feasibility studies to budgeting and design coordination, we provide comprehensive support to set your project on the path to success.",
       image:
-        "/Pre-ConstructionServices.jpg",
+        "/Pre-ConstructionServices.webp",
       icon: "📋",
       features: [
         "Feasibility Studies",
@@ -20,7 +20,7 @@
       description:
       "At SSN Corporation , we believe that effective Construction Management is the cornerstone of every successful project. Our team of experienced professionals is dedicated to overseeing every aspect of your construction project, ensuring it is completed on time, within budget, and to the highest standards of quality. From planning and coordination to risk management and quality assurance, we handle it all so you can focus on your vision.",
       image:
-        "/ConstructionManagement.jpg",
+        "/ConstructionManagement.webp",
       icon: "🏗️",
       features: [
         "Project Planning & Scheduling",
@@ -36,7 +36,7 @@
       description:
 "At SSN Corporation , we believe that a home is more than just a structure—it’s a sanctuary where life unfolds, memories are made, and dreams come true. Our Residential Construction Services are designed to bring your vision to life, whether you’re building a custom dream home, renovating an existing space, or developing a residential community. With a focus on quality, innovation, and sustainability, we create living spaces that are as unique as you are.",
       image:
-        "/ResidentialConstruction.jpg",
+        "/ResidentialConstruction.webp",
       icon: "🏠",
       features: [
         "Custom Home Building",
@@ -52,7 +52,7 @@
 "At SSN Corporation , we specialize in creating commercial spaces that are not only visually stunning but also highly functional and aligned with your business goals. Whether you’re planning an office complex, retail store, hospitality facility, or industrial building, our team of experts ensures that every project is executed with precision, efficiency, and innovation. From concept to completion, we deliver spaces that enhance productivity, attract customers, and elevate your brand.",
 
       image:
-        "/CommercialConstruction.jpg",
+        "/CommercialConstruction.webp",
       icon: "🏢",
       features: [
         "Office Buildings Design & Construction",
@@ -68,7 +68,7 @@
       description:
 "At SSN Corporation , we specialize in transforming tired, outdated, or inefficient commercial spaces into dynamic environments that drive business success. Whether you’re looking to modernize an office, revamp a retail store, or upgrade an industrial facility, our Commercial Space Uplift Services are designed to breathe new life into your property. From aesthetic enhancements to operational improvements, we deliver solutions that align with your business goals and elevate your brand.",
       image:
-        "/GroceryDurham1.png",
+        "/CommercialUpfit2.jpg",
       icon: "🔄",
       features: [
         "Interior Renovations",
@@ -83,7 +83,7 @@
   description:
     "We provide end-to-end site development and construction services, transforming land into fully functional and safe spaces. Our expertise ensures timely delivery, adherence to quality standards, and sustainable construction practices.",
   image:
-    "/SiteDevelopmentAndConstruction.jpg",
+    "/SiteDevelopmentAndConstruction.webp",
   icon: "🌍",
   features: [
     "Land surveying and site analysis",
@@ -100,7 +100,7 @@
       description:
 "We are in the process of building our team for Utility Construction",
       image:
-        "/utility.jpg",
+        "/utility.webp",
       icon: "🔌",
       features: [
       ],

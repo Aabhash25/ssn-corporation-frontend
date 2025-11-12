@@ -10,12 +10,27 @@ import { motion } from "framer-motion";
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [address, setAddress] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [zipCode, setZipCode] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const payload = { name, email, message };
+    const payload = {
+      name,
+      email,
+      subject,
+      message,
+      address,
+      state,
+      country,
+      zip_code: zipCode,
+    };
+
     try {
       const res = await fetch("https://api.ssnbuilders.com/api/contact/", {
         method: "POST",
@@ -27,7 +42,12 @@ const Contact = () => {
         setModalOpen(true);
         setName("");
         setEmail("");
+        setSubject("");
         setMessage("");
+        setAddress("");
+        setState("");
+        setCountry("");
+        setZipCode("");
         setTimeout(() => setModalOpen(false), 4000);
       } else {
         alert("Failed to send message.");
@@ -41,25 +61,19 @@ const Contact = () => {
   const offices = [
     {
       title: "Head Office",
-      location: "Holly Springs, NC",
+      location: "5540 Centerview Dr, Ste 304 \n Raleigh, NC 27606",
       phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
-      title: "Satellite Office",
-      location: "Lawrenceville, GA",
+      title: "Virginia Office",
+      location: "8401 Mayland Dr, Ste A,\n Richmond, VA 23294",
       phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
-      title: "Satellite Office",
-      location: "Philadelphia, PA",
-      phone: "+1 (919) 703-0222",
-      email: "contact@ssncorporation.com",
-    },
-    {
-      title: "Satellite Office",
-      location: "Mount Laurel, NJ",
+      title: "Georgia Office",
+      location: "1982 Side Branch Way,\n Lawrenceville, GA 30045",
       phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
     },
@@ -134,6 +148,55 @@ const Contact = () => {
                 className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                 required
               />
+
+              {/* Address + Zip Code */}
+              <div className="flex gap-4 flex-wrap">
+                <input
+                  type="text"
+                  placeholder="Your Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Zip Code"
+                  value={zipCode}
+                  onChange={(e) => setZipCode(e.target.value)}
+                  className="w-32 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                  required
+                />
+              </div>
+
+              {/* State + Country */}
+              <div className="flex gap-4 flex-wrap">
+                <input
+                  type="text"
+                  placeholder="State"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                />
+                <input
+                  type="text"
+                  placeholder="Country"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                  required
+                />
+              </div>
+
+              <input
+                type="text"
+                placeholder="Subject"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                required
+              />
+
               <textarea
                 placeholder="Your Message"
                 value={message}
@@ -168,8 +231,9 @@ const Contact = () => {
                 </h3>
                 <p className="flex items-center text-gray-700 font-roboto text-lg mb-2">
                   <MapPinIcon className="h-5 w-5 text-orange-400 mr-3" />
-                  {office.location}
+                  <span className="whitespace-pre-line">{office.location}</span>
                 </p>
+
                 <p className="flex items-center text-gray-700 font-roboto text-lg mb-2">
                   <PhoneIcon className="h-5 w-5 text-orange-400 mr-3" />
                   {office.phone}

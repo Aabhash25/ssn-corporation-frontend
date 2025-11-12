@@ -4,41 +4,41 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const services = [
   {
-    image: "/7.png",
+    image: "/7.webp",
     title: "Commercial Building Construction",
     description:
       "Complete commercial construction solutions from planning to completion",
   },
   {
-    image: "/BedRoomAddition3.jpg",
+    image: "/BedRoomAddition3.webp",
     title: "Residential Construction",
     description:
       "Custom residential projects with attention to detail and quality",
   },
   {
-    image: "/14.jpg",
+    image: "/14.webp",
     title: "Construction Management",
     description:
       "Professional project oversight ensuring timely and budget-conscious delivery",
   },
   {
-    image: "/PreConstructionService.jpg",
+    image: "/PreConstructionService.webp",
     title: "Pre Construction Services",
     description: "Comprehensive planning, design, and feasibility studies",
   },
+  // {
+  //   image: "/utilityconstruction.webp",
+  //   title: "Utility Construction",
+  //   description:
+  //     "Infrastructure development including roads, utilities, and site preparation",
+  // },
   {
-    image: "/utilityconstruction.jpg",
-    title: "Utility Construction",
-    description:
-      "Infrastructure development including roads, utilities, and site preparation",
-  },
-  {
-    image: "/MomoStation3.jpg",
+    image: "/MomoStation3.webp",
     title: "Site Development Construction",
     description: "Ground-up site development and preparation services",
   },
   {
-    image: "1.jpg",
+    image: "CommercialUpfit.jpg",
     title: "Commercial Space Upfit",
     description: "Renovation and modernization of existing commercial spaces",
   },
@@ -48,7 +48,6 @@ const Services = () => {
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Update slidesPerView based on window size
   const updateSlidesPerView = () => {
     if (window.innerWidth < 640) setSlidesPerView(1);
     else if (window.innerWidth < 1024) setSlidesPerView(2);
@@ -61,36 +60,31 @@ const Services = () => {
     return () => window.removeEventListener("resize", updateSlidesPerView);
   }, []);
 
-  // Calculate the highest index that allows all visible cards to remain in view.
   const maxIndex = Math.max(0, services.length - slidesPerView);
 
-  // Move slides right
-  const nextSlide = () => {
-    // Ensure we don't go beyond the calculated max index
+  const nextSlide = () =>
     setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
-  };
+  const prevSlide = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
 
-  // Move slides left
-  const prevSlide = () => {
-    // Ensure we don't go below index 0.
-    setCurrentIndex((prev) => Math.max(prev - 1, 0));
-  };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => {
+        if (prev >= maxIndex) return 0; // loop back to start
+        return prev + 1;
+      });
+    }, 1500); // change 3000ms to adjust speed
+
+    return () => clearInterval(interval); // cleanup on unmount
+  }, [maxIndex]);
 
   return (
     <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-6 overflow-hidden">
-      {/* Section Header */}
       <div className="text-center mb-16 px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">
-          What We{" "}
-          <span className="bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent">
-            Do
-          </span>
+          What We Do
         </h2>
         <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-semibold text-gray-800 mb-6">
-          Planning, Designing, Engineering, and Construction{" "}
-          <span className="bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent">
-            Services
-          </span>
+          Planning, Design, Engineering, and Construction Services
         </h3>
         <p className="text-base sm:text-lg lg:text-xl font-roboto text-gray-600 max-w-3xl mx-auto">
           We deliver end-to-end planning, design, and construction solutions
@@ -99,9 +93,7 @@ const Services = () => {
         </p>
       </div>
 
-      {/* Slider */}
       <div className="relative w-[95%] mx-auto overflow-hidden rounded-3xl">
-        {/* Track element */}
         <div
           className="flex transition-transform duration-700 ease-in-out"
           style={{
@@ -112,9 +104,7 @@ const Services = () => {
             <div
               key={index}
               className="flex-shrink-0 px-3"
-              style={{
-                width: `${100 / slidesPerView}%`,
-              }}
+              style={{ width: `${100 / slidesPerView}%` }}
             >
               <div className="group relative bg-white rounded-2xl h-full shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-2xl">
                 <div className="w-full h-72 relative overflow-hidden rounded-t-2xl">
@@ -127,9 +117,6 @@ const Services = () => {
                     <p className="text-gray-900 text-sm sm:text-base font-roboto mb-3">
                       {service.description}
                     </p>
-                    <button className="px-4 py-2 text-sm font-medium text-white bg-orange-600 rounded-lg hover:bg-orange-700 transition-colors">
-                      Learn More →
-                    </button>
                   </div>
                 </div>
 
@@ -143,7 +130,6 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Navigation Arrows */}
         <button
           onClick={prevSlide}
           aria-label="Previous Slide"
@@ -171,7 +157,6 @@ const Services = () => {
         </button>
       </div>
 
-      {/* Fonts */}
       <style jsx>{`
         .font-roboto {
           font-family: "Roboto", sans-serif;

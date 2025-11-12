@@ -81,18 +81,18 @@ const Engineers = () => {
             {listItems.map((listItem, listIndex) => (
               <motion.li
                 key={`li-${listIndex}`}
-                // UNIFIED STYLING FOR BOTH SECTIONS
-                className="flex items-start space-x-3 text-gray-700 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-200"
+                className="flex items-center space-x-3 text-gray-700 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-200"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
                   delay: paragraphs.length * 0.1 + listIndex * 0.05,
                 }}
               >
-                {/* UNIFIED ORANGE CIRCLE BULLET */}
-                <span className="text-orange-500 flex-shrink-0 mt-1.5 text-xl font-bold">
+                {/* Bullet */}
+                <span className="text-orange-500 flex-shrink-0 text-xl font-bold">
                   •
                 </span>
+                {/* Text */}
                 <span className="text-base font-medium">{listItem}</span>
               </motion.li>
             ))}
@@ -113,7 +113,7 @@ const Engineers = () => {
           <motion.li
             key={index}
             // UNIFIED STYLING FOR BOTH SECTIONS
-            className="flex items-start space-x-3 text-gray-700 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-200"
+            className="flex items-center space-x-3 text-gray-700 leading-relaxed bg-gray-50 p-3 rounded-xl border border-gray-200"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
@@ -136,7 +136,7 @@ const Engineers = () => {
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/22.jpg"
+            src="/22.webp"
             alt="Modern Architecture"
             className="w-full h-full object-cover"
           />
@@ -215,9 +215,13 @@ const Engineers = () => {
                 </span>
               </Link>
 
-              <button className="px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1">
+              {/* Updated to Link for Portfolio */}
+              <Link
+                to="/portfolio"
+                className="px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center"
+              >
                 View Our Work
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -229,7 +233,7 @@ const Engineers = () => {
             transition={{ delay: 0.6 }}
           >
             <img
-              src="/21.jpg"
+              src="/21.webp"
               alt="Engineering Preview"
               className="w-full h-full object-cover"
             />

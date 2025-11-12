@@ -78,18 +78,11 @@ const JoinOurTeam = () => {
                   <BriefcaseIcon className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
                 </div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold leading-tight">
-                  Join Our{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-500">
-                    Team
-                  </span>
+                  Join Our Team{" "}
                 </h2>
               </div>
               <p className="text-sm sm:text-base md:text-lg text-gray-700 font-roboto max-w-3xl mx-auto leading-snug">
-                At{" "}
-                <span className="font-bold text-orange-500">
-                  SSN Corporation
-                </span>
-                , we are always looking for
+                At SSN Corporation , we are always looking for
                 <span className="font-semibold text-gray-900">
                   {" "}
                   talented, motivated individuals
@@ -118,42 +111,30 @@ const JoinOurTeam = () => {
                     real impact.
                   </p>
                   <p className="text-sm sm:text-base text-gray-700 leading-snug">
-                    Our team thrives on{" "}
-                    <span className="font-semibold text-orange-500">
-                      collaboration
-                    </span>
-                    ,{" "}
-                    <span className="font-semibold text-blue-500">
-                      integrity
-                    </span>
-                    , and a shared commitment to{" "}
-                    <span className="font-semibold text-purple-500">
-                      excellence
-                    </span>
-                    .
+                    Our team thrives on collaboration , integrity , and a shared
+                    commitment to excellence .
                   </p>
                 </div>
 
                 {/* Call to Action */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-4 sm:p-6 text-center shadow-xl"
+                  className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-6 text-center shadow-lg border border-gray-200 dark:border-gray-700"
                 >
-                  <h4 className="text-lg sm:text-xl md:text-2xl font-playfair font-bold text-white mb-2 sm:mb-3">
+                  <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 dark:text-white mb-3">
                     Ready to Build Your Future?
                   </h4>
-                  <p className="text-sm sm:text-base md:text-lg text-white/95 mb-3 sm:mb-4">
-                    Explore our current openings and become part of a company
-                    where your skills, passion, and ideas can shape the future
-                    of construction.
+                  <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 mb-5">
+                    Explore our current openings and join a company where your
+                    skills and ideas help shape the future of construction.
                   </p>
                   <Link
                     to="/career"
-                    className="inline-flex items-center gap-2 sm:gap-3 bg-white text-orange-600 font-bold py-2 px-4 sm:py-3 sm:px-5 rounded-xl hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-md text-sm sm:text-base"
+                    className="inline-flex items-center gap-2 bg-orange-600 text-white font-medium py-2.5 px-5 rounded-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-105 shadow-md"
                   >
-                    <BriefcaseIcon className="w-5 sm:w-6 h-5 sm:h-6" />
+                    <BriefcaseIcon className="w-5 h-5" />
                     View Open Positions
-                    <ArrowRightIcon className="w-4 sm:w-5 h-4 sm:h-5" />
+                    <ArrowRightIcon className="w-4 h-4" />
                   </Link>
                 </motion.div>
               </motion.div>
@@ -207,7 +188,7 @@ const JoinOurTeam = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                   <div className="text-center">
                     <p className="text-2xl sm:text-3xl font-bold text-orange-500 mb-1">
-                      50+
+                      30+
                     </p>
                     <p className="text-sm sm:text-base text-gray-600">
                       Team Members
@@ -215,7 +196,7 @@ const JoinOurTeam = () => {
                   </div>
                   <div className="text-center">
                     <p className="text-2xl sm:text-3xl font-bold text-blue-500 mb-1">
-                      15+
+                      3+
                     </p>
                     <p className="text-sm sm:text-base text-gray-600">
                       Years Experience
@@ -223,7 +204,7 @@ const JoinOurTeam = () => {
                   </div>
                   <div className="text-center">
                     <p className="text-2xl sm:text-3xl font-bold text-purple-500 mb-1">
-                      100+
+                      40+
                     </p>
                     <p className="text-sm sm:text-base text-gray-600">
                       Projects Completed

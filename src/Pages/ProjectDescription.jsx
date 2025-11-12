@@ -58,10 +58,8 @@ const ProjectDescription = () => {
               />
             </AnimatePresence>
 
-            {/* Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent rounded-b-3xl"></div>
 
-            {/* Nav Buttons */}
             {project.images.length > 1 && (
               <>
                 <button
@@ -85,30 +83,38 @@ const ProjectDescription = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid lg:grid-cols-3 gap-8 sm:gap-12">
           {/* Descriptions */}
           <div className="lg:col-span-2 flex flex-col gap-8 sm:gap-10">
+            {/* Overview */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
+              className="bg-white/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-md border border-gray-200"
             >
               <h2 className="text-2xl sm:text-3xl font-bold mb-4 border-l-4 border-blue-500 pl-4 font-[Playfair_Display]">
                 Overview
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
-                {project.description}
-              </p>
+              <div className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify space-y-4">
+                {project.description.split("\n").map((line, idx) => (
+                  <p key={idx}>{line}</p>
+                ))}
+              </div>
             </motion.div>
 
+            {/* Project Details */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-md border border-gray-200"
             >
               <h2 className="text-2xl sm:text-3xl font-bold mb-4 border-l-4 border-blue-500 pl-4 font-[Playfair_Display]">
                 Project Details
               </h2>
-              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
-                {project.longDescription}
-              </p>
+              <div className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify space-y-4">
+                {project.longDescription.split("\n").map((line, idx) => (
+                  <p key={idx}>{line}</p>
+                ))}
+              </div>
             </motion.div>
           </div>
 

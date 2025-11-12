@@ -33,6 +33,7 @@ const MapController = ({ zoomProject }) => {
 };
 
 // Custom marker with hover tooltip
+// HoverMarker
 const HoverMarker = ({
   project,
   onMarkerClick,
@@ -40,6 +41,7 @@ const HoverMarker = ({
   onMarkerOut,
 }) => {
   const markerRef = useRef(null);
+
   const handleMouseEnter = () => {
     if (markerRef.current && onMarkerHover) {
       const marker = markerRef.current;
@@ -54,7 +56,7 @@ const HoverMarker = ({
 
         onMarkerHover(project, {
           x: rect.left + containerPoint.x,
-          y: rect.top + containerPoint.y - 40, // Adjust position above marker
+          y: rect.top + containerPoint.y - 40, // above marker
         });
       }
     }
@@ -66,7 +68,7 @@ const HoverMarker = ({
       position={[project.lat, project.lng]}
       eventHandlers={{
         mouseover: handleMouseEnter,
-        mouseout: onMarkerOut,
+        mouseout: () => onMarkerOut && onMarkerOut(),
         click: () => onMarkerClick(project),
       }}
     />
@@ -128,8 +130,8 @@ const MasonryPortfolio = () => {
                 Portfolio
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
-                Explore our architectural projects ({filteredProjects.length}{" "}
-                projects)
+                Explore our ongoing and completed projects (
+                {filteredProjects.length} projects)
               </p>
             </div>
             <button
@@ -251,10 +253,11 @@ const MasonryPortfolio = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
-                  className="fixed z-[9999] bg-white rounded-lg shadow-lg border p-3 sm:p-4 w-full max-w-xs sm:max-w-sm left-2 right-2 sm:left-auto sm:right-auto mx-auto"
+                  className="fixed z-[9999] bg-white rounded-lg shadow-lg border p-3 sm:p-4 w-full max-w-xs sm:max-w-sm pointer-events-none"
                   style={{
-                    left: `calc(50% - 120px)`, // Center on small screens
+                    left: `${hoverPosition.x}px`,
                     top: `${hoverPosition.y}px`,
+                    transform: "translate(-50%, -100%)", // center horizontally & above marker
                   }}
                 >
                   <h3 className="font-semibold text-gray-900 text-xs sm:text-sm mb-1">

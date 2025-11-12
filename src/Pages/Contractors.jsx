@@ -95,7 +95,7 @@ const Contractors = () => {
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <img
-            src="/contractorback.jpg"
+            src="/contractorback.webp"
             alt="Construction Site"
             className="w-full h-full object-cover"
           />
@@ -158,6 +158,7 @@ const Contractors = () => {
             </motion.div>
 
             {/* CTA Buttons */}
+            {/* CTA Buttons */}
             <motion.div
               className="flex flex-col sm:flex-row gap-4 mt-6 justify-center lg:justify-start"
               variants={fadeUp}
@@ -179,9 +180,13 @@ const Contractors = () => {
                 </span>
               </Link>
 
-              <button className="px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1">
+              {/* Updated button as Link */}
+              <Link
+                to="/portfolio"
+                className="px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold text-white border-2 border-white/30 rounded-xl hover:bg-white/10 backdrop-blur-sm transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center"
+              >
                 View Our Work
-              </button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -193,7 +198,7 @@ const Contractors = () => {
             transition={{ delay: 0.6 }}
           >
             <img
-              src="/contractor.jpg"
+              src="/contractor.webp"
               alt="Contracting Preview"
               className="w-full h-full object-cover"
             />

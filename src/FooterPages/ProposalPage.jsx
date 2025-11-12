@@ -330,7 +330,7 @@ const ProposalPage = () => {
             </select>
           </div>
 
-          <div>
+          {/* <div>
             <label className="block font-roboto font-semibold mb-2">
               Who did you refer us?
             </label>
@@ -341,7 +341,7 @@ const ProposalPage = () => {
               onChange={handleChange}
               className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
             />
-          </div>
+          </div> */}
         </div>
 
         {/* Submit Button */}

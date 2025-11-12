@@ -26,7 +26,7 @@ const ResearchAndDevelopment = () => {
           {/* Left Column */}
           <div className="space-y-8 order-2 lg:order-1">
             <h2 className="text-3xl lg:text-4xl font-playfair font-bold text-gray-900 leading-tight">
-              AI-Powered Quantity Take-Off And Cost Estimation
+              AI-Powered Quantity TakeOff And Cost Estimation
             </h2>
 
             <div className="space-y-4">
@@ -36,9 +36,9 @@ const ResearchAndDevelopment = () => {
                 </div>
                 <div>
                   <p className="text-gray-700 text-base leading-relaxed font-roboto">
-                    Our AI-enabled product automatically analyzes 2D building
-                    plans to extract elements and generate accurate quantity
-                    takeoffs.
+                    Our AI-enabled Quantity Takeoff(QTO) product automatically
+                    analyzes 2D building plans to extract elements and generate
+                    accurate quantity takeoffs.
                   </p>
                 </div>
               </div>
@@ -49,8 +49,8 @@ const ResearchAndDevelopment = () => {
                 </div>
                 <div>
                   <p className="text-gray-700 text-base leading-relaxed font-roboto">
-                    Reduces manual effort by 80%, minimizes errors, and
-                    accelerates project planning timelines.
+                    It reduces manual effort by 75 to 95%, minimizes errors,and
+                    accelerates project planning time-line.
                   </p>
                 </div>
               </div>
@@ -61,7 +61,7 @@ const ResearchAndDevelopment = () => {
                 </div>
                 <div>
                   <p className="text-gray-700 text-base leading-relaxed font-roboto">
-                    Integrating real-time cost data to provide precise material
+                    It Integrated real-time cost data to provide material
                     estimates and empower data-driven decision making.
                   </p>
                 </div>
@@ -84,7 +84,7 @@ const ResearchAndDevelopment = () => {
           <div className="relative order-1 lg:order-2 w-full">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 w-full max-w-[900px] mx-auto">
               <img
-                src="/research.png"
+                src="/research.webp"
                 alt="AI analyzing construction blueprints in our R&D lab"
                 className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-700"
                 loading="lazy"

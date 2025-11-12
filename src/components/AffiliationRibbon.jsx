@@ -2,21 +2,21 @@
 import React from "react";
 
 const logos = [
-  { src: "/bbb.png", alt: "BBB Accredited", info: "BBB Accredited Business" },
+  { src: "/bbb.webp", alt: "BBB Accredited", info: "BBB Accredited Business" },
   {
-    src: "/ncdot.png",
+    src: "/ncdot.webp",
     alt: "NCDOT Pre-Qualified",
     info: "NCDOT Pre-Qualified",
     showTextBelow: true, // text below logo
   },
-  { src: "/sam.png", alt: "SAM Registered", info: "SAM Registered Entity" },
+  { src: "/sam.webp", alt: "SAM Registered", info: "SAM Registered Entity" },
   {
-    src: "/minority.jpg",
+    src: "/minority.webp",
     alt: "Minority Business",
     info: "Certified Minority Business",
   },
   {
-    src: "/NMSDC.png",
+    src: "/NMSDC.webp",
     alt: "National Small Business",
     info: "Member of National Small Business Council",
   },

@@ -2,8 +2,7 @@ export const services = [
   {
     title: "Land Development and Planning",
     icon: "🗺️",
-    image:
-      "/19.jpg",
+    image: "/19.webp",
     description:
       "SSN Engineers is expert in land development and planning services for sustainable growth and smart infrastructure solutions. From site selection to permitting, we guide your project every step of the way. We can help with the following:",
     features: [
@@ -18,8 +17,7 @@ export const services = [
   {
     title: "Building Design",
     icon: "🏢",
-    image:
-      "/MorisvilleCommercial2.jpg",
+    image: "/MorisvilleCommercial2.webp",
     description:
       "SSN Engineers has proven skills to transform spaces with innovative building design for residential, commercial, and specialized facilities including healthcare, industrial, and educational environments. The key areas are:",
     features: [
@@ -33,8 +31,7 @@ export const services = [
   {
     title: "Facility Planning and Design",
     icon: "🏭",
-    image:
-      "/FacilityPlanningDesign.png",
+    image: "/FacilityPlanningDesign.webp",
     description:
       "We provide comprehensive facility planning and design for essential infrastructure and recreation. From water treatment to power generation, we deliver tailored, sustainable solutions. We can help you in the following areas:",
     features: [
@@ -47,8 +44,7 @@ export const services = [
   {
     title: "Specialty Structure Planning and Design",
     icon: "🏗️",
-    image:
-      "/SpecialtyStructurePlanningAndDesign.png",
+    image: "/SpecialtyStructurePlanningAndDesign.webp",
     description:
       "We offer specialty design solutions for advanced infrastructure and environmental challenges. From trenchless technology to water resources and acoustic control, we deliver innovative and sustainable results. We can help you with the following:",
     features: [
@@ -64,8 +60,7 @@ export const services = [
   {
     title: "Subsurface Investigation",
     icon: "🌍",
-    image:
-      "/SubsurfaceInvestigation.jpg",
+    image: "/SubsurfaceInvestigation.webp",
     description:
       "We offer field investigation services to assess subsurface conditions for construction and engineering projects.",
     features: [
@@ -80,8 +75,7 @@ export const services = [
   {
     title: "Instrumentation and Monitoring",
     icon: "📡",
-    image:
-      "/InstrumentationAndMonitoring.jpg",
+    image: "/InstrumentationAndMonitoring.webp",
     description:
       "Real-time instrumentation and monitoring solutions for construction sites and structures to ensure safety and performance.",
     features: [
@@ -98,8 +92,7 @@ export const services = [
   {
     title: "Construction Management",
     icon: "👷‍♂️",
-    image:
-      "/10.png",
+    image: "/10.webp",
     description:
       "End-to-end construction management ensuring projects are delivered on time, within budget, and to the highest quality standards.",
     features: [
@@ -114,8 +107,7 @@ export const services = [
   {
     title: "Construction Support and Material Testing",
     icon: "🧱",
-    image:
-      "/ConstructionSupportAndMaterialTesting.jpg",
+    image: "/ConstructionSupportAndMaterialTesting.webp",
     description:
       "SSN Engineers delivers expert laboratory and field material testing for construction and development projects. From concrete and asphalt testing to special inspections, we ensure compliance with plan specifications and regulatory standards. We can deliver the following support:",
     features: [

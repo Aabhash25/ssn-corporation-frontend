@@ -10,3 +10,33 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+# Media Optimization Guide
+
+This guide explains how to compress images for web using **Sharp CLI** in a React project.
+
+---
+
+## 1. Compress a Single Image
+
+Use the following command to resize and compress a single image:
+
+```bash
+# Create output folder if not exists
+mkdir optimized
+
+# Compress and resize
+sharp -i 22.jpg -o ./optimized/22.webp resize 1920 -q 60
+
+
+
+2. Compress All Images in Folder
+
+mkdir optimized
+
+Get-ChildItem *.jpg, *.png | ForEach-Object {
+    $inputFile = $_.FullName
+    $fileName = $_.BaseName
+    sharp -i $inputFile -o "./optimized/${fileName}.webp" resize 1920 -q 60
+}
+```

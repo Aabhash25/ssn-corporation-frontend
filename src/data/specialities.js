@@ -2,8 +2,7 @@ export const specialities = [
   {
     title: "Architectural Design",
     icon: "🏛️",
-    image:
-      "/GamesDayMensHealth7.png",
+    image: "/GamesDayMensHealth7.webp",
     description: [
       "SSN Engineers has proven skills to transform spaces with innovative building design for residential, commercial, and specialized facilities including healthcare, industrial, and educational environments.",
       [
@@ -19,8 +18,7 @@ export const specialities = [
   {
     title: "Structural Design",
     icon: "🏗️",
-    image:
-      "https://images.unsplash.com/photo-1581092160607-3b84c1e1c8e4?w=600&auto=format&fit=crop&q=60",
+    image: "/22.webp",
     description: [
       "We provide comprehensive structural engineering services for various building types and infrastructure projects.",
       [
@@ -37,7 +35,7 @@ export const specialities = [
     title: "Site Civil Design",
     icon: "🏞️",
     image:
-      "https://images.unsplash.com/photo-1568819317551-31051b37b6a9?w=600&auto=format&fit=crop&q=60",
+      "/19.webp",
     description: [
       "Comprehensive site civil engineering services for development projects.",
       [
@@ -53,8 +51,7 @@ export const specialities = [
   {
     title: "Subsurface Investigation and Geotechnical Laboratory Testing",
     icon: "🌍",
-    image:
-      "/SubsurfaceInvestigation.jpg",
+    image: "/SubSurface2.jpg",
     description: [
       "Comprehensive subsurface investigation and geotechnical testing services.",
       [
@@ -70,8 +67,8 @@ export const specialities = [
   {
     title: "Geotechnical Evaluation and Design",
     icon: "🧱",
-    image:
-      "/geotech.jpg",
+    // image: "/geotech.webp",
+    image:"/SubSurface4.jpg",
     description: [
       "Comprehensive geotechnical engineering services for various projects.",
       [
@@ -88,8 +85,7 @@ export const specialities = [
   {
     title: "MEP Design",
     icon: "⚡",
-    image:
-      "/mep.png",
+    image: "/mep.webp",
     description: [
       "Comprehensive MEP (Mechanical, Electrical, Plumbing) design services.",
       [
@@ -105,8 +101,7 @@ export const specialities = [
   {
     title: "Instrumentation and Monitoring",
     icon: "📡",
-    image:
-      "/InstrumentationMonitoring.jpg",
+    image: "/InstrumentationMonitoring.webp",
     description: [
       "Comprehensive instrumentation and monitoring services.",
       [

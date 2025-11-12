@@ -11,11 +11,11 @@ export default function PreLandingPage({ onFinish }) {
   useEffect(() => {
     const img = new Image();
     img.onload = () => setLogoLoaded(true);
-    img.src = "/logo.png";
+    img.src = "/logo.webp";
 
     // ✅ Preload the landing page video
     const video = document.createElement("video");
-    video.src = "/new.mp4"; // must match Hero video
+    video.src = "/heroVideo-web.mp4"; // must match Hero video
     video.preload = "auto";
     video.load();
 
@@ -237,7 +237,7 @@ export default function PreLandingPage({ onFinish }) {
           }}
         >
           <motion.img
-            src="/logo.png"
+            src="/logo.webp"
             alt="SSA CORPORATION"
             style={{ width: "320px", height: "auto" }}
             initial={{ opacity: 0 }}

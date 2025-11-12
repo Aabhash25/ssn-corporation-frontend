@@ -71,7 +71,7 @@ const Construction = () => (
     <FontsStyle />
 
     {/* Hero Section */}
-    <div className="relative w-full h-[70vh] md:h-[80vh] bg-[url('/ConstructionExcellence.jpg')] bg-cover bg-center flex items-center justify-center">
+    <div className="relative w-full h-[70vh] md:h-[80vh] bg-[url('/ConstructionExcellence.webp')] bg-cover bg-center flex items-center justify-center">
       <div className="absolute inset-0 bg-black/60"></div>
       <motion.h1
         initial={{ opacity: 0, y: 60 }}

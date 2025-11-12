@@ -24,10 +24,7 @@ const BusinessWithUs = () => {
           <div className="max-w-5xl text-center">
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-4 sm:mb-6 leading-snug">
-              Build Your Future with Confidence—{" "}
-              <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent">
-                Build it With Us
-              </span>
+              Build Your Future with Confidence— Build it With Us
             </h2>
 
             {/* Animated Divider */}
@@ -37,20 +34,10 @@ const BusinessWithUs = () => {
 
             {/* Paragraphs */}
             <p className="text-base sm:text-lg md:text-xl font-roboto text-gray-700 leading-relaxed mb-4 sm:mb-6">
-              At{" "}
-              <span className="font-semibold text-orange-500">
-                SSN Corporation
-              </span>
-              , we turn visions into reality. Our team offers full-service
-              support from planning and design to execution and completion.
-              Every project is built with a focus on{" "}
-              <span className="font-semibold text-orange-400">quality</span>,{" "}
-              <span className="font-semibold text-orange-400">innovation</span>,
-              and{" "}
-              <span className="font-semibold text-orange-400">
-                sustainability
-              </span>
-              .
+              At SSN Corporation , we turn visions into reality. Our team offers
+              full-service support from planning and design to execution and
+              completion. Every project is built with a focus on quality
+              innovation and sustainability.
             </p>
 
             <p className="text-sm sm:text-base md:text-lg font-roboto text-gray-600 leading-relaxed mb-6 sm:mb-8">
