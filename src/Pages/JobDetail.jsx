@@ -21,7 +21,7 @@ function JobDetail() {
   const [messageType, setMessageType] = useState("success");
 
   useEffect(() => {
-    fetch(`https://api.ssnbuilders.com/api/jobs/${id}/`)
+    fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`)
       .then((res) => res.json())
       .then((data) => {
         setJob(data);

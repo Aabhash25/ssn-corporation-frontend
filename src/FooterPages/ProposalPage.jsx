@@ -43,8 +43,11 @@ const ProposalPage = () => {
 
     try {
       const res = await fetch(
-        "https://api.ssnbuilders.com/api/proposal/submit/",
-        { method: "POST", body: fd }
+        `${import.meta.env.VITE_API_URL}proposal/submit/`,
+        {
+          method: "POST",
+          body: fd, // fd is your FormData
+        }
       );
 
       if (res.ok) {

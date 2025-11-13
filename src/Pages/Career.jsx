@@ -20,7 +20,7 @@ function Career() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://api.ssnbuilders.com/api/jobs/")
+    fetch(`${import.meta.env.VITE_API_URL}jobs/`)
       .then((res) => res.json())
       .then((data) => {
         setJobs(data);

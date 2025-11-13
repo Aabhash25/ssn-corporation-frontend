@@ -34,8 +34,7 @@ export const specialities = [
   {
     title: "Site Civil Design",
     icon: "🏞️",
-    image:
-      "/19.webp",
+    image: "/19.webp",
     description: [
       "Comprehensive site civil engineering services for development projects.",
       [
@@ -68,7 +67,7 @@ export const specialities = [
     title: "Geotechnical Evaluation and Design",
     icon: "🧱",
     // image: "/geotech.webp",
-    image:"/SubSurface4.jpg",
+    image: "/SubSurface4.jpg",
     description: [
       "Comprehensive geotechnical engineering services for various projects.",
       [

@@ -59,7 +59,7 @@ const Business = () => {
     );
 
     try {
-      const res = await fetch("https://api.ssnbuilders.com/api/submit/", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}submit/`, {
         method: "POST",
         body: fd,
       });

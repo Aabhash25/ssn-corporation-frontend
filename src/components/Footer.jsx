@@ -117,7 +117,7 @@ const Footer = () => {
             Design Capabilities
           </h3>
           <ul className="space-y-2 text-gray-400 text-sm">
-            <li>Land Development & Planning</li>
+            <li>Land Development and Planning</li>
             <li>Residential Building</li>
             <li>Commercial Building</li>
             <li>Infrastructure Planning & Design</li>

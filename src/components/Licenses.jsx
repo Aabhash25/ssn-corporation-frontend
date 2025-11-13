@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   GlobeAmericasIcon,
@@ -96,6 +96,16 @@ const licenses = [
 ];
 
 const Licenses = () => {
+  // Track expanded cards
+  const [expanded, setExpanded] = useState({});
+
+  const toggleExpand = (type) => {
+    setExpanded((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }));
+  };
+
   return (
     <>
       <FontsStyle />
@@ -139,6 +149,11 @@ const Licenses = () => {
           >
             {licenses.map((license, index) => {
               const Icon = license.icon;
+              const isExpanded = expanded[license.type];
+              const visibleStates = isExpanded
+                ? license.states
+                : license.states.slice(0, 6);
+
               return (
                 <motion.div
                   key={license.type}
@@ -157,6 +172,7 @@ const Licenses = () => {
                       style={{ color: license.color }}
                     />
                   </div>
+
                   <h3
                     className="text-xl sm:text-2xl font-semibold mb-2"
                     style={{ color: license.color }}
@@ -166,8 +182,9 @@ const Licenses = () => {
                   <p className="text-gray-600 font-roboto text-sm sm:text-base mb-4">
                     {license.description}
                   </p>
-                  <div className="flex flex-wrap justify-center gap-1">
-                    {license.states.slice(0, 6).map((state) => (
+
+                  <div className="flex flex-wrap justify-center gap-1 mb-2">
+                    {visibleStates.map((state) => (
                       <span
                         key={state}
                         className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md font-medium"
@@ -175,12 +192,18 @@ const Licenses = () => {
                         {state}
                       </span>
                     ))}
-                    {license.states.length > 6 && (
-                      <span className="text-xs text-gray-500 px-2 py-1">
-                        +{license.states.length - 6} more
-                      </span>
-                    )}
                   </div>
+
+                  {license.states.length > 6 && (
+                    <button
+                      onClick={() => toggleExpand(license.type)}
+                      className="text-xs font-semibold text-blue-600 hover:underline mt-2"
+                    >
+                      {isExpanded
+                        ? "Show Less"
+                        : `+${license.states.length - 6} more`}
+                    </button>
+                  )}
                 </motion.div>
               );
             })}
