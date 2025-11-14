@@ -230,7 +230,7 @@ const ModernNavbar = () => {
                     className="flex items-center px-6 py-3 text-xl font-oswald hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-l-4 border-transparent hover:border-yellow-500"
                   >
                     <FaTools className="mr-3 text-yellow-600" />
-                    Material Testing
+                    CMT Services
                   </Link>
                 </div>
               )}

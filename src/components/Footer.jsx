@@ -26,7 +26,7 @@ const Footer = () => {
           </div>
 
           <h2 className="text-2xl font-playfair font-bold mb-2">
-            SSN Corporation
+            SSN Corporation Corporate Office
           </h2>
 
           <div className="flex items-center gap-3 text-gray-400 mb-2">
@@ -84,7 +84,7 @@ const Footer = () => {
               <FaYoutube />
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.instagram.com/ssncorporation/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white"
@@ -117,7 +117,7 @@ const Footer = () => {
             Design Capabilities
           </h3>
           <ul className="space-y-2 text-gray-400 text-sm">
-            <li>Land Development and Planning</li>
+            <li>Land Development & Planning</li>
             <li>Residential Building</li>
             <li>Commercial Building</li>
             <li>Infrastructure Planning & Design</li>

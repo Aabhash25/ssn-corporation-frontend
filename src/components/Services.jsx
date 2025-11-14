@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const services = [
@@ -22,18 +22,12 @@ const services = [
       "Professional project oversight ensuring timely and budget-conscious delivery",
   },
   {
-    image: "/PreConstructionService.webp",
+    image: "/PreConstruction.webp",
     title: "Pre Construction Services",
     description: "Comprehensive planning, design, and feasibility studies",
   },
-  // {
-  //   image: "/utilityconstruction.webp",
-  //   title: "Utility Construction",
-  //   description:
-  //     "Infrastructure development including roads, utilities, and site preparation",
-  // },
   {
-    image: "/MomoStation3.webp",
+    image: "/PreConstructionService.webp",
     title: "Site Development Construction",
     description: "Ground-up site development and preparation services",
   },
@@ -47,7 +41,10 @@ const services = [
 const Services = () => {
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+  const timeoutRef = useRef(null);
 
+  // Adjust slides per view based on screen width
   const updateSlidesPerView = () => {
     if (window.innerWidth < 640) setSlidesPerView(1);
     else if (window.innerWidth < 1024) setSlidesPerView(2);
@@ -60,22 +57,60 @@ const Services = () => {
     return () => window.removeEventListener("resize", updateSlidesPerView);
   }, []);
 
-  const maxIndex = Math.max(0, services.length - slidesPerView);
+  // Create extended array with clones for seamless loop
+  const extendedServices = [
+    ...services.slice(-slidesPerView),
+    ...services,
+    ...services.slice(0, slidesPerView),
+  ];
 
-  const nextSlide = () =>
-    setCurrentIndex((prev) => Math.min(prev + 1, maxIndex));
-  const prevSlide = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+  // Infinite loop next/prev
+  const nextSlide = () => {
+    if (!isTransitioning) return;
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const prevSlide = () => {
+    if (!isTransitioning) return;
+    setCurrentIndex((prev) => prev - 1);
+  };
+
+  // Handle infinite loop reset
+  useEffect(() => {
+    if (currentIndex === services.length) {
+      timeoutRef.current = setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(0);
+      }, 700);
+    } else if (currentIndex === -1) {
+      timeoutRef.current = setTimeout(() => {
+        setIsTransitioning(false);
+        setCurrentIndex(services.length - 1);
+      }, 700);
+    }
+
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, [currentIndex]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => {
-        if (prev >= maxIndex) return 0; // loop back to start
-        return prev + 1;
-      });
-    }, 1500); // change 3000ms to adjust speed
+    if (!isTransitioning) {
+      setTimeout(() => {
+        setIsTransitioning(true);
+      }, 50);
+    }
+  }, [isTransitioning]);
 
-    return () => clearInterval(interval); // cleanup on unmount
-  }, [maxIndex]);
+  // Autoplay infinite loop
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 1500);
+    return () => clearInterval(interval);
+  }, [isTransitioning]);
+
+  const offset = -(currentIndex + slidesPerView) * (100 / slidesPerView);
 
   return (
     <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-6 overflow-hidden">
@@ -95,12 +130,13 @@ const Services = () => {
 
       <div className="relative w-[95%] mx-auto overflow-hidden rounded-3xl">
         <div
-          className="flex transition-transform duration-700 ease-in-out"
+          className="flex"
           style={{
-            transform: `translateX(-${currentIndex * (100 / slidesPerView)}%)`,
+            transform: `translateX(${offset}%)`,
+            transition: isTransitioning ? "transform 0.7s ease-in-out" : "none",
           }}
         >
-          {services.map((service, index) => (
+          {extendedServices.map((service, index) => (
             <div
               key={index}
               className="flex-shrink-0 px-3"
@@ -130,28 +166,20 @@ const Services = () => {
           ))}
         </div>
 
+        {/* Previous Button */}
         <button
           onClick={prevSlide}
           aria-label="Previous Slide"
-          disabled={currentIndex === 0}
-          className={`absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-12 h-12 ${
-            currentIndex === 0
-              ? "opacity-40 cursor-not-allowed"
-              : "hover:scale-110"
-          } bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-orange-600 z-10`}
+          className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-orange-600 z-10 hover:scale-110"
         >
           <FaChevronLeft className="text-lg" />
         </button>
 
+        {/* Next Button */}
         <button
           onClick={nextSlide}
           aria-label="Next Slide"
-          disabled={currentIndex >= maxIndex}
-          className={`absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 ${
-            currentIndex >= maxIndex
-              ? "opacity-40 cursor-not-allowed"
-              : "hover:scale-110"
-          } bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-orange-600 z-10`}
+          className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-orange-600 z-10 hover:scale-110"
         >
           <FaChevronRight className="text-lg" />
         </button>

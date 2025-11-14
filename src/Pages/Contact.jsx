@@ -60,7 +60,7 @@ const Contact = () => {
 
   const offices = [
     {
-      title: "Head Office",
+      title: "Corporate Office",
       location: "5540 Centerview Dr, Ste 304 \n Raleigh, NC 27606",
       phone: "+1 (919) 703-0222",
       email: "contact@ssncorporation.com",
@@ -149,6 +149,25 @@ const Contact = () => {
                 required
               />
 
+              {/* State + Country */}
+              <div className="flex gap-4 flex-wrap">
+                <input
+                  type="text"
+                  placeholder="State"
+                  value={state}
+                  onChange={(e) => setState(e.target.value)}
+                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                />
+                <input
+                  type="text"
+                  placeholder="Country"
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                  required
+                />
+              </div>
+
               {/* Address + Zip Code */}
               <div className="flex gap-4 flex-wrap">
                 <input
@@ -165,25 +184,6 @@ const Contact = () => {
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value)}
                   className="w-32 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
-                  required
-                />
-              </div>
-
-              {/* State + Country */}
-              <div className="flex gap-4 flex-wrap">
-                <input
-                  type="text"
-                  placeholder="State"
-                  value={state}
-                  onChange={(e) => setState(e.target.value)}
-                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
-                />
-                <input
-                  type="text"
-                  placeholder="Country"
-                  value={country}
-                  onChange={(e) => setCountry(e.target.value)}
-                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                   required
                 />
               </div>

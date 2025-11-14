@@ -165,8 +165,8 @@ const AboutUs = () => {
                 <span className="font-semibold text-orange-400">precision</span>
                 , and{" "}
                 <span className="font-semibold text-orange-400">integrity</span>
-                , we unite architects, engineers, and construction experts to
-                transform ideas into functional spaces.
+                , we unite planners, architects, engineers, and construction
+                experts to transform ideas into functional spaces.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
@@ -197,7 +197,7 @@ const AboutUs = () => {
               className="relative group rounded-3xl overflow-hidden shadow-2xl h-[600px] hidden sm:block"
             >
               <img
-                src="https://images.unsplash.com/photo-1622037022824-0c71d511ef3c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8d2hvJTIwd2UlMjBhcmV8ZW58MHx8MHx8fDA%3D"
+                src="/about1.webp"
                 alt="Modern Construction Team"
                 className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out"
               />
@@ -293,7 +293,7 @@ const AboutUs = () => {
               className="relative group rounded-3xl overflow-hidden shadow-2xl h-[600px] hidden sm:block"
             >
               <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+                src="/about8.webp"
                 alt="Modern Architecture Vision"
                 className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out"
               />

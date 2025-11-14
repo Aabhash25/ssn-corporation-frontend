@@ -1,16 +1,11 @@
 "use client";
 import React from "react";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
-import { ArrowTrendingUpIcon } from "@heroicons/react/24/outline";
+  ArrowTrendingUpIcon,
+  RocketLaunchIcon,
+  BuildingOfficeIcon,
+  WrenchScrewdriverIcon,
+} from "@heroicons/react/24/outline";
 
 // ✅ Fonts + Non-italic Fix
 const FontsStyle = () => (
@@ -40,126 +35,134 @@ const FontsStyle = () => (
   `}</style>
 );
 
-const barData = [
-  { name: "Engineering & Construction", 2024: 28, 2025: 40, growth: 12 },
-  { name: "Only Engineering", 2024: 8, 2025: 15, growth: 7 },
-  { name: "Only Construction", 2024: 6, 2025: 10, growth: 4 },
+const statsData = [
+  {
+    name: "Design Build",
+    2024: 28,
+    2025: 40,
+    growth: 12,
+    icon: BuildingOfficeIcon,
+    color: "from-blue-500 to-cyan-500",
+    bgColor: "bg-gradient-to-br from-blue-50 to-cyan-50",
+  },
+  {
+    name: "Planning and Engineering",
+    2024: 8,
+    2025: 15,
+    growth: 7,
+    icon: WrenchScrewdriverIcon,
+    color: "from-green-500 to-emerald-500",
+    bgColor: "bg-gradient-to-br from-green-50 to-emerald-50",
+  },
+  {
+    name: "General Construction",
+    2024: 6,
+    2025: 10,
+    growth: 4,
+    icon: RocketLaunchIcon,
+    color: "from-orange-500 to-red-500",
+    bgColor: "bg-gradient-to-br from-orange-50 to-red-50",
+  },
 ];
 
-const StatisticsBarChart = () => {
+const StatisticsProgressCards = () => {
+  const total2024 = statsData.reduce((sum, item) => sum + item[2024], 0);
+  const total2025 = statsData.reduce((sum, item) => sum + item[2025], 0);
+  const totalGrowth = statsData.reduce((sum, item) => sum + item.growth, 0);
+
   return (
     <>
       <FontsStyle />
-      <section className="relative py-10 sm:py-16 bg-gray-50 w-full overflow-hidden">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
+      <section className="relative py-10 sm:py-16 bg-gradient-to-br from-gray-50 to-white w-full overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Header */}
-          <div className="mb-10 sm:mb-12">
+          <div className="text-center mb-12 sm:mb-16">
             <div className="flex justify-center mb-4">
-              <div className="p-3 sm:p-5 bg-gradient-to-r from-orange-400 to-pink-500 rounded-full inline-flex shadow-lg">
-                <ArrowTrendingUpIcon className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              <div className="p-3 sm:p-5 bg-gradient-to-r from-orange-400 to-pink-500 rounded-2xl inline-flex shadow-lg">
+                <ArrowTrendingUpIcon className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
               </div>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-playfair font-bold mb-2">
-              Our Achievements
+            <h2 className="text-3xl sm:text-5xl font-playfair font-bold mb-3 text-gray-800">
+              Our Growth Journey
             </h2>
-            <p className="text-base sm:text-lg md:text-xl font-roboto text-gray-700 max-w-2xl mx-auto leading-relaxed">
-              A comparison of our past achievements and projected growth across
-              service categories.
+            <p className="text-base sm:text-lg md:text-xl font-roboto text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              From 2024 achievements to 2025 projections with continued growth
+              across all sectors.
             </p>
           </div>
 
-          {/* Bar Chart Container */}
-          <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-lg">
-            <div className="mb-6 sm:mb-8">
-              <h3 className="text-lg sm:text-2xl font-playfair font-bold mb-1">
-                Project Growth Analysis
-              </h3>
-              <p className="text-gray-600 font-roboto text-sm sm:text-base">
-                2024 Achievements vs 2025 Projections
-              </p>
-            </div>
+          {/* Progress Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
+            {statsData.map((item, index) => {
+              const IconComponent = item.icon;
+              const growthPercentage = Math.round(
+                (item.growth / item[2024]) * 100
+              );
 
-            {/* Chart */}
-            <div className="w-full h-[250px] sm:h-[350px] md:h-[400px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={barData}
-                  margin={{ top: 10, right: 10, left: -10, bottom: 30 }}
+              return (
+                <div
+                  key={index}
+                  className={`${item.bgColor} rounded-3xl p-6 sm:p-8 shadow-lg border border-white/50`}
                 >
-                  <CartesianGrid strokeDasharray="3 3" className="opacity-30" />
-                  <XAxis
-                    dataKey="name"
-                    tickLine={false}
-                    interval={0}
-                    tick={{
-                      fontSize: 10,
-                      sm: { fontSize: 12 },
-                      fontWeight: 500,
-                      fontFamily: "Roboto, sans-serif",
-                      fill: "#374151",
-                    }}
-                    angle={-10}
-                    dy={10}
-                  />
-                  <YAxis
-                    tick={{
-                      fontSize: 12,
-                      fontFamily: "Roboto, sans-serif",
-                      fill: "#4B5563",
-                    }}
-                  />
-                  <Tooltip
-                    formatter={(value, name) => [`${value} projects`, name]}
-                    labelFormatter={(label) => `Category: ${label}`}
-                  />
-                  <Legend
-                    wrapperStyle={{
-                      fontSize: "12px",
-                      fontFamily: "Roboto, sans-serif",
-                    }}
-                  />
-                  <Bar
-                    dataKey="2024"
-                    name="2024 Achievements"
-                    fill="#F97316"
-                    radius={[4, 4, 0, 0]}
-                    barSize={30}
-                  />
-                  <Bar
-                    dataKey="2025"
-                    name="2025 Projections"
-                    fill="#3B82F6"
-                    radius={[4, 4, 0, 0]}
-                    barSize={30}
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
+                  {/* Card Header */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div
+                      className={`p-3 rounded-2xl bg-gradient-to-r ${item.color} shadow-md`}
+                    >
+                      <IconComponent className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
+                    </div>
+                    <div className="text-right">
+                      <span className="inline-block px-3 py-1 rounded-full bg-white/80 text-xs font-semibold text-gray-700 shadow-sm">
+                        +{growthPercentage}%
+                      </span>
+                    </div>
+                  </div>
 
-          {/* Growth Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-10">
-            {barData.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl p-5 sm:p-6 shadow-md border-l-4 border-blue-500"
-              >
-                <h4 className="font-playfair font-semibold text-base sm:text-lg mb-2">
-                  {item.name}
-                </h4>
-                <div className="flex justify-between items-center">
-                  <span className="text-xl sm:text-2xl font-bold text-gray-800">
-                    {item.growth}
-                  </span>
-                  <span className="text-green-500 font-semibold text-sm sm:text-base">
-                    +{Math.round((item.growth / item["2024"]) * 100)}%
-                  </span>
+                  {/* Card Title */}
+                  <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-800 mb-2">
+                    {item.name}
+                  </h3>
+
+                  {/* Numbers Section */}
+                  <div className="space-y-4 mb-6">
+                    <div className="flex justify-between items-center py-2">
+                      <span className="text-sm font-roboto text-gray-600">
+                        2024 Achievements
+                      </span>
+                      <span className="text-xl font-bold text-gray-800">
+                        {item[2024]} projects
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center py-2 border-t border-gray-200">
+                      <span className="text-sm font-roboto text-gray-600">
+                        2025 Projections
+                      </span>
+                      <span className="text-xl font-bold text-gray-800">
+                        {item[2025]} projects
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Growth Stats */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-roboto text-gray-600">
+                        Growth
+                      </span>
+                      <div className="text-right">
+                        <span className="text-2xl font-bold text-gray-800 block">
+                          +{item.growth}
+                        </span>
+                        <span className="text-sm font-roboto text-green-600">
+                          +{growthPercentage}% increase
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600 mt-1 font-roboto">
-                  Project Growth
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -167,4 +170,4 @@ const StatisticsBarChart = () => {
   );
 };
 
-export default StatisticsBarChart;
+export default StatisticsProgressCards;
