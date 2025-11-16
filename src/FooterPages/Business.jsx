@@ -173,32 +173,34 @@ const Business = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block font-roboto font-semibold mb-2">
-                Email Address*
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-              />
-            </div>
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="flex-1 md:max-w-sm">
+                <label className="block font-roboto font-semibold mb-2">
+                  Email Address*
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                />
+              </div>
 
-            <div>
-              <label className="block font-roboto font-semibold mb-2">
-                Phone Number*
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
-              />
+              <div className="flex-1 md:max-w-sm">
+                <label className="block font-roboto font-semibold mb-2">
+                  Phone Number*
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                />
+              </div>
             </div>
 
             <div>

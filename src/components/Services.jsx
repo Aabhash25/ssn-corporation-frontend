@@ -32,7 +32,7 @@ const services = [
     description: "Ground-up site development and preparation services",
   },
   {
-    image: "CommercialUpfit.jpg",
+    image: "/CommercialUpfit.jpg",
     title: "Commercial Space Upfit",
     description: "Renovation and modernization of existing commercial spaces",
   },
@@ -43,6 +43,7 @@ const Services = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const timeoutRef = useRef(null);
+  const autoplayRef = useRef(null);
 
   // Adjust slides per view based on screen width
   const updateSlidesPerView = () => {
@@ -64,15 +65,40 @@ const Services = () => {
     ...services.slice(0, slidesPerView),
   ];
 
+  // Get actual slide index for dots
+  const getActualIndex = () => {
+    if (currentIndex < 0) return services.length + currentIndex;
+    if (currentIndex >= services.length) return currentIndex - services.length;
+    return currentIndex;
+  };
+
+  // Navigate to specific slide
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    resetAutoplay();
+  };
+
   // Infinite loop next/prev
   const nextSlide = () => {
     if (!isTransitioning) return;
     setCurrentIndex((prev) => prev + 1);
+    resetAutoplay();
   };
 
   const prevSlide = () => {
     if (!isTransitioning) return;
     setCurrentIndex((prev) => prev - 1);
+    resetAutoplay();
+  };
+
+  // Reset autoplay timer
+  const resetAutoplay = () => {
+    if (autoplayRef.current) {
+      clearInterval(autoplayRef.current);
+    }
+    autoplayRef.current = setInterval(() => {
+      setCurrentIndex((prev) => prev + 1);
+    }, 3000);
   };
 
   // Handle infinite loop reset
@@ -104,17 +130,20 @@ const Services = () => {
 
   // Autoplay infinite loop
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 1500);
-    return () => clearInterval(interval);
-  }, [isTransitioning]);
+    autoplayRef.current = setInterval(() => {
+      setCurrentIndex((prev) => prev + 1);
+    }, 3000);
+
+    return () => {
+      if (autoplayRef.current) clearInterval(autoplayRef.current);
+    };
+  }, []);
 
   const offset = -(currentIndex + slidesPerView) * (100 / slidesPerView);
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-6 overflow-hidden">
-      <div className="text-center mb-16 px-4">
+    <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-16 md:py-20 pb-8 md:pb-12 overflow-hidden">
+      <div className="text-center mb-12 md:mb-16 px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">
           What We Do
         </h2>
@@ -128,7 +157,7 @@ const Services = () => {
         </p>
       </div>
 
-      <div className="relative w-[95%] mx-auto overflow-hidden rounded-3xl">
+      <div className="relative w-[95%] mx-auto overflow-hidden rounded-3xl mb-8">
         <div
           className="flex"
           style={{
@@ -139,25 +168,26 @@ const Services = () => {
           {extendedServices.map((service, index) => (
             <div
               key={index}
-              className="flex-shrink-0 px-3"
+              className="flex-shrink-0 px-2 sm:px-3"
               style={{ width: `${100 / slidesPerView}%` }}
             >
-              <div className="group relative bg-white rounded-2xl h-full shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-2xl">
-                <div className="w-full h-72 relative overflow-hidden rounded-t-2xl">
+              <div className="group relative bg-white rounded-2xl h-full shadow-lg border border-gray-200 overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <div className="w-full h-64 sm:h-72 relative overflow-hidden rounded-t-2xl">
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 p-6 text-center border-t border-gray-200">
-                    <p className="text-gray-900 text-sm sm:text-base font-roboto mb-3">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 p-4 sm:p-6 text-center border-t border-gray-200">
+                    <p className="text-gray-900 text-sm sm:text-base font-roboto leading-relaxed">
                       {service.description}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-6 text-center">
-                  <h3 className="text-2xl font-playfair font-bold text-gray-900">
+                <div className="p-4 sm:p-6 text-center">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-playfair font-bold text-gray-900 leading-tight">
                     {service.title}
                   </h3>
                 </div>
@@ -170,19 +200,35 @@ const Services = () => {
         <button
           onClick={prevSlide}
           aria-label="Previous Slide"
-          className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-orange-600 z-10 hover:scale-110"
+          className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-yellow-500 hover:bg-white z-10 hover:scale-110"
         >
-          <FaChevronLeft className="text-lg" />
+          <FaChevronLeft className="text-base sm:text-lg" />
         </button>
 
         {/* Next Button */}
         <button
           onClick={nextSlide}
           aria-label="Next Slide"
-          className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-orange-600 z-10 hover:scale-110"
+          className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center text-gray-700 hover:text-yellow-500 hover:bg-white z-10 hover:scale-110"
         >
-          <FaChevronRight className="text-lg" />
+          <FaChevronRight className="text-base sm:text-lg" />
         </button>
+      </div>
+
+      {/* Dots Navigation */}
+      <div className="flex justify-center items-center gap-2 sm:gap-3 mt-6">
+        {services.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            aria-label={`Go to slide ${index + 1}`}
+            className={`transition-all duration-300 rounded-full ${
+              getActualIndex() === index
+                ? "w-8 sm:w-10 h-2.5 sm:h-3 bg-yellow-500"
+                : "w-2.5 sm:w-3 h-2.5 sm:h-3 bg-gray-300 hover:bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
 
       <style jsx>{`

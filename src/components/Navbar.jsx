@@ -13,6 +13,7 @@ import {
   FaFlask,
   FaRulerCombined,
 } from "react-icons/fa";
+import { services } from "../data/services"; // Import services data
 
 const topLinks = [
   { name: "News", to: "/news" },
@@ -79,6 +80,19 @@ const ModernNavbar = () => {
       document.body.style.width = "";
     };
   }, [isOpen]);
+
+  const servicesDropdownTimeout = useRef(null);
+
+  const handleServicesMouseEnter = () => {
+    clearTimeout(servicesDropdownTimeout.current);
+    setIsServicesOpen(true);
+  };
+
+  const handleServicesMouseLeave = () => {
+    servicesDropdownTimeout.current = setTimeout(() => {
+      setIsServicesOpen(false);
+    }, 100);
+  };
 
   const navBg =
     isLandingPage && !scrolled
@@ -185,8 +199,8 @@ const ModernNavbar = () => {
             {/* Services Dropdown */}
             <div
               className="relative group"
-              onMouseEnter={() => setIsServicesOpen(true)}
-              onMouseLeave={() => setIsServicesOpen(false)}
+              onMouseEnter={handleServicesMouseEnter}
+              onMouseLeave={handleServicesMouseLeave}
             >
               <button
                 className={`flex items-center gap-1 ${linkStyle} font-oswald`}
@@ -210,28 +224,124 @@ const ModernNavbar = () => {
               </button>
 
               {isServicesOpen && (
-                <div className="absolute top-full left-0 w-80 rounded-lg shadow-xl py-4 border-2 border-yellow-500 bg-white text-gray-800 z-50">
-                  <Link
-                    to="/engineering-architecture"
-                    className="flex items-center px-6 py-3 text-xl font-oswald hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-l-4 border-transparent hover:border-yellow-500"
-                  >
-                    <FaRulerCombined className="mr-3 text-yellow-600" />
-                    Planner & Engineer
-                  </Link>
-                  <Link
-                    to="/construction"
-                    className="flex items-center px-6 py-3 text-xl font-oswald hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-l-4 border-transparent hover:border-yellow-500"
-                  >
-                    <FaHardHat className="mr-3 text-yellow-600" />
-                    Construction
-                  </Link>
-                  <Link
-                    to="/construction-material-testing"
-                    className="flex items-center px-6 py-3 text-xl font-oswald hover:bg-yellow-50 hover:text-yellow-700 transition-colors border-l-4 border-transparent hover:border-yellow-500"
-                  >
-                    <FaTools className="mr-3 text-yellow-600" />
-                    CMT Services
-                  </Link>
+                <div
+                  className="fixed left-0 w-full shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
+                  style={{
+                    top: isDesktop
+                      ? isLandingPage && !scrolled
+                        ? "152px"
+                        : "96px"
+                      : "96px",
+                  }}
+                >
+                  <div className="grid grid-cols-4 gap-0 py-5 px-8">
+                    {/* Left Column - Company Motto */}
+                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 flex flex-col justify-center">
+                      <div className="border-l-4 border-yellow-500 pl-6">
+                        <p className="text-yellow-500 text-xs font-semibold mb-2 tracking-wider">
+                          OUR COMMITMENT
+                        </p>
+                        <h3 className="text-white text-lg font-bold font-oswald leading-tight mb-3">
+                          Building Excellence, Engineering Innovation
+                        </h3>
+                        <p className="text-gray-300 text-base font-oswald leading-relaxed">
+                          From first sketches to final construction, SSN
+                          Corporation offers integrated engineering, specialty
+                          technical services, and complete design-build delivery
+                          for projects of any scale.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Engineering Services */}
+                    <div className="p-5 border-r border-gray-200">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                        <FaHardHat className="text-xl" />
+                        Engineering Services
+                      </h4>
+                      <ul className="space-y-2 text-base font-oswald">
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Design and Engineering
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Land Planning and Permitting
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Construction Material Survey and Testing
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Geotechnical Engineering
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Construction Engineering and Management
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Specialty Engineering Services */}
+                    <div className="p-5 border-r border-gray-200">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                        <FaTools className="text-xl" />
+                        Specialty Engineering Services
+                      </h4>
+                      <ul className="space-y-2 text-base font-oswald">
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • MEP Services
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Pavement Design
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Traffic Engineering Services
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Specialty Structural Design
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Special Inspections & Field Support
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Pavement Design
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Directional Drilling Design
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • 3D Modeling/Rendering
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • BIM Modeling
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Instrumentation Engineering
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Construction Services */}
+                    <div className="p-5">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                        <FaFlask className="text-xl" />
+                        Construction Services
+                      </h4>
+                      <ul className="space-y-2 text-base font-oswald">
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • General Construction
+                        </li>
+                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
+                          • Design plus Build
+                        </li>
+                      </ul>
+                      <div className="mt-4 pt-3 border-t border-gray-200">
+                        <Link
+                          to="/contact"
+                          className="block text-center px-4 py-2 bg-yellow-500 text-gray-900 font-bold rounded-md hover:bg-yellow-600 transition-colors shadow-md text-sm"
+                        >
+                          Request a Proposal
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -248,7 +358,7 @@ const ModernNavbar = () => {
             </Link>
 
             <Link
-              className="px-6 py-3 rounded-md bg-yellow-500 text-gray-900 font-bold hover:bg-yellow-600 transition-colors shadow-md hover:shadow-lg"
+              className="px-6 py-3 rounded-md bg-yellow-500 text-gray-900 font-bold font-oswald hover:bg-yellow-600 transition-colors shadow-md hover:shadow-lg"
               to="/contact"
             >
               Contact Us
@@ -279,7 +389,6 @@ const ModernNavbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - sliding drawer */}
       {/* Mobile Menu Overlay - sliding drawer */}
       <div
         className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gray-900/95 backdrop-blur-md shadow-xl z-50 transform transition-transform duration-300 ${
@@ -367,27 +476,19 @@ const ModernNavbar = () => {
 
               {isServicesOpen && (
                 <div className="flex flex-col mt-2 space-y-2 pl-4 border-l-2 border-yellow-500">
-                  <Link
-                    to="/engineering-architecture"
-                    className="text-lg text-white hover:text-yellow-400"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Engineering & Architecture
-                  </Link>
-                  <Link
-                    to="/construction"
-                    className="text-lg text-white hover:text-yellow-400"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Construction
-                  </Link>
-                  <Link
-                    to="/construction-material-testing"
-                    className="text-lg text-white hover:text-yellow-400"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Material Testing
-                  </Link>
+                  {services.map((service) => (
+                    <Link
+                      key={service.title}
+                      to={`/services/${service.title
+                        .toLowerCase()
+                        .replace(/ /g, "-")
+                        .replace(/&/g, "and")}`}
+                      className="text-lg text-white hover:text-yellow-400 font-oswald"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {service.title}
+                    </Link>
+                  ))}
                 </div>
               )}
             </div>

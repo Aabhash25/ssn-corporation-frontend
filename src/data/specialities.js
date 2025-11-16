@@ -48,7 +48,7 @@ export const specialities = [
     ],
   },
   {
-    title: "Subsurface Investigation and Geotechnical Laboratory Testing",
+    title: "Subsurface Investigation and Geotechnical Testing",
     icon: "🌍",
     image: "/SubSurface2.jpg",
     description: [
@@ -94,22 +94,6 @@ export const specialities = [
         "HVAC Systems Engineering and Sustainability",
         "Energy-Efficient Building Systems",
         "Fire Protection and Safety Engineering",
-      ],
-    ],
-  },
-  {
-    title: "Instrumentation and Monitoring",
-    icon: "📡",
-    image: "/InstrumentationMonitoring.webp",
-    description: [
-      "Comprehensive instrumentation and monitoring services.",
-      [
-        "Crack Gauge/Crack Meter",
-        "Seismograph Installation and Vibration Monitoring",
-        "Piezometer/Vibrating Wire Piezometer Installation",
-        "Inclinometer Installation",
-        "Tiltmeter Installation",
-        "Settlement Plate Installation",
       ],
     ],
   },

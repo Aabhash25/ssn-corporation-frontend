@@ -1,227 +1,231 @@
 "use client";
+import React, { useState } from "react";
+import { newsData } from "../data/newsData";
+import {
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaPhone,
+  FaClock,
+  FaParking,
+  FaArrowRight,
+  FaCalendarAlt,
+} from "react-icons/fa";
 
-import React from "react";
+// Google Fonts
+const FontsStyle = () => (
+  <style jsx global>{`
+    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+    .font-roboto {
+      font-family: "Roboto", sans-serif;
+    }
+    .font-playfair {
+      font-family: "Playfair Display", serif;
+    }
+  `}</style>
+);
 
-const News = ({ newsList }) => {
+const NewsPage = () => {
+  const [selectedNews, setSelectedNews] = useState(newsData[0]);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      {newsList && newsList.length > 0 ? (
-        <div className="max-w-7xl w-full space-y-6">
-          {newsList.map((newsItem) => (
-            <div
-              key={newsItem.id}
-              className="bg-white shadow-md rounded-lg p-6"
-            >
-              <h2 className="text-xl font-semibold">{newsItem.title}</h2>
-              <p className="text-gray-600 mt-2">{newsItem.description}</p>
+    <>
+      <FontsStyle />
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-28 pb-16 w-full">
+        <div className="flex flex-col lg:flex-row w-full px-4 sm:px-6 lg:px-12 gap-8 pt-12">
+          {/* Sidebar - News Navigation */}
+          <aside className="lg:w-1/3 xl:w-1/4">
+            <div className="bg-white rounded-3xl shadow-lg p-6 sticky top-32">
+              <h2 className="text-2xl font-playfair font-bold mb-6 text-center text-gray-800 border-b pb-3 tracking-wide">
+                Latest Updates
+              </h2>
+              <ul className="space-y-3 font-roboto">
+                {newsData.map((news) => (
+                  <li key={news.id}>
+                    <button
+                      onClick={() => setSelectedNews(news)}
+                      className={`w-full text-left p-4 rounded-2xl transition-all duration-300 hover:shadow-md border-2 ${
+                        selectedNews.id === news.id
+                          ? "bg-orange-50 border-orange-300 shadow-md transform scale-[1.02]"
+                          : "bg-white border-gray-200 hover:border-orange-200"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="flex-1">
+                          <h3
+                            className={`font-semibold leading-snug mb-2 text-base md:text-lg ${
+                              selectedNews.id === news.id
+                                ? "text-orange-700"
+                                : "text-gray-800"
+                            }`}
+                          >
+                            {news.title}
+                          </h3>
+                          <div className="flex items-center text-xs md:text-sm text-gray-500 mb-1">
+                            <FaCalendarAlt className="mr-1" size={12} />
+                            {news.date}
+                          </div>
+                          <p className="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                            {news.excerpt}
+                          </p>
+                        </div>
+                        <FaArrowRight
+                          className={`mt-1 flex-shrink-0 ${
+                            selectedNews.id === news.id
+                              ? "text-orange-500"
+                              : "text-gray-400"
+                          }`}
+                          size={14}
+                        />
+                      </div>
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))}
+          </aside>
+
+          {/* Main Content */}
+          <main className="lg:w-2/3 xl:w-3/4">
+            <div className="bg-white rounded-3xl shadow-lg overflow-hidden w-full">
+              {/* Article Header */}
+              <div className="relative bg-gradient-to-r from-blue-900 to-gray-900 text-white p-6 md:p-12">
+                <div className="absolute inset-0 bg-black opacity-25"></div>
+                <div className="relative z-10">
+                  <div className="flex items-center text-blue-200 text-sm md:text-base font-roboto mb-3">
+                    <FaCalendarAlt className="mr-2" />
+                    {selectedNews.date}
+                  </div>
+                  <h1 className="text-3xl md:text-5xl font-playfair font-bold leading-snug mb-3">
+                    {selectedNews.title}
+                  </h1>
+                  <p className="text-lg md:text-xl text-blue-100 font-roboto max-w-4xl leading-relaxed">
+                    {selectedNews.excerpt}
+                  </p>
+                </div>
+              </div>
+
+              {/* Article Content */}
+              <div className="p-6 md:p-12 space-y-10">
+                {selectedNews.content.map((section, idx) => (
+                  <div key={idx} className="space-y-6">
+                    {section.image && (
+                      <div className="relative group rounded-2xl overflow-hidden shadow-lg">
+                        <img
+                          src={section.image}
+                          alt={`News ${selectedNews.id} image ${idx + 1}`}
+                          className="w-full h-auto object-cover max-h-[500px] transition-transform duration-300 group-hover:scale-[1.03]"
+                        />
+                        <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                      </div>
+                    )}
+
+                    {/* Check if section.text is JSX or string */}
+                    <div className="font-roboto text-gray-900 text-xl md:text-2xl leading-relaxed">
+                      {typeof section.text === "string"
+                        ? section.text
+                        : section.text}
+                    </div>
+
+                    {/* Project Portfolio Styled */}
+                    {section.list && (
+                      <div className="mt-4 space-y-4">
+                        {section.list.map((item, i) => {
+                          const [title, desc] = item.split(": ");
+                          return (
+                            <div
+                              key={i}
+                              className="bg-gray-50 p-4 md:p-6 rounded-2xl shadow-sm"
+                            >
+                              <h4 className="font-playfair text-lg md:text-xl font-semibold text-orange-700 mb-2">
+                                {title}:
+                              </h4>
+                              <p className="text-gray-800 font-roboto text-lg md:text-xl leading-relaxed">
+                                {desc}
+                              </p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                {/* Office Info */}
+                {selectedNews.officeInfo && (
+                  <div className="mt-10 bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl shadow-inner p-6 md:p-10 border border-gray-200">
+                    <h2 className="text-2xl md:text-3xl font-playfair font-semibold mb-6 text-center text-gray-800 tracking-wide">
+                      Visit Our New Office
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                      <div className="space-y-3">
+                        <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 font-roboto tracking-wide">
+                          Contact Information
+                        </h3>
+                        <div className="space-y-2">
+                          <p className="flex items-center gap-3 p-2 bg-white rounded-lg shadow-sm text-gray-700 font-roboto">
+                            <FaMapMarkerAlt
+                              className="text-red-500 flex-shrink-0"
+                              size={18}
+                            />
+                            {selectedNews.officeInfo.location}
+                          </p>
+                          <p className="flex items-center gap-3 p-2 bg-white rounded-lg shadow-sm text-gray-700 font-roboto">
+                            <FaEnvelope
+                              className="text-blue-500 flex-shrink-0"
+                              size={18}
+                            />
+                            {selectedNews.officeInfo.email}
+                          </p>
+                          <p className="flex items-center gap-3 p-2 bg-white rounded-lg shadow-sm text-gray-700 font-roboto">
+                            <FaPhone
+                              className="text-green-500 flex-shrink-0"
+                              size={18}
+                            />
+                            {selectedNews.officeInfo.phone}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-2 font-roboto tracking-wide">
+                          Office Hours & Amenities
+                        </h3>
+                        <div className="space-y-2">
+                          <p className="flex items-center gap-3 p-2 bg-white rounded-lg shadow-sm text-gray-700 font-roboto">
+                            <FaClock
+                              className="text-yellow-500 flex-shrink-0"
+                              size={18}
+                            />
+                            {selectedNews.officeInfo.hours}
+                          </p>
+                          <p className="flex items-center gap-3 p-2 bg-white rounded-lg shadow-sm text-gray-700 font-roboto">
+                            <FaParking
+                              className="text-gray-600 flex-shrink-0"
+                              size={18}
+                            />
+                            {selectedNews.officeInfo.parking}
+                          </p>
+                        </div>
+                        <a
+                          href={selectedNews.officeInfo.mapLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-roboto font-semibold py-2 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg mt-3"
+                        >
+                          <FaMapMarkerAlt />
+                          Open in Google Maps
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </main>
         </div>
-      ) : (
-        // Message when no news available
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">
-            News Not Available
-          </h1>
-          <p className="text-gray-600">
-            Sorry, we currently don’t have any news to show. Please check back
-            later.
-          </p>
-        </div>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 
-export default News;
-
-// import React from "react";
-
-// const News = () => {
-//   const newsArticles = [
-//     {
-//       id: 1,
-//       headline: "SSN Corporation Unveils Next-Generation Smart Infrastructure",
-//       date: "November 3, 2025",
-//       excerpt:
-//         "SSN Corporation launches its latest smart building project, integrating AI-driven systems and sustainable materials to redefine urban living.",
-//       category: "INNOVATION",
-//       readTime: "5 min read",
-//       featured: true,
-//     },
-//     {
-//       id: 2,
-//       headline: "SSN Expands Operations to Southeast Asia",
-//       date: "October 28, 2025",
-//       excerpt:
-//         "New headquarters in Singapore will enhance the company’s presence in Asia and generate over 250 new jobs in engineering and operations.",
-//       category: "BUSINESS",
-//       readTime: "4 min read",
-//     },
-//     {
-//       id: 3,
-//       headline: "Quarterly Report: Strong Growth Amid Global Challenges",
-//       date: "October 20, 2025",
-//       excerpt:
-//         "Despite global supply chain constraints, SSN reports 12% growth in Q3 revenues, demonstrating operational resilience and market leadership.",
-//       category: "FINANCE",
-//       readTime: "5 min read",
-//     },
-//     {
-//       id: 4,
-//       headline: "Collaborating with Universities to Drive Innovation",
-//       date: "October 12, 2025",
-//       excerpt:
-//         "SSN partners with leading engineering universities to foster research programs focused on sustainable construction technologies.",
-//       category: "EDUCATION",
-//       readTime: "4 min read",
-//     },
-//   ];
-
-//   const featuredArticle = newsArticles.find((article) => article.featured);
-//   const regularArticles = newsArticles.filter((article) => !article.featured);
-
-//   return (
-//     <div className="max-w-6xl mx-auto px-4 py-12 bg-amber-50 border border-amber-200 shadow-lg">
-//       {/* Newspaper Header */}
-//       <div className="text-center mb-8 border-b-2 border-amber-800 pb-4">
-//         <div className="font-playfair text-5xl font-bold text-gray-900 tracking-wide mb-2">
-//           SSN CHRONICLE
-//         </div>
-//         <div className="font-playfair text-lg text-amber-800 italic">
-//           DAILY EDITION •{" "}
-//           {new Date().toLocaleDateString("en-US", {
-//             weekday: "long",
-//             year: "numeric",
-//             month: "long",
-//             day: "numeric",
-//           })}
-//         </div>
-//         <div className="w-full h-px bg-gradient-to-r from-transparent via-amber-600 to-transparent mt-4"></div>
-//       </div>
-
-//       {/* Breaking News Banner */}
-//       <div className="bg-red-600 text-white py-2 px-4 mb-8 transform -rotate-1 shadow-lg">
-//         <div className="flex items-center justify-center space-x-4">
-//           <span className="font-bold uppercase tracking-widest text-sm">
-//             Breaking News
-//           </span>
-//           <span className="text-sm">
-//             SSN launches AI-driven smart city pilot project in Kathmandu
-//           </span>
-//         </div>
-//       </div>
-
-//       {/* Featured Article */}
-//       <div className="mb-12 border-b-2 border-double border-amber-600 pb-8">
-//         <div className="inline-block bg-amber-600 text-white px-4 py-1 font-playfair font-bold text-sm tracking-widest mb-4 transform -skew-x-6">
-//           EXCLUSIVE REPORT
-//         </div>
-//         <h1 className="font-playfair text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">
-//           {featuredArticle.headline}
-//         </h1>
-//         <div className="flex flex-wrap items-center justify-between mb-4 text-gray-600">
-//           <div className="flex items-center space-x-4">
-//             <span className="font-semibold">
-//               By Corporate Communications Desk
-//             </span>
-//             <span className="text-sm italic">09:30 AM EST</span>
-//           </div>
-//           <div className="flex items-center space-x-2">
-//             <span className="bg-gray-200 px-2 py-1 text-xs font-mono">
-//               {featuredArticle.category}
-//             </span>
-//             <span className="text-sm">{featuredArticle.readTime}</span>
-//           </div>
-//         </div>
-//         <p className="text-xl text-gray-700 leading-relaxed border-l-4 border-amber-500 pl-4 italic">
-//           {featuredArticle.excerpt}
-//         </p>
-//       </div>
-
-//       {/* News Grid */}
-//       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-//         {regularArticles.map((article) => (
-//           <article
-//             key={article.id}
-//             className="bg-white border border-amber-300 p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1"
-//           >
-//             <div className="flex justify-between items-center mb-3">
-//               <span className="font-playfair font-bold text-xs text-amber-600 tracking-widest uppercase">
-//                 {article.category}
-//               </span>
-//               <span className="text-xs text-gray-500 font-mono">
-//                 {article.readTime}
-//               </span>
-//             </div>
-
-//             <h2 className="font-playfair text-2xl font-semibold text-gray-900 leading-tight mb-3">
-//               {article.headline}
-//             </h2>
-
-//             <div className="flex items-center mb-4 text-sm text-gray-600">
-//               <span className="italic">{article.date}</span>
-//             </div>
-
-//             <p className="text-gray-700 leading-relaxed mb-6">
-//               {article.excerpt}
-//             </p>
-
-//             <button className="group flex items-center space-x-2 text-amber-700 hover:text-amber-800 font-playfair font-semibold transition-colors duration-200">
-//               <span>Continue Reading</span>
-//               <span className="transform group-hover:translate-x-1 transition-transform duration-200">
-//                 →
-//               </span>
-//             </button>
-//           </article>
-//         ))}
-//       </div>
-
-//       {/* Newspaper Columns Section */}
-//       <div className="bg-white border border-amber-300 p-8 mb-8 shadow-inner">
-//         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-//           <div>
-//             <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-4 border-b border-amber-200 pb-2">
-//               Industry Insights
-//             </h3>
-//             <p className="text-gray-700 leading-relaxed text-justify">
-//               SSN Corporation's latest initiatives in smart infrastructure and
-//               sustainable design are setting new benchmarks for engineering
-//               excellence. Analysts note that the company’s strategic focus on
-//               renewable technology will drive growth over the next decade.
-//             </p>
-//           </div>
-//           <div>
-//             <h3 className="font-playfair text-2xl font-bold text-gray-900 mb-4 border-b border-amber-200 pb-2">
-//               Leadership Commentary
-//             </h3>
-//             <p className="text-gray-700 leading-relaxed text-justify">
-//               "Innovation is at the core of every decision we make," said CEO
-//               Alexandra Chen. "Our commitment to sustainability and smart
-//               technology ensures that we are not just meeting industry
-//               standards—we are shaping the future of engineering."
-//             </p>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Newspaper Footer */}
-//       <div className="border-t-2 border-amber-800 pt-4">
-//         <div className="text-center text-gray-600 text-sm italic">
-//           <div className="font-playfair mb-2">
-//             © 2025 SSN Chronicle. All rights reserved.
-//           </div>
-//           <div className="flex justify-center space-x-4 text-xs">
-//             <span>Volume 3, Issue 44</span>
-//             <span>•</span>
-//             <span>Established 2023</span>
-//             <span>•</span>
-//             <span>Daily Edition</span>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default News;
+export default NewsPage;

@@ -87,7 +87,7 @@ const Contact = () => {
   return (
     <>
       <div className="max-w-7xl mx-auto px-6 sm:px-12 py-18 pt-42">
-        {/* Hero */}
+        {/* Hero Section */}
         <motion.div
           className="text-center mb-12"
           initial="hidden"
@@ -107,7 +107,7 @@ const Contact = () => {
 
         {/* Form + Offices */}
         <div className="grid md:grid-cols-2 gap-10">
-          {/* Message Form */}
+          {/* Form */}
           <motion.div
             className="bg-white rounded-3xl shadow-xl p-8 sm:p-12"
             initial="hidden"
@@ -131,6 +131,7 @@ const Contact = () => {
               </div>
             )}
 
+            {/* FORM START */}
             <form className="space-y-6" onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -140,6 +141,7 @@ const Contact = () => {
                 className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                 required
               />
+
               <input
                 type="email"
                 placeholder="Your Email"
@@ -149,7 +151,17 @@ const Contact = () => {
                 required
               />
 
-              {/* State + Country */}
+              {/* Address */}
+              <input
+                type="text"
+                placeholder="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                required
+              />
+
+              {/* State + Country + Zip Code */}
               <div className="flex gap-4 flex-wrap">
                 <input
                   type="text"
@@ -158,6 +170,7 @@ const Contact = () => {
                   onChange={(e) => setState(e.target.value)}
                   className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                 />
+
                 <input
                   type="text"
                   placeholder="Country"
@@ -166,18 +179,7 @@ const Contact = () => {
                   className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                   required
                 />
-              </div>
 
-              {/* Address + Zip Code */}
-              <div className="flex gap-4 flex-wrap">
-                <input
-                  type="text"
-                  placeholder="Your Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
-                  required
-                />
                 <input
                   type="text"
                   placeholder="Zip Code"
@@ -204,6 +206,7 @@ const Contact = () => {
                 className="w-full px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg h-40 resize-none"
                 required
               />
+
               <button
                 type="submit"
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl text-lg transition-colors"
@@ -211,6 +214,7 @@ const Contact = () => {
                 Send Message
               </button>
             </form>
+            {/* FORM END */}
           </motion.div>
 
           {/* Offices */}
@@ -229,6 +233,7 @@ const Contact = () => {
                 <h3 className="text-xl sm:text-2xl font-playfair font-bold text-gray-900 mb-4">
                   {office.title}
                 </h3>
+
                 <p className="flex items-center text-gray-700 font-roboto text-lg mb-2">
                   <MapPinIcon className="h-5 w-5 text-orange-400 mr-3" />
                   <span className="whitespace-pre-line">{office.location}</span>
@@ -238,6 +243,7 @@ const Contact = () => {
                   <PhoneIcon className="h-5 w-5 text-orange-400 mr-3" />
                   {office.phone}
                 </p>
+
                 <p className="flex items-center text-gray-700 font-roboto text-lg">
                   <EnvelopeIcon className="h-5 w-5 text-orange-400 mr-3" />
                   {office.email}

@@ -43,7 +43,7 @@ const Hero = () => {
   ));
 
   return (
-    <section className="relative h-screen flex flex-col justify-center items-center text-white overflow-hidden bg-black">
+    <section className="relative h-screen flex flex-col justify-between items-center text-white overflow-hidden bg-black pt-20 md:pt-24 pb-6">
       {/* Background Slider */}
       <AnimatePresence initial={false}>
         {images.map((src, index) =>
@@ -69,13 +69,13 @@ const Hero = () => {
 
       {/* Hero Content */}
       <motion.div
-        className="relative z-10 text-center max-w-4xl px-6"
+        className="relative z-10 text-center max-w-4xl px-6 flex-1 flex flex-col justify-center"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-snug tracking-wide"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl mb-4 md:mb-6 leading-tight md:leading-snug tracking-wide"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -84,7 +84,7 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p
-          className="text-white text-lg sm:text-xl md:text-2xl font-roboto mb-10 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
+          className="text-white text-base sm:text-lg md:text-xl lg:text-xl font-roboto mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-lg"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut", delay: 0.5 }}
@@ -94,33 +94,35 @@ const Hero = () => {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row justify-center gap-4 mt-8"
+          className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4 mt-6 md:mt-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.7 }}
         >
           <Link
             to="/portfolio"
-            className="px-8 py-4 bg-yellow-500 text-gray-900 hover:bg-yellow-600 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl font-roboto"
+            className="px-6 md:px-8 py-3 md:py-4 bg-yellow-500 text-gray-900 hover:bg-yellow-600 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl font-roboto text-sm md:text-base"
           >
             Explore Our Work
           </Link>
           <Link
             to="/contact"
-            className="px-8 py-4 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl font-roboto"
+            className="px-6 md:px-8 py-3 md:py-4 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 rounded-3xl font-bold shadow-lg transition duration-300 transform hover:scale-105 hover:shadow-xl font-roboto text-sm md:text-base"
           >
             Get In Touch
           </Link>
         </motion.div>
       </motion.div>
 
+      {/* Bottom Text */}
       <motion.h2
-        className="absolute bottom-16 w-full text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair font-bold text-yellow-400 drop-shadow-lg px-4"
+        className="relative z-10 w-full text-center text-sm sm:text-base md:text-lg lg:text-xl font-playfair font-bold text-yellow-400 drop-shadow-lg px-4 pb-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        Proudly serving design and construction in GA, NC, and VA.
+        Proudly serving for project planning, engineering design, and general
+        construction in GA, NC, and VA{" "}
       </motion.h2>
     </section>
   );
