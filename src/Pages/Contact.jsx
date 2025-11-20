@@ -62,19 +62,19 @@ const Contact = () => {
     {
       title: "Corporate Office",
       location: "5540 Centerview Dr, Ste 304 \n Raleigh, NC 27606",
-      phone: "+1 (919) 703-0222",
+      phone: "(919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
       title: "Virginia Office",
       location: "8401 Mayland Dr, Ste A,\n Richmond, VA 23294",
-      phone: "+1 (919) 703-0222",
+      phone: "(919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
       title: "Georgia Office",
       location: "1982 Side Branch Way,\n Lawrenceville, GA 30045",
-      phone: "+1 (919) 703-0222",
+      phone: "(919) 703-0222",
       email: "contact@ssncorporation.com",
     },
   ];
@@ -162,13 +162,13 @@ const Contact = () => {
               />
 
               {/* State + Country + Zip Code */}
-              <div className="flex gap-4 flex-wrap">
+              <div className="grid grid-cols-3 gap-4">
                 <input
                   type="text"
                   placeholder="State"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                 />
 
                 <input
@@ -176,7 +176,7 @@ const Contact = () => {
                   placeholder="Country"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  className="flex-1 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                   required
                 />
 
@@ -185,7 +185,7 @@ const Contact = () => {
                   placeholder="Zip Code"
                   value={zipCode}
                   onChange={(e) => setZipCode(e.target.value)}
-                  className="w-32 px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
+                  className="px-5 py-4 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-orange-400 outline-none font-roboto text-lg"
                   required
                 />
               </div>

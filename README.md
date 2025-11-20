@@ -40,3 +40,9 @@ Get-ChildItem *.jpg, *.png | ForEach-Object {
     sharp -i $inputFile -o "./optimized/${fileName}.webp" resize 1920 -q 60
 }
 ```
+
+#Backend
+
+sudo systemctl restart ssn_gunicorn
+sudo systemctl status ssn_gunicorn
+sudo systemctl restart nginx

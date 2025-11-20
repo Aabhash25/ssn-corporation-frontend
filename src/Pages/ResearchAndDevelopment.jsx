@@ -71,7 +71,9 @@ const ResearchAndDevelopment = () => {
             {/* CTA Button */}
             <div className="pt-4">
               <a
-                href="/quantity-takeoff"
+                href="https://qtakeoff.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-xl font-roboto font-semibold text-lg hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
               >
                 <span>Visit Quantity Takeoff</span>

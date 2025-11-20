@@ -94,16 +94,65 @@ export const newsData = [
     title: "SSN AI Launches New Quantity Takeoff Tool",
     date: "February 28, 2024",
     excerpt: "Revolutionary AI tool transforms construction estimating process",
-    images: [""],
+    images: [
+      "https://via.placeholder.com/800x400.png?text=QTO+Dashboard",
+      "https://via.placeholder.com/800x400.png?text=Plan+Analysis",
+      "https://via.placeholder.com/800x400.png?text=Material+Estimation",
+    ],
     content: [
       {
-        text: `SSN AI has launched a cutting-edge AI-enabled Quantity Takeoff tool
-        that automatically analyzes building plans...`,
+        text: `SSN AI has launched a cutting-edge AI-enabled Quantity Takeoff (QTO) tool
+        that automatically analyzes building plans and extracts critical elements 
+        to generate accurate material quantity estimates.`,
+        image:
+          "https://via.placeholder.com/800x400.png?text=QTO+Tool+Interface",
       },
       {
-        text: `This innovation is designed to save engineers and contractors time
-        while increasing accuracy in material estimation.`,
+        text: `This revolutionary tool is designed to save engineers, contractors, and
+        estimators significant time while increasing accuracy and reducing manual
+        errors in the material estimation process. It leverages advanced machine
+        learning algorithms to understand architectural and structural drawings 
+        and calculate quantities for various construction materials.`,
+      },
+      {
+        text: `Key Features of the QTO Tool include:`,
+        list: [
+          "Automated analysis of architectural, structural, and MEP plans.",
+          "Generation of material quantity estimates for concrete, steel, wood, and more.",
+          "Exportable reports in Excel, PDF, and BIM-compatible formats.",
+          "Integration with project management tools for real-time updates.",
+          "AI-powered suggestions for optimization and cost-saving opportunities.",
+        ],
+      },
+      {
+        text: `Since its launch, the QTO tool has been successfully implemented
+        in several commercial and residential projects, improving estimation speed
+        by up to 70% and reducing human error by over 50%.`,
+      },
+      {
+        text: (
+          <div>
+            To learn more or request a demo, visit{" "}
+            <a
+              href="https://ssnai.com/qto-tool"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-orange-600 hover:underline"
+            >
+              SSN AI QTO Tool
+            </a>
+            . Our team provides full onboarding support, training, and
+            integration assistance for construction firms of all sizes.
+          </div>
+        ),
       },
     ],
+    officeInfo: {
+      location: "SSN AI Headquarters, 123 Innovation Way, Raleigh NC",
+      email: "info@ssnai.com",
+      phone: "919-555-1010",
+      hours: "9 AM to 6 PM (M-F)",
+      mapLink: "https://www.google.com/maps/place/Raleigh+NC",
+    },
   },
 ];

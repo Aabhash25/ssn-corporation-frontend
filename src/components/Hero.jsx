@@ -9,7 +9,7 @@ const Hero = () => {
 
   const heading = [
     { text: "BUILDING", color: "text-white" },
-    { text: "FUTURE", color: "text-red-600" },
+    { text: "FUTURE", color: "text-yellow-500" },
     { text: "WITH", color: "text-white" },
     { text: "PRECISION", color: "text-yellow-500" },
   ];
@@ -116,7 +116,7 @@ const Hero = () => {
 
       {/* Bottom Text */}
       <motion.h2
-        className="relative z-10 w-full text-center text-sm sm:text-base md:text-lg lg:text-xl font-playfair font-bold text-yellow-400 drop-shadow-lg px-4 pb-4"
+        className="relative z-10 w-full text-center text-sm sm:text-base md:text-lg lg:text-xl font-playfair font-bold text-yellow-500 drop-shadow-lg px-4 pb-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}

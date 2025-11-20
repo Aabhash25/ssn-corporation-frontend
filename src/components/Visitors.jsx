@@ -7,7 +7,6 @@ const Visitors = () => {
   const cards = [
     {
       title: "Planner And Engineer",
-      subtitle: "Smart construction tools & CAD workflows",
       description:
         "Our multidisciplinary Planner and Engineer team unites creative planning with practical engineering. We deliver integrated, sustainable, and buildable solutions-from concept to construction-optimizing land use, infrastructure, and site design for every project",
       img: "/about7.webp",
@@ -16,7 +15,7 @@ const Visitors = () => {
     },
     {
       title: "General Contractor",
-      subtitle: "Real-time estimates & project coordination",
+
       description:
         "We deliver high-quality residential and commercial construction with precision and reliability-from planning to completion. We turn visions into lasting,buildable results with efficiency and craftsmanship.",
       img: "/GeneralContractor.webp",

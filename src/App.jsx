@@ -32,7 +32,15 @@ import Licenses from "./components/Licenses";
 import ConstructionMaterialTesting from "./Pages/ConstructionMaterialTesting";
 import PortfolioDescription from "./Pages/ProjectDescription";
 import AffiliationRibbon from "./components/AffiliationRibbon";
+import DesignAndEngineering from "./Pages/ServicesDropdown/DesignAndEngineering";
+import LandPlanningAndPermitting from "./Pages/ServicesDropdown/LandPlanningAndPermitting";
+import ConstructionMaterialSurveyAndTesting from "./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting";
+import GeoTechnicalEngineering from "./Pages/ServicesDropdown/GeoTechnicalEngineering";
+import ConstructioinEngineeringAndManagement from "./Pages/ServicesDropdown/ConstructionEngineeringAndManagement";
+import GeneralConstruction from "./Pages/ServicesDropdown/GeneralConstruction";
+import DesignPlusBuild from "./Pages/ServicesDropdown/DesignPlusBuild";
 // import Portfolio3DPage from "./Pages/Portfoilio3DPage";
+import SpecialtyEngineeringServices from "./Pages/ServicesDropdown/SpecialtyEngineeringServices";
 
 function App() {
   const [showPreLandingPage, setShowPreLandingPage] = useState(true);
@@ -103,6 +111,36 @@ function App() {
               path="/construction-material-testing"
               element={<ConstructionMaterialTesting />}
             />
+            <Route
+              path="/design-engineering"
+              element={<DesignAndEngineering />}
+            />
+            <Route
+              path="/land-planning"
+              element={<LandPlanningAndPermitting />}
+            />
+            <Route
+              path="material-testing"
+              element={<ConstructionMaterialSurveyAndTesting />}
+            />
+            <Route
+              path="geotechnical-engineering"
+              element={<GeoTechnicalEngineering />}
+            />
+            <Route
+              path="construction-management"
+              element={<ConstructioinEngineeringAndManagement />}
+            />
+            <Route
+              path="general-construction"
+              element={<GeneralConstruction />}
+            />
+            <Route path="design-plus-build" element={<DesignPlusBuild />} />
+            <Route
+              path="specialty-services"
+              element={<SpecialtyEngineeringServices />}
+            />
+
             {/* Add Proposal page later when ready */}
           </Routes>
           <Footer />

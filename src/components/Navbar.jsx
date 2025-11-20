@@ -13,7 +13,6 @@ import {
   FaFlask,
   FaRulerCombined,
 } from "react-icons/fa";
-import { services } from "../data/services"; // Import services data
 
 const topLinks = [
   { name: "News", to: "/news" },
@@ -57,23 +56,20 @@ const ModernNavbar = () => {
     setIsServicesOpen(false);
   }, [location]);
 
-  // Prevent body scroll when mobile menu is open - FIXED
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
-      // Store current scroll position
       const scrollY = window.scrollY;
       document.body.style.position = "fixed";
       document.body.style.top = `-${scrollY}px`;
       document.body.style.width = "100%";
     } else {
-      // Restore scroll position
       const scrollY = document.body.style.top;
       document.body.style.position = "";
       document.body.style.top = "";
       document.body.style.width = "";
       window.scrollTo(0, parseInt(scrollY || "0") * -1);
     }
-
     return () => {
       document.body.style.position = "";
       document.body.style.top = "";
@@ -105,7 +101,7 @@ const ModernNavbar = () => {
 
   return (
     <>
-      {/* Top Contact + Links Bar - Always visible on all pages */}
+      {/* Top Contact + Links Bar */}
       {isDesktop && (
         <div className="fixed top-0 left-0 w-full flex justify-between items-center h-14 px-8 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-lg font-sans z-50">
           {/* Left: Contact Info */}
@@ -259,21 +255,56 @@ const ModernNavbar = () => {
                         <FaHardHat className="text-xl" />
                         Engineering Services
                       </h4>
+
                       <ul className="space-y-2 text-base font-oswald">
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Design and Engineering
+                        <li>
+                          <Link
+                            to="/design-engineering"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Design and Engineering
+                          </Link>
                         </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Land Planning and Permitting
+                        <li>
+                          <Link
+                            to="/land-planning"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Land Planning and Permitting
+                          </Link>
                         </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Construction Material Survey and Testing
+                        <li>
+                          <Link
+                            to="/land-planning"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Structural Engineering
+                          </Link>
                         </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Geotechnical Engineering
+                        <li>
+                          <Link
+                            to="/geotechnical-engineering"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Geotechnical Engineering
+                          </Link>
                         </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Construction Engineering and Management
+                        <li>
+                          <Link
+                            to="/material-testing"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Construction Material Survey and Testing
+                          </Link>
+                        </li>
+
+                        <li>
+                          <Link
+                            to="/construction-management"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Construction Engineering
+                          </Link>
                         </li>
                       </ul>
                     </div>
@@ -285,36 +316,26 @@ const ModernNavbar = () => {
                         Specialty Engineering Services
                       </h4>
                       <ul className="space-y-2 text-base font-oswald">
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • MEP Services
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Pavement Design
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Traffic Engineering Services
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Specialty Structural Design
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Special Inspections & Field Support
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Pavement Design
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Directional Drilling Design
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • 3D Modeling/Rendering
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • BIM Modeling
-                        </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Instrumentation Engineering
-                        </li>
+                        {[
+                          "MEP Services",
+                          "Pavement Design",
+                          "Traffic Engineering Services",
+                          "Specialty Structural Design",
+                          "Special Inspections & Field Support",
+                          "Directional Drilling Design",
+                          "3D Modeling/Rendering",
+                          "BIM Modeling",
+                          "Instrumentation Engineering",
+                        ].map((service, index) => (
+                          <li key={index}>
+                            <Link
+                              to="/specialty-services" // You can change this to separate routes if needed
+                              className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                            >
+                              {service}
+                            </Link>
+                          </li>
+                        ))}
                       </ul>
                     </div>
 
@@ -325,21 +346,41 @@ const ModernNavbar = () => {
                         Construction Services
                       </h4>
                       <ul className="space-y-2 text-base font-oswald">
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • General Construction
+                        <li>
+                          <Link
+                            to="/design-plus-build"
+                            className="hover:text-yellow-400 block"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            Pre Construction
+                          </Link>
                         </li>
-                        <li className="hover:text-yellow-600 cursor-pointer transition-colors">
-                          • Design plus Build
+                        <li className="transition-colors">
+                          <Link
+                            to="/general-construction"
+                            className="block hover:text-yellow-600 cursor-pointer"
+                          >
+                            General Construction
+                          </Link>
+                        </li>
+                        <li className="transition-colors">
+                          <Link
+                            to="/design-plus-build"
+                            className="block hover:text-yellow-600 cursor-pointer"
+                          >
+                            Design plus Build
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/design-plus-build"
+                            className="hover:text-yellow-400 block"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            Construction Management
+                          </Link>
                         </li>
                       </ul>
-                      <div className="mt-4 pt-3 border-t border-gray-200">
-                        <Link
-                          to="/contact"
-                          className="block text-center px-4 py-2 bg-yellow-500 text-gray-900 font-bold rounded-md hover:bg-yellow-600 transition-colors shadow-md text-sm"
-                        >
-                          Request a Proposal
-                        </Link>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -389,13 +430,12 @@ const ModernNavbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - sliding drawer */}
+      {/* Mobile Menu Overlay */}
       <div
         className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gray-900/95 backdrop-blur-md shadow-xl z-50 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } rounded-l-3xl`}
       >
-        {/* Close button */}
         <button
           onClick={() => setIsOpen(false)}
           className="absolute top-6 right-6 text-white hover:text-yellow-400 p-2"
@@ -416,7 +456,7 @@ const ModernNavbar = () => {
         </button>
 
         <div className="h-full overflow-y-auto px-6 py-20 flex flex-col justify-start space-y-12">
-          {/* Section 1: Contact Info */}
+          {/* Contact Info */}
           <div className="flex flex-col items-start space-y-2 border-b border-gray-700 pb-4">
             <a
               href="mailto:contact@ssncorporation.com"
@@ -433,7 +473,7 @@ const ModernNavbar = () => {
             </a>
           </div>
 
-          {/* Section 2: Main Navigation */}
+          {/* Main Navigation */}
           <div className="flex flex-col space-y-4">
             <Link
               to="/about"
@@ -450,7 +490,7 @@ const ModernNavbar = () => {
               Portfolio
             </Link>
 
-            {/* Services Dropdown */}
+            {/* Hard-coded Mobile Services */}
             <div className="flex flex-col">
               <button
                 onClick={() => setIsServicesOpen(!isServicesOpen)}
@@ -475,20 +515,144 @@ const ModernNavbar = () => {
               </button>
 
               {isServicesOpen && (
-                <div className="flex flex-col mt-2 space-y-2 pl-4 border-l-2 border-yellow-500">
-                  {services.map((service) => (
-                    <Link
-                      key={service.title}
-                      to={`/services/${service.title
-                        .toLowerCase()
-                        .replace(/ /g, "-")
-                        .replace(/&/g, "and")}`}
-                      className="text-lg text-white hover:text-yellow-400 font-oswald"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {service.title}
-                    </Link>
-                  ))}
+                <div className="flex flex-col mt-2 space-y-4 pl-4 border-l-2 border-yellow-500">
+                  {/* Engineering Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald flex items-center gap-2">
+                      <FaHardHat /> Engineering Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      <li>
+                        <Link
+                          to="/design-engineering"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Design and Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/land-planning"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Land Planning and Permitting
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/material-testing"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Structural Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/geotechnical-engineering"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Geotechnical Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/material-testing"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Construction Material Survey and Testing
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/construction-management"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          • Construction Engineering
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Specialty Engineering Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald flex items-center gap-2">
+                      <FaTools /> Specialty Engineering Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      {[
+                        "MEP Services",
+                        "Pavement Design",
+                        "Traffic Engineering Services",
+                        "Specialty Structural Design",
+                        "Special Inspections & Field Support",
+                        "Directional Drilling Design",
+                        "3D Modeling/Rendering",
+                        "BIM Modeling",
+                        "Instrumentation Engineering",
+                      ].map((service, index) => (
+                        <li key={index}>
+                          <Link
+                            to="/specialty-services"
+                            className="hover:text-yellow-400 block"
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {service}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Construction Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald flex items-center gap-2">
+                      <FaFlask /> Construction Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      <li>
+                        <Link
+                          to="/design-plus-build"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Pre Construction
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/general-construction"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          General Construction
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/design-plus-build"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Design plus Build
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/design-plus-build"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Construction Management
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               )}
             </div>
@@ -517,7 +681,7 @@ const ModernNavbar = () => {
             </Link>
           </div>
 
-          {/* Section 3: Top Links (collapsible to save space) */}
+          {/* Quick Links */}
           <div className="flex flex-col space-y-2 border-t border-gray-700 pt-4">
             <p className="text-sm text-gray-400 font-semibold">Quick Links</p>
             {topLinks.map((link) => (
@@ -532,7 +696,7 @@ const ModernNavbar = () => {
             ))}
           </div>
 
-          {/* Section 4: Social Icons */}
+          {/* Social Icons */}
           <div className="flex space-x-6 mt-auto text-xl">
             <a
               href="https://www.facebook.com/people/SSN-Corporation/61566782237516/"

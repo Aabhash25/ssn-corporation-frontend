@@ -329,19 +329,21 @@ const AboutUs = () => {
                 </h2>
               </div>
               <p className="text-xl md:text-2xl leading-relaxed mb-8 text-gray-800">
-                From concept to completion, we deliver comprehensive
-                construction solutions tailored to your needs. Our expertise
-                spans architectural design, structural engineering, project
-                management, and sustainable development.
+                From concept to completion, we deliver comprehensive engineering
+                and construction solutions tailored to your needs. Our expertise
+                spans architectural design, structural,geotechnical,water
+                resources, elecctrical, mechanical, plumbing, and construction
+                management engineering, project management, and sustainable
+                development.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
-                  "Residential Buildings",
-                  "Commercial Complexes",
-                  "Industrial Projects",
+                  "Building Design and Construction",
+                  "Land Planning, Permitting, and Site Development",
+                  "Infrastructure and Facility Planning and Design",
                   "Renovations & Interiors",
                   "Sustainable Construction",
-                  "Project Management",
+                  "Construction Management, Construction Support and Material Testing",
                 ].map((item, i) => (
                   <div
                     key={i}
