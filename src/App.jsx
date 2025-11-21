@@ -34,11 +34,15 @@ import PortfolioDescription from "./Pages/ProjectDescription";
 import AffiliationRibbon from "./components/AffiliationRibbon";
 import DesignAndEngineering from "./Pages/ServicesDropdown/DesignAndEngineering";
 import LandPlanningAndPermitting from "./Pages/ServicesDropdown/LandPlanningAndPermitting";
+import ConstructionAdministration from "./Pages/ServicesDropdown/ConstructionAdministration";
+import StructuralEngineering from "./Pages/ServicesDropdown/StructuralEngineering";
 import ConstructionMaterialSurveyAndTesting from "./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting";
 import GeoTechnicalEngineering from "./Pages/ServicesDropdown/GeoTechnicalEngineering";
-import ConstructioinEngineeringAndManagement from "./Pages/ServicesDropdown/ConstructionEngineeringAndManagement";
+import ConstructioinEngineeringAndManagement from "./Pages/ServicesDropdown/ConstructionEngineering";
 import GeneralConstruction from "./Pages/ServicesDropdown/GeneralConstruction";
 import DesignPlusBuild from "./Pages/ServicesDropdown/DesignPlusBuild";
+import PreConstruction from "./Pages/ServicesDropdown/PreConstruction";
+import ConstructionManagement from "./Pages/ServicesDropdown/ConstructionManagement";
 // import Portfolio3DPage from "./Pages/Portfoilio3DPage";
 import SpecialtyEngineeringServices from "./Pages/ServicesDropdown/SpecialtyEngineeringServices";
 
@@ -120,6 +124,14 @@ function App() {
               element={<LandPlanningAndPermitting />}
             />
             <Route
+              path="/structural-engineering"
+              element={<StructuralEngineering />}
+            />
+            <Route
+              path="/construction-administration"
+              element={<ConstructionAdministration />}
+            />
+            <Route
               path="material-testing"
               element={<ConstructionMaterialSurveyAndTesting />}
             />
@@ -128,12 +140,17 @@ function App() {
               element={<GeoTechnicalEngineering />}
             />
             <Route
-              path="construction-management"
+              path="construction-engineering"
               element={<ConstructioinEngineeringAndManagement />}
             />
             <Route
               path="general-construction"
               element={<GeneralConstruction />}
+            />
+            <Route path="pre-construction" element={<PreConstruction />} />
+            <Route
+              path="construction-management"
+              element={<ConstructionManagement />}
             />
             <Route path="design-plus-build" element={<DesignPlusBuild />} />
             <Route

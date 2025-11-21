@@ -8,3 +8,12 @@ html, body {
   box-sizing: border-box;
 }
 
+.news-link {
+  @apply text-black underline font-bold;
+}
+
+/* index.css or global.css */
+.paragraph-indent p {
+  text-indent: 4rem; /* first-line indent */
+  margin-bottom: 1.5rem; /* optional spacing between paragraphs */
+}

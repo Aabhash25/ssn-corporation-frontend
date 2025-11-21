@@ -12,59 +12,49 @@ const ResearchAndDevelopment = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
-    <div className="w-full min-h-screen pt-42 pb-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <div className="w-full min-h-screen pt-20 sm:pt-24 pb-16 px-4 sm:px-6 lg:px-8 bg-white ">
       <div className="max-w-7xl mx-auto">
         {/* Page Header */}
-        <div className="text-center mb-16 px-4">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-playfair font-bold mb-6 text-gray-900">
-            Research And Development
-          </h1>
-        </div>
 
         {/* Two-column Layout */}
-        <div className="grid lg:grid-cols-[1.2fr_1.8fr] gap-12 lg:gap-16 items-center mb-20 px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1.8fr] gap-12 lg:gap-16 items-center mb-20 px-4">
           {/* Left Column */}
           <div className="space-y-8 order-2 lg:order-1">
-            <h2 className="text-3xl lg:text-4xl font-playfair font-bold text-gray-900 leading-tight">
+            <h2 className="text-3xl lg:text-4xl font-playfair font-bold text-gray-900 leading-tight pt-32  ">
               AI-Powered Quantity TakeOff And Cost Estimation
             </h2>
 
             <div className="space-y-4">
+              {/* Feature Cards */}
               <div className="flex items-start gap-4 p-6 rounded-xl bg-gray-50 border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
                 <div className="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
                   <FaBrain className="text-blue-600 text-xl" />
                 </div>
-                <div>
-                  <p className="text-gray-700 text-base leading-relaxed font-roboto">
-                    Our AI-enabled Quantity Takeoff(QTO) product automatically
-                    analyzes 2D building plans to extract elements and generate
-                    accurate quantity takeoffs.
-                  </p>
-                </div>
+                <p className="text-gray-700 text-base leading-relaxed font-roboto">
+                  Our AI-enabled Quantity Takeoff(QTO) product automatically
+                  analyzes 2D building plans to extract elements and generate
+                  accurate quantity takeoffs.
+                </p>
               </div>
 
               <div className="flex items-start gap-4 p-6 rounded-xl bg-gray-50 border border-gray-100 hover:border-green-200 hover:shadow-md transition-all duration-300">
                 <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                   <FaRocket className="text-green-600 text-xl" />
                 </div>
-                <div>
-                  <p className="text-gray-700 text-base leading-relaxed font-roboto">
-                    It reduces manual effort by 75 to 95%, minimizes errors,and
-                    accelerates project planning time-line.
-                  </p>
-                </div>
+                <p className="text-gray-700 text-base leading-relaxed font-roboto">
+                  It reduces manual effort by 75 to 95%, minimizes errors, and
+                  accelerates project planning time-line.
+                </p>
               </div>
 
               <div className="flex items-start gap-4 p-6 rounded-xl bg-gray-50 border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all duration-300">
                 <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
                   <FaChartLine className="text-purple-600 text-xl" />
                 </div>
-                <div>
-                  <p className="text-gray-700 text-base leading-relaxed font-roboto">
-                    It Integrated real-time cost data to provide material
-                    estimates and empower data-driven decision making.
-                  </p>
-                </div>
+                <p className="text-gray-700 text-base leading-relaxed font-roboto">
+                  It integrates real-time cost data to provide material
+                  estimates and empower data-driven decision making.
+                </p>
               </div>
             </div>
 
@@ -83,10 +73,10 @@ const ResearchAndDevelopment = () => {
           </div>
 
           {/* Right Column - Full Image */}
-          <div className="relative order-1 lg:order-2 w-full">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 w-full max-w-[900px] mx-auto">
+          <div className="relative order-1 lg:order-2 w-full flex justify-center lg:justify-end">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 w-full max-w-[600px] sm:max-w-[700px] lg:max-w-[900px] lg:translate-x-20 transition-transform duration-300">
               <img
-                src="/research.webp"
+                src="/qtakeoff1.png"
                 alt="AI analyzing construction blueprints in our R&D lab"
                 className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-700"
                 loading="lazy"

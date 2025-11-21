@@ -50,82 +50,94 @@ const ConstructionMaterialSurvey = () => {
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             What We Do
           </h2>
-          <p className="text-lg font-roboto text-gray-700 leading-relaxed mb-6">
-            SSN Corporation offers complete material survey and testing
-            solutions that support both new construction and existing site
-            assessments. Our team conducts pre-construction material surveys,
-            documenting existing site conditions, identifying usable and
-            unsuitable materials, and evaluating soil characteristics essential
-            for foundation design and earthwork planning. During active
-            construction, we perform field sampling and material verification
-            for soils, aggregates, concrete, asphalt, and masonry to confirm
-            compliance with project specifications. In our accredited
-            laboratories, materials undergo testing for strength, durability,
-            gradation, compaction, density, moisture content, and overall
-            composition, ensuring each component meets structural and
-            performance requirements. For redevelopment or renovation projects,
-            we provide condition surveys, core extractions, and material
-            verification to assess degradation, determine remaining service
-            life, and evaluate the suitability of existing materials for reuse.
-            This integrated survey-and-testing approach supports informed
-            decision-making, minimizes risk, and maintains compliance with IBC,
-            ASTM, AASHTO, and applicable local standards.
-          </p>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-10 w-full">
+            <p>
+              SSN Corporation offers complete material survey and testing
+              solutions that support both new construction and existing site
+              assessments. Our team conducts pre-construction material surveys,
+              documenting existing site conditions, identifying usable and
+              unsuitable materials, and evaluating soil characteristics
+              essential for foundation design and earthwork planning.
+            </p>
+            <p>
+              During active construction, we perform field sampling and material
+              verification for soils, aggregates, concrete, asphalt, and masonry
+              to confirm compliance with project specifications. In our
+              accredited laboratories, materials undergo testing for strength,
+              durability, gradation, compaction, density, moisture content, and
+              overall composition, ensuring each component meets structural and
+              performance requirements.
+            </p>
+            <p>
+              For redevelopment or renovation projects, we provide condition
+              surveys, core extractions, and material verification to assess
+              degradation, determine remaining service life, and evaluate the
+              suitability of existing materials for reuse. This integrated
+              survey-and-testing approach supports informed decision-making,
+              minimizes risk, and maintains compliance with IBC, ASTM, AASHTO,
+              and applicable local standards.
+            </p>
+          </div>
 
           {/* Why Choose SSN Corporation */}
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             Why Choose SSN Corporation
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
-              Comprehensive Material Survey Expertise – Clear and accurate
-              documentation of existing site materials and conditions.
-            </li>
-            <li>
-              Certified, Accredited Testing – Laboratory and field testing
-              performed to nationally recognized standards.
-            </li>
-            <li>
-              Fast, Actionable Reporting – Detailed results delivered quickly to
-              keep your project moving.
-            </li>
-            <li>
-              Responsive Field Technicians – Timely on-site sampling and
-              inspections aligned with construction schedules.
-            </li>
-            <li>
-              Regulatory & Specification Compliance – Testing aligned with
-              project requirements and governing codes.
-            </li>
-            <li>
-              Reduced Risk & Lower Costs – Early identification of unsuitable
-              materials prevents delays, rework, and future failures.
-            </li>
-          </ul>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-10 w-full">
+            <p>
+              <strong>Comprehensive Material Survey Expertise:</strong> Clear
+              and accurate documentation of existing site materials and
+              conditions.
+            </p>
+            <p>
+              <strong>Certified, Accredited Testing:</strong> Laboratory and
+              field testing performed to nationally recognized standards.
+            </p>
+            <p>
+              <strong>Fast, Actionable Reporting:</strong> Detailed results
+              delivered quickly to keep your project moving.
+            </p>
+            <p>
+              <strong>Responsive Field Technicians:</strong> Timely on-site
+              sampling and inspections aligned with construction schedules.
+            </p>
+            <p>
+              <strong>Regulatory & Specification Compliance:</strong> Testing
+              aligned with project requirements and governing codes.
+            </p>
+            <p>
+              <strong>Reduced Risk & Lower Costs:</strong> Early identification
+              of unsuitable materials prevents delays, rework, and future
+              failures.
+            </p>
+          </div>
 
           {/* Additional Highlights */}
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             Additional Highlights
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-10 w-full">
+            <p>
               Supports pre-construction planning through material validation and
               site condition assessments.
-            </li>
-            <li>
+            </p>
+            <p>
               Ideal for renovations and redevelopment, offering detailed
               evaluations of existing structures and materials.
-            </li>
-            <li>
+            </p>
+            <p>
               Fully integrated with engineering, inspection, and construction
               management teams for seamless project support.
-            </li>
-            <li>
+            </p>
+            <p>
               Experience across multiple sectors: commercial, industrial,
               infrastructure, municipal, transportation, energy, and
               residential.
-            </li>
-          </ul>
+            </p>
+          </div>
         </div>
 
         {/* Decorative Glow Circles */}

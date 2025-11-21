@@ -73,7 +73,7 @@ const Visitors = () => {
                 <p className="text-sm sm:text-base text-gray-500 mt-1 sm:mt-2">
                   {card.subtitle}
                 </p>
-                <div className="w-12 h-1 sm:w-14 bg-orange-500 rounded-full mt-2 sm:mt-3 mb-0" />
+                <div className="w-12 h-1 sm:w-14 bg-yellow-500 rounded-full mt-2 sm:mt-3 mb-0" />
               </div>
 
               {/* Image + hover overlay (bigger) */}
@@ -94,7 +94,7 @@ const Visitors = () => {
                   </p>
                   <Link
                     to={card.link}
-                    className="inline-block px-6 py-3 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg shadow-md hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
+                    className="inline-block px-6 py-3 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-lg shadow-md hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
                   >
                     Explore {card.title}
                   </Link>

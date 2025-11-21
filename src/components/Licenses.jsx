@@ -124,11 +124,6 @@ const Licenses = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <div className="flex items-center justify-center mb-5">
-              <div className="p-4 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl shadow-md">
-                <GlobeAmericasIcon className="w-8 h-8 text-white" />
-              </div>
-            </div>
             <h2 className="text-4xl sm:text-5xl font-playfair font-bold text-gray-900 mb-3">
               Where We Serve
             </h2>

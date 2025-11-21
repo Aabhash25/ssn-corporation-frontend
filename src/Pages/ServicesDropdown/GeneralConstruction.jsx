@@ -60,51 +60,52 @@ const GeneralConstruction = () => {
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             What We Do
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4">
-            <li>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-4">
+            <p>
               <strong>General Contracting:</strong> We manage day-to-day
               construction operations, coordinate subcontractors, oversee safety
               and quality, maintain schedules, and provide consistent reporting.
               Our experience spans commercial, educational, nonprofit,
               hospitality, retail, and industrial sectors.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Construction Management:</strong> Acting as your
               representative, SSN oversees architects, engineers, and trade
               partners to ensure the project stays aligned with your goals,
               scope, schedule, and budget. We provide leadership and
               communication so you maintain visibility without handling daily
               coordination.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Pre-Construction Services:</strong> We establish project
               clarity early through budgeting, value engineering,
               constructability reviews, and schedule development. Our planning
               reduces surprises and ensures the project starts with well-defined
               expectations.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Guaranteed Maximum Price (GMP):</strong> Through
               competitive local bidding and open-book review, we establish a GMP
               to provide financial certainty. If costs exceed the agreed amount
               due to uncontrollable conditions, SSN absorbs the overage—not the
               owner.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Construction Management at Risk (CMAR):</strong> For
               owners needing strong cost control and early collaboration, we
               partner with the design team from the outset. As CMAR, we accept
               responsibility for delivering the project within the agreed budget
               and timeline.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Renovations & Facility Upgrades:</strong> We evaluate
               existing buildings to determine the best path—whether cosmetic
               enhancements, functional improvements, or larger-scale expansions.
               Our team focuses on maximizing use of the current facility while
               minimizing disruption.
-            </li>
-          </ul>
+            </p>
+          </div>
         </div>
 
         {/* Why SSN Corporation */}
@@ -112,40 +113,41 @@ const GeneralConstruction = () => {
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             Why SSN Corporation
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4">
-            <li>
-              Disciplined Process – A structured approach that keeps every phase
-              organized and on track.
-            </li>
-            <li>
-              Transparent Communication – Clear updates, open dialogue, and no
-              surprises.
-            </li>
-            <li>
-              Investment Protection – Decisions made to safeguard your budget,
-              schedule, and long-term value.
-            </li>
-            <li>
-              Long-Term Partnership Mindset – We build with the care and
-              accountability of a trusted partner.
-            </li>
-            <li>
-              Safety & Quality First – Strong safety practices and dependable
-              craftsmanship on every job.
-            </li>
-            <li>
-              Reliable Scheduling – Consistent planning that keeps your project
-              moving efficiently.
-            </li>
-            <li>
-              Integrated Team Approach – Strong trade partnerships and
-              collaborative coordination.
-            </li>
-            <li>
-              Dedicated On-Site Leadership – Hands-on management ensuring
-              attention to detail and responsible execution.
-            </li>
-          </ul>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-4">
+            <p>
+              <strong>Disciplined Process:</strong> A structured approach that
+              keeps every phase organized and on track.
+            </p>
+            <p>
+              <strong>Transparent Communication:</strong> Clear updates, open
+              dialogue, and no surprises.
+            </p>
+            <p>
+              <strong>Investment Protection:</strong> Decisions made to
+              safeguard your budget, schedule, and long-term value.
+            </p>
+            <p>
+              <strong>Long-Term Partnership Mindset:</strong> We build with the
+              care and accountability of a trusted partner.
+            </p>
+            <p>
+              <strong>Safety & Quality First:</strong> Strong safety practices
+              and dependable craftsmanship on every job.
+            </p>
+            <p>
+              <strong>Reliable Scheduling:</strong> Consistent planning that
+              keeps your project moving efficiently.
+            </p>
+            <p>
+              <strong>Integrated Team Approach:</strong> Strong trade
+              partnerships and collaborative coordination.
+            </p>
+            <p>
+              <strong>Dedicated On-Site Leadership:</strong> Hands-on management
+              ensuring attention to detail and responsible execution.
+            </p>
+          </div>
         </div>
 
         {/* Decorative Glow Circles */}

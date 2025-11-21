@@ -48,79 +48,82 @@ const GeotechnicalEngineering = () => {
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             What We Do
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-10 w-full">
+            <p>
               <strong>Site Investigations & Subsurface Exploration:</strong>{" "}
               Conducting boreholes, test pits, cone penetration tests (CPT),
               dynamic cone penetration (DCP) tests, and standard penetration
-              test (SPT) to accurately characterize soil, rock, and groundwater
+              tests (SPT) to accurately characterize soil, rock, and groundwater
               conditions.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Laboratory Testing & Material Analysis:</strong>{" "}
               Evaluating soil, rock, and aggregate properties, including
               strength, compressibility, permeability, and chemical composition.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Foundation Design & Recommendations:</strong> Designing
               shallow and deep foundations, including piles, caissons, mat
               foundations, and retaining structures, tailored to soil conditions
               and project requirements.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Slope Stability & Earth Retention:</strong> Assessing
               natural and engineered slopes, retaining walls, soldier piles,
               tiebacks, and temporary shoring for stability and safety.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Ground Improvement & Soil Stabilization:</strong>{" "}
               Techniques such as compaction, grouting, geosynthetics, and soil
               replacement to enhance bearing capacity and reduce settlement.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Pavement & Earthwork Support:</strong> Subgrade
               evaluation, pavement design recommendations, and construction
               quality control to ensure durable roadway and site performance.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Seismic & Lateral Earth Pressure Analysis:</strong>{" "}
               Evaluating seismic risks, lateral soil pressures, and structural
               interaction for resilient design.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Geotechnical Reports & Risk Assessment:</strong> Preparing
               detailed reports with recommendations, construction
               considerations, and mitigation strategies to minimize risk and
               ensure regulatory compliance.
-            </li>
-          </ul>
+            </p>
+          </div>
 
           {/* Why Choose SSN Corporation */}
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             Why Choose SSN Corporation
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
-              Comprehensive Expertise – Experienced engineers provide practical,
-              code-compliant solutions.
-            </li>
-            <li>
-              Accurate & Reliable Testing – Advanced laboratory and field
-              testing for confident decision-making.
-            </li>
-            <li>
-              Integrated Approach – Coordination with structural, civil, and
-              construction teams ensures cohesive project execution.
-            </li>
-            <li>
-              Risk Reduction – Early identification of subsurface challenges
-              prevents costly delays and failures.
-            </li>
-            <li>
-              Client-Focused Communication – Clear reports, timely updates, and
-              collaborative problem-solving.
-            </li>
-          </ul>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-10 w-full">
+            <p>
+              <strong>Comprehensive Expertise:</strong> Experienced engineers
+              provide practical, code-compliant solutions.
+            </p>
+            <p>
+              <strong>Accurate & Reliable Testing:</strong> Advanced laboratory
+              and field testing for confident decision-making.
+            </p>
+            <p>
+              <strong>Integrated Approach:</strong> Coordination with
+              structural, civil, and construction teams ensures cohesive project
+              execution.
+            </p>
+            <p>
+              <strong>Risk Reduction:</strong> Early identification of
+              subsurface challenges prevents costly delays and failures.
+            </p>
+            <p>
+              <strong>Client-Focused Communication:</strong> Clear reports,
+              timely updates, and collaborative problem-solving.
+            </p>
+          </div>
         </div>
 
         {/* Decorative Glow Circles */}

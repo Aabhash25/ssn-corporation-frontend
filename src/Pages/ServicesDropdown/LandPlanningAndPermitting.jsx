@@ -47,59 +47,61 @@ const LandPlanningAndPermitting = () => {
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             What We Do
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-10 w-full">
+            <p>
               <strong>Project Kickoff & Due Diligence:</strong> We review
               zoning, site constraints, utilities, and environmental factors
               early to identify risks and opportunities before design begins.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Master Planning & Site Design:</strong> We create
               practical lot layouts, circulation plans, grading, and stormwater
               concepts that meet project goals while satisfying regulatory and
               community expectations.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Entitlements & Permitting Strategy:</strong> We map out
               all required local, state, and federal approvals—zoning, site
               plans, environmental permits, driveway/ROW access, NPDES, and
               more—to reduce delays and unexpected reviews.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Regulatory Coordination & Agency Support:</strong> We
               prepare application packages, technical documents, and
               environmental reports, and represent your project in meetings,
               hearings, and agency reviews to keep approvals moving.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Construction-Ready Documents & Compliance:</strong> We
               deliver complete permit drawings and provide conditions tracking,
               monitoring plans, and post-approval support to keep construction
               compliant and on schedule.
-            </li>
-          </ul>
+            </p>
+          </div>
 
           {/* Why SSN Corporation */}
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             Why SSN Corporation
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
+
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-10 w-full">
+            <p>
               <strong>Integrated Team:</strong> Our planners, engineers, and
               permitting specialists work together to anticipate requirements
               and avoid rework.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Local Expertise plus Strong Technical Skills:</strong> We
               understand local boards and standards and back every submittal
               with solid technical analysis.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Proactive, Schedule-Focused Process:</strong> Early due
               diligence and clear permitting roadmaps keep timelines predictable
               and budgets on track.
-            </li>
-          </ul>
+            </p>
+          </div>
         </div>
 
         {/* Decorative Glow Circles */}

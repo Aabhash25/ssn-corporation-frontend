@@ -14,7 +14,7 @@ const FontsStyle = () => (
   `}</style>
 );
 
-const ConstructionEngineeringAndManagement = () => {
+const ConstructionEngineering = () => {
   return (
     <>
       <FontsStyle />
@@ -23,7 +23,7 @@ const ConstructionEngineeringAndManagement = () => {
         {/* Heading */}
         <div className="relative z-10 w-full max-w-7xl text-center mx-auto">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-playfair font-bold leading-snug text-gray-900 mb-4">
-            Construction Engineering & Management
+            Construction Engineering
           </h1>
 
           <div className="flex justify-center mb-8">
@@ -47,73 +47,73 @@ const ConstructionEngineeringAndManagement = () => {
             What We Do
           </h2>
 
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-12 w-full">
-            <li>
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-12 w-full">
+            <p>
               <strong>Construction Planning & Scheduling Support:</strong>{" "}
               Review project sequences, constructability, and schedule
               optimization to minimize delays.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Structural & Civil Field Engineering:</strong> Provide
               on-site technical guidance, plan interpretation, and construction
               troubleshooting.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Temporary Works & Shoring Review:</strong> Evaluate
               temporary structures, bracing, and safety measures to support
               construction activities.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Quality Assurance & Control Support:</strong> Assist with
               inspections, testing coordination, and verification of materials
               and methods.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Coordination with Design Teams:</strong> Ensure design
               intent is maintained while accommodating field conditions and
               contractor requirements.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Technical Documentation & Reporting:</strong> Prepare
               construction guidance notes, field reports, and recommendations
               for engineering decisions.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Construction Risk Mitigation:</strong> Identify potential
               issues early and propose practical solutions to reduce schedule,
               cost, and safety risks.
-            </li>
-          </ul>
+            </p>
+          </div>
 
           {/* Why Choose SSN */}
           <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
             Why Choose SSN Corporation
           </h2>
 
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-16 w-full">
-            <li>
+          <div className="text-gray-700 font-roboto text-lg leading-relaxed space-y-6 mb-16 w-full">
+            <p>
               <strong>Practical Field Expertise:</strong> Experienced engineers
               provide hands-on support for complex construction challenges.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Integrated Approach:</strong> Collaboration with
               designers, contractors, and owners ensures smooth project
               execution.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Risk Management:</strong> Early identification and
               mitigation of construction and structural risks.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Quality-Focused:</strong> Support that ensures
               construction aligns with design standards and regulatory
               requirements.
-            </li>
-            <li>
+            </p>
+            <p>
               <strong>Responsive & Timely:</strong> On-site guidance and fast
               technical decision-making to keep projects moving.
-            </li>
-          </ul>
+            </p>
+          </div>
         </div>
 
         {/* Glow Circles */}
@@ -124,4 +124,4 @@ const ConstructionEngineeringAndManagement = () => {
   );
 };
 
-export default ConstructionEngineeringAndManagement;
+export default ConstructionEngineering;

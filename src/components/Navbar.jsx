@@ -11,6 +11,7 @@ import {
   FaHardHat,
   FaTools,
   FaFlask,
+  FaInstagram,
   FaRulerCombined,
 } from "react-icons/fa";
 
@@ -143,6 +144,7 @@ const ModernNavbar = () => {
             >
               <FaFacebookF />
             </a>
+
             <a
               href="https://www.youtube.com/@SSNBuildersMarketing"
               target="_blank"
@@ -151,6 +153,7 @@ const ModernNavbar = () => {
             >
               <FaYoutube />
             </a>
+
             <a
               href="https://www.linkedin.com/company/ssn-corporation"
               target="_blank"
@@ -158,6 +161,15 @@ const ModernNavbar = () => {
               className="hover:text-yellow-400 transition-colors"
             >
               <FaLinkedinIn />
+            </a>
+
+            <a
+              href="https://www.instagram.com/ssncorporation/" // replace with actual IG link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-yellow-400 transition-colors"
+            >
+              <FaInstagram />
             </a>
           </div>
         </div>
@@ -252,7 +264,7 @@ const ModernNavbar = () => {
                     {/* Engineering Services */}
                     <div className="p-5 border-r border-gray-200">
                       <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
-                        <FaHardHat className="text-xl" />
+                        {/* <FaHardHat className="text-xl" /> */}
                         Engineering Services
                       </h4>
 
@@ -275,7 +287,7 @@ const ModernNavbar = () => {
                         </li>
                         <li>
                           <Link
-                            to="/land-planning"
+                            to="/structural-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
                             Structural Engineering
@@ -300,10 +312,18 @@ const ModernNavbar = () => {
 
                         <li>
                           <Link
-                            to="/construction-management"
+                            to="/construction-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
                             Construction Engineering
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/construction-administration"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Construction Administration
                           </Link>
                         </li>
                       </ul>
@@ -312,7 +332,7 @@ const ModernNavbar = () => {
                     {/* Specialty Engineering Services */}
                     <div className="p-5 border-r border-gray-200">
                       <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
-                        <FaTools className="text-xl" />
+                        {/* <FaTools className="text-xl" /> */}
                         Specialty Engineering Services
                       </h4>
                       <ul className="space-y-2 text-base font-oswald">
@@ -342,13 +362,13 @@ const ModernNavbar = () => {
                     {/* Construction Services */}
                     <div className="p-5">
                       <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
-                        <FaFlask className="text-xl" />
+                        {/* <FaFlask className="text-xl" /> */}
                         Construction Services
                       </h4>
                       <ul className="space-y-2 text-base font-oswald">
                         <li>
                           <Link
-                            to="/design-plus-build"
+                            to="/pre-construction"
                             className="hover:text-yellow-400 block"
                             onClick={() => setIsOpen(false)}
                           >
@@ -373,7 +393,7 @@ const ModernNavbar = () => {
                         </li>
                         <li>
                           <Link
-                            to="/design-plus-build"
+                            to="/construction-management"
                             className="hover:text-yellow-400 block"
                             onClick={() => setIsOpen(false)}
                           >
@@ -519,7 +539,7 @@ const ModernNavbar = () => {
                   {/* Engineering Services */}
                   <div className="flex flex-col space-y-2">
                     <h4 className="text-yellow-500 font-bold text-lg font-oswald flex items-center gap-2">
-                      <FaHardHat /> Engineering Services
+                      Engineering Services
                     </h4>
                     <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
                       <li>
@@ -542,7 +562,7 @@ const ModernNavbar = () => {
                       </li>
                       <li>
                         <Link
-                          to="/material-testing"
+                          to="/structural-engineering"
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
                         >
@@ -569,11 +589,20 @@ const ModernNavbar = () => {
                       </li>
                       <li>
                         <Link
-                          to="/construction-management"
+                          to="/construction-engineering"
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
                         >
-                          • Construction Engineering
+                          Construction Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/construction-administration"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Construction Administration
                         </Link>
                       </li>
                     </ul>
@@ -582,7 +611,7 @@ const ModernNavbar = () => {
                   {/* Specialty Engineering Services */}
                   <div className="flex flex-col space-y-2">
                     <h4 className="text-yellow-500 font-bold text-lg font-oswald flex items-center gap-2">
-                      <FaTools /> Specialty Engineering Services
+                      Specialty Engineering Services
                     </h4>
                     <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
                       {[
@@ -612,12 +641,12 @@ const ModernNavbar = () => {
                   {/* Construction Services */}
                   <div className="flex flex-col space-y-2">
                     <h4 className="text-yellow-500 font-bold text-lg font-oswald flex items-center gap-2">
-                      <FaFlask /> Construction Services
+                      Construction Services
                     </h4>
                     <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
                       <li>
                         <Link
-                          to="/design-plus-build"
+                          to="/pre-construction"
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
                         >
@@ -644,7 +673,7 @@ const ModernNavbar = () => {
                       </li>
                       <li>
                         <Link
-                          to="/design-plus-build"
+                          to="/construction-management"
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
                         >
@@ -706,6 +735,7 @@ const ModernNavbar = () => {
             >
               <FaFacebookF />
             </a>
+
             <a
               href="https://www.youtube.com/@SSNBuildersMarketing"
               target="_blank"
@@ -714,6 +744,7 @@ const ModernNavbar = () => {
             >
               <FaYoutube />
             </a>
+
             <a
               href="https://www.linkedin.com/company/ssn-corporation"
               target="_blank"
@@ -721,6 +752,15 @@ const ModernNavbar = () => {
               className="text-white hover:text-yellow-400"
             >
               <FaLinkedinIn />
+            </a>
+
+            <a
+              href="https://www.instagram.com/ssncorporation/" // replace with real Instagram URL
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-yellow-400"
+            >
+              <FaInstagram />
             </a>
           </div>
         </div>
