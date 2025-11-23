@@ -75,7 +75,7 @@ const Hero = () => {
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl mb-4 md:mb-6 leading-tight md:leading-snug tracking-wide"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 md:mb-6 leading-tight md:leading-snug tracking-wide"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}
@@ -121,8 +121,8 @@ const Hero = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1 }}
       >
-        Proudly serving for project planning, engineering design, and general
-        construction in GA, NC, and VA{" "}
+        Proudly Serving Clients for Peoject Planning, Design, Engineering, and
+        Construction in GA,NC and VA{" "}
       </motion.h2>
     </section>
   );

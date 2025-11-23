@@ -2,6 +2,25 @@ export const newsData = [
   {
     id: 1,
     title:
+      "Let’s Celebrate with Completion of The Brass Tap Project in Downtown Raleigh",
+    date: "November 11, 2025",
+    imageUrls: [
+      "/BrassTrapNews1.jpg",
+      "/BrassTrapNews2.jpg",
+      "/BrassTrapNews3.jpg",
+    ],
+    content: [
+      "SSN Corporation is proud to announce the successful completion of the modern outdoor patio project for The Brass Tap, located in the heart of downtown Raleigh. The project is at 16 N West St, Raleigh, NC. This design and build project achievement marks a significant milestone for our team and reflects our commitment to delivering complex, high-quality construction solutions in high-traffic urban environments.",
+      "SSN Engineers led the patio design and permit, and SSN Builders served as the general contractor. What makes this project truly standout is its transformation of an outdoor space into a fully engineered, year-round, climate-controlled environment. While still open to fresh air, the new high-ceiling patio features an advanced suite of integrated building systems, including an infrared gas heating system for winter comfort, and a centralized fire sprinkler system and a comprehensive fire alarm system for customer safety. This innovative approach ensures guests can enjoy the space in any season—hot summers, cold winters, and everything in between.",
+      "Delivering this project required navigating numerous regulatory and logistical challenges. The team secured zoning and building-permit approvals, coordinated with multiple City of Raleigh departments, and successfully passed all building, electrical, mechanical, and life-safety inspections. Every component was constructed to meet the highest standards of safety, durability, and code compliance.",
+      "Adding to the complexity, construction took place in a bustling downtown area while The Brass Tap remained fully operational. Our team worked day and night, carefully coordinating deliveries, minimizing disruptions, and maintaining strict safety controls around active public spaces.",
+      "This project not only enhances the dining and social experience in downtown Raleigh but also reflects the craftsmanship, capability, and resilience of SSN Corporation. We are honored to help bring this vision to life and proud to contribute to the continued growth and vibrancy of the city.",
+      "Throughout the project, we also had several opportunities to sample The Brass Tap’s food and drinks—which were excellent. The owners shared that adding this beautiful, all-weather patio will undoubtedly help grow their business.",
+    ],
+  },
+  {
+    id: 4,
+    title:
       "SSN Corporation Expands: Moves to New Corporate Headquarters in Raleigh",
     date: "November 18, 2025",
     imageUrls: ["/office1.jpg", "/office2.jpg", "/office4.jpg"],

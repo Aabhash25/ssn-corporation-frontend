@@ -57,7 +57,8 @@ const Footer = () => {
 
                 {/* Office Hours */}
                 <p className="mt-2 text-gray-300 text-sm">
-                  Open Hours: M – F, 8 AM – 5 PM
+                  Open Hours : Monday– Friday
+                  <br /> 8:00 AM – 5:00 PM
                 </p>
               </div>
             </div>
