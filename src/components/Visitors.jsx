@@ -7,6 +7,8 @@ const Visitors = () => {
   const cards = [
     {
       title: "Engineering Consultant",
+      subtitle:
+        "SSN Engineerrs,PLLC is Your Planning, Design, and Engineering Partner",
       description:
         "Our multidisciplinary Planner and Engineer team unites creative planning with practical engineering. We deliver integrated, sustainable, and buildable solutions-from concept to construction-optimizing land use, infrastructure, and site design for every project",
       img: "/about7.webp",
@@ -15,7 +17,8 @@ const Visitors = () => {
     },
     {
       title: "General Contractor",
-
+      subtitle:
+        "SSN Builders LLC IS Your General Construction and Project Management Partner",
       description:
         "We deliver high-quality residential and commercial construction with precision and reliability-from planning to completion. We turn visions into lasting,buildable results with efficiency and craftsmanship.",
       img: "/GeneralContractor.webp",
@@ -86,12 +89,10 @@ const Visitors = () => {
 
                 {/* Slide-up overlay (description on hover) */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col items-center justify-center text-center text-white px-6 transition-transform duration-500 ease-out translate-y-full group-hover:translate-y-0">
-                  <h4 className="text-lg sm:text-xl font-playfair font-semibold mb-2">
-                    {card.title}
-                  </h4>
-                  <p className="text-sm sm:text-base font-roboto max-w-xl mb-4">
+                  <p className="text-lg sm:text-xl md:text-2xl font-roboto max-w-xl mb-4">
                     {card.description}
                   </p>
+
                   <Link
                     to={card.link}
                     className="inline-block px-6 py-3 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-lg shadow-md hover:from-orange-600 hover:to-orange-700 transition-all duration-300"

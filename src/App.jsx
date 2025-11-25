@@ -45,6 +45,7 @@ import PreConstruction from "./Pages/ServicesDropdown/PreConstruction";
 import ConstructionManagement from "./Pages/ServicesDropdown/ConstructionManagement";
 // import Portfolio3DPage from "./Pages/Portfoilio3DPage";
 import SpecialtyEngineeringServices from "./Pages/ServicesDropdown/SpecialtyEngineeringServices";
+import NewsDetail from "./FooterPages/NewsDetail";
 
 function App() {
   const [showPreLandingPage, setShowPreLandingPage] = useState(true);
@@ -157,6 +158,7 @@ function App() {
               path="specialty-services"
               element={<SpecialtyEngineeringServices />}
             />
+            <Route path="/news/:id" element={<NewsDetail />} />
 
             {/* Add Proposal page later when ready */}
           </Routes>

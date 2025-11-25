@@ -24,7 +24,7 @@ const BusinessWithUs = () => {
           <div className="max-w-5xl text-center">
             {/* Heading */}
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-4 sm:mb-6 leading-snug">
-              Build Your Future with Confidence— Build it With Us
+              Build Your Future with Confidence— Trust Us
             </h2>
 
             {/* Animated Divider */}
@@ -41,9 +41,8 @@ const BusinessWithUs = () => {
             </p>
 
             <p className="text-sm sm:text-base md:text-lg font-roboto text-gray-600 leading-relaxed mb-6 sm:mb-8">
-              Residential, commercial, or industrial—we deliver results beyond
-              expectations.{" "}
-              <span className="font-semibold text-gray-800">Join us</span> and
+              In Residential, commercial, or industrial sectors, we deliver
+              results beyond expectations Share your project concept with us and
               let’s create something remarkable together.
             </p>
 

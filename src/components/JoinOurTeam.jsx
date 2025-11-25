@@ -74,9 +74,6 @@ const JoinOurTeam = () => {
               className="text-center mb-6 sm:mb-8"
             >
               <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6 gap-3 sm:gap-4">
-                <div className="p-2 sm:p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-xl shadow-lg">
-                  <BriefcaseIcon className="w-6 sm:w-8 h-6 sm:h-8 text-white" />
-                </div>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold leading-tight">
                   Join Our Team{" "}
                 </h2>
@@ -204,7 +201,7 @@ const JoinOurTeam = () => {
                   </div>
                   <div className="text-center">
                     <p className="text-2xl sm:text-3xl font-bold text-purple-500 mb-1">
-                      40+
+                      100+
                     </p>
                     <p className="text-sm sm:text-base text-gray-600">
                       Projects Completed

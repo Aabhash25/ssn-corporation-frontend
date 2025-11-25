@@ -25,7 +25,8 @@ const licenses = [
   {
     type: "Engineering Practice",
     color: "#3B82F6",
-    description: "Licensed to provide professional engineering services.",
+    description:
+      "Capable to provide professional engineering services across USA.",
     icon: ShieldCheckIcon,
     states: [
       "AL",
@@ -78,10 +79,10 @@ const licenses = [
     ],
   },
   {
-    type: "Engineering & General Contractor",
+    type: " General Contractor",
     color: "#10B981",
     description:
-      "Full engineering and construction contracting services across select regions.",
+      "Unlimited general building contractor dedicated to residential and commercial site development and building construction, and commercial space upfit.",
     icon: BuildingOfficeIcon,
     states: ["NC"],
   },
@@ -89,7 +90,7 @@ const licenses = [
     type: "Engineering Firm",
     color: "#F59E0B",
     description:
-      "Certified engineering firm with specialized capabilities and expertise.",
+      "Certified engineering firm with specialized capabilities and expertise offering range of engineering services.",
     icon: DocumentCheckIcon,
     states: ["VA", "GA", "SC"],
   },
@@ -129,8 +130,8 @@ const Licenses = () => {
             </h2>
             <p className="text-lg sm:text-xl text-gray-700 font-roboto max-w-2xl mx-auto leading-relaxed">
               Licensed professional Engineers and General Contractors serving
-              across the United States with excellence in construction and
-              design.
+              across the United States with excellence in engineering and
+              construction.
             </p>
           </motion.div>
 
@@ -156,43 +157,38 @@ const Licenses = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 }}
-                  className="relative bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-6 flex flex-col items-center text-center"
+                  className="relative bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow duration-300 p-8 flex flex-col items-center text-center"
                 >
-                  <div
-                    className="p-4 rounded-full mb-4 shadow-md"
-                    style={{ backgroundColor: license.color + "20" }}
-                  >
-                    <Icon
-                      className="w-10 h-10"
-                      style={{ color: license.color }}
-                    />
-                  </div>
-
+                  {/* Title */}
                   <h3
-                    className="text-xl sm:text-2xl font-semibold mb-2"
+                    className="text-2xl sm:text-3xl font-playfair font-semibold mb-3"
                     style={{ color: license.color }}
                   >
                     {license.type}
                   </h3>
-                  <p className="text-gray-600 font-roboto text-sm sm:text-base mb-4">
+
+                  {/* Description */}
+                  <p className="text-gray-600 font-roboto text-base sm:text-lg leading-relaxed mb-5 max-w-xs">
                     {license.description}
                   </p>
 
-                  <div className="flex flex-wrap justify-center gap-1 mb-2">
+                  {/* States */}
+                  <div className="flex flex-wrap justify-center gap-2 mb-3">
                     {visibleStates.map((state) => (
                       <span
                         key={state}
-                        className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md font-medium"
+                        className="text-xs sm:text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-md font-medium shadow-sm"
                       >
                         {state}
                       </span>
                     ))}
                   </div>
 
+                  {/* Expand / collapse */}
                   {license.states.length > 6 && (
                     <button
                       onClick={() => toggleExpand(license.type)}
-                      className="text-xs font-semibold text-blue-600 hover:underline mt-2"
+                      className="text-sm font-semibold text-blue-600 hover:underline mt-1"
                     >
                       {isExpanded
                         ? "Show Less"

@@ -151,9 +151,10 @@ const Services = () => {
           Planning, Design, Engineering, and Construction Services
         </h3>
         <p className="text-base sm:text-lg lg:text-xl font-roboto text-gray-600 max-w-3xl mx-auto">
-          We deliver end-to-end planning, design, and construction solutions
-          powered by proven expertise, decades of experience, and cutting-edge
-          engineering excellence.
+          We deliver end-to-end planning, design engineering, and construction
+          solutions powered by proven expertise, decades of experience, and
+          cutting-edge engineering excellence.We also provide a wide range of
+          engineering services.
         </p>
       </div>
 
