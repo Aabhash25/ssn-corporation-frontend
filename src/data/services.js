@@ -1,6 +1,6 @@
 export const services = [
   {
-    title: "Land Development and Planning",
+    title: "Land Planning and Development",
     icon: "🗺️",
     image: "/19.webp",
     description:
@@ -15,7 +15,7 @@ export const services = [
     ],
   },
   {
-    title: "Building Design",
+    title: "Residential, Commercial, and Institutional Building Design",
     icon: "🏢",
     image: "/MorisvilleCommercial2.webp",
     description:
@@ -42,7 +42,7 @@ export const services = [
     ],
   },
   {
-    title: "Specialty Structure Planning and Design",
+    title: "Specialty Engineering Services",
     icon: "🏗️",
     image: "/SpecialtyStructurePlanningAndDesign.webp",
     description:
@@ -58,7 +58,7 @@ export const services = [
     ],
   },
   {
-    title: "Subsurface Investigation",
+    title: "Subsurface Investigation and Geotechnical Engineering",
     icon: "🌍",
     image: "/SubsurfaceInvestigation.webp",
     description:
@@ -90,7 +90,7 @@ export const services = [
     ],
   },
   {
-    title: "Construction Management",
+    title: "Construction Administration and Construction Engineering",
     icon: "👷‍♂️",
     image: "/10.webp",
     description:

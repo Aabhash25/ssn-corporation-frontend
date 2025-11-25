@@ -51,9 +51,9 @@ const News = () => {
                   {news.title}
                 </h3>
                 <p className="text-sm text-gray-500 mb-3">{news.date}</p>
-                <p className="text-gray-700 font-roboto text-sm sm:text-base line-clamp-3">
+                {/* <p className="text-gray-700 font-roboto text-sm sm:text-base line-clamp-3">
                   {news.content[0]}
-                </p>
+                </p> */}
               </div>
             </Link>
           ))}

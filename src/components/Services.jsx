@@ -38,14 +38,45 @@ const services = [
   },
 ];
 
-const Services = () => {
+const services2 = [
+  {
+    image: "/19.webp",
+    title: "Land Planning and Development",
+    description:
+      "Strategic land use planning and development services for optimal site utilization",
+  },
+  {
+    image: "/MorisvilleCommercial2.webp",
+    title: "Residential, Commercial, and Institutional Building Design",
+    description: "Residential, Commercial, and Institutional Building Design",
+  },
+  {
+    image: "/FacilityPlanningDesign.webp",
+    title: "Facility Planning and Design",
+    description:
+      "Efficient facility planning and design tailored to your operational needs",
+  },
+  {
+    image: "/SpecialtyStructurePlanningAndDesign.webp",
+    title: "Specialty Engineering Services",
+    description:
+      "Diverse specialty engineering solutions for complex project requirements",
+  },
+  {
+    image: "/SubsurfaceInvestigation.webp",
+    title: "Subsurface Investigation and Geotechnical Engineering",
+    description:
+      "In-depth subsurface analysis and geotechnical engineering for safe and stable foundations",
+  },
+];
+
+const Slider = ({ services, reverse = false }) => {
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const timeoutRef = useRef(null);
   const autoplayRef = useRef(null);
 
-  // Adjust slides per view based on screen width
   const updateSlidesPerView = () => {
     if (window.innerWidth < 640) setSlidesPerView(1);
     else if (window.innerWidth < 1024) setSlidesPerView(2);
@@ -58,50 +89,44 @@ const Services = () => {
     return () => window.removeEventListener("resize", updateSlidesPerView);
   }, []);
 
-  // Create extended array with clones for seamless loop
   const extendedServices = [
     ...services.slice(-slidesPerView),
     ...services,
     ...services.slice(0, slidesPerView),
   ];
 
-  // Get actual slide index for dots
   const getActualIndex = () => {
     if (currentIndex < 0) return services.length + currentIndex;
     if (currentIndex >= services.length) return currentIndex - services.length;
     return currentIndex;
   };
 
-  // Navigate to specific slide
   const goToSlide = (index) => {
     setCurrentIndex(index);
     resetAutoplay();
   };
 
-  // Infinite loop next/prev
   const nextSlide = () => {
     if (!isTransitioning) return;
-    setCurrentIndex((prev) => prev + 1);
+    setCurrentIndex((prev) => (reverse ? prev - 1 : prev + 1));
     resetAutoplay();
   };
 
   const prevSlide = () => {
     if (!isTransitioning) return;
-    setCurrentIndex((prev) => prev - 1);
+    setCurrentIndex((prev) => (reverse ? prev + 1 : prev - 1));
     resetAutoplay();
   };
 
-  // Reset autoplay timer
   const resetAutoplay = () => {
     if (autoplayRef.current) {
       clearInterval(autoplayRef.current);
     }
     autoplayRef.current = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
+      setCurrentIndex((prev) => (reverse ? prev - 1 : prev + 1));
     }, 3000);
   };
 
-  // Handle infinite loop reset
   useEffect(() => {
     if (currentIndex === services.length) {
       timeoutRef.current = setTimeout(() => {
@@ -118,7 +143,7 @@ const Services = () => {
     return () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
-  }, [currentIndex]);
+  }, [currentIndex, services.length]);
 
   useEffect(() => {
     if (!isTransitioning) {
@@ -128,36 +153,20 @@ const Services = () => {
     }
   }, [isTransitioning]);
 
-  // Autoplay infinite loop
   useEffect(() => {
     autoplayRef.current = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
+      setCurrentIndex((prev) => (reverse ? prev - 1 : prev + 1));
     }, 3000);
 
     return () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current);
     };
-  }, []);
+  }, [reverse]);
 
   const offset = -(currentIndex + slidesPerView) * (100 / slidesPerView);
 
   return (
-    <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-12 md:py-16 pb-8 md:pb-12 overflow-hidden">
-      <div className="text-center mb-12 md:mb-16 px-4">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">
-          What We Do
-        </h2>
-        <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-semibold text-gray-800 mb-6">
-          Planning, Design, Engineering, and Construction Services
-        </h3>
-        <p className="text-base sm:text-lg lg:text-xl font-roboto text-gray-600 max-w-3xl mx-auto">
-          We deliver end-to-end planning, design engineering, and construction
-          solutions powered by proven expertise, decades of experience, and
-          cutting-edge engineering excellence.We also provide a wide range of
-          engineering services.
-        </p>
-      </div>
-
+    <div className="mb-12">
       <div className="relative w-[95%] mx-auto overflow-hidden rounded-3xl mb-8">
         <div
           className="flex"
@@ -197,7 +206,6 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Previous Button */}
         <button
           onClick={prevSlide}
           aria-label="Previous Slide"
@@ -206,7 +214,6 @@ const Services = () => {
           <FaChevronLeft className="text-base sm:text-lg" />
         </button>
 
-        {/* Next Button */}
         <button
           onClick={nextSlide}
           aria-label="Next Slide"
@@ -216,8 +223,7 @@ const Services = () => {
         </button>
       </div>
 
-      {/* Dots Navigation */}
-      <div className="flex justify-center items-center gap-2 sm:gap-3 mt-6">
+      <div className="flex justify-center items-center gap-2 sm:gap-3">
         {services.map((_, index) => (
           <button
             key={index}
@@ -231,6 +237,33 @@ const Services = () => {
           />
         ))}
       </div>
+    </div>
+  );
+};
+
+const Services = () => {
+  return (
+    <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-12 md:py-16 pb-8 md:pb-12 overflow-hidden">
+      <div className="text-center mb-12 md:mb-16 px-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">
+          What We Do
+        </h2>
+        <h3 className="text-xl sm:text-2xl lg:text-3xl font-playfair font-semibold text-gray-800 mb-6">
+          Planning, Design, Engineering, and Construction Services
+        </h3>
+        <p className="text-base sm:text-lg lg:text-xl font-roboto text-gray-600 max-w-3xl mx-auto">
+          We deliver end-to-end planning, design engineering, and construction
+          solutions powered by proven expertise, decades of experience, and
+          cutting-edge engineering excellence. We also provide a wide range of
+          engineering services.
+        </p>
+      </div>
+
+      {/* First Slider - Original Direction */}
+      <Slider services={services} reverse={false} />
+
+      {/* Second Slider - Reverse Direction */}
+      <Slider services={services2} reverse={true} />
 
       <style jsx>{`
         .font-roboto {

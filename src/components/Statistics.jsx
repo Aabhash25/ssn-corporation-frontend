@@ -58,6 +58,10 @@ const StatisticsProgressCards = () => {
                 (item.growth / item[2024]) * 100
               );
 
+              // 🔥 Auto-detect label based on category
+              const isFamily = item.name === "SSN Family Growth";
+              const unit = isFamily ? "members" : "projects";
+
               return (
                 <div
                   key={index}
@@ -73,7 +77,7 @@ const StatisticsProgressCards = () => {
                         2024
                       </span>
                       <span className="text-xl font-bold text-gray-900">
-                        {item[2024]} projects
+                        {item[2024]} {unit}
                       </span>
                     </div>
 
@@ -82,7 +86,7 @@ const StatisticsProgressCards = () => {
                         2025
                       </span>
                       <span className="text-xl font-bold text-gray-900">
-                        {item[2025]} projects
+                        {item[2025]} {unit}
                       </span>
                     </div>
                   </div>

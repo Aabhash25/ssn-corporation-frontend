@@ -26,21 +26,15 @@ const SpecialtyEngineeringServices = () => {
             Specialty Engineering
           </h1>
 
-          {/* Animated Divider */}
           <div className="flex justify-center mb-8">
             <div className="w-24 sm:w-32 h-1 rounded-full bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 animate-pulse"></div>
           </div>
 
-          {/* Intro Paragraph */}
           <p className="text-lg sm:text-xl font-roboto text-gray-700 leading-relaxed mb-12 max-w-4xl mx-auto">
             SSN Corporation provides a full range of specialty engineering and
-            technical services that support the planning, design, and execution
-            of complex projects. Our team combines engineering precision,
-            advanced modeling tools, and field-tested expertise to help clients
-            achieve safe, efficient, and cost-effective outcomes. Each service
-            is delivered with a focus on quality, compliance, and long-term
-            performance—ensuring your project moves forward with clarity and
-            confidence. Currently, we offer the following services:
+            technical services supporting the planning, design, and execution of
+            complex projects. Each service is delivered with a focus on quality,
+            compliance, and long-term performance.
           </p>
         </div>
 
@@ -54,11 +48,8 @@ const SpecialtyEngineeringServices = () => {
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
               SSN Corporation delivers robust pavement design solutions tailored
               to traffic demands, soil conditions, and long-term performance
-              requirements. Our engineers evaluate subgrade conditions, material
-              options, and load expectations to create pavement structures that
-              maximize durability and reduce maintenance costs. From roadways
-              and parking lots to heavy-duty industrial pavements, we design
-              systems that stand up to real-world use.
+              requirements. Our designs maximize durability and reduce
+              maintenance costs across all pavement systems.
             </p>
           </div>
 
@@ -68,15 +59,10 @@ const SpecialtyEngineeringServices = () => {
               Trenchless Design Services
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              SSN Corporation provides efficient and minimally invasive
-              trenchless design services for underground utilities. Our team
-              handles bore path planning, geotechnical coordination, and
-              structural assessments to ensure safe, accurate, and
-              code-compliant installations. We specialize in Horizontal
-              Directional Drilling (HDD), Microtunneling, and Pipe Jacking,
-              selecting the best method to reduce surface disruption, avoid
-              conflicts with existing infrastructure, and deliver projects on
-              time and on budget.
+              We provide expert trenchless solutions including HDD,
+              Microtunneling, and Pipe Jacking. Our approach minimizes surface
+              disruption and ensures efficient, code-compliant underground
+              utility installation.
             </p>
           </div>
 
@@ -86,13 +72,9 @@ const SpecialtyEngineeringServices = () => {
               Traffic Engineering Services
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              SSN Corporation provides traffic engineering solutions that
-              improve mobility, safety, and roadway performance. Our services
-              include trip generation analyses, traffic impact studies, signal
-              design, signage and marking plans, and traffic control plans for
-              construction. We help clients navigate regulatory processes,
-              optimize traffic flow, and create safer environments for
-              motorists, pedestrians, and cyclists.
+              Our traffic engineering solutions enhance safety, mobility, and
+              roadway performance, offering traffic impact studies, signal
+              designs, signage plans, and traffic control plans.
             </p>
           </div>
 
@@ -102,44 +84,33 @@ const SpecialtyEngineeringServices = () => {
               MEP Services
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              Our MEP (Mechanical, Electrical, and Plumbing) services deliver
-              coordinated, energy-efficient, and cost-effective building system
-              designs. SSN Corporation integrates system performance, code
-              compliance, and constructability to produce MEP solutions that
-              support occupant comfort, operational efficiency, and long-term
-              reliability. From concept design to final commissioning, we ensure
-              every system works seamlessly together.
+              From concept to commissioning, our Mechanical, Electrical, and
+              Plumbing designs support energy-efficient, coordinated, and
+              code-compliant building systems.
             </p>
           </div>
 
-          {/* Special Inspections & Field Support */}
+          {/* Special Inspections */}
           <div>
             <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-3">
               Special Inspections & Field Support
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              SSN Corporation provides certified special inspections and field
-              support to ensure construction work complies with project
-              specifications and building codes. Our team performs inspections
-              for structural components, fireproofing, concrete, masonry, steel,
-              and anchorage systems. With real-time field coordination and clear
-              reporting, we help identify issues early and keep construction on
-              track.
+              SSN provides certified inspections for structural components,
+              fireproofing, steel, concrete, and anchorage systems—ensuring full
+              compliance with project specifications and building codes.
             </p>
           </div>
 
-          {/* 3D Modeling & Rendering */}
+          {/* 3D Modeling */}
           <div>
             <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-3">
               3D Modeling & Rendering
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              Our 3D modeling and rendering services help clients visualize
-              designs with clarity and accuracy. SSN Corporation produces
-              detailed, photorealistic visuals that support planning,
-              presentations, and decision-making. These models allow teams to
-              understand spatial relationships, identify conflicts, and
-              communicate design intent effectively before construction begins.
+              We create detailed 3D models and photorealistic renderings to
+              support design visualization, conflict detection, and presentation
+              needs.
             </p>
           </div>
 
@@ -149,13 +120,9 @@ const SpecialtyEngineeringServices = () => {
               BIM Modeling
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              SSN Corporation provides advanced Building Information Modeling
-              (BIM) services to improve coordination, reduce clashes, and
-              streamline construction workflows. Our BIM models integrate
-              architectural, structural, and MEP systems into a single digital
-              environment, enabling better communication across project teams
-              and supporting efficient construction sequencing and facility
-              management.
+              Our BIM services integrate architectural, structural, and MEP
+              systems into a unified model for improved coordination and
+              construction efficiency.
             </p>
           </div>
 
@@ -165,14 +132,9 @@ const SpecialtyEngineeringServices = () => {
               Specialty Structural Design
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              Our specialty structural design services address complex
-              challenges with advanced analysis and creative engineering. SSN
-              Corporation designs retaining walls, soldier piles, lagging,
-              tiebacks, shoring, bracing, temporary works, crane foundations,
-              rigging plans, lifting analysis, pre-engineered connections, and
-              delegated design components. Each solution is engineered to meet
-              critical safety, performance, and construction requirements while
-              supporting overall project objectives efficiently and reliably.
+              We design retaining walls, shoring systems, tiebacks, bracing,
+              crane foundations, lifting plans, and other specialty structural
+              components requiring advanced engineering analysis.
             </p>
           </div>
 
@@ -182,17 +144,43 @@ const SpecialtyEngineeringServices = () => {
               Instrumentation Engineering
             </h2>
             <p className="text-gray-700 font-roboto text-lg leading-relaxed">
-              SSN Corporation delivers precise instrumentation engineering for
-              structural and geotechnical monitoring. We design and implement
-              systems that measure vibration, displacement, load, pressure, and
-              environmental conditions. These monitoring solutions help clients
-              track performance, verify design assumptions, and ensure safety
-              during construction and long-term operation.
+              We provide vibration monitoring, displacement measurement, load
+              monitoring, and geotechnical instrumentation systems to ensure
+              safety and verify design assumptions.
+            </p>
+          </div>
+
+          {/* ⭐ NEW — Stormwater Impact & Erosion Control Analysis */}
+          <div>
+            <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-3">
+              Stormwater Impact & Erosion Control Analysis
+            </h2>
+            <p className="text-gray-700 font-roboto text-lg leading-relaxed">
+              SSN Corporation performs detailed stormwater impact assessments
+              and erosion control analyses to ensure compliance with
+              environmental regulations and protect infrastructure. We evaluate
+              runoff patterns, soil loss risks, sediment transport, and develop
+              effective mitigation measures such as silt barriers, sediment
+              basins, and slope protection systems.
+            </p>
+          </div>
+
+          {/* ⭐ NEW — Hydrology & Drainage Study */}
+          <div>
+            <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-3">
+              Hydrology & Drainage Study
+            </h2>
+            <p className="text-gray-700 font-roboto text-lg leading-relaxed">
+              Our hydrology and drainage studies analyze watershed behavior,
+              rainfall events, peak flows, and drainage system capacity. We
+              design sustainable drainage solutions including culverts,
+              channels, storm sewers, detention/retention systems, ensuring
+              effective stormwater conveyance and flood mitigation.
             </p>
           </div>
         </div>
 
-        {/* Decorative Glow Circles */}
+        {/* Decorative Glows */}
         <div className="absolute top-20 left-10 w-48 h-48 bg-orange-200 rounded-full opacity-30 blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-64 h-64 bg-pink-200 rounded-full opacity-20 blur-3xl animate-pulse delay-500"></div>
       </section>

@@ -179,18 +179,24 @@ const Engineers = () => {
 
             {/* Paragraphs */}
             <motion.div
-              className="space-y-4 text-gray-300 text-base sm:text-lg leading-relaxed"
+              className="space-y-6 text-gray-200 leading-relaxed"
               variants={fadeUp}
             >
-              <p>We are a multidisciplinary engineering firm.</p>
-              <p>
-                We offer expertise, resources, and creative problem-solving
-                skills that transform your dream project into reality.
-              </p>
-              <p>
-                Our team connects innovation with precision to move your project
-                forward.
-              </p>
+              <div className="border-l-4 border-orange-400/70 pl-4 space-y-4">
+                <p className="text-xl sm:text-2xl font-light tracking-wide">
+                  We are a multidisciplinary engineering firm.
+                </p>
+
+                <p className="text-xl sm:text-2xl font-light tracking-wide">
+                  We bring expertise, resources, and creative problem-solving
+                  skills that transform your dream project into a built reality.
+                </p>
+
+                <p className="text-xl sm:text-2xl font-light tracking-wide">
+                  Our team connects innovation with precision — ensuring your
+                  vision moves forward with clarity and confidence.
+                </p>
+              </div>
             </motion.div>
 
             {/* CTA Buttons */}
@@ -261,13 +267,16 @@ const Engineers = () => {
             viewport={{ once: true, amount: 0.3 }}
           >
             <motion.span
-              className="inline-block px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4"
+              className="inline-block px-6 py-3  bg-orange-200/40 text-orange-800 
+             rounded-full text-lg font-semibold backdrop-blur-sm
+             shadow-sm border border-orange-300/40"
               variants={fadeUp}
             >
               Our Services
             </motion.span>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4">
-              Comprehensive Engineering Solutions
+
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4 pt-4">
+              Comprehensive Engineering Services
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               As a multidisciplinary engineering firm, we can connect you to the

@@ -16,10 +16,14 @@ const Contact = () => {
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
   const [zipCode, setZipCode] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
+
+  const [loading, setLoading] = useState(false); // NEW
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // NEW
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const payload = {
       name,
       email,
@@ -39,7 +43,9 @@ const Contact = () => {
       });
 
       if (res.ok) {
-        setModalOpen(true);
+        setShowSuccessModal(true);
+
+        // Reset form
         setName("");
         setEmail("");
         setSubject("");
@@ -48,7 +54,9 @@ const Contact = () => {
         setState("");
         setCountry("");
         setZipCode("");
-        setTimeout(() => setModalOpen(false), 4000);
+
+        // Auto close modal
+        setTimeout(() => setShowSuccessModal(false), 3500);
       } else {
         alert("Failed to send message.");
       }
@@ -56,6 +64,8 @@ const Contact = () => {
       console.error(err);
       alert("Failed to send message.");
     }
+
+    setLoading(false);
   };
 
   const offices = [
@@ -86,6 +96,27 @@ const Contact = () => {
 
   return (
     <>
+      {/* SUCCESS MODAL */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm text-center">
+            <h2 className="text-2xl font-playfair font-bold text-green-600 mb-3">
+              Message Sent!
+            </h2>
+            <p className="text-gray-700 font-roboto mb-6">
+              We have received your message. Our team will contact you shortly.
+            </p>
+
+            <button
+              onClick={() => setShowSuccessModal(false)}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-2xl font-bold"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-7xl mx-auto px-6 sm:px-12 py-18 pt-42">
         {/* Hero Section */}
         <motion.div
@@ -101,7 +132,7 @@ const Contact = () => {
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl font-roboto text-gray-700 max-w-3xl mx-auto">
             Reach out for inquiries, collaborations, or project consultations.
-            Our team is ready to provide you the support and guidance you need.
+            Our team is ready to provide the support and guidance you need.
           </p>
         </motion.div>
 
@@ -118,18 +149,6 @@ const Contact = () => {
             <h2 className="text-2xl sm:text-3xl font-playfair font-bold mb-6 text-gray-900">
               Send Us a Message
             </h2>
-
-            {modalOpen && (
-              <div className="mb-6 px-4 py-3 rounded bg-green-100 text-green-800 text-center transition-all">
-                We have received your message and will reach back shortly.
-                <button
-                  className="ml-4 text-green-700 font-bold underline"
-                  onClick={() => setModalOpen(false)}
-                >
-                  Close
-                </button>
-              </div>
-            )}
 
             {/* FORM START */}
             <form className="space-y-6" onSubmit={handleSubmit}>
@@ -151,7 +170,6 @@ const Contact = () => {
                 required
               />
 
-              {/* Address */}
               <input
                 type="text"
                 placeholder="Address"
@@ -161,7 +179,6 @@ const Contact = () => {
                 required
               />
 
-              {/* State + Country + Zip Code */}
               <div className="grid grid-cols-3 gap-4">
                 <input
                   type="text"
@@ -207,11 +224,19 @@ const Contact = () => {
                 required
               />
 
+              {/* BUTTON WITH LOADING SPINNER */}
               <button
                 type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl text-lg transition-colors"
+                disabled={loading}
+                className={`w-full flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-2xl text-lg transition-colors ${
+                  loading ? "opacity-70 cursor-not-allowed" : ""
+                }`}
               >
-                Send Message
+                {loading ? (
+                  <div className="w-6 h-6 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  "Send Message"
+                )}
               </button>
             </form>
             {/* FORM END */}

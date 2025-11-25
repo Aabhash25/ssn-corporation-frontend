@@ -326,6 +326,14 @@ const ModernNavbar = () => {
                             Construction Administration
                           </Link>
                         </li>
+                        <li>
+                          <Link
+                            to="/water-resources-engineering"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Water Resources Engineering
+                          </Link>
+                        </li>
                       </ul>
                     </div>
 
@@ -346,6 +354,8 @@ const ModernNavbar = () => {
                           "3D Modeling/Rendering",
                           "BIM Modeling",
                           "Instrumentation Engineering",
+                          "Stormwater Impact and Erosion Control Analysis",
+                          "Hydrology and drainage study",
                         ].map((service, index) => (
                           <li key={index}>
                             <Link
@@ -419,7 +429,7 @@ const ModernNavbar = () => {
             </Link>
 
             <Link
-              className="px-6 py-3 rounded-md bg-yellow-500 text-gray-900 font-bold font-oswald hover:bg-yellow-600 transition-colors shadow-md hover:shadow-lg"
+              className={`transition-colors ${linkStyle} font-oswald`}
               to="/contact"
             >
               Contact Us
@@ -605,6 +615,14 @@ const ModernNavbar = () => {
                           Construction Administration
                         </Link>
                       </li>
+                      <li>
+                        <Link
+                          to="/water-resources-engineering"
+                          className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                        >
+                          Water Resources Engineering
+                        </Link>
+                      </li>
                     </ul>
                   </div>
 
@@ -624,6 +642,8 @@ const ModernNavbar = () => {
                         "3D Modeling/Rendering",
                         "BIM Modeling",
                         "Instrumentation Engineering",
+                        "Stormwater Impact and Erosion Control Analysis",
+                        "Hydrology and drainage study",
                       ].map((service, index) => (
                         <li key={index}>
                           <Link

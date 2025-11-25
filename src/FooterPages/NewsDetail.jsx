@@ -14,16 +14,6 @@ const FontsStyle = () => (
     .font-playfair {
       font-family: "Playfair Display", serif !important;
     }
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    p,
-    span {
-      font-style: normal !important;
-    }
   `}</style>
 );
 
@@ -31,6 +21,8 @@ const NewsDetail = () => {
   const { id } = useParams();
   const newsId = parseInt(id);
   const news = newsData.find((item) => item.id === newsId);
+
+  const moreNews = newsData.filter((item) => item.id !== newsId).slice(0, 3);
 
   if (!news) {
     return (
@@ -51,49 +43,85 @@ const NewsDetail = () => {
   return (
     <>
       <FontsStyle />
-      <section className="py-10 sm:py-16 bg-gray-50 w-full">
-        <div className="px-4 sm:px-6 w-full pt-32">
-          {/* Back Link */}
-          <div className="mb-6">
-            <Link
-              to="/news"
-              className="text-orange-500 hover:text-orange-600 font-semibold"
-            >
-              &larr; Back to News
-            </Link>
-          </div>
 
-          {/* News Title */}
-          <h1 className="text-3xl sm:text-4xl font-playfair font-bold text-gray-800 mb-2">
+      {/* FULL WIDTH SECTION */}
+      <section className="py-10 sm:py-16 bg-gray-50 w-full">
+        <div className="w-full px-6 sm:px-10 lg:px-14 pt-28">
+          {/* Title */}
+          <h1 className="text-3xl sm:text-4xl font-playfair font-bold text-gray-900 mb-3">
             {news.title}
           </h1>
-          <p className="text-sm sm:text-base text-gray-500 mb-6">{news.date}</p>
+          <p className="text-sm sm:text-base text-gray-500 mb-10">
+            {news.date}
+          </p>
 
-          {/* Layout: text left, images right */}
-          <div className="flex flex-col lg:flex-row gap-8 w-full">
-            {/* Text */}
-            <div className="flex-[3]">
+          {/* -------- MAIN 2:1 LAYOUT -------- */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* LEFT = 2 parts (TEXT) */}
+            <div className="lg:col-span-2 leading-relaxed">
               {news.content.map((paragraph, index) => (
                 <p
                   key={index}
-                  className="indent-8 text-gray-700 font-roboto text-base sm:text-lg leading-relaxed mb-4"
+                  className="indent-8 text-gray-700 font-roboto text-lg mb-6"
                   dangerouslySetInnerHTML={{ __html: paragraph }}
                 />
               ))}
             </div>
 
-            {/* Images */}
-            <div className="flex-[1] flex flex-col gap-4">
+            {/* RIGHT = 1 part (IMAGES) */}
+            <div className="flex flex-col gap-6 lg:pl-4">
               {news.imageUrls.map((imgUrl, index) => (
                 <img
                   key={index}
                   src={imgUrl}
                   alt={news.title}
-                  className="w-full h-48 sm:h-60 object-cover rounded-xl shadow-md"
+                  className="w-full h-60 lg:h-72 object-cover rounded-xl shadow-lg"
                 />
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* -------- MORE NEWS -------- */}
+      <section className="py-14 bg-white px-6 sm:px-10 lg:px-14">
+        <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-gray-900 mb-8">
+          More News
+        </h2>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {moreNews.map((item) => (
+            <Link
+              key={item.id}
+              to={`/news/${item.id}`}
+              className="bg-gray-50 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300"
+            >
+              <img
+                src={item.imageUrls[0]}
+                alt={item.title}
+                className="w-full h-48 object-cover"
+              />
+
+              <div className="p-5">
+                <h3 className="font-playfair text-xl font-semibold text-gray-900 mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-gray-500 text-sm mb-3">{item.date}</p>
+                <p className="text-gray-700 font-roboto text-sm line-clamp-3">
+                  {item.content[0].replace(/<[^>]+>/g, "")}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <Link
+            to="/news"
+            className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-8 rounded-full transition-all"
+          >
+            View All News
+          </Link>
         </div>
       </section>
     </>

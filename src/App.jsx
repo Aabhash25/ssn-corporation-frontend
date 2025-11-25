@@ -45,6 +45,7 @@ import PreConstruction from "./Pages/ServicesDropdown/PreConstruction";
 import ConstructionManagement from "./Pages/ServicesDropdown/ConstructionManagement";
 // import Portfolio3DPage from "./Pages/Portfoilio3DPage";
 import SpecialtyEngineeringServices from "./Pages/ServicesDropdown/SpecialtyEngineeringServices";
+import WaterResourcesEngineering from "./Pages/ServicesDropdown/WaterResources";
 import NewsDetail from "./FooterPages/NewsDetail";
 
 function App() {
@@ -144,6 +145,11 @@ function App() {
               path="construction-engineering"
               element={<ConstructioinEngineeringAndManagement />}
             />
+            <Route
+              path="water-resources-engineering"
+              element={<WaterResourcesEngineering />}
+            />
+
             <Route
               path="general-construction"
               element={<GeneralConstruction />}

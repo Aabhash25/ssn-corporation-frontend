@@ -48,22 +48,6 @@ export const specialities = [
     ],
   },
   {
-    title: "Subsurface Investigation and Geotechnical Testing",
-    icon: "🌍",
-    image: "/SubSurface2.jpg",
-    description: [
-      "Comprehensive subsurface investigation and geotechnical testing services.",
-      [
-        "Dynamic Cone Penetration (DCP) Test",
-        "Pavement Coring",
-        "Hand Auger and Sampling",
-        "Light Weight Deflectometer (LWD) Test",
-        "Field Density Test",
-        "Field Infiltration Test",
-      ],
-    ],
-  },
-  {
     title: "Geotechnical Evaluation and Design",
     icon: "🧱",
     // image: "/geotech.webp",
@@ -94,6 +78,40 @@ export const specialities = [
         "HVAC Systems Engineering and Sustainability",
         "Energy-Efficient Building Systems",
         "Fire Protection and Safety Engineering",
+      ],
+    ],
+  },
+    {
+    title: "Water Resources Engineering",
+    icon: "⚡",
+    image: "/mep.webp",
+    description: [
+      "Comprehensive Water Resources Engineering design services.",
+      [
+        "Hydraulics, Hydrology and Drainage Studies",
+        "Stormwater Management Planning and Design",
+        "Green Infrastructure Design",
+        "Roadway and Site Drainage Design",
+        "Floodplain Evaluation",
+        "Wetland Studies",
+        "Hydrology & Hydraulic Analysis",
+        "NPDES Permitting Services"
+      ],
+    ],
+  },
+      {
+    title: "Pavement Engineering",
+    icon: "⚡",
+    image: "/mep.webp",
+    description: [
+      "Comprehensive Pavement Engineering design services.",
+      [
+        "Pavement Evaluation and Design",
+        "Flexible and Rigid Pavement Design",
+        "Pavement Rehabilitation and Maintenance Planning",
+        "Material Selection and Testing",
+        "Traffic Analysis and Load Considerations",
+        "Sustainable Pavement Solutions",
       ],
     ],
   },
