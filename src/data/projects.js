@@ -157,7 +157,7 @@ export const projects = [
   {
     id: 18,
     name: "Gastonia Deli",
-    images: ["/CommercialUpfit.jpg","/CommercialUpfit2.jpg","/Gastonia1.webp","/Gastonia2.webp","/Gastonia3.webp","/Gastonia4.webp","/Gastonia5.webp"],
+    images: ["/CommercialUpfit.webp","/CommercialUpfit2.webp","/Gastonia1.webp","/Gastonia2.webp","/Gastonia3.webp","/Gastonia4.webp","/Gastonia5.webp"],
     description: "Commercial Upfit Design Project",
     longDescription: "SSN Corporation is involved in the successful completion of a commercial upfit design project located in Gastonia, North Carolina. The project focused on transforming an existing shell space into a deli combined with an ice cream and juice bar.  The project scope included architectural design for the space upfit, structural evaluation and detailing for an additional door, ADA compliance, and mechanical, electrical, and plumbing (MEP) design, including kitchen and hood layouts. SSN Corporation helped the client to proceed with permit applications and jurisdictional coordination to ensure timely approval. This project showcases SSN Corporation’s capability to deliver integrated, code-compliant architecture and engineering solutions that convert existing shells into highly functional and specialized facilities.",
     year: 2025,
@@ -171,7 +171,7 @@ export const projects = [
   {
     id: 13,
     name: "Gastonia Office",
-    images: ["/GastoniaOffice1.webp","/GastoniaOffice2.webp","/GastoniaOffice3.webp","/GastoniaOffice4.webp","/GastoniaOffice5.webp"],
+    images: ["/GastoniaOffice4.webp","/GastoniaOffice2.webp","/GastoniaOffice3.webp","/GastoniaOffice1.webp","/GastoniaOffice5.webp"],
     description: "djkfnasd",
     longDescription: "skjfwsg b",
     year: 2024,
@@ -255,7 +255,7 @@ export const projects = [
     {
     id: 19,
     name: "Subsurface Exploration and Slope Stability Analysis",
-    images: ['/SubSurface2.jpg','/SubSurface1.jpg','/SubSurface3.jpg','/SubSurface4.jpg',],
+    images: ['/SubSurface2.webp','/SubSurface1.webp','/SubSurface3.webp','/SubSurface4.webp',],
     description: "Geotechnical exploration and slope stability analysis",
     longDescription: "SSN Engineers, PLLC has proudly performed subsurface exploration and  slope stability analyses for the proposed Riverview Heights Residential Subdivision in Front Royal, VA.The project focuses on exploring subsurface soil conditions and evaluating and ensuring the stability of steep slopes across the development site. Our geotechnical engineering services included subsurface exploration through Standard Penetration Tests (SPT), laboratory soil classification and strength testing, and slope stability modeling using advanced GeoStudio software.The study assessed both natural and engineered slope conditions to provide recommendations for safe grading design, erosion control, and long-term slope performance in compliance with the Town of Front Royal’s steep slope regulations.This project highlights SSN Engineers’ expertise in geotechnical investigation and slope stability assessment, supporting safe, sustainable residential development through data-driven engineering solutions.",
     year: 2024,

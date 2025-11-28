@@ -38,7 +38,7 @@ const Visitors = () => {
 
   return (
     <section className="w-full pt-4 sm:pt-6 md:pt-8 pb-8 sm:pb-10 md:pb-12 bg-gradient-to-b from-gray-50 via-white to-gray-100 relative overflow-hidden">
-      <div className="w-full max-w-full px-4 sm:px-8 lg:px-12 space-y-12 md:space-y-16">
+      <div className="w-full max-w-full px-4 sm:px-8 lg:px-12 space-y-2 md:space-y-8">
         {/* Heading */}
         <motion.div
           className="text-center max-w-3xl mx-auto"
@@ -47,7 +47,7 @@ const Visitors = () => {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-playfair font-bold text-gray-900 mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-playfair font-bold text-gray-900 mb-1 sm:mb-2">
             Who We Are
           </h2>
         </motion.div>
@@ -95,7 +95,7 @@ const Visitors = () => {
 
                   <Link
                     to={card.link}
-                    className="inline-block px-6 py-3 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-lg shadow-md hover:from-orange-600 hover:to-orange-700 transition-all duration-300"
+                    className="inline-block px-6 py-3 text-sm sm:text-base font-medium text-white bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-lg shadow-md hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300"
                   >
                     Explore {card.title}
                   </Link>

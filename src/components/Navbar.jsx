@@ -295,6 +295,14 @@ const ModernNavbar = () => {
                         </li>
                         <li>
                           <Link
+                            to="/water-resources-engineering"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Water Resources Engineering
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
                             to="/geotechnical-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
@@ -324,14 +332,6 @@ const ModernNavbar = () => {
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
                             Construction Administration
-                          </Link>
-                        </li>
-                        <li>
-                          <Link
-                            to="/water-resources-engineering"
-                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
-                          >
-                            Water Resources Engineering
                           </Link>
                         </li>
                       </ul>
@@ -581,6 +581,14 @@ const ModernNavbar = () => {
                       </li>
                       <li>
                         <Link
+                          to="/water-resources-engineering"
+                          className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                        >
+                          Water Resources Engineering
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
                           to="/geotechnical-engineering"
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
@@ -613,14 +621,6 @@ const ModernNavbar = () => {
                           onClick={() => setIsOpen(false)}
                         >
                           Construction Administration
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/water-resources-engineering"
-                          className="hover:text-yellow-600 cursor-pointer transition-colors block"
-                        >
-                          Water Resources Engineering
                         </Link>
                       </li>
                     </ul>

@@ -243,7 +243,7 @@ const Slider = ({ services, reverse = false }) => {
 
 const Services = () => {
   return (
-    <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 py-12 md:py-16 pb-8 md:pb-12 overflow-hidden">
+    <section className="relative w-full bg-gradient-to-b from-gray-50 via-white to-gray-100 pt-6 md:pt-8 pb-8 md:pb-12 overflow-hidden">
       <div className="text-center mb-12 md:mb-16 px-4">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-gray-900 mb-4">
           What We Do

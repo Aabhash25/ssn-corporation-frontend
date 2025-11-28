@@ -67,9 +67,6 @@ const Testimonials = () => {
               className="text-center mb-16"
             >
               <div className="flex items-center justify-center mb-6">
-                <div className="p-3 bg-orange-500 rounded-xl shadow-lg">
-                  <ChatBubbleLeftRightIcon className="w-7 h-7 text-white" />
-                </div>
                 <h2 className="ml-4 text-5xl sm:text-6xl md:text-7xl font-playfair font-bold text-gray-900">
                   What Our Clients Say
                 </h2>
@@ -95,7 +92,7 @@ const Testimonials = () => {
                   {/* Star Rating */}
                   <div className="flex gap-1 mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <StarIcon key={i} className="w-5 h-5 text-orange-500" />
+                      <StarIcon key={i} className="w-5 h-5 text-yellow-500" />
                     ))}
                   </div>
 

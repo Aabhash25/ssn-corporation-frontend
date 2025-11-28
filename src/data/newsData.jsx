@@ -6,9 +6,9 @@ export const newsData = [
       "Let’s Celebrate with Completion of The Brass Tap Project in Downtown Raleigh",
     date: "November 11, 2025",
     imageUrls: [
-      "/BrassTrapNews1.jpg",
-      "/BrassTrapNews2.jpg",
-      "/BrassTrapNews3.jpg",
+      "/BrassTrapNews1.webp",
+      "/BrassTrapNews2.webp",
+      "/BrassTrapNews3.webp",
     ],
     content: [
       `<a href="https://ssncorporation.com" class="news-link" target="_blank" rel="noopener noreferrer">SSN Corporation </a> is proud to announce the successful completion of the modern outdoor patio project for The Brass Tap, located in the heart of downtown Raleigh. The project is at 16 N West St, Raleigh, NC. This design and build project achievement marks a significant milestone for our team and reflects our commitment to delivering complex, high-quality construction solutions in high-traffic urban environments.`,
@@ -24,7 +24,7 @@ export const newsData = [
     title:
       "SSN Corporation Expands: Moves to New Corporate Headquarters in Raleigh",
     date: "November 18, 2025",
-    imageUrls: ["/office1.jpg", "/office2.jpg", "/office4.jpg"],
+    imageUrls: ["/office1.webp", "/office2.webp", "/office4.webp"],
     content: [
       `<a href="https://ssncorporation.com" class="news-link" target="_blank" rel="noopener noreferrer">SSN Corporation</a> is excited to announce our official move into a new 2,000 sq. ft. corporate headquarter located in the heart of Raleigh, North Carolina. This transition reflects our continued growth as we take on more projects and expand our team. What began as a smaller home-office operation has now evolved into an organization of more than 30+ team members—both full-time and part-time—allowing us to manage a growing and diverse project portfolio with greater efficiency. Our new office provides a modern, collaborative workspace designed to enhance productivity, creativity, and overall client service. This location now serves as the corporate headquarter for <a href="https://ssncorporation.com/contractors" class="news-link" target="_blank" rel="noopener noreferrer">SSN Builders</a> (General Contractor), <a href="https://ssncorporation.com/engineers" class="news-link" target="_blank" rel="noopener noreferrer">SSN Engineers</a> (Design Engineer), and <a href="https://qtakeoff.ai" class="news-link" target="_blank" rel="noopener noreferrer">SSN AI</a> (qtakeoff) with future expansion plans in place should additional space be required to support team growth.`,
 
@@ -44,7 +44,7 @@ export const newsData = [
     id: 2,
     title: "SSN AI Launches New QTO Beta",
     date: "November 1, 2025",
-    imageUrls: ["/qtakeoff1.png", "/qtakeoff2.png", "/qtakeoff3.png"],
+    imageUrls: ["/qtakeoff1.webp", "/qtakeoff2.webp", "/qtakeoff3.webp"],
     content: [
       "<a href='https://qtakeoff.ai' class='news-link' target='_blank' rel='noopener noreferrer'>SSN AI</a>, the sister company of <a href='https://ssncorporation.com' class='news-link' target='_blank' rel='noopener noreferrer'>SSN Corporation</a>, is proud to announce the beta launch of its revolutionary AI-enabled Quantity Takeoff (QTO) product. This advanced tool is designed to streamline the pre-construction process for general contractors, design engineers, and project managers, providing faster and more accurate quantity takeoffs directly from building plans.",
       "The QTO Beta leverages cutting-edge AI algorithms to automatically detect and quantify structural elements, materials, and fixtures from both 2D construction plans. By eliminating manual calculations, the tool drastically reduces human error and improves the efficiency of project cost estimation, scheduling, and procurement.",

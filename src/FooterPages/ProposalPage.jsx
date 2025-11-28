@@ -25,6 +25,7 @@ const ProposalPage = () => {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // 🔥 Added loading state
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -36,6 +37,8 @@ const ProposalPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // ⏳ Start loading
+
     const fd = new FormData();
     Object.keys(formData).forEach((key) => {
       if (formData[key]) fd.append(key, formData[key]);
@@ -46,13 +49,14 @@ const ProposalPage = () => {
         `${import.meta.env.VITE_API_URL}proposal/submit/`,
         {
           method: "POST",
-          body: fd, // fd is your FormData
+          body: fd,
         }
       );
 
       if (res.ok) {
         setModalMessage("Proposal submitted successfully!");
         setModalOpen(true);
+
         setFormData({
           first_name: "",
           last_name: "",
@@ -81,13 +85,15 @@ const ProposalPage = () => {
       setModalMessage("Failed to submit. Please try again.");
       setModalOpen(true);
     }
+
+    setIsLoading(false); // ⏳ Stop loading
   };
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-24 text-gray-900 relative z-10 pt-42">
       {/* Page Header */}
       <h1 className="text-5xl sm:text-6xl font-playfair font-bold mb-4 text-center">
-        Submit Your Proposal
+        Submit For Proposal
       </h1>
       <p className="text-lg sm:text-xl font-roboto mb-12 leading-relaxed text-center text-gray-700">
         We welcome your project proposals. Please fill out the form below.
@@ -288,7 +294,7 @@ const ProposalPage = () => {
           </div>
         </div>
 
-        {/* Attachment and Referral in multi-column */}
+        {/* Attachment and Referral */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
           <div>
             <label className="block font-roboto font-semibold mb-2">
@@ -332,33 +338,27 @@ const ProposalPage = () => {
               <option>Other</option>
             </select>
           </div>
-
-          {/* <div>
-            <label className="block font-roboto font-semibold mb-2">
-              Who did you refer us?
-            </label>
-            <input
-              type="text"
-              name="referred_by"
-              value={formData.referred_by}
-              onChange={handleChange}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-400 focus:outline-none transition"
-            />
-          </div> */}
         </div>
 
-        {/* Submit Button */}
+        {/* Submit Button with Loading */}
         <button
           type="submit"
-          className="w-full md:w-auto px-6 py-3 bg-orange-600 text-white font-roboto font-semibold rounded-2xl hover:bg-orange-700 transition text-center mt-6"
+          disabled={isLoading}
+          className={`w-full md:w-auto px-6 py-3 text-white font-roboto font-semibold rounded-2xl transition text-center mt-6
+            ${
+              isLoading
+                ? "bg-orange-400 cursor-not-allowed"
+                : "bg-orange-600 hover:bg-orange-700"
+            }
+          `}
         >
-          Submit Proposal
+          {isLoading ? "Submitting..." : "Submit for Proposal"}
         </button>
       </form>
 
       {/* Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/20 backdrop-blur-sm">
           <div className="bg-white p-6 rounded-2xl shadow-xl text-center max-w-sm mx-4">
             <h2 className="text-xl font-bold mb-2">Notification</h2>
             <p className="mb-4">{modalMessage}</p>

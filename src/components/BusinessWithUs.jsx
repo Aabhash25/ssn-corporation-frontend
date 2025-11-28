@@ -27,11 +27,6 @@ const BusinessWithUs = () => {
               Build Your Future with Confidence— Trust Us
             </h2>
 
-            {/* Animated Divider */}
-            <div className="flex justify-center mb-6 sm:mb-8">
-              <div className="w-24 sm:w-32 h-1 rounded-full bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 animate-pulse"></div>
-            </div>
-
             {/* Paragraphs */}
             <p className="text-base sm:text-lg md:text-xl font-roboto text-gray-700 leading-relaxed mb-4 sm:mb-6">
               At SSN Corporation , we turn visions into reality. Our team offers
@@ -49,7 +44,7 @@ const BusinessWithUs = () => {
             {/* Call-to-action buttons */}
             <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mt-4 sm:mt-6">
               <Link to="/contact">
-                <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 sm:py-4 px-10 sm:px-12 rounded-3xl shadow-lg transition-all duration-300 transform hover:scale-105">
+                <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 sm:py-4 px-10 sm:px-12 rounded-3xl shadow-lg transition-all duration-300 transform hover:scale-105">
                   Start Your Project
                 </button>
               </Link>

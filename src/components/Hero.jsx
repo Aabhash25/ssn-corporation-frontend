@@ -75,7 +75,8 @@ const Hero = () => {
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <motion.h1
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl mb-4 md:mb-6 leading-tight md:leading-snug tracking-wide"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl
+             mb-4 md:mb-6 leading-tight md:leading-snug tracking-wide"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut" }}

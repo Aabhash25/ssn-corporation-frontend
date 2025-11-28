@@ -14,6 +14,16 @@ const FontsStyle = () => (
     .font-playfair {
       font-family: "Playfair Display", serif !important;
     }
+
+    /* Style for links inside paragraphs */
+    .news-link {
+      color: #050200ff;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    .news-link:hover {
+      text-decoration: underline;
+    }
   `}</style>
 );
 
@@ -44,20 +54,21 @@ const NewsDetail = () => {
     <>
       <FontsStyle />
 
-      {/* FULL WIDTH SECTION */}
+      {/* MAIN SECTION */}
       <section className="py-10 sm:py-16 bg-gray-50 w-full">
         <div className="w-full px-6 sm:px-10 lg:px-14 pt-28">
-          {/* Title */}
+          {/* TITLE */}
           <h1 className="text-3xl sm:text-4xl font-playfair font-bold text-gray-900 mb-3">
             {news.title}
           </h1>
+
           <p className="text-sm sm:text-base text-gray-500 mb-10">
             {news.date}
           </p>
 
-          {/* -------- MAIN 2:1 LAYOUT -------- */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* LEFT = 2 parts (TEXT) */}
+          {/* LAYOUT */}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            {/* TEXT COLUMN */}
             <div className="lg:col-span-2 leading-relaxed">
               {news.content.map((paragraph, index) => (
                 <p
@@ -68,14 +79,20 @@ const NewsDetail = () => {
               ))}
             </div>
 
-            {/* RIGHT = 1 part (IMAGES) */}
-            <div className="flex flex-col gap-6 lg:pl-4">
+            {/* IMAGE COLUMN — AUTO HEIGHT */}
+            <div
+              className="
+                flex flex-col gap-6 lg:pl-4 items-start w-full
+                /* Uncomment for sticky effect */
+                /* lg:sticky lg:top-28 */
+              "
+            >
               {news.imageUrls.map((imgUrl, index) => (
                 <img
                   key={index}
                   src={imgUrl}
                   alt={news.title}
-                  className="w-full h-60 lg:h-72 object-cover rounded-xl shadow-lg"
+                  className="w-full h-auto object-cover rounded-xl shadow-lg"
                 />
               ))}
             </div>
@@ -83,7 +100,7 @@ const NewsDetail = () => {
         </div>
       </section>
 
-      {/* -------- MORE NEWS -------- */}
+      {/* MORE NEWS */}
       <section className="py-14 bg-white px-6 sm:px-10 lg:px-14">
         <h2 className="text-2xl sm:text-3xl font-playfair font-bold text-gray-900 mb-8">
           More News

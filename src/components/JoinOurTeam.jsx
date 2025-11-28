@@ -1,21 +1,10 @@
 "use client";
 import React from "react";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-  UserGroupIcon,
-  BriefcaseIcon,
-  AcademicCapIcon,
-  HandRaisedIcon,
-  RocketLaunchIcon,
-  ArrowRightIcon,
-} from "@heroicons/react/24/outline";
 
-// Google Fonts
+// Inject Google Fonts
 const FontsStyle = () => (
   <style jsx global>{`
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
-
     .font-roboto {
       font-family: "Roboto", sans-serif;
     }
@@ -25,200 +14,85 @@ const FontsStyle = () => (
   `}</style>
 );
 
-const JoinOurTeam = () => {
-  const benefits = [
-    {
-      icon: AcademicCapIcon,
-      title: "Professional Growth",
-      description: "Continuous learning and development opportunities",
-      color: "from-blue-400 to-indigo-500",
-    },
-    {
-      icon: UserGroupIcon,
-      title: "Team Collaboration",
-      description: "Work with industry experts and innovative minds",
-      color: "from-green-400 to-emerald-500",
-    },
-    {
-      icon: RocketLaunchIcon,
-      title: "Career Advancement",
-      description: "Clear pathways for promotion and leadership roles",
-      color: "from-purple-400 to-pink-500",
-    },
-    {
-      icon: HandRaisedIcon,
-      title: "Work-Life Balance",
-      description: "Flexible schedules and supportive work environment",
-      color: "from-orange-400 to-red-500",
-    },
-  ];
-
+export default function JoinOurTeam({
+  imageSrc = "https://plus.unsplash.com/premium_photo-1661405543210-4a20cbcf5aed?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8b2ZmaWNlJTIwbWVtYmVyc3xlbnwwfHwwfHx8MA%3D%3D",
+  imageAlt = "Team on a construction site",
+}) {
   return (
     <>
       <FontsStyle />
-      <div className="overflow-x-hidden text-gray-800 relative">
-        <section className="relative flex flex-col justify-start py-6 sm:py-8 lg:py-10 bg-gradient-to-br ...">
-          {/* Animated background */}
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute top-0 left-0 w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-0 right-0 w-28 sm:w-36 md:w-44 h-28 sm:h-36 md:h-44 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute top-1/2 left-1/2 w-24 sm:w-32 md:w-40 h-24 sm:h-32 md:h-40 bg-purple-500/8 rounded-full blur-3xl animate-pulse delay-2000 -translate-x-1/2 -translate-y-1/2"></div>
+
+      <section className="w-full relative flex flex-col items-center pt-10 pb-16 bg-white overflow-hidden font-roboto">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 px-4 sm:px-8 md:px-14 lg:px-20 items-center">
+          {/* LEFT — IMAGE */}
+          <div className="w-full h-72 sm:h-96 lg:h-[480px] rounded-3xl overflow-hidden shadow-xl">
+            <img
+              src="./whoweare.webp"
+              alt={imageAlt}
+              className="w-full h-full object-cover transform hover:scale-105 transition duration-700"
+            />
           </div>
 
-          <div className="relative z-10 w-full px-4 sm:px-6 md:px-8 lg:px-12">
-            {/* Header */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-center mb-6 sm:mb-8"
-            >
-              <div className="flex flex-col sm:flex-row items-center justify-center mb-4 sm:mb-6 gap-3 sm:gap-4">
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-playfair font-bold leading-tight">
-                  Join Our Team{" "}
-                </h2>
-              </div>
-              <p className="text-sm sm:text-base md:text-lg text-gray-700 font-roboto max-w-3xl mx-auto leading-snug">
-                At SSN Corporation , we are always looking for
-                <span className="font-semibold text-gray-900">
-                  {" "}
-                  talented, motivated individuals
-                </span>{" "}
-                to join our growing team.
-              </p>
-            </motion.div>
+          {/* RIGHT — IMPROVED TEXT + DESIGN */}
+          <div className="space-y-10 relative">
+            {/* Decorative floating blur circles */}
+            <div className="absolute -top-10 -right-6 w-36 h-36 bg-indigo-200 rounded-full blur-3xl opacity-30"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-pink-200 rounded-full blur-3xl opacity-20"></div>
 
-            {/* Main Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 mb-6 sm:mb-8">
-              {/* Left Content */}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7 }}
-                className="space-y-4 sm:space-y-6"
-              >
-                <div className="bg-white backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-gray-200 shadow-lg">
-                  <h3 className="text-2xl sm:text-3xl font-playfair font-bold text-gray-900 mb-3 sm:mb-4">
-                    Why Choose SSN Corporation?
-                  </h3>
-                  <p className="text-sm sm:text-base text-gray-700 leading-snug mb-2 sm:mb-3">
-                    As a leader in the construction industry, we offer exciting
-                    career opportunities for people passionate about making a
-                    real impact.
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-700 leading-snug">
-                    Our team thrives on collaboration , integrity , and a shared
-                    commitment to excellence .
-                  </p>
-                </div>
+            {/* Title */}
+            <div>
+              <h2 className="text-4xl sm:text-5xl font-playfair font-bold text-gray-900 mb-3">
+                Join Our Team
+              </h2>
 
-                {/* Call to Action */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-gray-100 dark:bg-gray-800 rounded-2xl p-6 text-center shadow-lg border border-gray-200 dark:border-gray-700"
-                >
-                  <h4 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 dark:text-white mb-3">
-                    Ready to Build Your Future?
-                  </h4>
-                  <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 mb-5">
-                    Explore our current openings and join a company where your
-                    skills and ideas help shape the future of construction.
-                  </p>
-                  <Link
-                    to="/career"
-                    className="inline-flex items-center gap-2 bg-orange-600 text-white font-medium py-2.5 px-5 rounded-lg hover:bg-orange-700 transition-all duration-300 transform hover:scale-105 shadow-md"
-                  >
-                    <BriefcaseIcon className="w-5 h-5" />
-                    View Open Positions
-                    <ArrowRightIcon className="w-4 h-4" />
-                  </Link>
-                </motion.div>
-              </motion.div>
-
-              {/* Right Content - Benefits Grid */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4"
-              >
-                {benefits.map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 * index }}
-                    whileHover={{ scale: 1.03, y: -1 }}
-                    className="bg-white backdrop-blur-lg rounded-xl p-3 sm:p-4 border border-gray-200 hover:border-orange-300 shadow-md hover:shadow-lg transition-all duration-300"
-                  >
-                    <div
-                      className={`inline-flex p-2 sm:p-3 bg-gradient-to-r ${benefit.color} rounded-lg mb-2 sm:mb-3 shadow-md`}
-                    >
-                      <benefit.icon className="w-5 sm:w-6 h-5 sm:h-6 text-white" />
-                    </div>
-                    <h5 className="text-lg sm:text-xl font-playfair font-bold text-gray-900 mb-1">
-                      {benefit.title}
-                    </h5>
-                    <p className="text-sm sm:text-base text-gray-600 leading-snug">
-                      {benefit.description}
-                    </p>
-                  </motion.div>
-                ))}
-              </motion.div>
+              {/* Gradient Divider */}
             </div>
 
-            {/* Bottom Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="text-center mb-6 sm:mb-8"
-            >
-              <div className="bg-white backdrop-blur-lg rounded-2xl p-4 sm:p-6 border border-gray-200 shadow-xl">
-                <h4 className="text-xl sm:text-2xl md:text-3xl font-playfair font-bold text-gray-900 mb-3">
-                  Join Our Growing Family
-                </h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                  <div className="text-center">
-                    <p className="text-2xl sm:text-3xl font-bold text-orange-500 mb-1">
-                      30+
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-600">
-                      Team Members
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl sm:text-3xl font-bold text-blue-500 mb-1">
-                      3+
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-600">
-                      Years Experience
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-2xl sm:text-3xl font-bold text-purple-500 mb-1">
-                      100+
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-600">
-                      Projects Completed
-                    </p>
-                  </div>
-                </div>
-                <p className="text-sm sm:text-base md:text-lg text-gray-700 mt-2 sm:mt-3 max-w-3xl mx-auto font-playfair italic">
-                  "Apply today and take the first step toward an enriching
-                  career with us!"
+            {/* Intro Paragraph */}
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-roboto relative z-10">
+              We’re looking for passionate people who want to make a real impact
+              in the construction industry. Here's why you should consider
+              joining our growing team.
+            </p>
+
+            {/* Small Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-10">
+              {/* Card 1 */}
+              <article className="rounded-2xl p-6 bg-white/70 backdrop-blur-xl border border-gray-200 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1">
+                <h3 className="text-xl font-semibold mb-3 font-playfair text-gray-800">
+                  Why Choose Us?
+                </h3>
+                <p className="text-base text-gray-700 font-roboto leading-relaxed">
+                  As a leader in the construction industry, we offer exciting
+                  opportunities for people passionate about creating meaningful
+                  change.
+                  <br />
+                  <br />
+                  We focus on innovation, teamwork, and long-term career
+                  success.
                 </p>
-              </div>
-            </motion.div>
+              </article>
+
+              {/* Card 2 */}
+              <article className="rounded-2xl p-6 bg-white/70 backdrop-blur-xl border border-gray-200 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1">
+                <h3 className="text-xl font-semibold mb-4 font-playfair text-gray-800">
+                  What We Offer
+                </h3>
+                <ul className="space-y-3 text-base text-gray-700 leading-relaxed">
+                  <li>
+                    • Professional Growth — Continuous learning & development.
+                  </li>
+                  <li>• Team Collaboration — Work with industry experts.</li>
+                  <li>• Career Advancement — Clear leadership paths.</li>
+                  <li>
+                    • Work-Life Balance — Flexible, supportive environment.
+                  </li>
+                </ul>
+              </article>
+            </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </>
   );
-};
-
-export default JoinOurTeam;
+}

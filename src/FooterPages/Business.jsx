@@ -13,22 +13,22 @@ const prequalificationDocs = [
   {
     doc: "OSHA 300 and 300A Forms",
     explanation:
-      "For the past three years. If your company has ten (10) or fewer employees, provide the number of employees and total hours worked each year. Any work-related incident resulting in fatality, in-patient hospitalization, amputation, or loss of an eye must be reported to OSHA.",
+      "For the past three years. If your company has ten (10) or fewer employees, provide the number of employees and total hours worked each year.",
   },
   {
     doc: "EMR Verification",
     explanation:
-      "NCCI comparable form or letter from worker’s comp carrier showing EMR for the past 3 years. Your carrier can provide a letter if you do not qualify for EMR.",
+      "NCCI comparable form or letter from worker’s comp carrier showing EMR for the past 3 years.",
   },
   {
     doc: "Letter from your Surety",
     explanation:
-      "Dated within the past 6 months. State your single project bonding capacity, aggregate bonding capacity, and amount available. If no ongoing bond program, provide a document stating that.",
+      "Dated within the past 6 months. State your single project bonding capacity and aggregate capacity.",
   },
   {
     doc: "Financial Statements",
     explanation:
-      "Third-party prepared financial statements preferred. Include balance sheet and income statement. Internal statements accepted if third-party not available. Use accrual basis.",
+      "Third-party prepared financial statements preferred. Include balance sheet and income statement.",
   },
   { doc: "Experiences", explanation: "List of recently completed 3 projects." },
 ];
@@ -43,6 +43,8 @@ const Business = () => {
     note: "",
     file: null,
   });
+
+  const [loading, setLoading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
 
@@ -53,19 +55,21 @@ const Business = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     const fd = new FormData();
-    Object.keys(formData).forEach(
-      (key) => formData[key] && fd.append(key, formData[key])
-    );
+    Object.keys(formData).forEach((key) => {
+      if (formData[key]) fd.append(key, formData[key]);
+    });
 
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}submit/`, {
         method: "POST",
         body: fd,
       });
+
       if (res.ok) {
         setModalMessage("Prequalification form submitted successfully!");
-        setModalOpen(true);
         setFormData({
           first_name: "",
           last_name: "",
@@ -76,19 +80,18 @@ const Business = () => {
           file: null,
         });
       } else {
-        setModalMessage("Failed to submit. Please try again.");
-        setModalOpen(true);
+        setModalMessage("Submission failed. Please try again.");
       }
     } catch (err) {
-      console.error(err);
-      setModalMessage("Failed to submit. Please try again.");
+      setModalMessage("Submission failed. Please try again.");
+    } finally {
+      setLoading(false);
       setModalOpen(true);
     }
   };
 
   return (
     <div className="w-full px-4 sm:px-6 lg:px-12 py-24 text-gray-900 pt-42">
-      {/* Page Header */}
       <h1 className="text-5xl sm:text-6xl font-playfair font-bold mb-6 text-center">
         Work With SSN Corporation
       </h1>
@@ -97,13 +100,13 @@ const Business = () => {
         and collaborators/partners
       </p>
 
-      {/* Full-width Two-column Layout */}
       <div className="flex flex-col lg:flex-row gap-12 w-full">
-        {/* Table Container */}
+        {/* Table */}
         <div className="flex-1">
           <h2 className="text-3xl font-playfair font-bold mb-4 text-center lg:text-left">
             Prequalification Documents
           </h2>
+
           <div className="overflow-x-auto rounded-2xl shadow-lg">
             <table className="min-w-full table-auto bg-white/90 text-gray-900">
               <thead className="bg-gray-200">
@@ -135,15 +138,17 @@ const Business = () => {
           </div>
         </div>
 
-        {/* Form Container */}
+        {/* Form */}
         <div className="flex-1">
           <h2 className="text-3xl font-playfair font-bold mb-6 text-center lg:text-left">
             Prequalification Form
           </h2>
+
           <form
             className="bg-white/90 p-8 rounded-2xl shadow-lg grid gap-6"
             onSubmit={handleSubmit}
           >
+            {/* NAME */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block font-roboto font-semibold mb-2">
@@ -158,6 +163,7 @@ const Business = () => {
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
                 />
               </div>
+
               <div>
                 <label className="block font-roboto font-semibold mb-2">
                   Last Name*
@@ -173,6 +179,7 @@ const Business = () => {
               </div>
             </div>
 
+            {/* EMAIL + PHONE */}
             <div className="flex flex-col md:flex-row gap-6">
               <div className="flex-1 md:max-w-sm">
                 <label className="block font-roboto font-semibold mb-2">
@@ -203,6 +210,7 @@ const Business = () => {
               </div>
             </div>
 
+            {/* COMPANY */}
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 Company
@@ -216,6 +224,7 @@ const Business = () => {
               />
             </div>
 
+            {/* NOTE */}
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 Note*
@@ -225,11 +234,12 @@ const Business = () => {
                 value={formData.note}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
                 rows={4}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none"
               ></textarea>
             </div>
 
+            {/* FILE */}
             <div>
               <label className="block font-roboto font-semibold mb-2">
                 File
@@ -245,22 +255,29 @@ const Business = () => {
               </p>
             </div>
 
+            {/* SUBMIT BUTTON WITH LOADER */}
             <button
               type="submit"
-              className="px-6 py-3 bg-orange-600 text-white font-roboto font-semibold rounded-xl hover:bg-orange-700 transition"
+              disabled={loading}
+              className="px-6 py-3 bg-orange-600 text-white font-roboto font-semibold rounded-xl hover:bg-orange-700 transition flex items-center justify-center"
             >
-              Submit
+              {loading ? (
+                <span className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></span>
+              ) : (
+                "Submit"
+              )}
             </button>
           </form>
         </div>
       </div>
 
-      {/* Modal */}
+      {/* MODAL */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-xl shadow-xl text-center max-w-sm">
             <h2 className="text-xl font-bold mb-2">Notification</h2>
             <p className="mb-4">{modalMessage}</p>
+
             <button
               className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md"
               onClick={() => setModalOpen(false)}
@@ -271,7 +288,7 @@ const Business = () => {
         </div>
       )}
 
-      {/* Fonts */}
+      {/* FONTS */}
       <style jsx>{`
         .font-playfair {
           font-family: "Playfair Display", serif;

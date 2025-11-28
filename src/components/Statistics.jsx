@@ -38,7 +38,7 @@ const StatisticsProgressCards = () => {
   return (
     <>
       <FontsStyle />
-      <section className="py-10 sm:py-16 bg-gray-50 w-full overflow-hidden">
+      <section className="pt-6 sm:pt-8 pb-10 sm:pb-16 bg-gray-50 w-full overflow-hidden">
         <div className="max-w-full mx-auto px-4 sm:px-6">
           {/* Header */}
           <div className="text-center mb-12 sm:mb-16">

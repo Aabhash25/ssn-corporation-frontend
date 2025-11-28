@@ -110,7 +110,7 @@ const Licenses = () => {
   return (
     <>
       <FontsStyle />
-      <section className="relative flex flex-col items-center py-12 sm:py-16 px-6 sm:px-10 bg-white overflow-hidden text-gray-800">
+      <section className="relative flex flex-col items-center pt-6 sm:pt-8 pb-12 px-6 sm:px-10 bg-white overflow-hidden text-gray-800">
         {/* Background animation */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/5 w-60 h-60 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
