@@ -2,12 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/logo.webp" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SSN Corporation</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+
+    <!-- Mobile Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO Title -->
+    <title>
+      SSN Corporation — Engineering, Construction, Infrastructure & R&D
+    </title>
+
+    <!-- SEO Description -->
+    <meta
+      name="description"
+      content="SSN Corporation is a multidisciplinary engineering and construction firm headquartered in Raleigh, North Carolina. We provide engineering and general construction services throughout Georgia, North Carolina, and Virginia. Our team delivers comprehensive, end-to-end solutions, including land planning and permitting, building and infrastructure design, site development, structural, geotechnical, water resources, and MEP design and engineering, construction management, pre-construction services, and general construction solutions. With a strong commitment to innovation, precision, and sustainability, we consistently deliver high-quality residential, commercial, and industrial projects."
+    />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ssncorporation.com/" />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
       rel="stylesheet"
@@ -20,7 +44,61 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ======================================================================= -->
+    <!-- ⭐⭐⭐ STRUCTURED DATA FOR GOOGLE ⭐⭐⭐ -->
+    <!-- ======================================================================= -->
+
+    <!-- Website Schema (Sitelinks Search Box) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "SSN Corporation",
+        "url": "https://ssncorporation.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://ssncorporation.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- Organization Schema (IMPORTANT for Logo in Google Search) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SSN Corporation",
+        "url": "https://ssncorporation.com",
+        "logo": "https://ssncorporation.com/logo.png",
+        "image": "https://ssncorporation.com/logo.png",
+        "description": "SSN Corporation is a multidisciplinary engineering and construction firm headquartered in Raleigh, North Carolina. We provide engineering and general construction services throughout Georgia, North Carolina, and Virginia. Our team delivers comprehensive, end-to-end solutions, including land planning and permitting, building and infrastructure design, site development, structural, geotechnical, water resources, and MEP design and engineering, construction management, pre-construction services, and general construction solutions. With a strong commitment to innovation, precision, and sustainability, we consistently deliver high-quality residential, commercial, and industrial projects.",
+        "sameAs": [
+          "https://www.facebook.com/ssncorporation",
+          "https://www.linkedin.com/company/ssncorporation",
+          "https://www.instagram.com/ssncorporation"
+        ]
+      }
+    </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://ssncorporation.com"
+          }
+        ]
+      }
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

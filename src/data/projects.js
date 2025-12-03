@@ -17,7 +17,7 @@ export const projects = [
   {
     id: 2,
     name: "Game Day Mens Health",
-    images: ["/GamesDayMensHealth1.webp", "/GamesDayMensHealth2.webp", "/GamesDayMensHealth3.webp", "/GamesDayMensHealth4.webp", "/GamesDayMensHealth5.webp", "/GamesDayMensHealth6.webp", "/GamesDayMensHealth7.webp"],
+    images: ["/GamesDayMensHealth1.webp", "/GamesDayMensHealth2.webp", "/GamesDayMensHealth3.webp", "/GamesDayMensHealth4.webp", "/GamesDayMensHealth5.webp", "/GamesDayMensHealth6.webp", "/GamesDayMensHealth7.webp","/GamesDayMensHealth8.jpg","/GamesDayMensHealth9.jpg","/GamesDayMensHealth10.jpg","/GamesDayMensHealth11.jpg","/GamesDayMensHealth12.jpg"],
     description: "Medical clinic upfit project in Burlington, NC.",
     longDescription: "We are pleased to share the successful completion of a medical clinic upfit project in Burlington, NC. The project included conversion of an open cell into a functional medical space by constructing/partitioning 4 patient checkup rooms, 2 doctor's/nurse's offices, 1 breakroom, 1 laboratory, and 2 waiting spaces and counters. The project included general construction, plumbing, mechanical, electrical, and fire sprinkler work. This project demonstrates our team's ability to adapt and optimize existing commercial spaces for a specialized use. Thank you GSP Health LLC of Morrisville, NC for this collaboration .",
     year: 2023,

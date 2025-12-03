@@ -47,7 +47,7 @@ const Footer = () => {
                   <p>Raleigh, NC 27606</p>
                 </address>
                 <a
-                  href="https://www.google.com/maps?q=5540+Centerview+Dr+Raleigh+NC+27606"
+                  href="https://www.google.com/maps/place/SSN+Engineers+PLLC/@35.7631477,-78.7319232,17z/data=!4m6!3m5!1s0x2c87c20ddc801e11:0x376efaf8d3e32d33!8m2!3d35.7629976!4d-78.7321878!16s%2Fg%2F11yq030k1b?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-orange-400 text-sm hover:underline inline-block mt-1"
@@ -109,51 +109,100 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Design Expertise */}
         <div>
           <h3 className="text-xl font-playfair font-bold mb-5">
             Design Expertise
           </h3>
           <ul className="space-y-3 text-gray-400 text-[15px] leading-relaxed">
-            <li>Architectural Design</li>
-            <li>Structural Design</li>
-            <li>Site Civil Design</li>
-            <li>Subsurface Investigation & Geotechnical Testing</li>
-            <li>Geotechnical Evaluation & Design</li>
-            <li>MEP Design</li>
-            <li>Construction Support & Material Testing</li>
-            <li>Instrumentation & Monitoring</li>
+            {[
+              "Architectural Design",
+              "Structural Design",
+              "Site Civil Design",
+              "Geotechnical Evaluation & Design",
+              "MEP Design",
+              "Water Resources Engineering",
+              "Pavement Engineering",
+            ].map((item, index) => {
+              const slug = item
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
+              return (
+                <li key={index}>
+                  <Link
+                    to={`/engineers#${slug}`}
+                    className="hover:text-white cursor-pointer transition"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
-        {/* Design Capabilities */}
         <div>
           <h3 className="text-xl font-playfair font-bold mb-5">
             Design Capabilities
           </h3>
           <ul className="space-y-3 text-gray-400 text-[15px] leading-relaxed">
-            <li>Land Development & Planning</li>
-            <li>Residential Building</li>
-            <li>Commercial Building</li>
-            <li>Infrastructure Planning & Design</li>
-            <li>Commercial Space Uplift & Permitting</li>
-            <li>Pavement Design</li>
-            <li>Trenchless Pipe Design</li>
+            {[
+              "Land Planning and Development",
+              "Residential, Commercial, and Institutional Building Design",
+              "Facility Planning and Design",
+              "Specialty Engineering Services",
+              "SubSurface Investigation and Geotechnical Engineering",
+              "Instrumentation and Monitoring",
+              "Construction Administration and Construction Engineering",
+              "Construction Support and Material Testing",
+            ].map((item, index) => {
+              const slug = item
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
+              return (
+                <li key={index}>
+                  <Link
+                    to={`/engineers#${slug}`}
+                    className="hover:text-white cursor-pointer transition"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
 
-        {/* Construction Capabilities */}
         <div>
           <h3 className="text-xl font-playfair font-bold mb-5">
             Construction Capabilities
           </h3>
           <ul className="space-y-3 text-gray-400 text-[15px] leading-relaxed">
-            <li>Residential Building Construction</li>
-            <li>Commercial Building Construction</li>
-            <li>Commercial Space Upfits</li>
-            <li>Site Development - Construction</li>
-            <li>Construction Management</li>
-            <li>Pre Construction Services</li>
+            {[
+              "Pre-Construction Services",
+              "Construction Management",
+              "Residential Construction",
+              "Commercial Construction",
+              "Commercial Space Upfit",
+              "Site Development & Construction",
+              "Utility Construction",
+            ].map((item, index) => {
+              const slug = item
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
+              return (
+                <li key={index}>
+                  <Link
+                    to={`/contractors#${slug}`}
+                    className="hover:text-white cursor-pointer transition"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>

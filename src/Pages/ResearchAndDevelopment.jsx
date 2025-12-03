@@ -76,7 +76,7 @@ const ResearchAndDevelopment = () => {
           <div className="relative order-1 lg:order-2 w-full flex justify-center lg:justify-end">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 w-full max-w-[600px] sm:max-w-[700px] lg:max-w-[900px] lg:translate-x-20 transition-transform duration-300">
               <img
-                src="/qtakeoff1.png"
+                src="/qtakeoff1.webp"
                 alt="AI analyzing construction blueprints in our R&D lab"
                 className="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-700"
                 loading="lazy"

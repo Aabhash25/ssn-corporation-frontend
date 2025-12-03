@@ -32,7 +32,7 @@ const services = [
     description: "Ground-up site development and preparation services",
   },
   {
-    image: "/CommercialUpfit.jpg",
+    image: "/CommercialUpfit.webp",
     title: "Commercial Space Upfit",
     description: "Renovation and modernization of existing commercial spaces",
   },

@@ -51,7 +51,7 @@ export const specialities = [
     title: "Geotechnical Evaluation and Design",
     icon: "🧱",
     // image: "/geotech.webp",
-    image: "/SubSurface4.jpg",
+    image: "/SubSurface4.webp",
     description: [
       "Comprehensive geotechnical engineering services for various projects.",
       [
@@ -102,7 +102,7 @@ export const specialities = [
       {
     title: "Pavement Engineering",
     icon: "⚡",
-    image: "/mep.webp",
+    image: "/CarolinaMurganTemple3.webp",
     description: [
       "Comprehensive Pavement Engineering design services.",
       [

@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { specialities } from "../data/specialities";
 import { services } from "../data/services";
 
@@ -20,6 +20,30 @@ const Engineers = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+
+  const location = useLocation();
+  const highlightedCardRef = useRef(null);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Add highlighting effect
+        element.classList.add('highlight-card');
+        highlightedCardRef.current = element;
+        
+        // Remove highlight after a few seconds
+        setTimeout(() => {
+          if (highlightedCardRef.current === element) { // Ensure we are removing the highlight from the correct element
+            highlightedCardRef.current.classList.remove('highlight-card');
+            highlightedCardRef.current = null;
+          }
+        }, 3000);
+      }
+    }
+  }, [location]);
 
   const openModal = (speciality) => {
     setSelectedSpeciality(speciality);
@@ -287,48 +311,52 @@ const Engineers = () => {
 
           {/* Service Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                className="group cursor-pointer"
-                initial="hidden"
-                whileInView="visible"
-                variants={fadeUp}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.1 }}
-                onClick={() => openServiceModal(service)}
-              >
-                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full border border-gray-100 flex flex-col">
-                  <div className="relative overflow-hidden flex-shrink-0">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
-                      <span className="text-2xl">{service.icon}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-6 flex flex-col justify-between flex-grow">
-                    <div>
-                      <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
-                        {service.title}
-                      </h3>
-                      <p className="text-gray-600 line-clamp-2 mb-4 flex-grow">
-                        {service.description}
-                      </p>
+            {services.map((service, index) => {
+              const slug = service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+              return (
+                <motion.div
+                  key={index}
+                  id={slug}
+                  className="group cursor-pointer"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={fadeUp}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => openServiceModal(service)}
+                >
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full border border-gray-100 flex flex-col">
+                    <div className="relative overflow-hidden flex-shrink-0">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
+                        <span className="text-2xl">{service.icon}</span>
+                      </div>
                     </div>
 
-                    {/* NEW SIMPLE BUTTON FOR SERVICES */}
-                    <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
-                      Explore Service
-                    </button>
+                    <div className="p-6 flex flex-col justify-between flex-grow">
+                      <div>
+                        <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
+                          {service.title}
+                        </h3>
+                        <p className="text-gray-600 line-clamp-2 mb-4 flex-grow">
+                          {service.description}
+                        </p>
+                      </div>
+
+                      {/* NEW SIMPLE BUTTON FOR SERVICES */}
+                      <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
+                        Explore Service
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -360,50 +388,54 @@ const Engineers = () => {
 
           {/* Specialities Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-            {specialities.map((speciality, index) => (
-              <motion.div
-                key={index}
-                className="group cursor-pointer"
-                initial="hidden"
-                whileInView="visible"
-                variants={fadeUp}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.1 }}
-                onClick={() => openModal(speciality)}
-              >
-                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full border border-gray-100 flex flex-col">
-                  <div className="relative overflow-hidden flex-shrink-0">
-                    <img
-                      src={speciality.image}
-                      alt={speciality.title}
-                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
-                      <span className="text-2xl">{speciality.icon}</span>
-                    </div>
-                  </div>
-
-                  <div className="p-6 flex flex-col justify-between flex-grow">
-                    <div>
-                      <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
-                        {speciality.title}
-                      </h3>
-                      <p className="text-gray-600 line-clamp-2 mb-4 flex-grow">
-                        {typeof speciality.description[0] === "string"
-                          ? speciality.description[0]
-                          : "Click to explore our comprehensive services..."}
-                      </p>
+            {specialities.map((speciality, index) => {
+              const slug = speciality.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+              return (
+                <motion.div
+                  key={index}
+                  id={slug}
+                  className="group cursor-pointer"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={fadeUp}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => openModal(speciality)}
+                >
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 h-full border border-gray-100 flex flex-col">
+                    <div className="relative overflow-hidden flex-shrink-0">
+                      <img
+                        src={speciality.image}
+                        alt={speciality.title}
+                        className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
+                        <span className="text-2xl">{speciality.icon}</span>
+                      </div>
                     </div>
 
-                    {/* NEW SIMPLE BUTTON FOR SPECIALITIES */}
-                    <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
-                      Explore Service
-                    </button>
+                    <div className="p-6 flex flex-col justify-between flex-grow">
+                      <div>
+                        <h3 className="font-playfair font-bold text-xl sm:text-2xl text-gray-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
+                          {speciality.title}
+                        </h3>
+                        <p className="text-gray-600 line-clamp-2 mb-4 flex-grow">
+                          {typeof speciality.description[0] === "string"
+                            ? speciality.description[0]
+                            : "Click to explore our comprehensive services..."}
+                        </p>
+                      </div>
+
+                      {/* NEW SIMPLE BUTTON FOR SPECIALITIES */}
+                      <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
+                        Explore Service
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -534,6 +566,11 @@ const Engineers = () => {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        .highlight-card {
+          box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.8), 0 0 20px rgba(251, 146, 60, 0.6);
+          transition: box-shadow 0.5s ease-in-out;
         }
       `}</style>
     </div>

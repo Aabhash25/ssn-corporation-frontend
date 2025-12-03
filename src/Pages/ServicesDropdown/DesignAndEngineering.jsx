@@ -15,6 +15,25 @@ const FontsStyle = () => (
 );
 
 const DesignAndEngineering = () => {
+  // Projects
+  const featureProjects = [
+    {
+      id: 1,
+      image: "./SlaughterHouse1.webp",
+      title: "Slaughter House - Retail Convenience Store ",
+    },
+    {
+      id: 2,
+      image: "./GamesDayMensHealth5.webp",
+      title: "GamesDay Men's Health - Design and Engineering ",
+    },
+    {
+      id: 3,
+      image: "./NorthWoodsShoppingCenter1.webp",
+      title: "NorthWood Shopping Center - Architectural Design",
+    },
+  ];
+
   return (
     <>
       <FontsStyle />
@@ -31,83 +50,113 @@ const DesignAndEngineering = () => {
             <div className="w-24 sm:w-32 h-1 rounded-full bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 animate-pulse"></div>
           </div>
 
-          {/* Intro Paragraph */}
           <p className="text-lg sm:text-xl font-roboto text-gray-700 leading-relaxed mb-12 max-w-4xl mx-auto">
             Our Design and Engineering practice delivers creative, efficient,
-            and technically sound solutions — ensuring projects are not only
-            visually compelling but structurally optimized and practically
-            buildable. Our Design and Engineering team is equipped to handle all
-            types of projects—including buildings, infrastructure, roadways,
-            facilities, educational, and industrial projects—across both
-            vertical and horizontal construction sectors.
+            and technically sound solutions — ensuring projects are visually
+            compelling, structurally optimized, and practically buildable. We
+            support buildings, infrastructure, roadways, facilities,
+            educational, and industrial projects across vertical and horizontal
+            construction sectors.
           </p>
         </div>
 
         {/* Content Section */}
         <div className="relative z-10 w-full max-w-7xl mx-auto">
           {/* What We Do */}
-          <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
+          <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-6">
             What We Do
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
+
+          <div className="space-y-6 text-gray-700 font-roboto text-lg leading-relaxed mb-12">
+            <p>
               <strong>Concept & Detailed Design:</strong> We translate visions
-              into reality by developing master plans, site layouts, and
-              architectural concepts. Our team dives into grading, drainage,
-              utility infrastructure, structural systems, and MEP (mechanical,
-              electrical, plumbing) design.
-            </li>
-            <li>
+              into reality by developing master plans, site layouts,
+              architectural concepts, grading, drainage, utilities, structural
+              systems, and MEP design.
+            </p>
+
+            <p>
               <strong>Multidisciplinary Engineering:</strong> Our civil,
               structural, water resources, and environmental engineers work
-              collaboratively to provide integrated solutions — from roads and
-              utilities to sustainable building systems.
-            </li>
-            <li>
+              collaboratively to ensure all systems function together as one.
+            </p>
+
+            <p>
               <strong>Sustainable & Resilient Infrastructure:</strong> We design
-              for long-term performance: minimizing lifecycle costs, reducing
-              environmental impacts, and building resilience against climate
-              risks.
-            </li>
-            <li>
-              <strong>Digital Innovation & Modeling:</strong> We leverage BIM,
-              3D modeling, and data-driven workflows to validate design early,
-              reduce rework, and streamline construction.
-            </li>
-            <li>
-              <strong>Constructability & Value Engineering:</strong> Our
-              engineers focus on buildability and cost optimization without
-              compromising on quality — we evaluate construction phasing,
-              material choices, and system integration to maximize value.
-            </li>
-            <li>
-              <strong>Construction Support:</strong> We don’t just hand off
-              drawings. We provide construction-phase services: review, QA/QC,
-              shop drawing coordination, and as-built documentation to keep the
-              project on track.
-            </li>
-          </ul>
+              for long-term performance—minimizing costs, reducing environmental
+              impact, and ensuring climate resilience.
+            </p>
+
+            <p>
+              <strong>Digital Innovation & Modeling:</strong> We use BIM, 3D
+              modeling, and technology-driven workflows to reduce rework and
+              validate design early.
+            </p>
+
+            <p>
+              <strong>Constructability & Value Engineering:</strong> We optimize
+              material selection, construction phasing, and system integration
+              for maximum value.
+            </p>
+
+            <p>
+              <strong>Construction Support:</strong> Our team provides QA/QC,
+              shop drawing reviews, coordination, and as-built documentation to
+              ensure successful execution.
+            </p>
+          </div>
 
           {/* Why SSN Corporation */}
-          <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-4">
+          <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-6">
             Why SSN Corporation
           </h2>
-          <ul className="list-disc pl-6 text-gray-700 font-roboto text-lg leading-relaxed space-y-4 mb-10">
-            <li>
-              <strong>Integrated Teams:</strong> We blend architecture,
-              engineering, and planning to deliver refined, cohesive solutions.
-            </li>
-            <li>
-              <strong>Technical Depth plus Local Insight:</strong> We combine
-              national-level engineering capabilities with deep knowledge of
-              local codes, permitting, and community contexts.
-            </li>
-            <li>
-              <strong>Sustainable Mindset:</strong> Driven by principles of
-              resilience and efficiency, we design systems that reduce
-              environmental harm and adapt for the future.
-            </li>
-          </ul>
+
+          <div className="space-y-6 text-gray-700 font-roboto text-lg leading-relaxed mb-16">
+            <p>
+              <strong>Integrated Teams:</strong> We combine architecture,
+              engineering, and planning to deliver cohesive and refined design
+              solutions.
+            </p>
+
+            <p>
+              <strong>Technical Depth + Local Insight:</strong> National-level
+              engineering expertise blended with deep understanding of local
+              codes, permitting processes, and community needs.
+            </p>
+
+            <p>
+              <strong>Sustainable Mindset:</strong> We prioritize efficiency,
+              resilience, and environmental responsibility in every design.
+            </p>
+          </div>
+
+          {/* ⭐ FEATURE PROJECTS ⭐ */}
+          <h2 className="text-3xl font-playfair font-semibold text-gray-900 mb-8">
+            Featured Projects
+          </h2>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-20">
+            {featureProjects.map((project) => (
+              <div
+                key={project.id}
+                className="rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="h-56 w-full overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                  />
+                </div>
+
+                <div className="p-5">
+                  <h3 className="font-playfair text-xl font-semibold text-gray-900">
+                    {project.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Decorative Glow Circles */}

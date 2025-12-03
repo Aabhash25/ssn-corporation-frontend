@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { contractorServices } from "../data/contractorServices";
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -16,6 +16,30 @@ const scaleUp = {
 const Contractors = () => {
   const [selectedService, setSelectedService] = useState(null);
   const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
+
+  const location = useLocation();
+  const highlightedCardRef = useRef(null);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Add highlighting effect
+        element.classList.add('highlight-card');
+        highlightedCardRef.current = element;
+        
+        // Remove highlight after a few seconds
+        setTimeout(() => {
+          if (highlightedCardRef.current === element) {
+            highlightedCardRef.current.classList.remove('highlight-card');
+            highlightedCardRef.current = null;
+          }
+        }, 3000);
+      }
+    }
+  }, [location]);
 
   const openServiceModal = (service) => {
     setSelectedService(service);
@@ -240,50 +264,54 @@ const Contractors = () => {
 
           {/* Service Cards Grid (4 Columns) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
-            {contractorServices.map((service, index) => (
-              <motion.div
-                key={index}
-                className="group cursor-pointer"
-                initial="hidden"
-                whileInView="visible"
-                variants={fadeUp}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ delay: index * 0.1 }}
-                onClick={() => openServiceModal(service)}
-              >
-                <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 h-full flex flex-col">
-                  {/* Card Image and Title Area */}
-                  <div className="relative overflow-hidden flex-shrink-0">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                    <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
-                      <span className="text-2xl">{service.icon}</span>
+            {contractorServices.map((service, index) => {
+              const slug = service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+              return (
+                <motion.div
+                  key={index}
+                  id={slug}
+                  className="group cursor-pointer"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={fadeUp}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ delay: index * 0.1 }}
+                  onClick={() => openServiceModal(service)}
+                >
+                  <div className="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 h-full flex flex-col">
+                    {/* Card Image and Title Area */}
+                    <div className="relative overflow-hidden flex-shrink-0">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-48 object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-xl p-3 shadow-lg">
+                        <span className="text-2xl">{service.icon}</span>
+                      </div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="font-playfair font-bold text-xl sm:text-2xl text-white mb-1 line-clamp-2">
+                          {service.title}
+                        </h3>
+                      </div>
                     </div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="font-playfair font-bold text-xl sm:text-2xl text-white mb-1 line-clamp-2">
-                        {service.title}
-                      </h3>
+
+                    {/* Card Content (Description and New Simple Button) */}
+                    <div className="p-4 flex flex-col justify-between flex-grow">
+                      <p className="text-gray-600 text-base leading-relaxed line-clamp-3 mb-4 flex-grow">
+                        {service.description}
+                      </p>
+
+                      {/* NEW SIMPLE BUTTON */}
+                      <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
+                        Explore Service
+                      </button>
                     </div>
                   </div>
-
-                  {/* Card Content (Description and New Simple Button) */}
-                  <div className="p-4 flex flex-col justify-between flex-grow">
-                    <p className="text-gray-600 text-base leading-relaxed line-clamp-3 mb-4 flex-grow">
-                      {service.description}
-                    </p>
-
-                    {/* NEW SIMPLE BUTTON */}
-                    <button className="w-full mt-3 py-2 text-base font-semibold text-orange-600 border-2 border-orange-200 rounded-xl bg-orange-50 hover:bg-orange-100 transition-all duration-300">
-                      Explore Service
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -408,6 +436,11 @@ const Contractors = () => {
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        .highlight-card {
+          box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.8), 0 0 20px rgba(251, 146, 60, 0.6);
+          transition: box-shadow 0.5s ease-in-out;
         }
       `}</style>
     </div>
