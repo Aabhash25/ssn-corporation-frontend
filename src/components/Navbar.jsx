@@ -26,7 +26,7 @@ const ModernNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
 
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
@@ -45,7 +45,7 @@ const ModernNavbar = () => {
   // Update isDesktop on resize
   useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
+      setIsDesktop(window.innerWidth >= 1280);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -113,12 +113,10 @@ const ModernNavbar = () => {
             >
               <FaEnvelope /> contact@ssncorporation.com
             </a>
-            <a
-              href="tel: (919) 703-0222"
-              className="flex items-center gap-2 hover:text-yellow-400 transition-colors"
-            >
+
+            <span className="flex items-center gap-2">
               <FaPhoneAlt /> (919) 703-0222
-            </a>
+            </span>
           </div>
 
           {/* Center: Top Links */}
@@ -182,21 +180,28 @@ const ModernNavbar = () => {
           top: isDesktop ? "56px" : "0px",
         }}
       >
-        <div className="max-w-7xl mx-auto flex justify-between items-center h-24 px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex justify-between items-center h-20 md:h-20 xl:h-24 px-4 md:px-6 xl:px-8">
           {/* Logo */}
           <Link
             to="/"
-            className="flex items-center font-playfair text-3xl lg:text-4xl font-bold -ml-3 lg:-ml-6"
+            className="flex items-center font-playfair text-2xl xl:text-4xl font-bold -ml-2 xl:-ml-6 mt-2 md:mt-0"
+            onClick={() => {
+              setIsOpen(false);
+              setIsServicesOpen(false);
+              if (typeof window !== "undefined") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
           >
             <img
               src="/logo.webp"
               alt="SSN Logo"
-              className="h-20 w-auto hover:scale-110 transition-transform duration-300"
+              className="h-16 md:h-16 xl:h-20 w-auto hover:scale-105 transition-transform duration-300"
             />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center space-x-10 font-oswald text-2xl">
+          <div className="hidden xl:flex items-center space-x-6 xl:space-x-10 font-oswald text-lg xl:text-2xl">
             <Link className={`transition-colors ${linkStyle}`} to="/about">
               About Us
             </Link>
@@ -233,7 +238,7 @@ const ModernNavbar = () => {
 
               {isServicesOpen && (
                 <div
-                  className="fixed left-0 w-full shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
+                  className="fixed left-0 right-0 mx-auto max-w-7xl shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
                   style={{
                     top: isDesktop
                       ? isLandingPage && !scrolled
@@ -242,7 +247,7 @@ const ModernNavbar = () => {
                       : "96px",
                   }}
                 >
-                  <div className="grid grid-cols-4 gap-0 py-5 px-8">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-0 py-4 px-6">
                     {/* Left Column - Company Motto */}
                     <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 flex flex-col justify-center">
                       <div className="border-l-4 border-yellow-500 pl-6">
@@ -437,7 +442,7 @@ const ModernNavbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center">
+          <div className="xl:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`focus:outline-none p-3 rounded-md transition-all duration-300 ${linkStyle}`}
@@ -462,7 +467,7 @@ const ModernNavbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gray-900/95 backdrop-blur-md shadow-xl z-50 transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-11/12 max-w-md bg-gray-900/95 backdrop-blur-md shadow-xl z-50 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } rounded-l-3xl`}
       >
@@ -485,36 +490,33 @@ const ModernNavbar = () => {
           </svg>
         </button>
 
-        <div className="h-full overflow-y-auto px-6 py-20 flex flex-col justify-start space-y-12">
+        <div className="h-full overflow-y-auto px-6 py-8 flex flex-col justify-start space-y-6">
           {/* Contact Info */}
-          <div className="flex flex-col items-start space-y-2 border-b border-gray-700 pb-4">
+          <div className="flex flex-col space-y-2 text-white">
             <a
               href="mailto:contact@ssncorporation.com"
-              className="flex items-center gap-2 text-sm text-white hover:text-yellow-400"
+              className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors"
             >
               <FaEnvelope /> contact@ssncorporation.com
             </a>
-            <a
-              href="tel:9197030222"
-              className="flex items-center gap-2 text-sm text-white hover:text-yellow-400"
-            >
-              <FaPhoneAlt />
-              (919) 703-0222
-            </a>
+
+            <span className="flex items-center gap-2 text-white">
+              <FaPhoneAlt /> (919) 703-0222
+            </span>
           </div>
 
           {/* Main Navigation */}
           <div className="flex flex-col space-y-4">
             <Link
               to="/about"
-              className="text-2xl text-white hover:text-yellow-400 font-semibold"
+              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
               onClick={() => setIsOpen(false)}
             >
               About Us
             </Link>
             <Link
               to="/portfolio"
-              className="text-2xl text-white hover:text-yellow-400 font-semibold"
+              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
               onClick={() => setIsOpen(false)}
             >
               Portfolio
@@ -524,7 +526,7 @@ const ModernNavbar = () => {
             <div className="flex flex-col">
               <button
                 onClick={() => setIsServicesOpen(!isServicesOpen)}
-                className="flex items-center justify-between w-full py-2 text-2xl text-white hover:text-yellow-400 font-semibold gap-2"
+                className="flex items-center justify-between w-full py-2 text-lg md:text-xl text-white hover:text-yellow-400 font-semibold gap-2"
               >
                 Services
                 <svg
@@ -708,7 +710,7 @@ const ModernNavbar = () => {
 
             <Link
               to="/research-and-development"
-              className="text-2xl text-white hover:text-yellow-400 font-semibold"
+              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
               onClick={() => setIsOpen(false)}
             >
               Research & Development
@@ -716,14 +718,14 @@ const ModernNavbar = () => {
 
             <Link
               to="/career"
-              className="text-2xl text-white hover:text-yellow-400 font-semibold"
+              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
               onClick={() => setIsOpen(false)}
             >
               Careers
             </Link>
             <Link
               to="/contact"
-              className="text-2xl text-yellow-500 font-bold hover:text-yellow-400"
+              className="text-lg md:text-xl text-yellow-500 font-bold hover:text-yellow-400"
               onClick={() => setIsOpen(false)}
             >
               Contact Us

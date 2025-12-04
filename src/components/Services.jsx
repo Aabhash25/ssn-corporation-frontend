@@ -108,13 +108,25 @@ const Slider = ({ services, reverse = false }) => {
 
   const nextSlide = () => {
     if (!isTransitioning) return;
-    setCurrentIndex((prev) => (reverse ? prev - 1 : prev + 1));
+    setCurrentIndex((prev) => {
+      const next = reverse ? prev - 1 : prev + 1;
+      // Wrap around: if we exceed bounds, loop to the start/end
+      if (next >= services.length) return 0;
+      if (next < 0) return services.length - 1;
+      return next;
+    });
     resetAutoplay();
   };
 
   const prevSlide = () => {
     if (!isTransitioning) return;
-    setCurrentIndex((prev) => (reverse ? prev + 1 : prev - 1));
+    setCurrentIndex((prev) => {
+      const prev_index = reverse ? prev + 1 : prev - 1;
+      // Wrap around: if we exceed bounds, loop to the end/start
+      if (prev_index >= services.length) return 0;
+      if (prev_index < 0) return services.length - 1;
+      return prev_index;
+    });
     resetAutoplay();
   };
 
@@ -123,26 +135,19 @@ const Slider = ({ services, reverse = false }) => {
       clearInterval(autoplayRef.current);
     }
     autoplayRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (reverse ? prev - 1 : prev + 1));
+      setCurrentIndex((prev) => {
+        const next = reverse ? prev - 1 : prev + 1;
+        // Wrap around on autoplay
+        if (next >= services.length) return 0;
+        if (next < 0) return services.length - 1;
+        return next;
+      });
     }, 3000);
   };
 
   useEffect(() => {
-    if (currentIndex === services.length) {
-      timeoutRef.current = setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(0);
-      }, 700);
-    } else if (currentIndex === -1) {
-      timeoutRef.current = setTimeout(() => {
-        setIsTransitioning(false);
-        setCurrentIndex(services.length - 1);
-      }, 700);
-    }
-
-    return () => {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
+    // No need for wrap-around logic here since we handle it in nextSlide/prevSlide
+    // This effect is now a no-op but kept for structure
   }, [currentIndex, services.length]);
 
   useEffect(() => {
@@ -155,18 +160,24 @@ const Slider = ({ services, reverse = false }) => {
 
   useEffect(() => {
     autoplayRef.current = setInterval(() => {
-      setCurrentIndex((prev) => (reverse ? prev - 1 : prev + 1));
+      setCurrentIndex((prev) => {
+        const next = reverse ? prev - 1 : prev + 1;
+        // Wrap around on autoplay
+        if (next >= services.length) return 0;
+        if (next < 0) return services.length - 1;
+        return next;
+      });
     }, 3000);
 
     return () => {
       if (autoplayRef.current) clearInterval(autoplayRef.current);
     };
-  }, [reverse]);
+  }, [reverse, services.length]);
 
   const offset = -(currentIndex + slidesPerView) * (100 / slidesPerView);
 
   return (
-    <div className="mb-12">
+    <div className="mb-0">
       <div className="relative w-[95%] mx-auto overflow-hidden rounded-3xl mb-8">
         <div
           className="flex"
@@ -263,7 +274,9 @@ const Services = () => {
       <Slider services={services} reverse={false} />
 
       {/* Second Slider - Reverse Direction */}
-      <Slider services={services2} reverse={true} />
+      <div className="mt-16 md:mt-20">
+        <Slider services={services2} reverse={true} />
+      </div>
 
       <style jsx>{`
         .font-roboto {

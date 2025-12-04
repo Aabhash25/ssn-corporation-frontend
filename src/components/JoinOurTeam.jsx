@@ -17,22 +17,28 @@ const FontsStyle = () => (
 export default function JoinOurTeam({
   imageSrc = "https://plus.unsplash.com/premium_photo-1661405543210-4a20cbcf5aed?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8b2ZmaWNlJTIwbWVtYmVyc3xlbnwwfHwwfHx8MA%3D%3D",
   imageAlt = "Team on a construction site",
+  subtitle = "Explore career opportunities and build a rewarding career with us.",
 }) {
   return (
     <>
       <FontsStyle />
 
       {/* MAIN SECTION */}
-      <section className="w-full relative flex flex-col items-center pt-28 pb-16 bg-white overflow-hidden font-roboto">
-        {/* ABSOLUTE HEADING */}
-        <h2 className="absolute top-6 left-1/2 -translate-x-1/2 text-4xl sm:text-5xl font-playfair font-bold text-gray-900 z-20">
-          Join Our Team
-        </h2>
+      <section className="w-full relative flex flex-col items-center pt-4 pb-10 bg-white overflow-hidden font-roboto">
+        {/* HEADING + SUBTITLE (in flow to avoid overlap) */}
+        <div className="w-full text-center z-20 mb-6">
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-playfair font-bold text-gray-900">
+            Join Our Team
+          </h2>
+          <p className="mt-2 text-sm sm:text-lg text-gray-700 max-w-3xl mx-auto px-4 pt-4">
+            {subtitle}
+          </p>
+        </div>
 
         {/* MAIN GRID */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 px-4 sm:px-8 md:px-14 lg:px-20 items-center">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 px-4 sm:px-8 md:px-12 lg:px-16 items-center mt-6">
           {/* LEFT — IMAGE */}
-          <div className="w-full h-72 sm:h-96 lg:h-[480px] rounded-3xl overflow-hidden shadow-xl">
+          <div className="w-full h-64 sm:h-80 lg:h-[420px] rounded-2xl overflow-hidden shadow-lg">
             <img
               src="./whoweare.webp"
               alt={imageAlt}
@@ -41,10 +47,10 @@ export default function JoinOurTeam({
           </div>
 
           {/* RIGHT — TEXT */}
-          <div className="space-y-10 relative">
+          <div className="space-y-6 relative">
             {/* Decorative Circles */}
-            <div className="absolute -top-10 -right-6 w-36 h-36 bg-indigo-200 rounded-full blur-3xl opacity-30"></div>
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-pink-200 rounded-full blur-3xl opacity-20"></div>
+            <div className="absolute -top-8 -right-4 w-28 h-28 bg-indigo-200 rounded-full blur-3xl opacity-30"></div>
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-pink-200 rounded-full blur-3xl opacity-20"></div>
 
             {/* Intro Paragraph */}
             <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-roboto relative z-10">
@@ -54,10 +60,10 @@ export default function JoinOurTeam({
             </p>
 
             {/* ⭐ ONLY THE FOUR BOXES — CLEAN VERSION */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
               {/* Box 1 */}
-              <article className="rounded-2xl p-6 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1">
-                <h3 className="text-lg font-semibold mb-2 font-playfair text-gray-900">
+              <article className="rounded-xl p-5 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-md hover:shadow-xl transition-transform transform hover:-translate-y-1">
+                <h3 className="text-lg font-semibold mb-1 font-playfair text-gray-900">
                   Professional Growth
                 </h3>
                 <p className="text-sm text-gray-700 font-roboto">
@@ -66,8 +72,8 @@ export default function JoinOurTeam({
               </article>
 
               {/* Box 2 */}
-              <article className="rounded-2xl p-6 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1">
-                <h3 className="text-lg font-semibold mb-2 font-playfair text-gray-900">
+              <article className="rounded-xl p-5 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-md hover:shadow-xl transition-transform transform hover:-translate-y-1">
+                <h3 className="text-lg font-semibold mb-1 font-playfair text-gray-900">
                   Collaboration
                 </h3>
                 <p className="text-sm text-gray-700 font-roboto">
@@ -76,8 +82,8 @@ export default function JoinOurTeam({
               </article>
 
               {/* Box 3 */}
-              <article className="rounded-2xl p-6 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1">
-                <h3 className="text-lg font-semibold mb-2 font-playfair text-gray-900">
+              <article className="rounded-xl p-5 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-md hover:shadow-xl transition-transform transform hover:-translate-y-1">
+                <h3 className="text-lg font-semibold mb-1 font-playfair text-gray-900">
                   Career Advancement
                 </h3>
                 <p className="text-sm text-gray-700 font-roboto">
@@ -86,8 +92,8 @@ export default function JoinOurTeam({
               </article>
 
               {/* Box 4 */}
-              <article className="rounded-2xl p-6 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-lg hover:shadow-2xl transition-transform transform hover:-translate-y-1">
-                <h3 className="text-lg font-semibold mb-2 font-playfair text-gray-900">
+              <article className="rounded-xl p-5 bg-white/80 backdrop-blur-xl border border-gray-200 shadow-md hover:shadow-xl transition-transform transform hover:-translate-y-1">
+                <h3 className="text-lg font-semibold mb-1 font-playfair text-gray-900">
                   Work-Life Balance
                 </h3>
                 <p className="text-sm text-gray-700 font-roboto">
@@ -96,10 +102,10 @@ export default function JoinOurTeam({
               </article>
             </div>
 
-            <div className="pt-8">
+            <div className="pt-4">
               <a
-                href="/careers" // change to your careers page
-                className="inline-flex items-center gap-3 px-8 py-4 bg-yellow-500 text-gray-900 font-medium rounded-xl shadow-lg hover:bg-yellow-600 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+                href="/career"
+                className="inline-flex items-center gap-2 px-7 py-3 bg-yellow-500 text-gray-900 font-medium rounded-lg shadow-md hover:bg-yellow-600 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap"
               >
                 Join Our Team
                 <svg
@@ -118,7 +124,6 @@ export default function JoinOurTeam({
                 </svg>
               </a>
             </div>
-            {/* ←←← END OF NEW PART →→→ */}
           </div>
         </div>
       </section>

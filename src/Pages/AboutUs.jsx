@@ -202,14 +202,6 @@ const AboutUs = () => {
                 className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm p-6 rounded-xl">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                  Shaping the Future of Construction
-                </h3>
-                <p className="text-gray-700 text-lg">
-                  Innovation-driven. Client-focused. Built for tomorrow.
-                </p>
-              </div>
             </motion.div>
           </div>
         </section>
@@ -298,14 +290,6 @@ const AboutUs = () => {
                 className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm p-6 rounded-xl">
-                <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                  Building Tomorrow's Skylines
-                </h3>
-                <p className="text-gray-700 text-lg">
-                  Delivering innovation and sustainability in every project.
-                </p>
-              </div>
             </motion.div>
           </div>
         </section>
@@ -347,10 +331,12 @@ const AboutUs = () => {
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-4 bg-orange-50 hover:bg-orange-100 transition rounded-xl px-6 py-4 shadow-sm border border-orange-100"
+                    className="flex items-start gap-4 bg-orange-50 hover:bg-orange-100 transition rounded-xl px-6 py-4 shadow-sm border border-orange-100"
                   >
-                    <CheckBadgeIcon className="w-7 h-7 text-orange-500 flex-shrink-0" />
-                    <span className="text-gray-900 font-semibold text-lg">
+                    <div className="flex-shrink-0 mt-1">
+                      <CheckBadgeIcon className="w-7 h-7 text-orange-500" />
+                    </div>
+                    <span className="text-gray-900 font-semibold text-base leading-tight break-words">
                       {item}
                     </span>
                   </div>
@@ -367,20 +353,20 @@ const AboutUs = () => {
             >
               {[
                 {
-                  img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
-                  title: "Luxury Homes",
+                  img: "./CommercialUpfit.webp",
+                  // title: "Luxury Homes",
                 },
                 {
-                  img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80",
-                  title: "Modern Offices",
+                  img: "./commUpfit.jpg",
+                  // title: "Modern Offices",
                 },
                 {
-                  img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=80",
-                  title: "Industrial",
+                  img: "./seven-eleven.jpg",
+                  // title: "Industrial",
                 },
                 {
-                  img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80",
-                  title: "Sustainability",
+                  img: "./BrassTap4.webp",
+                  // title: "Sustainability",
                 },
               ].map((project, i) => (
                 <div

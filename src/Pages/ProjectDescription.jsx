@@ -42,77 +42,87 @@ const ProjectDescription = () => {
   return (
     <>
       <div className="min-h-screen bg-gray-50 pt-28 sm:pt-36 md:pt-48 lg:pt-56 font-sans text-gray-800">
-        {/* Hero Section */}
-        <div className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-b-3xl border-2 sm:border-4 border-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-xl">
-          <div className="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] relative">
-            <AnimatePresence>
-              <motion.img
-                key={currentImageIndex}
-                src={project.images[currentImageIndex]}
-                alt={project.name}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.9 }}
-                className="absolute inset-0 w-full h-full object-cover rounded-b-3xl will-change-transform"
-              />
-            </AnimatePresence>
+        {/* -------- HERO SECTION FIXED FOR MOBILE -------- */}
+        <div className="px-3 sm:px-0">
+          <div className="relative w-full max-w-7xl mx-auto overflow-hidden rounded-3xl sm:rounded-b-3xl border-0 sm:border-4 border-gradient-to-r from-blue-500 via-purple-500 to-pink-500 shadow-xl">
+            <div className="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] relative">
+              <AnimatePresence>
+                <motion.img
+                  key={currentImageIndex}
+                  src={project.images[currentImageIndex]}
+                  alt={project.name}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.9 }}
+                  className="absolute inset-0 w-full h-full object-cover rounded-3xl sm:rounded-b-3xl will-change-transform"
+                  style={{ objectPosition: "center" }}
+                />
+              </AnimatePresence>
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent rounded-b-3xl"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-transparent rounded-3xl sm:rounded-b-3xl"></div>
 
-            {project.images.length > 1 && (
-              <>
-                <button
-                  onClick={prevImage}
-                  className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all duration-300"
-                >
-                  <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </button>
-                <button
-                  onClick={nextImage}
-                  className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all duration-300"
-                >
-                  <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </button>
-              </>
-            )}
+              {project.images.length > 1 && (
+                <>
+                  <button
+                    onClick={prevImage}
+                    className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all duration-300"
+                  >
+                    <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </button>
+                  <button
+                    onClick={nextImage}
+                    className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition-all duration-300"
+                  >
+                    <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
-
-        {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid lg:grid-cols-3 gap-8 sm:gap-12">
-          {/* Descriptions */}
+        {/* -------- MAIN CONTENT -------- */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-10 sm:pt-6 sm:pb-14 grid lg:grid-cols-3 gap-8 sm:gap-12">
+          {/* Description Section */}
           <div className="lg:col-span-2 flex flex-col gap-8 sm:gap-10">
-            {/* Overview */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-md border border-gray-200"
+              className="bg-white/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-md border border-gray-200 overflow-visible whitespace-normal break-words"
             >
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4 border-l-4 border-blue-500 pl-4 font-[Playfair_Display]">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 border-l-4 border-yellow-500 pl-4 font-[Playfair_Display]">
                 Overview
               </h2>
-              <div className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify space-y-4">
+              <div className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify space-y-4 whitespace-normal break-words">
                 {project.description.split("\n").map((line, idx) => (
-                  <p key={idx}>{line}</p>
+                  <p
+                    key={idx}
+                    className="max-w-full break-words whitespace-normal"
+                  >
+                    {line}
+                  </p>
                 ))}
               </div>
             </motion.div>
 
-            {/* Project Details */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-md border border-gray-200"
+              className="bg-white/50 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow-md border border-gray-200 overflow-visible whitespace-normal break-words"
             >
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4 border-l-4 border-blue-500 pl-4 font-[Playfair_Display]">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 border-l-4 border-yellow-500 pl-4 font-[Playfair_Display]">
                 Project Details
               </h2>
-              <div className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify space-y-4">
+              <div className="text-gray-700 text-base sm:text-lg leading-relaxed text-justify space-y-4 whitespace-normal break-words">
                 {project.longDescription.split("\n").map((line, idx) => (
-                  <p key={idx}>{line}</p>
+                  <p
+                    key={idx}
+                    className="max-w-full break-words whitespace-normal"
+                  >
+                    {line}
+                  </p>
                 ))}
               </div>
             </motion.div>
@@ -129,35 +139,54 @@ const ProjectDescription = () => {
                 Project Info
               </h3>
               <div className="space-y-3 sm:space-y-4 text-gray-700 text-sm sm:text-base">
-                <div className="flex justify-between">
-                  <span className="font-semibold">Category:</span>{" "}
-                  <span>{project.category}</span>
+                <div className="flex justify-between gap-2">
+                  <span className="font-semibold whitespace-nowrap">
+                    Category:
+                  </span>
+                  <span className="text-right break-words">
+                    {project.category}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Client:</span>{" "}
-                  <span>{project.client || "N/A"}</span>
+
+                <div className="flex justify-between gap-2">
+                  <span className="font-semibold whitespace-nowrap">
+                    Client:
+                  </span>
+                  <span className="text-right break-words">
+                    {project.client || "N/A"}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Status:</span>{" "}
-                  <span>{project.status}</span>
+
+                <div className="flex justify-between gap-2">
+                  <span className="font-semibold whitespace-nowrap">
+                    Status:
+                  </span>
+                  <span className="text-right break-words">
+                    {project.status}
+                  </span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Year:</span>{" "}
-                  <span>{project.year}</span>
+
+                <div className="flex justify-between gap-2">
+                  <span className="font-semibold whitespace-nowrap">Year:</span>
+                  <span className="text-right break-words">{project.year}</span>
                 </div>
-                <div className="flex justify-between">
-                  <span className="font-semibold">Location:</span>{" "}
-                  <span>{project.location}</span>
+
+                <div className="flex justify-between gap-2">
+                  <span className="font-semibold whitespace-nowrap">
+                    Location:
+                  </span>
+                  <span className="text-right break-words">
+                    {project.location}
+                  </span>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
-
         {/* Gallery */}
         {project.images.length > 1 && (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-12">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 border-l-4 border-blue-500 pl-4 font-[Playfair_Display]">
+            <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 border-l-4 border-yellow-500 pl-4 font-[Playfair_Display]">
               Gallery
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">

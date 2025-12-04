@@ -7,17 +7,11 @@ export default function PreLandingPage({ onFinish }) {
   const canvasRef = useRef(null);
   const constructionElementsRef = useRef(null);
 
-  // Load logo and trigger finish
+  // Load logo and trigger finish (NO VIDEO PRELOAD)
   useEffect(() => {
     const img = new Image();
     img.onload = () => setLogoLoaded(true);
     img.src = "/logo.webp";
-
-    // ✅ Preload the landing page video
-    const video = document.createElement("video");
-    video.src = "/heroVideo-web.mp4"; // must match Hero video
-    video.preload = "auto";
-    video.load();
 
     const endTimer = setTimeout(() => {
       setShow(false);
