@@ -18,38 +18,80 @@
     <!-- SEO Description -->
     <meta
       name="description"
-      content="SSN Corporation is a multidisciplinary engineering and construction firm headquartered in Raleigh, North Carolina. We provide engineering and general construction services throughout Georgia, North Carolina, and Virginia. Our team delivers comprehensive, end-to-end solutions, including land planning and permitting, building and infrastructure design, site development, structural, geotechnical, water resources, and MEP design and engineering, construction management, pre-construction services, and general construction solutions. With a strong commitment to innovation, precision, and sustainability, we consistently deliver high-quality residential, commercial, and industrial projects."
+      content="SSN Corporation is a multidisciplinary engineering and construction firm headquartered in Raleigh, North Carolina. We provide engineering and general construction services throughout Georgia, North Carolina, and Virginia. Our team delivers comprehensive, end-to-end solutions, including land planning and permitting, building and infrastructure design, site development, structural, geotechnical, water resources, and MEP design and engineering, construction management, pre-construction services, and general construction solutions."
     />
 
-    <!-- Canonical URL -->
+    <!-- Canonical -->
     <link rel="canonical" href="https://ssncorporation.com/" />
 
     <!-- Robots -->
     <meta name="robots" content="index, follow" />
 
-    <!-- Preconnect for performance -->
+    <!-- ============================================================ -->
+    <!-- ⭐ PERFORMANCE: Google Fonts Optimization (NO RENDER BLOCKING) -->
+    <!-- ============================================================ -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Google Fonts -->
+    <!-- Preload fonts -->
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
-      rel="stylesheet"
     />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Poppins:wght@400;500;700&display=swap"
-      rel="stylesheet"
     />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
-      rel="stylesheet"
     />
 
-    <!-- ======================================================================= -->
-    <!-- ⭐⭐⭐ STRUCTURED DATA FOR GOOGLE ⭐⭐⭐ -->
-    <!-- ======================================================================= -->
+    <!-- Load fonts without blocking render -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Poppins:wght@400;500;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
 
-    <!-- Website Schema (Sitelinks Search Box) -->
+    <!-- Fallback for users with JS disabled -->
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Poppins:wght@400;500;700&display=swap"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap"
+      />
+    </noscript>
+
+    <!-- ============================================================ -->
+    <!-- ⭐ STRUCTURED DATA / SCHEMA -->
+    <!-- ============================================================ -->
+
+    <!-- Website Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -64,7 +106,7 @@
       }
     </script>
 
-    <!-- Organization Schema (IMPORTANT for Logo in Google Search) -->
+    <!-- Organization Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -73,7 +115,7 @@
         "url": "https://ssncorporation.com",
         "logo": "https://ssncorporation.com/logo.png",
         "image": "https://ssncorporation.com/logo.png",
-        "description": "SSN Corporation is a multidisciplinary engineering and construction firm headquartered in Raleigh, North Carolina. We provide engineering and general construction services throughout Georgia, North Carolina, and Virginia. Our team delivers comprehensive, end-to-end solutions, including land planning and permitting, building and infrastructure design, site development, structural, geotechnical, water resources, and MEP design and engineering, construction management, pre-construction services, and general construction solutions. With a strong commitment to innovation, precision, and sustainability, we consistently deliver high-quality residential, commercial, and industrial projects.",
+        "description": "SSN Corporation is a multidisciplinary engineering and construction firm headquartered in Raleigh, North Carolina.",
         "sameAs": [
           "https://www.facebook.com/ssncorporation",
           "https://www.linkedin.com/company/ssncorporation",
@@ -101,6 +143,8 @@
 
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- ⭐ PERFORMANCE: Defer JS (Fix render-blocking) -->
+    <script type="module" src="/src/main.jsx" defer></script>
   </body>
 </html>
