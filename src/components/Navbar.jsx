@@ -27,9 +27,20 @@ const ModernNavbar = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1280);
-
+  const [isRnDOpen, setIsRnDOpen] = useState(false);
+  const rndDropdownTimeout = useRef(null);
   const location = useLocation();
   const isLandingPage = location.pathname === "/";
+  const handleRnDMouseEnter = () => {
+    clearTimeout(rndDropdownTimeout.current);
+    setIsRnDOpen(true);
+  };
+
+  const handleRnDMouseLeave = () => {
+    rndDropdownTimeout.current = setTimeout(() => {
+      setIsRnDOpen(false);
+    }, 100);
+  };
 
   // Handle scroll
   useEffect(() => {
@@ -421,13 +432,62 @@ const ModernNavbar = () => {
                 </div>
               )}
             </div>
-
-            <Link
-              className={`transition-colors ${linkStyle}`}
-              to="/research-and-development"
+            {/* Research & Development Dropdown - FIXED GAP */}
+            <div
+              className="relative"
+              onMouseEnter={handleRnDMouseEnter}
+              onMouseLeave={handleRnDMouseLeave}
             >
-              Research & Development
-            </Link>
+              <button
+                className={`flex items-center gap-1 ${linkStyle} font-oswald`}
+              >
+                Research & Development
+                <svg
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    isRnDOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {/* Dropdown - Now sits flush under navbar */}
+              {isRnDOpen && (
+                <div
+                  className="absolute left-1/2 -translate-x-1/2 w-64 bg-white rounded-lg shadow-2xl border-t-4 border-yellow-500 overflow-hidden z-50"
+                  style={{
+                    top: "100%", // This is the key line - sticks directly to bottom of parent
+                  }}
+                >
+                  <div className="py-3">
+                    <Link
+                      to="/qtakeoff-ai"
+                      className="block px-6 py-4 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 font-oswald text-lg transition-colors flex items-center gap-3"
+                      onClick={() => setIsRnDOpen(false)}
+                    >
+                      <span className="text-2xl font-bold">Q</span>
+                      QTakeoff AI
+                    </Link>
+                    <Link
+                      to="/real-estate-site-analysis"
+                      className="block px-6 py-4 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 font-oswald text-lg transition-colors flex items-center gap-3 border-t border-gray-200"
+                      onClick={() => setIsRnDOpen(false)}
+                    >
+                      <FaRulerCombined className="text-xl" />
+                      Real Estate Site Analysis
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link className={`transition-colors ${linkStyle}`} to="/career">
               Careers

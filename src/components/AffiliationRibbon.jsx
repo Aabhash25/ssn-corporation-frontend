@@ -1,6 +1,3 @@
-"use client";
-import React from "react";
-
 const logos = [
   { src: "/bbb.webp", alt: "BBB Accredited", info: "BBB Accredited Business" },
   {

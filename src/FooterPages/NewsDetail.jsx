@@ -27,6 +27,32 @@ const FontsStyle = () => (
   `}</style>
 );
 
+// Utility function to convert keywords (single or multi-word) to links
+const linkKeywords = (text) => {
+  const links = {
+    "SSN Corporation": "https://ssncorporation.com/engineers",
+    "SSN Builders": "https://ssncorporation.com/contractors",
+    // ssncorporation: "https://ssncorporation.com",
+    // ssnbuilders: "https://ssnbuilders.com",
+    // add more keywords or phrases here
+  };
+
+  let linkedText = text;
+
+  // Sort keys by length descending so multi-word phrases are replaced first
+  const sortedKeys = Object.keys(links).sort((a, b) => b.length - a.length);
+
+  sortedKeys.forEach((key) => {
+    const regex = new RegExp(`\\b${key}\\b`, "gi"); // whole word/phrase match
+    linkedText = linkedText.replace(
+      regex,
+      `<a href="${links[key]}" class="news-link" target="_blank" rel="noopener noreferrer">${key}</a>`
+    );
+  });
+
+  return linkedText;
+};
+
 const NewsDetail = () => {
   const { id } = useParams();
   const newsId = parseInt(id);
@@ -74,19 +100,13 @@ const NewsDetail = () => {
                 <p
                   key={index}
                   className="indent-8 text-gray-700 font-roboto text-lg mb-6"
-                  dangerouslySetInnerHTML={{ __html: paragraph }}
+                  dangerouslySetInnerHTML={{ __html: linkKeywords(paragraph) }}
                 />
               ))}
             </div>
 
-            {/* IMAGE COLUMN — AUTO HEIGHT */}
-            <div
-              className="
-                flex flex-col gap-6 lg:pl-4 items-start w-full
-                /* Uncomment for sticky effect */
-                /* lg:sticky lg:top-28 */
-              "
-            >
+            {/* IMAGE COLUMN */}
+            <div className="flex flex-col gap-6 lg:pl-4 items-start w-full">
               {news.imageUrls.map((imgUrl, index) => (
                 <img
                   key={index}

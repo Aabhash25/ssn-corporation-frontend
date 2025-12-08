@@ -7,7 +7,9 @@ export default function PreLandingPage({ onFinish }) {
   const canvasRef = useRef(null);
   const constructionElementsRef = useRef(null);
 
-  // Load logo and trigger finish (NO VIDEO PRELOAD)
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+
+  // Load logo and trigger finish
   useEffect(() => {
     const img = new Image();
     img.onload = () => setLogoLoaded(true);
@@ -21,8 +23,10 @@ export default function PreLandingPage({ onFinish }) {
     return () => clearTimeout(endTimer);
   }, [onFinish]);
 
-  // Canvas particles & construction icons
+  // DESKTOP ONLY: Canvas animation
   useEffect(() => {
+    if (isMobile) return; // ← BLOCK MOBILE
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -39,9 +43,8 @@ export default function PreLandingPage({ onFinish }) {
     const particles = [];
     const constructionIcons = [];
     const iconTypes = ["🛠️", "🔧", "⚒️", "🏗️", "📐", "🔨", "⛏️", "🪚"];
-    const particleCount = 18;
 
-    for (let i = 0; i < particleCount; i++) {
+    for (let i = 0; i < 18; i++) {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -69,10 +72,11 @@ export default function PreLandingPage({ onFinish }) {
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Subtle grid
+      // grid
       ctx.strokeStyle = "rgba(100, 180, 255, 0.05)";
       ctx.lineWidth = 0.5;
       const gridSize = 70;
+
       for (let x = 0; x < canvas.width; x += gridSize) {
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -86,21 +90,24 @@ export default function PreLandingPage({ onFinish }) {
         ctx.stroke();
       }
 
-      // Particles
+      // particles
       particles.forEach((p) => {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(100, 180, 255, ${p.opacity})`;
         ctx.fill();
+
         p.x += p.vx;
         p.y += p.vy;
+
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
       });
 
-      // Construction icons
+      // icons
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+
       constructionIcons.forEach((icon) => {
         ctx.save();
         ctx.translate(icon.x, icon.y);
@@ -128,43 +135,7 @@ export default function PreLandingPage({ onFinish }) {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", resizeCanvas);
     };
-  }, []);
-
-  // Floating emojis
-  useEffect(() => {
-    const container = constructionElementsRef.current;
-    if (!container) return;
-
-    const floatingElements = [
-      { emoji: "🏗️", top: "12%", right: "12%", delay: 0 },
-      { emoji: "🔧", bottom: "18%", left: "12%", delay: 0.8 },
-      { emoji: "📐", top: "40%", right: "10%", delay: 1.6 },
-      { emoji: "⚙️", bottom: "25%", right: "20%", delay: 2.4 },
-    ];
-
-    floatingElements.forEach((el) => {
-      const div = document.createElement("div");
-      div.innerHTML = el.emoji;
-      div.style.cssText = `
-        position: absolute;
-        top: ${el.top || "auto"};
-        bottom: ${el.bottom || "auto"};
-        left: ${el.left || "auto"};
-        right: ${el.right || "auto"};
-        font-size: 28px;
-        opacity: 0.7;
-        z-index: 2;
-        pointer-events: none;
-        animation: float 4s infinite ease-in-out ${el.delay}s;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-      `;
-      container.appendChild(div);
-    });
-
-    return () => {
-      container.innerHTML = "";
-    };
-  }, []);
+  }, [isMobile]);
 
   if (!show) return null;
 
@@ -181,140 +152,130 @@ export default function PreLandingPage({ onFinish }) {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background:
-            "linear-gradient(135deg, #0a1128 0%, #1a2a4c 50%, #0f172a 100%)",
+          background: isMobile
+            ? "#0f172a"
+            : "linear-gradient(135deg, #0a1128 0%, #1a2a4c 50%, #0f172a 100%)",
           zIndex: 9999,
           overflow: "hidden",
           fontFamily: "'Roboto', sans-serif",
         }}
       >
-        <canvas
-          ref={canvasRef}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 1,
-          }}
-        />
+        {!isMobile && (
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: 1,
+            }}
+          />
+        )}
 
-        <div
-          ref={constructionElementsRef}
-          style={{
-            position: "absolute",
-            inset: 0,
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-        />
+        {!isMobile && (
+          <div
+            ref={constructionElementsRef}
+            style={{
+              position: "absolute",
+              inset: 0,
+              zIndex: 2,
+              pointerEvents: "none",
+            }}
+          />
+        )}
 
-        {/* Center box */}
+        {/* CENTER BOX */}
         <motion.div
-          initial={{ scale: 0.8, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "backOut" }}
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6 }}
           style={{
             zIndex: 4,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            padding: "3.5rem 5rem",
+            padding: isMobile ? "2rem" : "3.5rem 5rem",
             borderRadius: "18px",
-            background: "rgba(15, 23, 42, 0.65)",
-            backdropFilter: "blur(12px)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
-            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
+            background: isMobile ? "transparent" : "rgba(15, 23, 42, 0.65)",
+            backdropFilter: isMobile ? "none" : "blur(12px)",
             maxWidth: "90%",
           }}
         >
-          <motion.img
-            src="/logo.webp"
-            alt="SSA CORPORATION"
-            style={{ width: "320px", height: "auto" }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: logoLoaded ? 1 : 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          />
+          {/* FIXED LOGO BOX (no stretching) */}
+          <div
+            style={{
+              width: 260,
+              height: 100,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <motion.img
+              src="/logo.webp"
+              alt="SSN CORPORATION"
+              fetchPriority="high"
+              style={{
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain", // ← FIX: keeps original ratio
+              }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: logoLoaded ? 1 : 0 }}
+              transition={{ duration: 0.6 }}
+            />
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.6 }}
+          <p
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "2.2rem",
+              fontSize: isMobile ? "1.4rem" : "2.2rem",
               fontWeight: 700,
               color: "rgba(255,255,255,0.92)",
               textAlign: "center",
-              lineHeight: 1.4,
-              margin: "1.8rem 0 1.2rem 0",
-              textShadow: "0 2px 6px rgba(0,0,0,0.35)",
+              marginTop: "1rem",
             }}
           >
             Building the Future through Innovation
-          </motion.p>
+          </p>
 
-          {/* Progress bar */}
           <motion.div
             initial={{ width: "0%" }}
             animate={{ width: "100%" }}
-            transition={{ duration: 2.5, ease: "easeInOut" }}
+            transition={{ duration: 2.5 }}
             style={{
               height: "6px",
               background: "linear-gradient(90deg, #4facfe 0%, #00f2fe 100%)",
               borderRadius: "10px",
-              boxShadow: "0 0 12px rgba(79,172,254,0.6)",
               width: "100%",
-              marginBottom: "0.6rem",
+              marginTop: "1.4rem",
             }}
           />
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 0.4 }}
+
+          <span
             style={{
-              fontFamily: "'Roboto', sans-serif",
               color: "rgba(255,255,255,0.75)",
               fontSize: "0.9rem",
-              marginTop: "0.3rem",
-              fontWeight: 400,
+              marginTop: "0.4rem",
             }}
           >
             Preparing your experience...
-          </motion.span>
+          </span>
         </motion.div>
 
-        {/* Footer */}
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.8, duration: 0.5 }}
+        <span
           style={{
             position: "absolute",
-            bottom: "18px",
-            fontFamily: "'Roboto', sans-serif",
+            bottom: "15px",
             color: "rgba(255,255,255,0.55)",
             fontSize: "0.8rem",
-            letterSpacing: "0.3px",
+            zIndex: 4,
           }}
         >
-          © {new Date().getFullYear()} SSA CORPORATION. All rights reserved.
-        </motion.span>
-
-        <style jsx>{`
-          @keyframes float {
-            0%,
-            100% {
-              transform: translateY(0) rotate(0deg);
-            }
-            50% {
-              transform: translateY(-14px) rotate(6deg);
-            }
-          }
-        `}</style>
+          © {new Date().getFullYear()} SSN CORPORATION
+        </span>
       </motion.div>
     </AnimatePresence>
   );

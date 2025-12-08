@@ -16,7 +16,7 @@ const Hero = () => {
     "/14.webp",
   ];
 
-  // Auto slide every 3 seconds
+  // Auto slide every 3 seconds (DESKTOP ONLY)
   useEffect(() => {
     const interval = setInterval(
       () => setCurrentIndex((prev) => (prev + 1) % images.length),
@@ -35,39 +35,41 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-between items-center text-white overflow-hidden bg-black pt-16 md:pt-20 pb-6">
-      {/* Background Slider */}
-      <picture className="absolute inset-0 w-full h-full">
-        {/* MOBILE - uses your -mobile.webp files */}
-        <source
-          srcSet={images[currentIndex].replace(".webp", "-mobile.webp")}
-          media="(max-width: 768px)"
-          type="image/webp"
+      {/* Background */}
+      <div className="absolute inset-0 w-full h-full">
+        {/* MOBILE — FIXED SINGLE PHOTO (NO SLIDER) */}
+        <img
+          src="/30-mobile.webp" // ← Put your fixed mobile hero image here
+          alt="Hero mobile"
+          className="w-full h-full object-cover brightness-75 md:hidden absolute inset-0"
         />
 
-        {/* DESKTOP with fade animation */}
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={currentIndex}
-            src={images[currentIndex]}
-            alt="Hero slide"
-            className="w-full h-full object-cover brightness-75"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-          />
-        </AnimatePresence>
-      </picture>
+        {/* DESKTOP SLIDER */}
+        <div className="hidden md:block absolute inset-0">
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentIndex}
+              src={images[currentIndex]}
+              alt="Hero slide"
+              className="w-full h-full object-cover brightness-75 absolute inset-0"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.8 }}
+            />
+          </AnimatePresence>
+        </div>
+      </div>
 
-      {/* Blur placeholder before load */}
+      {/* Blur placeholder */}
       {!loadedImages[currentIndex] && (
         <div className="absolute inset-0 bg-black/40 blur-xl"></div>
       )}
 
-      {/* Gradient overlay */}
+      {/* Gradients */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/70"></div>
 
-      {/* Text Content */}
+      {/* Text */}
       <motion.div
         className="relative z-10 text-center max-w-4xl px-6 flex-1 flex flex-col justify-center"
         initial={{ opacity: 0, y: 20 }}
@@ -105,10 +107,8 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      {/* Bottom tagline */}
-      <motion.h2 className="relative z-10 text-yellow-500 font-playfair font-bold text-xs sm:text-sm md:text-base lg:text-lg pb-4 px-4 text-center">
-        Proudly Serving in Planning, Design, Engineering, and Construction in
-        GA, NC, and VA
+      <motion.h2 className="relative z-10 text-yellow-500 font-playfair font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl pb-4 px-4 text-center">
+        Proudly Serving in GA, NC, and VA
       </motion.h2>
     </section>
   );

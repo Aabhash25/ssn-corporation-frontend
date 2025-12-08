@@ -1,174 +1,219 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
 import BusinessWithUs from "./components/BusinessWithUs";
 import Statistics from "./components/Statistics";
-import PortfolioPages from "./Pages/PortfolioPages"; // New page for portfolios
 import JoinOurTeam from "./components/JoinOurTeam";
 import Testimonials from "./components/Testimonials";
 import Footer from "./components/Footer";
-import AboutUs from "./Pages/AboutUs";
-import Contact from "./Pages/Contact";
-import Career from "./Pages/Career";
-// import Proposal from "./Pages/Proposal";
-import PreLandingPage from "./Layout/PreLandingPage";
-import OpenResources from "./FooterPages/OpenResources";
 import ScrollToTop from "./components/ScrollToTop";
-import News from "./FooterPages/News";
-import Business from "./FooterPages/Business";
-import ProposalPage from "./FooterPages/ProposalPage";
-import EngineeringArchitecture from "./Pages/EngineeringArchitecture";
-import Construction from "./Pages/Construction";
-import ResearchAndDevelopment from "./Pages/ResearchAndDevelopment";
-import Quote from "./components/Quote";
 import Visitors from "./components/Visitors";
-import Engineers from "./Pages/Engineers";
-import Contractors from "./Pages/Contractors";
-import JobDetail from "./Pages/JobDetail";
-// import Topbar from "./components/TopBar";
 import Licenses from "./components/Licenses";
-import ConstructionMaterialTesting from "./Pages/ConstructionMaterialTesting";
-import PortfolioDescription from "./Pages/ProjectDescription";
 import AffiliationRibbon from "./components/AffiliationRibbon";
-import DesignAndEngineering from "./Pages/ServicesDropdown/DesignAndEngineering";
-import LandPlanningAndPermitting from "./Pages/ServicesDropdown/LandPlanningAndPermitting";
-import ConstructionAdministration from "./Pages/ServicesDropdown/ConstructionAdministration";
-import StructuralEngineering from "./Pages/ServicesDropdown/StructuralEngineering";
-import ConstructionMaterialSurveyAndTesting from "./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting";
-import GeoTechnicalEngineering from "./Pages/ServicesDropdown/GeoTechnicalEngineering";
-import ConstructioinEngineeringAndManagement from "./Pages/ServicesDropdown/ConstructionEngineering";
-import GeneralConstruction from "./Pages/ServicesDropdown/GeneralConstruction";
-import DesignPlusBuild from "./Pages/ServicesDropdown/DesignPlusBuild";
-import PreConstruction from "./Pages/ServicesDropdown/PreConstruction";
-import ConstructionManagement from "./Pages/ServicesDropdown/ConstructionManagement";
-// import Portfolio3DPage from "./Pages/Portfoilio3DPage";
-import SpecialtyEngineeringServices from "./Pages/ServicesDropdown/SpecialtyEngineeringServices";
-import WaterResourcesEngineering from "./Pages/ServicesDropdown/WaterResources";
-import NewsDetail from "./FooterPages/NewsDetail";
+import Quote from "./components/Quote";
 import NotAvailable from "./components/NotAvailable";
+import PreLandingPage from "./Layout/PreLandingPage";
+import QTakeoffAI from "./pages/QTakeoffAI";
+import RealEstateAnalysis from "./pages/RealEstateAnalysis";
+
+// ⭐ Lazy-loaded pages — these will split into separate JS files
+const AboutUs = lazy(() => import("./Pages/AboutUs"));
+const Contact = lazy(() => import("./Pages/Contact"));
+const Career = lazy(() => import("./Pages/Career"));
+const PortfolioPages = lazy(() => import("./Pages/PortfolioPages"));
+const PortfolioDescription = lazy(() => import("./Pages/ProjectDescription"));
+const Engineers = lazy(() => import("./Pages/Engineers"));
+const Contractors = lazy(() => import("./Pages/Contractors"));
+const JobDetail = lazy(() => import("./Pages/JobDetail"));
+
+const OpenResources = lazy(() => import("./FooterPages/OpenResources"));
+const News = lazy(() => import("./FooterPages/News"));
+const Business = lazy(() => import("./FooterPages/Business"));
+const ProposalPage = lazy(() => import("./FooterPages/ProposalPage"));
+const NewsDetail = lazy(() => import("./FooterPages/NewsDetail"));
+
+const EngineeringArchitecture = lazy(() =>
+  import("./Pages/EngineeringArchitecture")
+);
+const Construction = lazy(() => import("./Pages/Construction"));
+const ResearchAndDevelopment = lazy(() =>
+  import("./Pages/ResearchAndDevelopment")
+);
+const ConstructionMaterialTesting = lazy(() =>
+  import("./Pages/ConstructionMaterialTesting")
+);
+
+// Services Dropdown Pages
+const DesignAndEngineering = lazy(() =>
+  import("./Pages/ServicesDropdown/DesignAndEngineering")
+);
+const LandPlanningAndPermitting = lazy(() =>
+  import("./Pages/ServicesDropdown/LandPlanningAndPermitting")
+);
+const ConstructionAdministration = lazy(() =>
+  import("./Pages/ServicesDropdown/ConstructionAdministration")
+);
+const StructuralEngineering = lazy(() =>
+  import("./Pages/ServicesDropdown/StructuralEngineering")
+);
+const ConstructionMaterialSurveyAndTesting = lazy(() =>
+  import("./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting")
+);
+const GeoTechnicalEngineering = lazy(() =>
+  import("./Pages/ServicesDropdown/GeoTechnicalEngineering")
+);
+const ConstructionEngineeringAndManagement = lazy(() =>
+  import("./Pages/ServicesDropdown/ConstructionEngineering")
+);
+const GeneralConstruction = lazy(() =>
+  import("./Pages/ServicesDropdown/GeneralConstruction")
+);
+const DesignPlusBuild = lazy(() =>
+  import("./Pages/ServicesDropdown/DesignPlusBuild")
+);
+const PreConstruction = lazy(() =>
+  import("./Pages/ServicesDropdown/PreConstruction")
+);
+const ConstructionManagement = lazy(() =>
+  import("./Pages/ServicesDropdown/ConstructionManagement")
+);
+const SpecialtyEngineeringServices = lazy(() =>
+  import("./Pages/ServicesDropdown/SpecialtyEngineeringServices")
+);
+const WaterResourcesEngineering = lazy(() =>
+  import("./Pages/ServicesDropdown/WaterResources")
+);
+
 function App() {
   const [showPreLandingPage, setShowPreLandingPage] = useState(true);
-
-  const handlePreLandingFinish = () => {
-    setShowPreLandingPage(false);
-  };
 
   return (
     <Router>
       {showPreLandingPage ? (
-        <PreLandingPage onFinish={handlePreLandingFinish} />
+        <PreLandingPage onFinish={() => setShowPreLandingPage(false)} />
       ) : (
         <>
-          {/* Remove the fixed wrapper - let Navbar handle its own positioning */}
-          {/* <Topbar /> */}
           <Navbar />
           <ScrollToTop />
-          <Routes>
-            {/* Home page */}
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                  <Visitors />
-                  <Services />
-                  <Licenses />
-                  <BusinessWithUs />
-                  <Statistics />
-                  <JoinOurTeam />
-                  <Testimonials />
-                  <AffiliationRibbon />
-                </>
-              }
-            />
 
-            {/* Portfolio page */}
-            <Route path="/portfolio" element={<PortfolioPages />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/career" element={<Career />} />
-            <Route path="/jobs/:id" element={<JobDetail />} />
-            <Route path="/open-resources" element={<OpenResources />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/business" element={<Business />} />
-            <Route path="/request-proposal" element={<ProposalPage />} />
-            <Route path="/quote" element={<Quote />} />
-            <Route path="/engineers" element={<Engineers />} />
-            <Route path="/contractors" element={<Contractors />} />
-            {/* <Route path="/license" element={<License />} /> */}
-            <Route
-              path="/project-description/:id"
-              element={<PortfolioDescription />}
-            />
-            {/* <Route path="/portfolio/3d/:id" element={<Portfolio3DPage />} /> */}
+          {/* 🚀 Suspense enables code splitting */}
+          <Suspense fallback={<div className="min-h-screen">Loading...</div>}>
+            <Routes>
+              {/* Home */}
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Hero />
+                    <Visitors />
+                    <Services />
+                    <Licenses />
+                    <BusinessWithUs />
+                    <Statistics />
+                    <JoinOurTeam />
+                    <Testimonials />
+                    <AffiliationRibbon />
+                  </>
+                }
+              />
 
-            <Route
-              path="/engineering-architecture"
-              element={<EngineeringArchitecture />}
-            />
-            <Route path="/construction" element={<Construction />} />
-            <Route
-              path="/research-and-development"
-              element={<ResearchAndDevelopment />}
-            />
-            <Route
-              path="/construction-material-testing"
-              element={<ConstructionMaterialTesting />}
-            />
-            <Route
-              path="/design-engineering"
-              element={<DesignAndEngineering />}
-            />
-            <Route
-              path="/land-planning"
-              element={<LandPlanningAndPermitting />}
-            />
-            <Route
-              path="/structural-engineering"
-              element={<StructuralEngineering />}
-            />
-            <Route
-              path="/construction-administration"
-              element={<ConstructionAdministration />}
-            />
-            <Route
-              path="material-testing"
-              element={<ConstructionMaterialSurveyAndTesting />}
-            />
-            <Route
-              path="geotechnical-engineering"
-              element={<GeoTechnicalEngineering />}
-            />
-            <Route
-              path="construction-engineering"
-              element={<ConstructioinEngineeringAndManagement />}
-            />
-            <Route
-              path="water-resources-engineering"
-              element={<WaterResourcesEngineering />}
-            />
+              {/* Pages */}
+              <Route path="/portfolio" element={<PortfolioPages />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/career" element={<Career />} />
+              <Route path="/jobs/:id" element={<JobDetail />} />
+              <Route path="/open-resources" element={<OpenResources />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/business" element={<Business />} />
+              <Route path="/request-proposal" element={<ProposalPage />} />
+              <Route path="/quote" element={<Quote />} />
+              <Route path="/engineers" element={<Engineers />} />
+              <Route path="/contractors" element={<Contractors />} />
 
-            <Route
-              path="general-construction"
-              element={<GeneralConstruction />}
-            />
-            <Route path="pre-construction" element={<PreConstruction />} />
-            <Route
-              path="construction-management"
-              element={<ConstructionManagement />}
-            />
-            <Route path="design-plus-build" element={<DesignPlusBuild />} />
-            <Route
-              path="specialty-services"
-              element={<SpecialtyEngineeringServices />}
-            />
-            <Route path="/news/:id" element={<NewsDetail />} />
-            <Route path="*" element={<NotAvailable />} />
+              <Route
+                path="/project-description/:id"
+                element={<PortfolioDescription />}
+              />
 
-            {/* Add Proposal page later when ready */}
-          </Routes>
+              {/* Services */}
+              <Route
+                path="/engineering-architecture"
+                element={<EngineeringArchitecture />}
+              />
+              <Route path="/construction" element={<Construction />} />
+              <Route
+                path="/research-and-development"
+                element={<ResearchAndDevelopment />}
+              />
+              <Route
+                path="/construction-material-testing"
+                element={<ConstructionMaterialTesting />}
+              />
+
+              {/* Dropdown Services */}
+              <Route
+                path="/design-engineering"
+                element={<DesignAndEngineering />}
+              />
+              <Route
+                path="/land-planning"
+                element={<LandPlanningAndPermitting />}
+              />
+              <Route
+                path="/structural-engineering"
+                element={<StructuralEngineering />}
+              />
+              <Route
+                path="/construction-administration"
+                element={<ConstructionAdministration />}
+              />
+              <Route
+                path="/material-testing"
+                element={<ConstructionMaterialSurveyAndTesting />}
+              />
+              <Route
+                path="/geotechnical-engineering"
+                element={<GeoTechnicalEngineering />}
+              />
+              <Route
+                path="/construction-engineering"
+                element={<ConstructionEngineeringAndManagement />}
+              />
+              <Route
+                path="/water-resources-engineering"
+                element={<WaterResourcesEngineering />}
+              />
+              <Route
+                path="/general-construction"
+                element={<GeneralConstruction />}
+              />
+              <Route path="/pre-construction" element={<PreConstruction />} />
+              <Route
+                path="/construction-management"
+                element={<ConstructionManagement />}
+              />
+              <Route path="/design-plus-build" element={<DesignPlusBuild />} />
+              <Route
+                path="/specialty-services"
+                element={<SpecialtyEngineeringServices />}
+              />
+
+              <Route path="/news/:id" element={<NewsDetail />} />
+              <Route path="/qtakeoff-ai" element={<QTakeoffAI />} />
+              <Route
+                path="/real-estate-site-analysis"
+                element={<RealEstateAnalysis />}
+              />
+
+              {/* 404 */}
+              <Route path="*" element={<NotAvailable />} />
+            </Routes>
+          </Suspense>
+
           <Footer />
         </>
       )}
