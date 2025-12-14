@@ -29,7 +29,7 @@ const FontsStyle = () => (
 
 const statsData = [
   { name: "Design and Build", 2024: 28, 2025: 40, growth: 12 },
-  { name: "Engineering Design", 2024: 8, 2025: 15, growth: 7 },
+  { name: "Planning and Design/Engineering", 2024: 8, 2025: 15, growth: 7 },
   { name: "General Construction", 2024: 6, 2025: 10, growth: 4 },
   { name: "SSN Family Growth", 2024: 8, 2025: 30, growth: 22 },
 ];

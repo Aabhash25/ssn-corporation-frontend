@@ -432,9 +432,9 @@ const ModernNavbar = () => {
                 </div>
               )}
             </div>
-            {/* Research & Development Dropdown - FIXED GAP */}
+            {/* Research & Development Dropdown */}
             <div
-              className="relative"
+              className="relative group"
               onMouseEnter={handleRnDMouseEnter}
               onMouseLeave={handleRnDMouseLeave}
             >
@@ -459,31 +459,92 @@ const ModernNavbar = () => {
                 </svg>
               </button>
 
-              {/* Dropdown - Now sits flush under navbar */}
               {isRnDOpen && (
                 <div
-                  className="absolute left-1/2 -translate-x-1/2 w-64 bg-white rounded-lg shadow-2xl border-t-4 border-yellow-500 overflow-hidden z-50"
+                  className="fixed left-0 right-0 mx-auto max-w-7xl shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
                   style={{
-                    top: "100%", // This is the key line - sticks directly to bottom of parent
+                    top: isDesktop
+                      ? isLandingPage && !scrolled
+                        ? "152px"
+                        : "96px"
+                      : "96px",
                   }}
                 >
-                  <div className="py-3">
-                    <Link
-                      to="/qtakeoff-ai"
-                      className="block px-6 py-4 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 font-oswald text-lg transition-colors flex items-center gap-3"
-                      onClick={() => setIsRnDOpen(false)}
-                    >
-                      <span className="text-2xl font-bold">Q</span>
-                      QTakeoff AI
-                    </Link>
-                    <Link
-                      to="/real-estate-site-analysis"
-                      className="block px-6 py-4 text-gray-800 hover:bg-yellow-50 hover:text-yellow-600 font-oswald text-lg transition-colors flex items-center gap-3 border-t border-gray-200"
-                      onClick={() => setIsRnDOpen(false)}
-                    >
-                      <FaRulerCombined className="text-xl" />
-                      Real Estate Site Analysis
-                    </Link>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-0 py-4 px-6">
+                    {/* Left Column - Motto */}
+                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 flex flex-col justify-center">
+                      <div className="border-l-4 border-yellow-500 pl-6">
+                        <p className="text-yellow-500 text-xs font-semibold mb-2 tracking-wider">
+                          INNOVATION
+                        </p>
+                        <h3 className="text-white text-lg font-bold font-oswald leading-tight mb-3">
+                          Intelligence that Builds the Future
+                        </h3>
+                        <p className="text-gray-300 text-base font-oswald leading-relaxed">
+                          We build AI technology our clients can trust. Our
+                          commitment is to deliver consistent accuracy and
+                          exceptional performance.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Our Team */}
+                    <div className="p-5 border-r border-gray-200">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500">
+                        Our Team
+                      </h4>
+                      <p className="text-gray-800 text-base font-oswald leading-relaxed">
+                        With over 20 years of combined experience, our
+                        leadership team brings expertise in civil engineering
+                        and AI. Supported by seven skilled engineers, we drive
+                        research and development. Together, we unite civil
+                        engineering and AI to deliver smarter, more efficient
+                        construction solutions.
+                      </p>
+                    </div>
+
+                    {/* Our Products */}
+                    <div className="p-5">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500">
+                        Our Products
+                      </h4>
+
+                      <div className="space-y-4">
+                        {/* QTakeoff */}
+                        <div>
+                          <Link
+                            to="/qtakeoff-ai"
+                            className="text-lg font-bold text-gray-900 hover:text-yellow-600 font-oswald block mb-2 transition-colors"
+                            onClick={() => setIsRnDOpen(false)}
+                          >
+                            QTakeoff
+                          </Link>
+                          <p className="text-sm text-gray-700 font-oswald leading-snug">
+                            Our AI technology delivers measurable improvements
+                            with industry-leading accuracy and speed. Users
+                            experience higher efficiency, lower costs, and
+                            continuous 24/7 automated analysis.
+                          </p>
+                        </div>
+
+                        {/* Real Estate Site Map */}
+                        <div className="pt-3 border-t border-gray-200">
+                          <Link
+                            to="/real-estate-site-analysis"
+                            className="text-lg font-bold text-gray-900 hover:text-yellow-600 font-oswald block mb-2 transition-colors"
+                            onClick={() => setIsRnDOpen(false)}
+                          >
+                            Real Estate Site Map
+                          </Link>
+                          <p className="text-sm text-gray-700 font-oswald leading-snug">
+                            Analyze any location with AI-driven insights on
+                            nearby amenities and infrastructure. Generate
+                            interactive results and professional reports in
+                            seconds.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
@@ -768,13 +829,50 @@ const ModernNavbar = () => {
               )}
             </div>
 
-            <Link
-              to="/research-and-development"
-              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
-              onClick={() => setIsOpen(false)}
-            >
-              Research & Development
-            </Link>
+            {/* Research & Development (Mobile Dropdown) */}
+            <div className="flex flex-col">
+              <button
+                onClick={() => setIsRnDOpen(!isRnDOpen)}
+                className="flex items-center justify-between w-full py-2 text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
+              >
+                Research & Development
+                <svg
+                  className={`w-5 h-5 transition-transform duration-300 ${
+                    isRnDOpen ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {isRnDOpen && (
+                <div className="flex flex-col mt-2 space-y-3 pl-4 border-l-2 border-yellow-500">
+                  <Link
+                    to="/qtakeoff-ai"
+                    className="text-white hover:text-yellow-400 text-base"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    QTakeoff
+                  </Link>
+
+                  <Link
+                    to="/real-estate-site-analysis"
+                    className="text-white hover:text-yellow-400 text-base"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Real Estate Site Map
+                  </Link>
+                </div>
+              )}
+            </div>
 
             <Link
               to="/career"

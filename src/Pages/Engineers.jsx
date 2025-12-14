@@ -26,18 +26,19 @@ const Engineers = () => {
 
   useEffect(() => {
     if (location.hash) {
-      const id = location.hash.replace('#', '');
+      const id = location.hash.replace("#", "");
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
         // Add highlighting effect
-        element.classList.add('highlight-card');
+        element.classList.add("highlight-card");
         highlightedCardRef.current = element;
-        
+
         // Remove highlight after a few seconds
         setTimeout(() => {
-          if (highlightedCardRef.current === element) { // Ensure we are removing the highlight from the correct element
-            highlightedCardRef.current.classList.remove('highlight-card');
+          if (highlightedCardRef.current === element) {
+            // Ensure we are removing the highlight from the correct element
+            highlightedCardRef.current.classList.remove("highlight-card");
             highlightedCardRef.current = null;
           }
         }, 3000);
@@ -300,7 +301,7 @@ const Engineers = () => {
             </motion.span>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4 pt-4">
-              Comprehensive Engineering Services
+              Design Capabilities
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               As a multidisciplinary engineering firm, we can connect you to the
@@ -312,7 +313,10 @@ const Engineers = () => {
           {/* Service Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
             {services.map((service, index) => {
-              const slug = service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+              const slug = service.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
               return (
                 <motion.div
                   key={index}
@@ -378,7 +382,7 @@ const Engineers = () => {
               Our Expertise
             </motion.span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4">
-              Specialized Engineering Disciplines
+              Design Expertise
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               We Have the Expert In-House Team Specializing in Architecture,
@@ -389,7 +393,10 @@ const Engineers = () => {
           {/* Specialities Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
             {specialities.map((speciality, index) => {
-              const slug = speciality.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+              const slug = speciality.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
               return (
                 <motion.div
                   key={index}

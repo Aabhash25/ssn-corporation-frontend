@@ -107,8 +107,8 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      <motion.h2 className="relative z-10 text-yellow-500 font-playfair font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl pb-4 px-4 text-center">
-        Proudly Serving in GA, NC, and VA
+      <motion.h2 className="relative z-10 text-yellow-500 font-roboto text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl whitespace-nowrap pb-4 px-4 text-center">
+        Proudly Serving in Georgia, North Carolina, and Virginia
       </motion.h2>
     </section>
   );

@@ -17,13 +17,23 @@ const RealEstateAnalysis = () => {
       {/* Hero Section */}
       <section className="text-center max-w-4xl mx-auto mb-16 pt-42">
         <h1 className="text-4xl md:text-5xl font-playfair font-bold text-black-500 mb-4">
-          Real Estate Site Analysis
+          Property Halo
         </h1>
         <p className="text-gray-700 text-lg md:text-xl mb-4">
           Analyze your property and surroundings efficiently. Our AI-powered
           tool provides interactive insights on nearby points of interest (POIs)
           and generates detailed reports.
         </p>
+
+        {/* Visit Button */}
+        <a
+          href="https://propertyhalo.qtakeoff.ai"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-6 px-6 py-3 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 transition-colors"
+        >
+          Visit Property Halo
+        </a>
       </section>
 
       {/* How It Works */}

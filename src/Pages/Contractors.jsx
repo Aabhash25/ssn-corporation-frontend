@@ -22,18 +22,18 @@ const Contractors = () => {
 
   useEffect(() => {
     if (location.hash) {
-      const id = location.hash.replace('#', '');
+      const id = location.hash.replace("#", "");
       const element = document.getElementById(id);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
         // Add highlighting effect
-        element.classList.add('highlight-card');
+        element.classList.add("highlight-card");
         highlightedCardRef.current = element;
-        
+
         // Remove highlight after a few seconds
         setTimeout(() => {
           if (highlightedCardRef.current === element) {
-            highlightedCardRef.current.classList.remove('highlight-card');
+            highlightedCardRef.current.classList.remove("highlight-card");
             highlightedCardRef.current = null;
           }
         }, 3000);
@@ -254,7 +254,7 @@ const Contractors = () => {
               Our Services
             </motion.span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4">
-              Comprehensive Contracting Solutions
+              Construction Capabilities
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               From initial concept to final construction, we deliver innovative
@@ -265,7 +265,10 @@ const Contractors = () => {
           {/* Service Cards Grid (4 Columns) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
             {contractorServices.map((service, index) => {
-              const slug = service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+              const slug = service.title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
               return (
                 <motion.div
                   key={index}

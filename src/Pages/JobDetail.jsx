@@ -6,7 +6,8 @@ import { FaCalendarAlt, FaMoneyBillWave, FaUsers } from "react-icons/fa";
 function JobDetail() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
-  const [loading, setLoading] = useState(true); // track loading state
+  const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -17,8 +18,12 @@ function JobDetail() {
     coverLetter: "",
   });
 
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("success");
+  const [modalMessage, setModalMessage] = useState(""); // modal message
+  const [modalType, setModalType] = useState("success"); // success or error
+  const [showModal, setShowModal] = useState(false); // modal visibility
+
+  const interviewNotice =
+    "This position requires two levels of interview (Initial Scanning and Technical Interview). Selected candidates will be called for interview.";
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`)
@@ -43,14 +48,31 @@ function JobDetail() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!job || job.is_expired) {
-      showMessage("Applications are closed for this job.", "error");
+      showModalMessage("Applications are closed for this job.", "error");
       return;
     }
+
+    // Check required fields
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.address
+    ) {
+      showModalMessage("Please fill in all required fields.", "error");
+      return;
+    }
+
     if (!formData.resume) {
-      showMessage("Please upload your resume.", "error");
+      showModalMessage("Please upload your resume.", "error");
       return;
     }
+
+    setSubmitting(true);
+
+    // Prepare FormData
     const fd = new FormData();
     fd.append("job", job.id);
     fd.append("name", formData.name);
@@ -60,17 +82,27 @@ function JobDetail() {
     fd.append("cover_letter", formData.coverLetter || "Applied via website");
     fd.append("resume", formData.resume);
 
+    // Debug: log FormData entries
+    console.log("Submitting application:");
+    for (let pair of fd.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+
     try {
-      const res = await fetch("https://api.ssnbuilders.com/api/applications/", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}applications/`, {
         method: "POST",
         body: fd,
       });
 
+      const data = await res.json();
+
       if (res.ok) {
-        showMessage(
+        showModalMessage(
           `Application submitted successfully for ${job.title}!`,
           "success"
         );
+
+        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -80,18 +112,40 @@ function JobDetail() {
           coverLetter: "",
         });
       } else {
-        showMessage("Failed to submit application. Please try again.", "error");
+        // Display field-specific errors in the modal
+        let errorMsg = "";
+
+        if (data) {
+          if (data.message) {
+            errorMsg = data.message;
+          } else {
+            // Join all field errors
+            errorMsg = Object.entries(data)
+              .map(([field, errors]) => `${field}: ${errors.join(", ")}`)
+              .join("\n");
+          }
+        } else {
+          errorMsg = "Failed to submit application. Please try again.";
+        }
+
+        console.error("Backend validation errors:", data);
+        showModalMessage(errorMsg, "error");
       }
     } catch (err) {
-      console.error(err);
-      showMessage("Failed to submit application. Please try again.", "error");
+      console.error("Network or server error:", err);
+      showModalMessage(
+        "Failed to submit application. Please try again.",
+        "error"
+      );
+    } finally {
+      setSubmitting(false);
     }
   };
 
-  const showMessage = (text, type = "success") => {
-    setMessage(text);
-    setMessageType(type);
-    setTimeout(() => setMessage(""), 4000);
+  const showModalMessage = (text, type = "success") => {
+    setModalMessage(text);
+    setModalType(type);
+    setShowModal(true);
   };
 
   const expired = job?.is_expired;
@@ -154,25 +208,22 @@ function JobDetail() {
               </p>
             )}
             <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
-              Description
+              Company Description
             </h3>
             <p className="text-gray-700">{job?.description}</p>
 
             <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
-              Requirements
+              Role Description
+            </h3>
+            <p className="text-gray-700">
+              {job?.key_responsibilities.join(". ")}.
+            </p>
+            <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
+              Qualification
             </h3>
             <ul className="list-disc ml-6 text-gray-700">
               {job?.requirements.map((req, idx) => (
                 <li key={idx}>{req}</li>
-              ))}
-            </ul>
-
-            <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
-              Key Responsibilities
-            </h3>
-            <ul className="list-disc ml-6 text-gray-700">
-              {job?.key_responsibilities.map((resp, idx) => (
-                <li key={idx}>{resp}</li>
               ))}
             </ul>
 
@@ -187,26 +238,21 @@ function JobDetail() {
 
         {/* Right column: Application Form */}
         <div className="space-y-4">
-          {message && (
-            <div
-              className={`px-4 py-3 rounded ${
-                messageType === "success"
-                  ? "bg-green-100 text-green-800"
-                  : "bg-red-100 text-red-800"
-              }`}
-            >
-              {message}
-            </div>
-          )}
           <form
             onSubmit={handleSubmit}
             className={`space-y-4 bg-white p-8 rounded-2xl shadow-md ${
               expired ? "opacity-50 pointer-events-none" : ""
             }`}
           >
-            <h3 className="text-2xl font-bold mb-4 text-gray-900">
+            <h3 className="text-2xl font-bold mb-2 text-gray-900">
               Apply for this Job
             </h3>
+
+            {/* Interview Notice */}
+            <p className="text-gray-700 mb-4 bg-yellow-100 p-3 rounded-lg border-l-4 border-yellow-400">
+              {interviewNotice}
+            </p>
+
             <input
               type="text"
               name="name"
@@ -259,15 +305,64 @@ function JobDetail() {
               rows="5"
               className="w-full border border-gray-300 rounded-lg px-4 py-2"
             ></textarea>
+
             <button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium transition"
+              disabled={submitting}
+              className={`w-full flex justify-center items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium transition ${
+                submitting ? "opacity-70 cursor-not-allowed" : ""
+              }`}
             >
-              Submit Application
+              {submitting && (
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
+                  ></path>
+                </svg>
+              )}
+              {submitting ? "Submitting..." : "Submit Application"}
             </button>
           </form>
         </div>
       </div>
+
+      {/* Modal */}
+      {/* Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+          <div className="bg-white rounded-xl p-6 max-w-md w-full text-center shadow-lg border border-gray-200">
+            <h3
+              className={`text-xl font-bold mb-4 ${
+                modalType === "success" ? "text-green-600" : "text-red-600"
+              }`}
+            >
+              {modalType === "success" ? "Success!" : "Error!"}
+            </h3>
+            <p className="text-gray-700 mb-6">{modalMessage}</p>
+            <button
+              onClick={() => setShowModal(false)}
+              className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

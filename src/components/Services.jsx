@@ -51,7 +51,7 @@ const services2 = [
     description: "Residential, Commercial, and Institutional Building Design",
   },
   {
-    image: "/FacilityPlanningDesign.webp",
+    image: "/seven-eleven.jpg",
     title: "Facility Planning and Design",
     description:
       "Efficient facility planning and design tailored to your operational needs",
@@ -264,9 +264,9 @@ const Services = () => {
         </h3>
         <p className="text-base sm:text-lg lg:text-xl font-roboto text-gray-600 max-w-3xl mx-auto">
           We deliver end-to-end planning, design engineering, and construction
-          solutions powered by proven expertise, decades of experience, and
-          cutting-edge engineering excellence. We also provide a wide range of
-          engineering services.
+          solutions—from concept to completion—driven by proven expertise,
+          decades of experience, cutting-edge engineering excellence, and expert
+          craftsmanship.
         </p>
       </div>
 

@@ -6,9 +6,8 @@ import { FaDraftingCompass, FaHardHat } from "react-icons/fa";
 const Visitors = () => {
   const cards = [
     {
-      title: "Engineering Consultant",
-      subtitle:
-        "SSN Engineerrs,PLLC is Your Planning, Design, and Engineering Partner",
+      title: "SSN Engineers",
+      subtitle: "Your trusted Planner, Designer, and Engineer Consultant",
       description:
         "Our multidisciplinary Planner and Engineer team unites creative planning with practical engineering. We deliver integrated, sustainable, and buildable solutions-from concept to construction-optimizing land use, infrastructure, and site design for every project",
       img: "/about7.webp",
@@ -16,9 +15,9 @@ const Visitors = () => {
       link: "/engineers",
     },
     {
-      title: "General Contractor",
+      title: "SSN Builders",
       subtitle:
-        "SSN Builders LLC IS Your General Construction and Project Management Partner",
+        "Unlimited General Contractor for Construction and Project Management",
       description:
         "We deliver high-quality residential and commercial construction with precision and reliability-from planning to completion. We turn visions into lasting,buildable results with efficiency and craftsmanship.",
       img: "/GeneralContractor.webp",

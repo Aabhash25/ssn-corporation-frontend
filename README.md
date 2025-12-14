@@ -46,3 +46,15 @@ Get-ChildItem *.jpg, *.png | ForEach-Object {
 sudo systemctl restart ssn_gunicorn
 sudo systemctl status ssn_gunicorn
 sudo systemctl restart nginx
+
+# access terminal vps hosting
+
+you can do it through the hostinger website or
+ssh root@167.88.44.111
+Password-
+
+now you are good to go
+
+#activate virtual environment
+
+source venv/bin/activate

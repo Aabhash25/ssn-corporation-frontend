@@ -52,11 +52,9 @@ function Career() {
     navigate(`/jobs/${jobId}`);
   };
 
-  // Split jobs based on is_expired
   const currentOpenings = filteredJobs.filter((job) => !job.is_expired);
   const pastOpenings = filteredJobs.filter((job) => job.is_expired);
 
-  // Redesigned benefits array
   const benefits = [
     {
       icon: AcademicCapIcon,
@@ -128,12 +126,18 @@ function Career() {
         {loading ? (
           <p className="text-center text-gray-500 text-lg">Loading jobs...</p>
         ) : currentOpenings.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            className={`grid gap-8 ${
+              currentOpenings.length === 1
+                ? "grid-cols-1 justify-items-center"
+                : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {currentOpenings.map((job) => (
               <motion.div
                 key={job.id}
                 whileHover={{ scale: 1.03 }}
-                className="bg-white rounded-3xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition"
+                className="bg-white rounded-3xl shadow-md p-6 flex flex-col justify-between hover:shadow-lg transition w-full max-w-md"
               >
                 <div>
                   <h3 className="text-xl font-playfair font-bold mb-2 text-gray-900 flex items-center gap-2">
@@ -193,12 +197,18 @@ function Career() {
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-8">
             Past Openings
           </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            className={`grid gap-8 ${
+              pastOpenings.length === 1
+                ? "grid-cols-1 justify-items-center"
+                : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {pastOpenings.map((job) => (
               <motion.div
                 key={job.id}
                 whileHover={{ scale: 1.02 }}
-                className="bg-gray-100 rounded-3xl shadow-sm p-6 flex flex-col justify-between opacity-90"
+                className="bg-gray-100 rounded-3xl shadow-sm p-6 flex flex-col justify-between opacity-90 w-full max-w-md"
               >
                 <div>
                   <h3 className="text-xl font-playfair font-bold mb-2 text-gray-700 flex items-center gap-2">
@@ -224,7 +234,7 @@ function Career() {
         </div>
       )}
 
-      {/* Redesigned Benefits Section like JoinOurTeam */}
+      {/* Benefits Section */}
       <div className="max-w-7xl mx-auto py-16 px-6">
         <h2 className="text-3xl md:text-4xl font-playfair font-bold text-center mb-10">
           Why Work With Us

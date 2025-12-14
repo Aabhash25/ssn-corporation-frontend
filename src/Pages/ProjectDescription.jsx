@@ -1,32 +1,322 @@
-// src/pages/ProjectDescription.jsx
+// // src/pages/ProjectDescription.jsx
+// import React, { useState, useEffect } from "react";
+// import { useParams, Link, useNavigate } from "react-router-dom";
+// import { projects } from "../data/projects";
+// import { motion, AnimatePresence } from "framer-motion";
+// import { ChevronLeft, ChevronRight, X, Grid3x3 } from "lucide-react";
+
+// export default function ProjectDescription() {
+//   const { id } = useParams();
+//   const navigate = useNavigate();
+//   const project = projects.find((p) => p.id === parseInt(id, 10));
+
+//   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+//   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+
+//   useEffect(() => {
+//     setCurrentImageIndex(0);
+//     setIsImageModalOpen(false);
+//   }, [project]);
+
+//   useEffect(() => {
+//     if (!project || !project.images || project.images.length <= 1) return;
+//     const interval = setInterval(() => {
+//       setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+//     }, 5000);
+//     return () => clearInterval(interval);
+//   }, [project]);
+
+//   if (!project) {
+//     return (
+//       <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-gray-50">
+//         <div className="text-center">
+//           <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">
+//             Project not found
+//           </h2>
+//           <div className="flex flex-col sm:flex-row gap-3 justify-center">
+//             <button
+//               onClick={() => navigate(-1)}
+//               className="px-4 py-2 bg-gray-200 rounded-md text-sm sm:text-base"
+//             >
+//               Go Back
+//             </button>
+//             <Link
+//               to="/portfolio"
+//               className="text-blue-600 underline text-sm sm:text-base"
+//             >
+//               View Portfolio
+//             </Link>
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+
+//   const images = Array.isArray(project.images) ? project.images : [];
+
+//   const openImageModal = (index) => {
+//     setCurrentImageIndex(index);
+//     setIsImageModalOpen(true);
+//   };
+
+//   const closeImageModal = () => setIsImageModalOpen(false);
+//   const prevImage = (e) => {
+//     e?.stopPropagation();
+//     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+//   };
+//   const nextImage = (e) => {
+//     e?.stopPropagation();
+//     setCurrentImageIndex((prev) => (prev + 1) % images.length);
+//   };
+
+//   return (
+//     <>
+//       <div className="min-h-screen bg-gray-50 pt-24 sm:pt-28 md: lg:pt-42 pb-12 sm:pb-16">
+//         {/* HERO / IMAGE SLIDER */}
+//         {images.length > 0 && (
+//           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+//             <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl">
+//               <div className="w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[2.5/1] relative">
+//                 <AnimatePresence initial={false} mode="wait">
+//                   <motion.img
+//                     key={currentImageIndex}
+//                     src={images[currentImageIndex]}
+//                     alt={project.description || "Project image"}
+//                     initial={{ opacity: 0 }}
+//                     animate={{ opacity: 1 }}
+//                     exit={{ opacity: 0 }}
+//                     transition={{ duration: 0.8 }}
+//                     className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+//                     onClick={() => openImageModal(currentImageIndex)}
+//                   />
+//                 </AnimatePresence>
+
+//                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+
+//                 {images.length > 1 && (
+//                   <>
+//                     <button
+//                       onClick={(e) => prevImage(e)}
+//                       className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition"
+//                     >
+//                       <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+//                     </button>
+//                     <button
+//                       onClick={(e) => nextImage(e)}
+//                       className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition"
+//                     >
+//                       <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+//                     </button>
+//                   </>
+//                 )}
+//               </div>
+//             </div>
+//           </div>
+//         )}
+
+//         {/* MAIN CONTENT */}
+//         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
+//           {/* Left Column */}
+//           <div className="lg:col-span-2 flex flex-col gap-6 sm:gap-8">
+//             {/* PROJECT DESCRIPTION TITLE */}
+//             <h1 className="text-2xl sm:text-3xl md:text-4xl font-[Playfair_Display] font-bold text-gray-900 leading-tight">
+//               {project.description}
+//             </h1>
+
+//             {/* DESCRIPTION CARD */}
+//             {(project.longDescription ||
+//               project.shortDetails ||
+//               project.details) && (
+//               <motion.div
+//                 initial={{ opacity: 0, y: 12 }}
+//                 animate={{ opacity: 1, y: 0 }}
+//                 transition={{ duration: 0.45 }}
+//                 className="bg-white/95 backdrop-blur-sm p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-200"
+//               >
+//                 <div className="text-gray-700 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed space-y-3 sm:space-y-4">
+//                   {project.longDescription
+//                     ? project.longDescription
+//                         .split("\n")
+//                         .map((line, i) => <p key={i}>{line}</p>)
+//                     : (project.shortDetails || project.details)
+//                         .split("\n")
+//                         .map((line, i) => <p key={i}>{line}</p>)}
+//                 </div>
+//               </motion.div>
+//             )}
+//           </div>
+
+//           {/* Right Column / Sidebar */}
+//           <aside className="lg:sticky lg:top-24 h-fit">
+//             <div className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-xl border border-gray-100">
+//               <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-4">
+//                 Project Info
+//               </h3>
+//               <div className="text-gray-700 space-y-2 sm:space-y-3">
+//                 {project.category && (
+//                   <div className="flex justify-between text-xs sm:text-sm md:text-base">
+//                     <span className="font-medium">Category</span>
+//                     <span className="text-right">{project.category}</span>
+//                   </div>
+//                 )}
+//                 {project.status && (
+//                   <div className="flex justify-between text-xs sm:text-sm md:text-base">
+//                     <span className="font-medium">Status</span>
+//                     <span className="text-right">{project.status}</span>
+//                   </div>
+//                 )}
+//                 {project.location && (
+//                   <div className="flex justify-between text-xs sm:text-sm md:text-base">
+//                     <span className="font-medium">Location</span>
+//                     <span className="text-right">{project.location}</span>
+//                   </div>
+//                 )}
+//               </div>
+
+//               {/* See Other Projects Link */}
+//               <div className="mt-6 pt-6 border-t border-gray-200">
+//                 <Link
+//                   to="/portfolio"
+//                   className="flex items-center justify-center gap-2 w-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold py-2.5 sm:py-3 px-4 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base"
+//                 >
+//                   <Grid3x3 className="w-4 h-4 sm:w-5 sm:h-5" />
+//                   View All Projects
+//                 </Link>
+//               </div>
+//             </div>
+//           </aside>
+//         </div>
+
+//         {/* GALLERY */}
+//         {images.length > 0 && (
+//           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
+//             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 border-l-4 border-yellow-500 pl-3 sm:pl-4 font-[Playfair_Display]">
+//               Gallery
+//             </h3>
+//             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+//               {images.map((src, idx) => (
+//                 <motion.div
+//                   key={idx}
+//                   initial={{ opacity: 0, scale: 0.98 }}
+//                   whileInView={{ opacity: 1, scale: 1 }}
+//                   transition={{ duration: 0.35, delay: idx * 0.03 }}
+//                   className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-lg cursor-pointer group"
+//                   onClick={() => openImageModal(idx)}
+//                 >
+//                   <div className="w-full aspect-square overflow-hidden">
+//                     <img
+//                       src={src}
+//                       alt={project.description || `Image ${idx + 1}`}
+//                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+//                     />
+//                   </div>
+//                   <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+//                     <span className="text-white text-sm sm:text-base font-medium">
+//                       View
+//                     </span>
+//                   </div>
+//                 </motion.div>
+//               ))}
+//             </div>
+//           </div>
+//         )}
+//       </div>
+
+//       {/* IMAGE MODAL */}
+//       <AnimatePresence>
+//         {isImageModalOpen && images.length > 0 && (
+//           <motion.div
+//             initial={{ opacity: 0 }}
+//             animate={{ opacity: 1 }}
+//             exit={{ opacity: 0 }}
+//             className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+//             onClick={closeImageModal}
+//           >
+//             <button
+//               onClick={(e) => {
+//                 e.stopPropagation();
+//                 closeImageModal();
+//               }}
+//               className="absolute top-4 sm:top-6 right-4 sm:right-6 text-white hover:text-gray-300 transition-colors"
+//             >
+//               <X className="w-8 h-8 sm:w-10 sm:h-10" />
+//             </button>
+//             <button
+//               onClick={(e) => {
+//                 e.stopPropagation();
+//                 prevImage(e);
+//               }}
+//               className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+//             >
+//               <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+//             </button>
+//             <motion.img
+//               key={currentImageIndex}
+//               src={images[currentImageIndex]}
+//               alt={project.description || "Project image"}
+//               initial={{ opacity: 0, scale: 0.95 }}
+//               animate={{ opacity: 1, scale: 1 }}
+//               exit={{ opacity: 0, scale: 0.95 }}
+//               transition={{ duration: 0.25 }}
+//               className="max-h-[85vh] sm:max-h-[90vh] max-w-[90vw] sm:max-w-[95vw] object-contain rounded-lg"
+//               onClick={(e) => e.stopPropagation()}
+//             />
+//             <button
+//               onClick={(e) => {
+//                 e.stopPropagation();
+//                 nextImage(e);
+//               }}
+//               className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
+//             >
+//               <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+//             </button>
+//           </motion.div>
+//         )}
+//       </AnimatePresence>
+//     </>
+//   );
+// }
+
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { projects } from "../data/projects";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, ArrowLeft } from "lucide-react";
-
-/**
- * ProjectDescription page
- * - Shows ONLY a single top title using `project.description`
- * - Does NOT repeat project.name or project.description elsewhere
- * - Shows longDescription / shortDetails (if provided) in a single description card
- * - Image hero slider + gallery + modal
- */
+import { ChevronLeft, ChevronRight, X, Grid3x3 } from "lucide-react";
 
 export default function ProjectDescription() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const project = projects.find((p) => p.id === parseInt(id, 10));
 
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
+  // ✅ Fetch project by ID from API
   useEffect(() => {
-    // reset index when project changes
+    setLoading(true);
+    fetch(`${import.meta.env.VITE_API_URL}projects/${id}/`)
+      .then((res) => res.json())
+      .then((data) => {
+        const formattedProject = {
+          ...data,
+          images: data.images.map((img) => img.image), // full URLs from DRF
+        };
+        setProject(formattedProject);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching project:", err);
+        setLoading(false);
+      });
+  }, [id]);
+
+  // Reset image slider when project changes
+  useEffect(() => {
     setCurrentImageIndex(0);
     setIsImageModalOpen(false);
   }, [project]);
 
+  // Auto slider for gallery
   useEffect(() => {
     if (!project || !project.images || project.images.length <= 1) return;
     const interval = setInterval(() => {
@@ -34,22 +324,86 @@ export default function ProjectDescription() {
     }, 5000);
     return () => clearInterval(interval);
   }, [project]);
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gray-50 pt-24 sm:pt-28 pb-12 sm:pb-16 animate-pulse">
+        {/* HERO SKELETON */}
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-gray-300">
+            <div className="w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[2.5/1]"></div>
+          </div>
+        </div>
+
+        {/* MAIN CONTENT SKELETON */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
+          {/* LEFT COLUMN */}
+          <div className="lg:col-span-2 flex flex-col gap-6 sm:gap-8">
+            {/* Title */}
+            <div className="h-8 sm:h-10 bg-gray-300 rounded w-3/4"></div>
+
+            {/* Description Card */}
+            <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-200 space-y-4">
+              <div className="h-4 bg-gray-300 rounded w-full"></div>
+              <div className="h-4 bg-gray-300 rounded w-5/6"></div>
+              <div className="h-4 bg-gray-300 rounded w-4/5"></div>
+              <div className="h-4 bg-gray-300 rounded w-3/5"></div>
+            </div>
+          </div>
+
+          {/* RIGHT SIDEBAR */}
+          <aside className="lg:sticky lg:top-24 h-fit">
+            <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100">
+              <div className="h-6 bg-gray-300 rounded w-32 mb-6"></div>
+
+              <div className="space-y-4">
+                <div className="h-4 bg-gray-300 rounded w-full"></div>
+                <div className="h-4 bg-gray-300 rounded w-full"></div>
+                <div className="h-4 bg-gray-300 rounded w-full"></div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="h-10 bg-gray-300 rounded-lg w-full"></div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        {/* GALLERY SKELETON */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+          {/* Gallery Title */}
+          <div className="h-8 bg-gray-300 rounded w-40 mb-8 border-l-4 border-yellow-500"></div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {[...Array(8)].map((_, idx) => (
+              <div
+                key={idx}
+                className="w-full aspect-square bg-gray-300 rounded-xl shadow"
+              ></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-8 bg-gray-50">
+      <div className="min-h-screen flex items-center justify-center p-4 sm:p-8 bg-gray-50">
         <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+          <h2 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4">
             Project not found
           </h2>
-          <div className="space-x-3">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <button
               onClick={() => navigate(-1)}
-              className="px-4 py-2 bg-gray-200 rounded-md"
+              className="px-4 py-2 bg-gray-200 rounded-md text-sm sm:text-base"
             >
               Go Back
             </button>
-            <Link to="/portfolio" className="text-blue-600 underline">
+            <Link
+              to="/portfolio"
+              className="text-blue-600 underline text-sm sm:text-base"
+            >
               View Portfolio
             </Link>
           </div>
@@ -58,25 +412,17 @@ export default function ProjectDescription() {
     );
   }
 
-  const images =
-    Array.isArray(project.images) && project.images.length > 0
-      ? project.images
-      : [];
+  const images = Array.isArray(project.images) ? project.images : [];
 
   const openImageModal = (index) => {
     setCurrentImageIndex(index);
     setIsImageModalOpen(true);
   };
-
-  const closeImageModal = () => {
-    setIsImageModalOpen(false);
-  };
-
+  const closeImageModal = () => setIsImageModalOpen(false);
   const prevImage = (e) => {
     e?.stopPropagation();
     setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
-
   const nextImage = (e) => {
     e?.stopPropagation();
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
@@ -84,21 +430,12 @@ export default function ProjectDescription() {
 
   return (
     <>
-      {/* Back button (left) */}
-      <Link
-        to="/portfolio"
-        className="fixed top-20 left-4 z-40 inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm px-3 py-2 rounded-full shadow-sm border border-gray-200 hover:bg-white"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back
-      </Link>
-
-      <div className="min-h-screen bg-gray-50 pt-28 sm:pt-36 md:pt-44 lg:pt-52 pb-16">
+      <div className="min-h-screen bg-gray-50 pt-24 sm:pt-28 md:lg:pt-42 pb-12 sm:pb-16">
         {/* HERO / IMAGE SLIDER */}
         {images.length > 0 && (
-          <div className="w-full px-4 sm:px-6 max-w-7xl mx-auto">
-            <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-              <div className="w-full h-[40vh] sm:h-[50vh] md:h-[60vh] lg:h-[70vh] relative">
+          <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-2xl">
+              <div className="w-full aspect-[16/9] sm:aspect-[21/9] lg:aspect-[2.5/1] relative">
                 <AnimatePresence initial={false} mode="wait">
                   <motion.img
                     key={currentImageIndex}
@@ -108,7 +445,7 @@ export default function ProjectDescription() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="absolute inset-0 w-full h-full object-cover cursor-pointer"
                     onClick={() => openImageModal(currentImageIndex)}
                   />
                 </AnimatePresence>
@@ -118,25 +455,16 @@ export default function ProjectDescription() {
                 {images.length > 1 && (
                   <>
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        prevImage(e);
-                      }}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-3 transition"
-                      aria-label="Previous image"
+                      onClick={(e) => prevImage(e)}
+                      className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition"
                     >
-                      <ChevronLeft className="w-6 h-6 text-white" />
+                      <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </button>
-
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        nextImage(e);
-                      }}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-3 transition"
-                      aria-label="Next image"
+                      onClick={(e) => nextImage(e)}
+                      className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 backdrop-blur-sm rounded-full p-2 sm:p-3 transition"
                     >
-                      <ChevronRight className="w-6 h-6 text-white" />
+                      <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                     </button>
                   </>
                 )}
@@ -146,93 +474,101 @@ export default function ProjectDescription() {
         )}
 
         {/* MAIN CONTENT */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 grid lg:grid-cols-3 gap-8 sm:gap-12">
-          {/* Left column (main) */}
-          <div className="lg:col-span-2 flex flex-col gap-10">
-            {/* MAIN TITLE (only shows project.description) */}
-            <h1 className="text-4xl sm:text-5xl font-[Playfair_Display] font-bold text-gray-900 leading-tight">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
+          {/* Left Column */}
+          <div className="lg:col-span-2 flex flex-col gap-6 sm:gap-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-[Playfair_Display] font-bold text-gray-900 leading-tight">
               {project.description}
             </h1>
-
-            {/* DESCRIPTION CARD - show either longDescription or shortDetails if available.
-                Do NOT repeat project.name or project.description elsewhere. */}
-            {(project.longDescription ||
-              project.shortDetails ||
-              project.details) && (
+            {project.long_description && (
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45 }}
-                className="bg-white/80 backdrop-blur-sm p-6 sm:p-8 rounded-2xl shadow border border-gray-200"
+                className="bg-white/95 backdrop-blur-sm p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl shadow-lg border border-gray-200"
               >
-                <div className="text-gray-700 text-base sm:text-lg leading-relaxed space-y-4">
-                  {project.longDescription
-                    ? project.longDescription
-                        .split("\n")
-                        .map((line, i) => <p key={i}>{line}</p>)
-                    : (project.shortDetails || project.details)
-                        .split("\n")
-                        .map((line, i) => <p key={i}>{line}</p>)}
-                </div>
+                <div
+                  className="text-gray-700 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed space-y-4"
+                  dangerouslySetInnerHTML={{ __html: project.long_description }}
+                ></div>
               </motion.div>
             )}
           </div>
 
-          {/* Right column (sidebar) */}
-          <aside className="lg:sticky lg:top-32">
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-gray-100">
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">
+          {/* Sidebar */}
+          <aside className="lg:sticky lg:top-24 h-fit">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-xl border border-gray-100">
+              <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-4">
                 Project Info
               </h3>
-              <div className="text-gray-700 space-y-3">
+              <div className="text-gray-700 space-y-2 sm:space-y-3">
                 {project.category && (
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-xs sm:text-sm md:text-base">
                     <span className="font-medium">Category</span>
-                    <span>{project.category}</span>
+                    <span className="text-right">{project.category}</span>
                   </div>
                 )}
                 {project.status && (
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-xs sm:text-sm md:text-base">
                     <span className="font-medium">Status</span>
-                    <span>{project.status}</span>
+                    <span className="text-right">{project.status}</span>
                   </div>
                 )}
                 {project.location && (
-                  <div className="flex justify-between text-sm">
+                  <div className="flex justify-between text-xs sm:text-sm md:text-base">
                     <span className="font-medium">Location</span>
-                    <span>{project.location}</span>
+                    <span className="text-right">{project.location}</span>
                   </div>
                 )}
-                {/* Add other info fields as needed, but DO NOT repeat title/description here */}
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <Link
+                  to="/portfolio"
+                  className="flex items-center justify-center gap-2 w-full 
+bg-yellow-500 hover:bg-yellow-600 
+text-white font-semibold 
+py-2.5 sm:py-3 px-4 
+rounded-lg 
+transition-all duration-300 
+shadow-md hover:shadow-lg 
+text-sm sm:text-base"
+                >
+                  <Grid3x3 className="w-4 h-4 sm:w-5 sm:h-5" />
+                  View All Projects
+                </Link>
               </div>
             </div>
           </aside>
         </div>
 
-        {/* GALLERY (thumbnails) */}
+        {/* Gallery */}
         {images.length > 0 && (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-8 border-l-4 border-yellow-500 pl-4 font-[Playfair_Display]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 border-l-4 border-yellow-500 pl-3 sm:pl-4 font-[Playfair_Display]">
               Gallery
             </h3>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               {images.map((src, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, scale: 0.98 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.35, delay: idx * 0.03 }}
-                  className="relative rounded-xl overflow-hidden shadow-lg cursor-pointer"
+                  className="relative rounded-lg sm:rounded-xl overflow-hidden shadow-lg cursor-pointer group"
                   onClick={() => openImageModal(idx)}
                 >
-                  <img
-                    src={src}
-                    alt={project.description || `Image ${idx + 1}`}
-                    className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
-                    <span className="text-white">View</span>
+                  <div className="w-full aspect-square overflow-hidden">
+                    <img
+                      src={src}
+                      alt={project.description || `Image ${idx + 1}`}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="text-white text-sm sm:text-base font-medium">
+                      View
+                    </span>
                   </div>
                 </motion.div>
               ))}
@@ -241,7 +577,7 @@ export default function ProjectDescription() {
         )}
       </div>
 
-      {/* IMAGE MODAL */}
+      {/* Image Modal */}
       <AnimatePresence>
         {isImageModalOpen && images.length > 0 && (
           <motion.div
@@ -256,23 +592,19 @@ export default function ProjectDescription() {
                 e.stopPropagation();
                 closeImageModal();
               }}
-              className="absolute top-6 right-6 text-white"
-              aria-label="Close"
+              className="absolute top-4 sm:top-6 right-4 sm:right-6 text-white hover:text-gray-300 transition-colors"
             >
-              <X className="w-10 h-10" />
+              <X className="w-8 h-8 sm:w-10 sm:h-10" />
             </button>
-
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 prevImage(e);
               }}
-              className="absolute left-6 top-1/2 -translate-y-1/2 text-white"
-              aria-label="Previous"
+              className="absolute left-2 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
             >
-              <ChevronLeft className="w-12 h-12" />
+              <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
             </button>
-
             <motion.img
               key={currentImageIndex}
               src={images[currentImageIndex]}
@@ -281,19 +613,17 @@ export default function ProjectDescription() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.25 }}
-              className="max-h-[90vh] max-w-[95vw] object-contain rounded-lg"
+              className="max-h-[85vh] sm:max-h-[90vh] max-w-[90vw] sm:max-w-[95vw] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
             />
-
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 nextImage(e);
               }}
-              className="absolute right-6 top-1/2 -translate-y-1/2 text-white"
-              aria-label="Next"
+              className="absolute right-2 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors"
             >
-              <ChevronRight className="w-12 h-12" />
+              <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
             </button>
           </motion.div>
         )}

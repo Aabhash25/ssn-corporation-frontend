@@ -97,11 +97,11 @@ const AboutUs = () => {
               <div className="h-1 w-20 bg-orange-500 rounded-full"></div>
             </div>
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-playfair font-bold mb-4 leading-tight">
-              Plan Smarter, <br /> Plan Stronger
+              Plan Smarter, <br /> Build Stronger
             </h1>
             <p className="text-xl sm:text-2xl md:text-3xl mb-8 leading-relaxed text-gray-200 max-w-3xl mx-auto">
-              At SSN Corporation, we plan with expertise, design with precision,
-              and deliver with excellence.
+              We plan with expertise, design with precision, and deliver with
+              excellence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <motion.button
@@ -119,7 +119,7 @@ const AboutUs = () => {
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-white text-white hover:bg-white/10 font-semibold py-3 px-8 rounded-lg transition-all duration-300 text-lg"
                 >
-                  View Projects
+                  View Our Portfolio
                 </motion.button>
               </Link>
             </div>
@@ -166,7 +166,7 @@ const AboutUs = () => {
                 , and{" "}
                 <span className="font-semibold text-orange-400">integrity</span>
                 , we unite planners, architects, engineers, and construction
-                experts to transform ideas into functional spaces.
+                experts to transform ideas into enduring construction solutions.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
@@ -225,17 +225,12 @@ const AboutUs = () => {
                 </h2>
               </div>
               <p className="text-xl md:text-2xl leading-relaxed mb-8 text-gray-800">
-                We envision a future where construction transcends traditional
-                boundaries, creating spaces that inspire, sustain, and endure.
-                Our commitment to{" "}
-                <span className="font-semibold text-orange-400">
-                  innovation
-                </span>
-                ,{" "}
-                <span className="font-semibold text-orange-400">precision</span>
-                , and{" "}
-                <span className="font-semibold text-orange-400">integrity</span>{" "}
-                drives every project we undertake.
+                We envision a future where design and construction redefine
+                possibilities—creating spaces that inspire, sustain, and stand
+                the test of time. Our foundation of innovation, precision, and
+                integrity shaped by decades of expertise—guides every project as
+                we transform ideas into purposeful, high-quality spaces. Drives
+                every project we undertake.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
@@ -318,16 +313,16 @@ const AboutUs = () => {
                 spans architectural design, structural,geotechnical,water
                 resources, elecctrical, mechanical, plumbing, and construction
                 management engineering, project management, and sustainable
-                development.
+                construction solutions.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
-                  "Building Design and Construction",
+                  "Residential and Commercial Building Design and Construction",
                   "Land Planning, Permitting, and Site Development",
                   "Infrastructure and Facility Planning and Design",
-                  "Renovations & Interiors",
-                  "Sustainable Construction",
-                  "Construction Management, Construction Support and Material Testing",
+                  "Commercial Renovation,Fit-out, and Maintenance",
+                  "Construction Delivery, Design and Build, and Construction Management",
+                  "Geotechnical Support, Construction Material Testing, and Construction Support",
                 ].map((item, i) => (
                   <div
                     key={i}

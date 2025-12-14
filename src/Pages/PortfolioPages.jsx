@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { projects } from "../data/projects";
 
 // Fix leaflet default markers
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
@@ -33,7 +32,6 @@ const MapController = ({ zoomProject }) => {
 };
 
 // Custom marker with hover tooltip
-// HoverMarker
 const HoverMarker = ({
   project,
   onMarkerClick,
@@ -77,6 +75,12 @@ const HoverMarker = ({
 
 const MasonryPortfolio = () => {
   const navigate = useNavigate();
+
+  // Projects state
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Map / hover states
   const [showMap, setShowMap] = useState(false);
   const [zoomProject, setZoomProject] = useState(null);
   const [hoveredMapProject, setHoveredMapProject] = useState(null);
@@ -86,18 +90,124 @@ const MasonryPortfolio = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [selectedYear, setSelectedYear] = useState("All");
+  const [searchKeyword, setSearchKeyword] = useState(""); // ✅ Search state
 
-  // ✅ Filter logic + show newest (highest ID) first
+  // Fetch projects from Django API
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_API_URL}projects/`)
+      .then((res) => res.json())
+      .then((data) => {
+        const formattedData = data.map((project) => ({
+          ...project,
+          images: project.images.map((img) => img.image), // full URLs already
+        }));
+        setProjects(formattedData);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching projects:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white" style={{ paddingTop: "140px" }}>
+        {/* Header */}
+        <div className="bg-white border-b border-gray-100 relative z-10">
+          <div className="max-w-[90vw] mx-auto px-4 sm:px-6 py-4 sm:py-6">
+            <div className="h-8 sm:h-10 bg-gray-300 rounded w-40 sm:w-56 mb-3 animate-pulse"></div>
+            <div className="h-4 bg-gray-300 rounded w-64 sm:w-80 animate-pulse"></div>
+          </div>
+        </div>
+
+        {/* Filters Row */}
+        <div className="bg-white border-b border-gray-100 py-3 sm:py-4 shadow-sm">
+          <div className="max-w-[90vw] mx-auto px-4 sm:px-6 flex flex-wrap items-center gap-4">
+            {/* Search */}
+            <div className="flex flex-col gap-2 w-full sm:w-auto">
+              <div className="h-3 w-12 bg-gray-300 rounded animate-pulse"></div>
+              <div className="h-9 w-40 bg-gray-300 rounded-lg animate-pulse"></div>
+            </div>
+
+            {/* Category */}
+            <div className="flex flex-col gap-2 w-full sm:w-auto">
+              <div className="h-3 w-14 bg-gray-300 rounded animate-pulse"></div>
+              <div className="h-9 w-32 bg-gray-300 rounded-lg animate-pulse"></div>
+            </div>
+
+            {/* Status */}
+            <div className="flex flex-col gap-2 w-full sm:w-auto">
+              <div className="h-3 w-12 bg-gray-300 rounded animate-pulse"></div>
+              <div className="h-9 w-32 bg-gray-300 rounded-lg animate-pulse"></div>
+            </div>
+
+            {/* Year */}
+            <div className="flex flex-col gap-2 w-full sm:w-auto">
+              <div className="h-3 w-10 bg-gray-300 rounded animate-pulse"></div>
+              <div className="h-9 w-28 bg-gray-300 rounded-lg animate-pulse"></div>
+            </div>
+
+            {/* Reset */}
+            <div className="h-9 w-24 bg-gray-300 rounded-lg animate-pulse"></div>
+          </div>
+        </div>
+
+        {/* Portfolio Grid */}
+        <div className="py-6 sm:py-10 max-w-[90vw] mx-auto px-2 sm:px-4 lg:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+            {[...Array(8)].map((_, index) => (
+              <div
+                key={index}
+                className="rounded-2xl overflow-hidden shadow-lg bg-gray-100 animate-pulse aspect-[3/4] flex flex-col"
+              >
+                {/* Image section */}
+                <div className="w-full h-[75%] bg-gray-300"></div>
+
+                {/* Title footer */}
+                <div className="bg-white/95 h-[25%] px-3 flex flex-col justify-center">
+                  <div className="h-4 bg-gray-300 rounded w-3/4 mb-2"></div>
+                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
   const filteredProjects = [...projects]
-    .sort((a, b) => b.id - a.id) // Sort by ID descending
+    .sort((a, b) => {
+      // Sort by display_order first (ascending)
+      if (a.display_order !== b.display_order) {
+        return a.display_order - b.display_order;
+      }
+      // Fallback: newest ID first
+      return b.id - a.id;
+    })
     .filter((project) => {
-      return (
-        (selectedCategory === "All" || project.category === selectedCategory) &&
-        (selectedStatus === "All" || project.status === selectedStatus) &&
-        (selectedYear === "All" || project.year === parseInt(selectedYear))
-      );
+      const matchesCategory =
+        selectedCategory === "All" || project.category === selectedCategory;
+      const matchesStatus =
+        selectedStatus === "All" || project.status === selectedStatus;
+      const matchesYear =
+        selectedYear === "All" || project.year === parseInt(selectedYear);
+
+      const keywordList = project.keywords ? project.keywords.split(",") : [];
+      const matchesKeyword =
+        project.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        project.description
+          .toLowerCase()
+          .includes(searchKeyword.toLowerCase()) ||
+        keywordList.some((k) =>
+          k.toLowerCase().includes(searchKeyword.toLowerCase())
+        );
+
+      return matchesCategory && matchesStatus && matchesYear && matchesKeyword;
     });
 
+  // Handlers
   const handleProjectClick = (p) => navigate(`/project-description/${p.id}`);
   const handleMarkerHover = (p, pos) => {
     setHoverPosition(pos);
@@ -146,6 +256,20 @@ const MasonryPortfolio = () => {
         {/* Filters */}
         <div className="bg-white border-b border-gray-100 py-3 sm:py-4 shadow-sm">
           <div className="max-w-[90vw] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-4 justify-start sm:justify-between">
+            {/* Search */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
+              <label className="text-xs sm:text-sm font-medium text-gray-700">
+                Search:
+              </label>
+              <input
+                type="text"
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+                placeholder="Search by keyword..."
+                className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[150px]"
+              />
+            </div>
+
             {/* Category */}
             <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
               <label className="text-xs sm:text-sm font-medium text-gray-700">
@@ -211,6 +335,7 @@ const MasonryPortfolio = () => {
                 setSelectedCategory("All");
                 setSelectedStatus("All");
                 setSelectedYear("All");
+                setSearchKeyword("");
               }}
               className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-3 sm:px-4 py-1 rounded-lg text-xs sm:text-sm w-full sm:w-auto"
             >
@@ -221,28 +346,33 @@ const MasonryPortfolio = () => {
 
         {/* Main Content */}
         {showMap ? (
-          // 🌍 Map View
-          <div className="h-[50vh] sm:h-[60vh] lg:h-[calc(100vh-200px)] max-w-[90vw] mx-auto mt-6 lg:mt-12 px-4 relative z-0">
+          // Map View
+          <div
+            className="w-full relative"
+            style={{ height: "60vh", zIndex: 1 }}
+          >
             <MapContainer
-              center={[39.8283, -98.5795]} // 🗺️ Default US center
+              center={[39.8283, -98.5795]}
               zoom={5}
               scrollWheelZoom={true}
-              className="w-full h-full rounded-2xl shadow-lg"
+              style={{ height: "100%", width: "100%", borderRadius: "16px" }}
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
               />
               <MapController zoomProject={zoomProject} />
-              {filteredProjects.map((p) => (
-                <HoverMarker
-                  key={p.id}
-                  project={p}
-                  onMarkerClick={handleMarkerClick}
-                  onMarkerHover={handleMarkerHover}
-                  onMarkerOut={handleMarkerOut}
-                />
-              ))}
+              {filteredProjects
+                .filter((p) => p.lat && p.lng && !isNaN(p.lat) && !isNaN(p.lng))
+                .map((p) => (
+                  <HoverMarker
+                    key={p.id}
+                    project={p}
+                    onMarkerClick={handleMarkerClick}
+                    onMarkerHover={handleMarkerHover}
+                    onMarkerOut={handleMarkerOut}
+                  />
+                ))}
             </MapContainer>
 
             {/* Hover Tooltip */}
@@ -257,7 +387,7 @@ const MasonryPortfolio = () => {
                   style={{
                     left: `${hoverPosition.x}px`,
                     top: `${hoverPosition.y}px`,
-                    transform: "translate(-50%, -100%)", // center horizontally & above marker
+                    transform: "translate(-50%, -100%)",
                   }}
                 >
                   <h3 className="font-semibold text-gray-900 text-xs sm:text-sm mb-1">
@@ -275,7 +405,7 @@ const MasonryPortfolio = () => {
             </AnimatePresence>
           </div>
         ) : (
-          // 🧱 Grid View (Original hover style)
+          // Grid View
           <div className="py-6 sm:py-10 max-w-[90vw] mx-auto px-2 sm:px-4 lg:px-6">
             {filteredProjects.length === 0 ? (
               <p className="text-center text-gray-500 py-10">
@@ -301,8 +431,6 @@ const MasonryPortfolio = () => {
                       alt={project.name}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-
-                    {/* Modern Bottom White Bar */}
                     <div className="absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur-md rounded-t-2xl shadow-md px-2 sm:px-3 py-1 sm:py-2 transition-transform duration-300 group-hover:translate-y-[-5px]">
                       <h3
                         className="text-gray-900 font-semibold text-center truncate text-xs sm:text-sm"
@@ -312,13 +440,7 @@ const MasonryPortfolio = () => {
                         {project.name}
                       </h3>
                     </div>
-
-                    {/* Original hover overlay */}
-                    <motion.div
-                      className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-2 sm:p-4"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                    >
+                    <motion.div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-2 sm:p-4">
                       <h3
                         className="text-base sm:text-lg font-bold mb-1 sm:mb-2 text-center"
                         style={{ fontFamily: "Playfair Display, serif" }}
