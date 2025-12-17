@@ -157,7 +157,7 @@ const AboutUs = () => {
                   SSN Corporation
                 </span>{" "}
                 is a visionary design and construction firm led by professionals
-                with over two decades of excellence. Founded on principles of{" "}
+                with over decades of excellence. Founded on principles of{" "}
                 <span className="font-semibold text-orange-400">
                   innovation
                 </span>
@@ -229,8 +229,7 @@ const AboutUs = () => {
                 possibilities—creating spaces that inspire, sustain, and stand
                 the test of time. Our foundation of innovation, precision, and
                 integrity shaped by decades of expertise—guides every project as
-                we transform ideas into purposeful, high-quality spaces. Drives
-                every project we undertake.
+                we transform ideas into purposeful, high-quality spaces.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
@@ -310,7 +309,7 @@ const AboutUs = () => {
               <p className="text-xl md:text-2xl leading-relaxed mb-8 text-gray-800">
                 From concept to completion, we deliver comprehensive engineering
                 and construction solutions tailored to your needs. Our expertise
-                spans architectural design, structural,geotechnical,water
+                spans architectural design, structural, geotechnical, water
                 resources, elecctrical, mechanical, plumbing, and construction
                 management engineering, project management, and sustainable
                 construction solutions.
