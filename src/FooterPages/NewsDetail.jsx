@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 // Google Fonts
 const FontsStyle = () => (
-  <style jsx global>{`
+  <style>{`
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
 
     .font-roboto {
@@ -16,11 +16,12 @@ const FontsStyle = () => (
 
     /* Style for links inside paragraphs */
     .news-link {
-      color: #050200ff;
+      color: #2563eb;
       font-weight: 600;
       text-decoration: underline;
     }
     .news-link:hover {
+      color: #1d4ed8;
       text-decoration: underline;
     }
   `}</style>
@@ -31,6 +32,11 @@ const linkKeywords = (text) => {
   const links = {
     "SSN Corporation": "https://ssncorporation.com/engineers",
     "SSN Builders": "https://ssncorporation.com/contractors",
+    "City of Raleigh":
+      "https://raleighnc.gov/fire/services/view-raleigh-fire-statistics",
+    FEMA: "https://www.usfa.fema.gov/statistics/states/north-carolina.html",
+    NCOSFM:
+      "https://www.ncosfm.gov/news/press-releases/2025/01/21/new-report-highlights-nc-fire-fatalities-2024",
   };
 
   let linkedText = text;
@@ -64,13 +70,19 @@ const NewsDetail = () => {
     fetch(`${import.meta.env.VITE_API_URL}news/`)
       .then((res) => res.json())
       .then((data) => {
-        const others = data
+        // Handle both array and paginated object responses
+        const newsArray = Array.isArray(data) ? data : data.results || [];
+
+        const others = newsArray
           .filter((item) => item.id !== parseInt(id))
           .slice(0, 3);
         setMoreNews(others);
         setLoading(false);
       })
-      .catch((err) => console.error("Error fetching more news:", err));
+      .catch((err) => {
+        console.error("Error fetching more news:", err);
+        setLoading(false);
+      });
   }, [id]);
 
   if (loading) {
@@ -86,17 +98,20 @@ const NewsDetail = () => {
 
   if (!news) {
     return (
-      <div className="text-center py-20">
-        <h2 className="text-3xl font-playfair font-bold text-gray-800">
-          News Not Found
-        </h2>
-        <Link
-          to="/news"
-          className="mt-4 inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
-        >
-          Back to News
-        </Link>
-      </div>
+      <>
+        <FontsStyle />
+        <div className="text-center py-20">
+          <h2 className="text-3xl font-playfair font-bold text-gray-800">
+            News Not Found
+          </h2>
+          <Link
+            to="/news"
+            className="mt-4 inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
+          >
+            Back to News
+          </Link>
+        </div>
+      </>
     );
   }
 

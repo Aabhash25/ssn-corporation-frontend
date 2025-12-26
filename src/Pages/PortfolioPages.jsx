@@ -1,180 +1,27 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-} from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
-
-// Fix leaflet default markers
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
-
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: markerIcon2x,
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
-});
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { motion } from "framer-motion";
+import { useNavigate, useLocation } from "react-router-dom";
+import { PortfolioMapView } from "./MapComponents";
 
 // ============================================
-// CACHING UTILITIES
+// GLOBAL CACHE (persists across component remounts)
 // ============================================
-
-/**
- * In-memory cache for API responses with sessionStorage persistence
- * Caches data for 5 minutes to reduce API calls
- */
-const apiCache = {
-  data: null,
-  timestamp: null,
-  maxAge: 5 * 60 * 1000, // 5 minutes
-
-  set(data) {
-    this.data = data;
-    this.timestamp = Date.now();
-    // Persist to sessionStorage for refresh resilience
-    try {
-      sessionStorage.setItem(
-        "portfolio_cache",
-        JSON.stringify({
-          data,
-          timestamp: this.timestamp,
-        })
-      );
-      console.log("✓ Cache saved to sessionStorage");
-    } catch (e) {
-      console.warn("Failed to cache to sessionStorage:", e);
-    }
-  },
-
-  get() {
-    // Check in-memory cache first (fastest)
-    if (
-      this.data &&
-      this.timestamp &&
-      Date.now() - this.timestamp < this.maxAge
-    ) {
-      console.log("✓ Using in-memory cache");
-      return this.data;
-    }
-
-    // Check sessionStorage (survives page refresh)
-    try {
-      const cached = sessionStorage.getItem("portfolio_cache");
-      if (cached) {
-        const { data, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < this.maxAge) {
-          console.log("✓ Restored cache from sessionStorage");
-          this.data = data;
-          this.timestamp = timestamp;
-          return data;
-        } else {
-          console.log("✗ Cache expired");
-        }
-      }
-    } catch (e) {
-      console.warn("Failed to retrieve from sessionStorage:", e);
-    }
-
-    return null;
-  },
-
-  clear() {
-    this.data = null;
-    this.timestamp = null;
-    try {
-      sessionStorage.removeItem("portfolio_cache");
-      console.log("✓ Cache cleared");
-    } catch (e) {
-      console.warn("Failed to clear sessionStorage:", e);
-    }
-  },
-
-  getAge() {
-    if (!this.timestamp) return null;
-    return Math.floor((Date.now() - this.timestamp) / 1000);
+const globalCache = {
+  projects: new Map(),
+  filterOptions: null,
+  scrollPosition: 0,
+  filters: {
+    selectedCategory: "All",
+    selectedStatus: "All",
+    selectedYear: "All",
+    searchKeyword: "",
+    currentPage: 1,
+    showMap: false,
   },
 };
 
-/**
- * Memoized filter results cache
- * Stores computed filter results to avoid re-filtering on every render
- */
-const filterCache = new Map();
-const MAX_FILTER_CACHE_SIZE = 50;
-
-const getCacheKey = (projects, category, status, year, keyword) => {
-  return `${category}|${status}|${year}|${keyword}|${projects.length}`;
-};
-
 // ============================================
-// MAP COMPONENTS
-// ============================================
-
-const MapController = React.memo(({ zoomProject }) => {
-  const map = useMap();
-  useEffect(() => {
-    if (zoomProject) {
-      map.flyTo([zoomProject.lat, zoomProject.lng], 15, {
-        duration: 1.5,
-        easeLinearity: 0.25,
-      });
-    }
-  }, [map, zoomProject]);
-  return null;
-});
-
-const HoverMarker = React.memo(
-  ({ project, onMarkerClick, onMarkerHover, onMarkerOut }) => {
-    const markerRef = useRef(null);
-
-    const handleMouseEnter = useCallback(() => {
-      if (markerRef.current && onMarkerHover) {
-        const marker = markerRef.current;
-        const map = marker._map;
-        if (map) {
-          const containerPoint = map.latLngToContainerPoint([
-            project.lat,
-            project.lng,
-          ]);
-          const mapContainer = map.getContainer();
-          const rect = mapContainer.getBoundingClientRect();
-
-          onMarkerHover(project, {
-            x: rect.left + containerPoint.x,
-            y: rect.top + containerPoint.y - 40,
-          });
-        }
-      }
-    }, [project, onMarkerHover]);
-
-    const handleClick = useCallback(() => {
-      onMarkerClick(project);
-    }, [project, onMarkerClick]);
-
-    return (
-      <Marker
-        ref={markerRef}
-        position={[project.lat, project.lng]}
-        eventHandlers={{
-          mouseover: handleMouseEnter,
-          mouseout: onMarkerOut,
-          click: handleClick,
-        }}
-      />
-    );
-  }
-);
-
-// ============================================
-// PROJECT CARD COMPONENT (Memoized)
+// PROJECT CARD COMPONENT
 // ============================================
 
 const ProjectCard = React.memo(({ project, index, onClick }) => {
@@ -190,9 +37,9 @@ const ProjectCard = React.memo(({ project, index, onClick }) => {
       className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg aspect-[3/4] sm:aspect-square"
       onClick={onClick}
     >
-      {project.images && project.images[0] && (
+      {project.image && (
         <img
-          src={project.images[0]}
+          src={project.image}
           alt={project.name}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -215,7 +62,7 @@ const ProjectCard = React.memo(({ project, index, onClick }) => {
           {project.name}
         </h3>
         <p className="text-xs sm:text-sm text-gray-200 mb-1 sm:mb-2 text-center">
-          {project.category?.name || "Uncategorized"}
+          {project.category || "Uncategorized"}
         </p>
         <div className="flex items-center gap-1 sm:gap-2 text-xs text-gray-300 justify-center">
           <span>{project.status}</span>
@@ -228,68 +75,257 @@ const ProjectCard = React.memo(({ project, index, onClick }) => {
 });
 
 // ============================================
+// PAGINATION COMPONENT
+// ============================================
+
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const getPageNumbers = () => {
+    const pages = [];
+    const showPages = 5;
+
+    let startPage = Math.max(1, currentPage - Math.floor(showPages / 2));
+    let endPage = Math.min(totalPages, startPage + showPages - 1);
+
+    if (endPage - startPage < showPages - 1) {
+      startPage = Math.max(1, endPage - showPages + 1);
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  };
+
+  return (
+    <div className="flex items-center justify-center gap-2 py-8">
+      <button
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className={`px-4 py-2 rounded-lg font-medium transition ${
+          currentPage === 1
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-blue-600 text-white hover:bg-blue-700"
+        }`}
+      >
+        Previous
+      </button>
+
+      {getPageNumbers()[0] > 1 && (
+        <>
+          <button
+            onClick={() => onPageChange(1)}
+            className="px-4 py-2 rounded-lg font-medium bg-gray-100 hover:bg-gray-200 text-gray-700"
+          >
+            1
+          </button>
+          {getPageNumbers()[0] > 2 && (
+            <span className="text-gray-500">...</span>
+          )}
+        </>
+      )}
+
+      {getPageNumbers().map((page) => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            page === currentPage
+              ? "bg-blue-600 text-white"
+              : "bg-gray-100 hover:bg-gray-200 text-gray-700"
+          }`}
+        >
+          {page}
+        </button>
+      ))}
+
+      {getPageNumbers()[getPageNumbers().length - 1] < totalPages && (
+        <>
+          {getPageNumbers()[getPageNumbers().length - 1] < totalPages - 1 && (
+            <span className="text-gray-500">...</span>
+          )}
+          <button
+            onClick={() => onPageChange(totalPages)}
+            className="px-4 py-2 rounded-lg font-medium bg-gray-100 hover:bg-gray-200 text-gray-700"
+          >
+            {totalPages}
+          </button>
+        </>
+      )}
+
+      <button
+        onClick={() => onPageChange(currentPage + 1)}
+        disabled={currentPage === totalPages}
+        className={`px-4 py-2 rounded-lg font-medium transition ${
+          currentPage === totalPages
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-blue-600 text-white hover:bg-blue-700"
+        }`}
+      >
+        Next
+      </button>
+    </div>
+  );
+};
+
+// ============================================
 // MAIN COMPONENT
 // ============================================
 
 const MasonryPortfolio = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Projects state
+  // Initialize state from global cache
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    globalCache.filters.currentPage
+  );
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
-  const [cacheAge, setCacheAge] = useState(null);
 
-  // Map / hover states
-  const [showMap, setShowMap] = useState(false);
+  const [showMap, setShowMap] = useState(globalCache.filters.showMap);
   const [zoomProject, setZoomProject] = useState(null);
   const [hoveredMapProject, setHoveredMapProject] = useState(null);
   const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
 
-  // Filters
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedStatus, setSelectedStatus] = useState("All");
-  const [selectedYear, setSelectedYear] = useState("All");
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(
+    globalCache.filters.selectedCategory
+  );
+  const [selectedStatus, setSelectedStatus] = useState(
+    globalCache.filters.selectedStatus
+  );
+  const [selectedYear, setSelectedYear] = useState(
+    globalCache.filters.selectedYear
+  );
+  const [searchKeyword, setSearchKeyword] = useState(
+    globalCache.filters.searchKeyword
+  );
 
-  // Fetch projects with intelligent caching
+  const [allCategories, setAllCategories] = useState([]);
+  const [allStatuses, setAllStatuses] = useState([]);
+  const [allYears, setAllYears] = useState([]);
+
+  // Save scroll position before unmount
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL || "";
-    console.log("🔍 Fetching from:", `${apiUrl}projects/`);
+    const handleScroll = () => {
+      globalCache.scrollPosition = window.scrollY;
+    };
 
-    // Check cache first
-    const cachedData = apiCache.get();
-    if (cachedData) {
-      const age = apiCache.getAge();
-      console.log(`✓ Using cached data (${age}s old)`);
-      setCacheAge(age);
-      setProjects(cachedData.projects);
-      setTotalCount(cachedData.count);
-      setTotalPages(1);
-      setLoading(false);
-      return;
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Restore scroll position on mount
+  useEffect(() => {
+    if (globalCache.scrollPosition > 0) {
+      window.scrollTo(0, globalCache.scrollPosition);
     }
+  }, []);
 
-    // Fetch from API
-    console.log("⚡ Fetching fresh data from API");
-    setLoading(true);
+  // Save filter state to global cache whenever it changes
+  useEffect(() => {
+    globalCache.filters = {
+      selectedCategory,
+      selectedStatus,
+      selectedYear,
+      searchKeyword,
+      currentPage,
+      showMap,
+    };
+  }, [
+    selectedCategory,
+    selectedStatus,
+    selectedYear,
+    searchKeyword,
+    currentPage,
+    showMap,
+  ]);
 
-    fetch(`${apiUrl}projects/`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! status: ${res.status}`);
+  // Fetch filter options once
+  useEffect(() => {
+    const fetchFilterOptions = async () => {
+      // Check if we already have filter options cached
+      if (globalCache.filterOptions) {
+        setAllCategories(globalCache.filterOptions.categories);
+        setAllStatuses(globalCache.filterOptions.statuses);
+        setAllYears(globalCache.filterOptions.years);
+        return;
+      }
+
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+
+      try {
+        let allProjects = [];
+        let page = 1;
+        let hasMore = true;
+
+        while (hasMore) {
+          const response = await fetch(`${apiUrl}projects/?page=${page}`);
+          const data = await response.json();
+          allProjects = [...allProjects, ...(data.results || [])];
+          hasMore = data.next !== null;
+          page++;
         }
-        return res.json();
-      })
-      .then((data) => {
-        console.log("📦 Raw API data received:", data);
 
-        const projectsArray = Array.isArray(data) ? data : data.results || [];
-        const count = Array.isArray(data) ? data.length : data.count || 0;
+        const categories = [
+          ...new Set(allProjects.map((p) => p.category).filter(Boolean)),
+        ];
+        const statuses = [
+          ...new Set(allProjects.map((p) => p.status).filter(Boolean)),
+        ];
+        const years = [
+          ...new Set(allProjects.map((p) => p.year).filter(Boolean)),
+        ].sort((a, b) => b - a);
 
-        const formattedData = projectsArray.map((project) => {
+        // Cache filter options globally
+        globalCache.filterOptions = { categories, statuses, years };
+
+        setAllCategories(categories);
+        setAllStatuses(statuses);
+        setAllYears(years);
+      } catch (err) {
+        console.error("Error fetching filter options:", err);
+      }
+    };
+
+    fetchFilterOptions();
+  }, []);
+
+  // Fetch projects with global caching
+  useEffect(() => {
+    const fetchProjects = async () => {
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      const pageKey = `page-${currentPage}`;
+
+      // Check global cache first
+      if (globalCache.projects.has(pageKey)) {
+        console.log("🚀 Using cached data for page:", currentPage);
+        const cachedData = globalCache.projects.get(pageKey);
+        setProjects(cachedData.formattedProjects);
+        setTotalCount(cachedData.totalCount);
+        setTotalPages(cachedData.totalPages);
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const params = new URLSearchParams({
+          page: currentPage.toString(),
+        });
+
+        console.log("📡 Fetching page", currentPage, "from API");
+        const response = await fetch(`${apiUrl}projects/?${params}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        const formattedProjects = (data.results || []).map((project) => {
           let imageUrl = "";
           if (project.image) {
             if (project.image.startsWith("http")) {
@@ -305,128 +341,65 @@ const MasonryPortfolio = () => {
 
           return {
             ...project,
-            images: imageUrl ? [imageUrl] : [],
-            category: { name: project.category || "Uncategorized" },
+            image: imageUrl,
           };
         });
 
-        console.log(`✓ Formatted ${formattedData.length} projects`);
+        const cacheData = {
+          formattedProjects,
+          totalCount: data.count || 0,
+          totalPages: Math.ceil((data.count || 0) / 12),
+        };
 
-        // Cache the results
-        apiCache.set({
-          projects: formattedData,
-          count: count,
-        });
+        // Store in global cache
+        globalCache.projects.set(pageKey, cacheData);
 
-        setCacheAge(0);
-        setProjects(formattedData);
-        setTotalCount(count);
-        setTotalPages(1);
+        // Limit cache size
+        if (globalCache.projects.size > 20) {
+          const oldestKey = globalCache.projects.keys().next().value;
+          globalCache.projects.delete(oldestKey);
+        }
+
+        setProjects(formattedProjects);
+        setTotalCount(data.count || 0);
+        setTotalPages(Math.ceil((data.count || 0) / 12));
         setLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("❌ Error fetching projects:", err);
         setProjects([]);
         setLoading(false);
-      });
-  }, []);
+      }
+    };
 
-  // Memoized filtered projects with intelligent caching
+    fetchProjects();
+  }, [currentPage]);
+
   const filteredProjects = useMemo(() => {
-    const cacheKey = getCacheKey(
-      projects,
-      selectedCategory,
-      selectedStatus,
-      selectedYear,
-      searchKeyword
-    );
+    return projects.filter((project) => {
+      const matchesCategory =
+        selectedCategory === "All" || project.category === selectedCategory;
 
-    // Check filter cache
-    if (filterCache.has(cacheKey)) {
-      console.log("✓ Using cached filter results");
-      return filterCache.get(cacheKey);
-    }
+      const matchesStatus =
+        selectedStatus === "All" || project.status === selectedStatus;
 
-    console.log("🔄 Computing filtered results");
-    const startTime = performance.now();
+      const matchesYear =
+        selectedYear === "All" || project.year === parseInt(selectedYear);
 
-    const result = [...projects]
-      .sort((a, b) => {
-        if (a.display_order !== b.display_order) {
-          return a.display_order - b.display_order;
-        }
-        return b.id - a.id;
-      })
-      .filter((project) => {
-        const matchesCategory =
-          selectedCategory === "All" ||
-          project.category?.name === selectedCategory;
-
-        const matchesStatus =
-          selectedStatus === "All" || project.status === selectedStatus;
-        const matchesYear =
-          selectedYear === "All" || project.year === parseInt(selectedYear);
-
-        const keywordList = project.keywords ? project.keywords.split(",") : [];
-        const matchesKeyword =
-          searchKeyword === "" ||
-          project.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-          project.description
-            .toLowerCase()
-            .includes(searchKeyword.toLowerCase()) ||
-          keywordList.some((k) =>
-            k.toLowerCase().includes(searchKeyword.toLowerCase())
-          );
-
-        return (
-          matchesCategory && matchesStatus && matchesYear && matchesKeyword
+      const keywordList = project.keywords ? project.keywords.split(",") : [];
+      const matchesKeyword =
+        searchKeyword === "" ||
+        project.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+        project.description
+          .toLowerCase()
+          .includes(searchKeyword.toLowerCase()) ||
+        keywordList.some((k) =>
+          k.toLowerCase().includes(searchKeyword.toLowerCase())
         );
-      });
 
-    const endTime = performance.now();
-    console.log(
-      `✓ Filtered to ${result.length} projects in ${(
-        endTime - startTime
-      ).toFixed(2)}ms`
-    );
-
-    // Cache the filtered results
-    filterCache.set(cacheKey, result);
-
-    // Limit cache size to prevent memory issues
-    if (filterCache.size > MAX_FILTER_CACHE_SIZE) {
-      const firstKey = filterCache.keys().next().value;
-      filterCache.delete(firstKey);
-      console.log(`🧹 Filter cache cleaned (size: ${filterCache.size})`);
-    }
-
-    return result;
+      return matchesCategory && matchesStatus && matchesYear && matchesKeyword;
+    });
   }, [projects, selectedCategory, selectedStatus, selectedYear, searchKeyword]);
 
-  // Memoized unique categories, statuses, and years
-  const categories = useMemo(() => {
-    const cats = [
-      ...new Set(projects.map((p) => p.category?.name).filter(Boolean)),
-    ];
-    console.log(`📁 ${cats.length} unique categories`);
-    return cats;
-  }, [projects]);
-
-  const statuses = useMemo(() => {
-    const stats = [...new Set(projects.map((p) => p.status).filter(Boolean))];
-    console.log(`📊 ${stats.length} unique statuses`);
-    return stats;
-  }, [projects]);
-
-  const years = useMemo(() => {
-    const yrs = [...new Set(projects.map((p) => p.year).filter(Boolean))].sort(
-      (a, b) => b - a
-    );
-    console.log(`📅 ${yrs.length} unique years`);
-    return yrs;
-  }, [projects]);
-
-  // Memoized event handlers to prevent unnecessary re-renders
   const handleProjectClick = useCallback(
     (p) => {
       navigate(`/project-description/${p.id}`);
@@ -456,22 +429,22 @@ const MasonryPortfolio = () => {
     setSelectedStatus("All");
     setSelectedYear("All");
     setSearchKeyword("");
+    setCurrentPage(1);
+    // Clear global cache
+    globalCache.projects.clear();
+    globalCache.filterOptions = null;
   }, []);
 
   const toggleView = useCallback(() => {
     setShowMap((prev) => !prev);
   }, []);
 
-  const handleClearCache = useCallback(() => {
-    if (window.confirm("Clear cached data and reload from API?")) {
-      apiCache.clear();
-      filterCache.clear();
-      window.location.reload();
-    }
+  const handlePageChange = useCallback((page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-  // Loading state
-  if (loading) {
+  if (loading && projects.length === 0) {
     return (
       <div className="min-h-screen bg-white" style={{ paddingTop: "140px" }}>
         <div className="bg-white border-b border-gray-100 relative z-10 animate-pulse">
@@ -484,31 +457,17 @@ const MasonryPortfolio = () => {
           </div>
         </div>
 
-        <div className="bg-white border-b border-gray-100 py-3 sm:py-4 shadow-sm animate-pulse">
-          <div className="max-w-[90vw] mx-auto px-4 sm:px-6 flex flex-wrap items-center gap-3">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-9 w-24 bg-gray-300 rounded-lg"></div>
-            ))}
-            <div className="h-9 w-24 bg-gray-300 rounded-lg"></div>
-          </div>
-        </div>
-
         <div className="py-6 sm:py-10 max-w-[90vw] mx-auto px-2 sm:px-4 lg:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {[...Array(8)].map((_, index) => (
+            {[...Array(12)].map((_, index) => (
               <div
                 key={index}
-                className="rounded-2xl overflow-hidden shadow-lg bg-gray-100 aspect-[3/4] flex flex-col animate-pulse"
+                className="rounded-2xl overflow-hidden shadow-lg bg-gray-100 aspect-[3/4] animate-pulse"
               >
-                <div className="w-full h-[60%] bg-gray-300 relative">
-                  <div className="absolute bottom-2 left-2 h-3 w-12 bg-gray-400 rounded animate-pulse"></div>
-                </div>
-                <div className="bg-white/90 flex-1 p-3 flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="h-3 bg-gray-300 rounded w-3/4"></div>
-                    <div className="h-3 bg-gray-300 rounded w-1/2"></div>
-                  </div>
-                  <div className="h-4 bg-gray-200 rounded w-1/4 mt-2"></div>
+                <div className="w-full h-[60%] bg-gray-300"></div>
+                <div className="bg-white/90 flex-1 p-3">
+                  <div className="h-3 bg-gray-300 rounded w-3/4 mb-2"></div>
+                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
                 </div>
               </div>
             ))}
@@ -540,26 +499,15 @@ const MasonryPortfolio = () => {
               </h1>
               <p className="text-sm sm:text-base text-gray-600">
                 Explore our ongoing and completed projects ({totalCount} total
-                projects, showing page {currentPage} of {totalPages})
+                projects)
               </p>
             </div>
-            <div className="flex gap-2">
-              <button
-                onClick={toggleView}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition"
-              >
-                {showMap ? "Grid View" : "Map View"}
-              </button>
-              {cacheAge !== null && (
-                <button
-                  onClick={handleClearCache}
-                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 px-3 rounded-lg text-sm"
-                  title="Clear cache and reload"
-                >
-                  🔄
-                </button>
-              )}
-            </div>
+            <button
+              onClick={toggleView}
+              className="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-2 px-6 rounded-lg shadow-md transition transform hover:scale-105"
+            >
+              {showMap ? "Grid View" : "Map View"}
+            </button>
           </div>
         </div>
 
@@ -589,7 +537,7 @@ const MasonryPortfolio = () => {
                 className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[120px]"
               >
                 <option value="All">All</option>
-                {categories.map((catName) => (
+                {allCategories.map((catName) => (
                   <option key={catName} value={catName}>
                     {catName}
                   </option>
@@ -607,7 +555,7 @@ const MasonryPortfolio = () => {
                 className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[120px]"
               >
                 <option value="All">All</option>
-                {statuses.map((status) => (
+                {allStatuses.map((status) => (
                   <option key={status} value={status}>
                     {status}
                   </option>
@@ -625,7 +573,7 @@ const MasonryPortfolio = () => {
                 className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[120px]"
               >
                 <option value="All">All</option>
-                {years.map((year) => (
+                {allYears.map((year) => (
                   <option key={year} value={year}>
                     {year}
                   </option>
@@ -644,81 +592,45 @@ const MasonryPortfolio = () => {
 
         {/* Main Content */}
         {showMap ? (
-          <div
-            className="w-full relative"
-            style={{ height: "60vh", zIndex: 1 }}
-          >
-            <MapContainer
-              center={[39.8283, -98.5795]}
-              zoom={5}
-              scrollWheelZoom={true}
-              style={{ height: "100%", width: "100%", borderRadius: "16px" }}
-            >
-              <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              />
-              <MapController zoomProject={zoomProject} />
-              {filteredProjects
-                .filter((p) => p.lat && p.lng && !isNaN(p.lat) && !isNaN(p.lng))
-                .map((p) => (
-                  <HoverMarker
-                    key={p.id}
-                    project={p}
-                    onMarkerClick={handleMarkerClick}
-                    onMarkerHover={handleMarkerHover}
-                    onMarkerOut={handleMarkerOut}
-                  />
-                ))}
-            </MapContainer>
-
-            <AnimatePresence>
-              {hoveredMapProject && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.2 }}
-                  className="fixed z-[9999] bg-white rounded-lg shadow-lg border p-3 sm:p-4 w-full max-w-xs sm:max-w-sm pointer-events-none"
-                  style={{
-                    left: `${hoverPosition.x}px`,
-                    top: `${hoverPosition.y}px`,
-                    transform: "translate(-50%, -100%)",
-                  }}
-                >
-                  <h3 className="font-semibold text-gray-900 text-xs sm:text-sm mb-1">
-                    {hoveredMapProject.name}
-                  </h3>
-                  <p className="text-xs text-gray-600 mb-2 line-clamp-2">
-                    {hoveredMapProject.description}
-                  </p>
-                  <div className="flex justify-between items-center text-xs text-gray-500">
-                    <span>📍 {hoveredMapProject.location}</span>
-                    <span>{hoveredMapProject.year}</span>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+          <PortfolioMapView
+            projects={filteredProjects}
+            zoomProject={zoomProject}
+            onMarkerClick={handleMarkerClick}
+            onMarkerHover={handleMarkerHover}
+            onMarkerOut={handleMarkerOut}
+            hoveredProject={hoveredMapProject}
+            hoverPosition={hoverPosition}
+          />
         ) : (
-          <div className="py-6 sm:py-10 max-w-[90vw] mx-auto px-2 sm:px-4 lg:px-6">
-            {filteredProjects.length === 0 ? (
-              <p className="text-center text-gray-500 py-10">
-                No projects match your selected filters.
-              </p>
-            ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-                {filteredProjects.map((project, index) => (
-                  <ProjectCard
-                    key={project.id}
-                    project={project}
-                    index={index}
-                    onClick={() => handleProjectClick(project)}
-                  />
-                ))}
-              </div>
+          <>
+            <div className="py-6 sm:py-10 max-w-[90vw] mx-auto px-2 sm:px-4 lg:px-6">
+              {filteredProjects.length === 0 ? (
+                <p className="text-center text-gray-500 py-10">
+                  No projects match your selected filters.
+                </p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+                  {filteredProjects.map((project, index) => (
+                    <ProjectCard
+                      key={project.id}
+                      project={project}
+                      index={index}
+                      onClick={() => handleProjectClick(project)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Pagination */}
+            {!showMap && totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             )}
-          </div>
+          </>
         )}
       </div>
     </>
