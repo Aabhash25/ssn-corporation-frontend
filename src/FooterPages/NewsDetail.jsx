@@ -31,6 +31,7 @@ const FontsStyle = () => (
 const linkKeywords = (text) => {
   const links = {
     "SSN Corporation": "https://ssncorporation.com/engineers",
+    "SSN Engineers": "https://ssncorporation.com/engineers",
     "SSN Builders": "https://ssncorporation.com/contractors",
     "City of Raleigh":
       "https://raleighnc.gov/fire/services/view-raleigh-fire-statistics",
