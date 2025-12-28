@@ -37,6 +37,9 @@ const linkKeywords = (text) => {
     FEMA: "https://www.usfa.fema.gov/statistics/states/north-carolina.html",
     NCOSFM:
       "https://www.ncosfm.gov/news/press-releases/2025/01/21/new-report-highlights-nc-fire-fatalities-2024",
+    "SSN AI": "https://qtakeoff.ai",
+    "takeoff@ssncorporation.com": "mailto:takeoff@ssncorporation.com",
+    "contact@ssncorporation.com": "mailto:contact@ssncorporation.com",
   };
 
   let linkedText = text;
@@ -173,33 +176,33 @@ const NewsDetail = () => {
             More News
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {moreNews.map((item) => (
               <Link
                 key={item.id}
                 to={`/news/${item.id}`}
-                className="bg-gray-50 rounded-2xl shadow-sm overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col"
+                className="group bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
               >
+                {/* IMAGE */}
                 {item.image1 && (
-                  <div className="w-full h-48 overflow-hidden">
+                  <div className="w-full aspect-[16/9] overflow-hidden">
                     <img
                       src={item.image1}
                       alt={item.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                 )}
-                <div className="p-4 sm:p-5 flex-1 flex flex-col">
-                  <h3 className="font-playfair text-lg sm:text-xl font-semibold text-gray-900 mb-2">
+
+                {/* CONTENT */}
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-playfair text-lg sm:text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
                     {item.title}
                   </h3>
-                  <p className="text-gray-500 text-xs sm:text-sm mb-3">
+
+                  <p className="text-gray-500 text-xs sm:text-sm">
                     {new Date(item.published_date).toLocaleDateString()}
                   </p>
-                  <div
-                    className="text-gray-700 font-roboto text-sm line-clamp-3 flex-1"
-                    dangerouslySetInnerHTML={{ __html: item.content }}
-                  />
                 </div>
               </Link>
             ))}
