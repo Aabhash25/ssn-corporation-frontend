@@ -20,6 +20,30 @@ const globalCache = {
   },
 };
 
+const PortfolioLoader = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-white">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4 }}
+        className="flex flex-col items-center gap-4"
+      >
+        {/* Spinner */}
+        <div className="relative w-16 h-16">
+          <div className="absolute inset-0 rounded-full border-4 border-gray-200"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-yellow-500 border-t-transparent animate-spin"></div>
+        </div>
+
+        {/* Text */}
+        <p className="text-gray-600 text-sm tracking-wide">
+          Loading projects...
+        </p>
+      </motion.div>
+    </div>
+  );
+};
+
 // ============================================
 // PROJECT CARD COMPONENT
 // ============================================
@@ -445,36 +469,7 @@ const MasonryPortfolio = () => {
   }, []);
 
   if (loading && projects.length === 0) {
-    return (
-      <div className="min-h-screen bg-white" style={{ paddingTop: "140px" }}>
-        <div className="bg-white border-b border-gray-100 relative z-10 animate-pulse">
-          <div className="max-w-[90vw] mx-auto px-4 sm:px-6 py-4 sm:py-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-            <div>
-              <div className="h-8 sm:h-10 bg-gray-300 rounded w-48 sm:w-64 mb-2"></div>
-              <div className="h-4 bg-gray-300 rounded w-80 sm:w-96"></div>
-            </div>
-            <div className="h-10 w-32 bg-gray-300 rounded-lg"></div>
-          </div>
-        </div>
-
-        <div className="py-6 sm:py-10 max-w-[90vw] mx-auto px-2 sm:px-4 lg:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-            {[...Array(12)].map((_, index) => (
-              <div
-                key={index}
-                className="rounded-2xl overflow-hidden shadow-lg bg-gray-100 aspect-[3/4] animate-pulse"
-              >
-                <div className="w-full h-[60%] bg-gray-300"></div>
-                <div className="bg-white/90 flex-1 p-3">
-                  <div className="h-3 bg-gray-300 rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-gray-300 rounded w-1/2"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
+    return <PortfolioLoader />;
   }
 
   return (

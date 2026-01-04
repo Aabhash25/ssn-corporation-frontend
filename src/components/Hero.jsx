@@ -28,10 +28,10 @@ const Hero = () => {
       headline: (
         <>
           <span>
-            ONE COMPANY <span className="text-yellow-500">COMPLETE</span>
+            Open <span className="text-yellow-500">Company</span>
           </span>
           <span className="mt-2 block">
-            <span className="text-yellow-500">SOLUTIONS</span>
+            Complete <span className="text-yellow-500">Solutions</span>
           </span>
         </>
       ),
@@ -54,21 +54,21 @@ const Hero = () => {
       subheadline:
         "Registered Professional Engineering Firm & Licensed Unlimited General Contractor",
     },
-    {
-      image: "/14.webp",
-      headline: (
-        <>
-          <span>
-            SPECIALTY <span className="text-yellow-500">ENGINEERING</span>
-          </span>
-          <span className="mt-2 block">
-            <span className="text-yellow-500">SERVICES PROVIDER</span>
-          </span>
-        </>
-      ),
-      subheadline:
-        "Delivering advanced engineering solutions tailored to complex projects across multiple states.",
-    },
+    // {
+    //   image: "/14.webp",
+    //   headline: (
+    //     <>
+    //       <span>
+    //         SPECIALTY <span className="text-yellow-500">ENGINEERING</span>
+    //       </span>
+    //       <span className="mt-2 block">
+    //         <span className="text-yellow-500">SERVICES PROVIDER</span>
+    //       </span>
+    //     </>
+    //   ),
+    //   subheadline:
+    //     "Delivering advanced engineering solutions tailored to complex projects across multiple states.",
+    // },
   ];
 
   // Auto slide every 5 seconds

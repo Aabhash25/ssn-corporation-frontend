@@ -188,6 +188,7 @@ function JobDetail() {
         }`}
       >
         {/* Left column: Job Details */}
+        {/* Left column: Job Details */}
         <div className="space-y-6">
           <div className="bg-white p-8 rounded-2xl shadow-md">
             <h2 className="text-3xl font-bold mb-2">{job?.title}</h2>
@@ -212,12 +213,17 @@ function JobDetail() {
             </h3>
             <p className="text-gray-700">{job?.description}</p>
 
+            {/* Role Description as list */}
             <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
               Role Description
             </h3>
-            <p className="text-gray-700">
-              {job?.key_responsibilities.join(". ")}.
-            </p>
+            <ul className="list-disc ml-6 text-gray-700">
+              {job?.key_responsibilities.map((resp, idx) => (
+                <li key={idx}>{resp}</li>
+              ))}
+            </ul>
+
+            {/* Qualification / Requirements */}
             <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
               Qualification
             </h3>
