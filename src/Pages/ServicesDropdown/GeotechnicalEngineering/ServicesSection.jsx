@@ -54,7 +54,13 @@ const ServicesSection = ({
             {/* Content */}
             <div className="relative h-full flex flex-col p-4 sm:p-6 lg:p-8">
               {/* Title - Always Visible */}
-              <div className="mt-auto">
+              <div
+                className={
+                  activeService === service.id
+                    ? ""
+                    : "flex-1 flex items-center justify-center"
+                }
+              >
                 <h3
                   className={`text-white text-lg sm:text-xl lg:text-2xl font-bold font-playfair leading-tight
                   ${
@@ -97,8 +103,8 @@ const ServicesSection = ({
                     >
                       <X className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                     </button>
-              )}
-            </div>
+                  )}
+                </div>
 
                 {/* Description - Only shown when active */}
                 <div
@@ -137,7 +143,7 @@ const ServicesSection = ({
                     </div>
                   </div>
                 </div>
-            </div>
+              </div>
 
               {/* Expand Indicator (only when not active) */}
               {activeService !== service.id && (
@@ -145,7 +151,7 @@ const ServicesSection = ({
                   <div className="flex flex-col items-center space-y-1.5 sm:space-y-2 p-4">
                     <div className="p-2 sm:p-3 rounded-full bg-white/20 backdrop-blur-sm">
                       <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-white animate-bounce" />
-                  </div>
+                    </div>
                   </div>
                 </div>
               )}
@@ -157,18 +163,18 @@ const ServicesSection = ({
                 <div className="absolute top-1/2 -right-[1px] transform -translate-y-1/2 w-[1px] sm:w-[2px] h-12 sm:h-16 bg-gradient-to-b from-transparent via-white/20 to-transparent z-20"></div>
               )}
           </div>
-            ))}
-          </div>
+        ))}
+      </div>
     </div>
   );
 
   return (
-    <section className="relative w-full py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
+    <section className="relative w-full py-6 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50 ">
       <div className="mx-auto w-full sm:w-[90%] lg:w-[80%]">
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
-            <span className="text-lg font-semibold uppercase tracking-widest text-green-600">
-              Our Geotechnical Engineering Services
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold uppercase  text-blue-600 font-playfair">
+              OUR GEOTECHNICAL SERVICES
             </span>
           </div>
         </div>
@@ -177,9 +183,7 @@ const ServicesSection = ({
         {renderServiceRow(servicesDataRow1)}
 
         {/* Second Row of Services */}
-        <div className="mt-12">
-          {renderServiceRow(servicesDataRow2)}
-        </div>
+        <div className="mt-12">{renderServiceRow(servicesDataRow2)}</div>
       </div>
     </section>
   );

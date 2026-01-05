@@ -3,9 +3,9 @@ const WhySSNSection = () => {
     <section className="relative w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <span className="text-lg font-semibold uppercase tracking-widest text-green-600">
-              Why SSN Corporation
+        <div className="inline-block mb-4">
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold uppercase  text-blue-600 font-playfair">
+              WHY SSN CORPORATION ?
             </span>
           </div>
           {/* <div className="w-16 h-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mx-auto mb-8"></div> */}

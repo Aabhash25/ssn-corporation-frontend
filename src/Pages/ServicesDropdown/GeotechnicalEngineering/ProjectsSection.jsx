@@ -29,11 +29,11 @@ const ProjectsSection = () => {
   return (
     <section className="relative w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-6xl mx-auto">
-        <div className="inline-block mb-4">
-          <span className="text-lg font-semibold uppercase tracking-widest text-green-600">
-            VIEW RELATED PROJECTS
-          </span>
-        </div>
+      <div className="inline-block mb-4">
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold uppercase  text-blue-600 font-playfair">
+              VIEW RELATED PROJECTS
+            </span>
+          </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsLoading

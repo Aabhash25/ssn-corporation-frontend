@@ -53,7 +53,7 @@ const GeotechnicalStudiesSection = ({
             {/* Content */}
             <div className="relative h-full flex flex-col p-4 sm:p-6 lg:p-8">
               {/* Title - Always Visible */}
-              <div className="mt-auto">
+              <div className={activeService === service.id ? "" : "flex-1 flex items-center justify-center"}>
                 <h3
                   className={`text-white text-lg sm:text-xl lg:text-2xl font-bold font-playfair leading-tight
                   ${
@@ -178,8 +178,8 @@ const GeotechnicalStudiesSection = ({
       <div className="mx-auto w-full sm:w-[90%] lg:w-[80%]">
         <div className="text-center mb-12">
           <div className="inline-block mb-4">
-            <span className="text-lg font-semibold uppercase tracking-widest text-green-600">
-              Our Geotechnical Studies & Engineering Solutions
+            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold uppercase  text-blue-600 font-playfair">
+              OUR GEOTECHNICAL STUDIES & ENGINEERING SOLUTIONS
             </span>
           </div>
         </div>

@@ -218,7 +218,7 @@ const GeotechnicalEngineering = () => {
         "Pavement rehabilitation and overlay planning",
         "Life-cycle analysis and predictive performance modeling for maintenance and reconstruction",
         "Construction quality control and field testing",
-        "Sustainable pavement solutions using recycled materials, warm mix asphalt, and high-performance binders",
+        "Sustainable pavement solutions",
       ],
       color: "slate",
     },
@@ -339,37 +339,49 @@ const GeotechnicalEngineering = () => {
       <div className="min-h-screen bg-white overflow-hidden pt-40">
         <HeroSection />
 
-        <AboutSection />
+        <div className="-mt-16">
+          <AboutSection />
+        </div>
 
-        <ServicesSection
-          servicesDataRow1={servicesDataRow1}
-          servicesDataRow2={servicesDataRow2}
-          activeService={activeService}
-          setActiveService={setActiveService}
-          getColorClasses={getColorClasses}
-          getTextColor={getTextColor}
-        />
+        <div className="-mt-20">
+          <ServicesSection
+            servicesDataRow1={servicesDataRow1}
+            servicesDataRow2={servicesDataRow2}
+            activeService={activeService}
+            setActiveService={setActiveService}
+            getColorClasses={getColorClasses}
+            getTextColor={getTextColor}
+          />
+        </div>
 
-        <ContactCTA
-          title="Need Expert Engineering Support?"
-          description="Our engineers are ready to assist you with reliable, data-driven solutions."
-          buttonText="Get in Touch"
-          link="/contact"
-        />
+        <div className="-mt-16">
+          <ContactCTA
+            title="Need Expert Engineering Support?"
+            description="Our engineers are ready to assist you with reliable, data-driven solutions."
+            buttonText="Get in Touch"
+            link="/contact"
+          />
+        </div>
 
-        <GeotechnicalStudiesSection
-          geotechnicalStudiesData={geotechnicalStudiesData}
-          activeService={activeService}
-          setActiveService={setActiveService}
-          getColorClasses={getColorClasses}
-          getTextColor={getTextColor}
-        />
+        <div className="-mt-20">
+          <GeotechnicalStudiesSection
+            geotechnicalStudiesData={geotechnicalStudiesData}
+            activeService={activeService}
+            setActiveService={setActiveService}
+            getColorClasses={getColorClasses}
+            getTextColor={getTextColor}
+          />
+        </div>
 
-        <WhySSNSection />
+        <div className="-mt-16">
+          <WhySSNSection />
+        </div>
 
-        <TeamSection />
+        {/* <TeamSection /> */}
 
-        <ProjectsSection />
+        <div className="-mt-16">
+          <ProjectsSection />
+        </div>
       </div>
     </>
   );
