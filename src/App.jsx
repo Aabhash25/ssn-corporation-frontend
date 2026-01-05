@@ -62,7 +62,9 @@ const ConstructionMaterialSurveyAndTesting = lazy(() =>
   import("./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting")
 );
 const GeoTechnicalEngineering = lazy(() =>
-  import("./Pages/ServicesDropdown/GeoTechnicalEngineering")
+  import(
+    "./Pages/ServicesDropdown/GeotechnicalEngineering/GeoTechnicalEngineering"
+  )
 );
 const ConstructionEngineeringAndManagement = lazy(() =>
   import("./Pages/ServicesDropdown/ConstructionEngineering")

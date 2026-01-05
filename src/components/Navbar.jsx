@@ -258,7 +258,7 @@ const ModernNavbar = () => {
                       : "96px",
                   }}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-0 py-4 px-6">
+                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 py-4 px-6">
                     {/* Left Column - Company Motto */}
                     <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 flex flex-col justify-center">
                       <div className="border-l-4 border-yellow-500 pl-6">
@@ -290,7 +290,7 @@ const ModernNavbar = () => {
                             to="/design-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
-                            Design and Engineering
+                            Building and Building Services System Design
                           </Link>
                         </li>
                         <li>
@@ -298,7 +298,7 @@ const ModernNavbar = () => {
                             to="/land-planning"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
-                            Land Planning and Permitting
+                            Land Planning, Development, and Permitting
                           </Link>
                         </li>
                         <li>
@@ -325,21 +325,22 @@ const ModernNavbar = () => {
                             Geotechnical Engineering
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             to="/material-testing"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
                             Construction Material Survey and Testing
                           </Link>
-                        </li>
+                        </li> */}
 
                         <li>
                           <Link
                             to="/construction-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block"
                           >
-                            Construction Engineering
+                            Architectural and Engineering Services for Tenant
+                            Fit-Outs
                           </Link>
                         </li>
                         <li>
@@ -361,15 +362,15 @@ const ModernNavbar = () => {
                       </h4>
                       <ul className="space-y-2 text-base font-oswald">
                         {[
-                          "MEP Services",
+                          "Mechanical, Electrical, and Plumbing Design",
                           "Pavement Design",
                           "Traffic Engineering Services",
-                          "Specialty Structural Design",
-                          "Special Inspections & Field Support",
-                          "Directional Drilling Design",
+                          // "Specialty Structural Design",
+                          "Special Inspections Services (IBC Chapter 17)",
+                          "Trenchless Design (HDD, Pipe Jacking, Micro Tunneling)",
                           "3D Modeling/Rendering",
-                          "BIM Modeling",
-                          "Instrumentation Engineering",
+                          // "BIM Modeling",
+                          "Geotechnical Instrumentation Engineering",
                           "Stormwater Impact and Erosion Control Analysis",
                           "Hydrology and drainage study",
                         ].map((service, index) => (
@@ -424,6 +425,56 @@ const ModernNavbar = () => {
                             onClick={() => setIsOpen(false)}
                           >
                             Construction Management
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Material Testing Services */}
+                    <div className="p-5">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                        {/* <FaFlask className="text-xl" /> */}
+                        Material Testing Services
+                      </h4>
+                      <ul className="space-y-2 text-base font-oswald">
+                        <li>
+                          <Link
+                            to="/material-testing"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Soil and Aggregate Physical and Strength Tests
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/material-testing"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Fresh and Hardened Concrete Tests
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/material-testing"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Bitumen and Asphalt Mix Tests
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/material-testing"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Water Drainage and Permeability Tests
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            to="/material-testing"
+                            className="hover:text-yellow-600 cursor-pointer transition-colors block"
+                          >
+                            Environmental Sampling and Tests
                           </Link>
                         </li>
                       </ul>
@@ -681,7 +732,7 @@ const ModernNavbar = () => {
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
                         >
-                          Design and Engineering
+                          Building and Building Services System
                         </Link>
                       </li>
                       <li>
@@ -690,7 +741,7 @@ const ModernNavbar = () => {
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
                         >
-                          Land Planning and Permitting
+                          Land Planning, Development, and Permitting
                         </Link>
                       </li>
                       <li>
@@ -719,7 +770,7 @@ const ModernNavbar = () => {
                           Geotechnical Engineering
                         </Link>
                       </li>
-                      <li>
+                      {/* <li>
                         <Link
                           to="/material-testing"
                           className="hover:text-yellow-400 block"
@@ -727,14 +778,15 @@ const ModernNavbar = () => {
                         >
                           Construction Material Survey and Testing
                         </Link>
-                      </li>
+                      </li> */}
                       <li>
                         <Link
                           to="/construction-engineering"
                           className="hover:text-yellow-400 block"
                           onClick={() => setIsOpen(false)}
                         >
-                          Construction Engineering
+                          Architectural and Engineering Services for Tenant
+                          Fit-Outs
                         </Link>
                       </li>
                       <li>
@@ -756,15 +808,15 @@ const ModernNavbar = () => {
                     </h4>
                     <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
                       {[
-                        "MEP Services",
+                        "Mechanical, Electrical, and Plumbing Design",
                         "Pavement Design",
                         "Traffic Engineering Services",
-                        "Specialty Structural Design",
-                        "Special Inspections & Field Support",
-                        "Directional Drilling Design",
+                        // "Specialty Structural Design",
+                        "Special Inspections Services (IBC Chapter 17)",
+                        "Trenchless Design (HDD, Pipe Jacking, Micro Tunneling)",
                         "3D Modeling/Rendering",
-                        "BIM Modeling",
-                        "Instrumentation Engineering",
+                        // "BIM Modeling",
+                        "Geotechnical Instrumentation Engineering",
                         "Stormwater Impact and Erosion Control Analysis",
                         "Hydrology and drainage study",
                       ].map((service, index) => (
@@ -821,6 +873,60 @@ const ModernNavbar = () => {
                           onClick={() => setIsOpen(false)}
                         >
                           Construction Management
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* Material Testing Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald flex items-center gap-2">
+                      Material Testing Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      <li>
+                        <Link
+                          to="/material-testing"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Soil and Aggregate Physical and Strength Tests
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/material-testing"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Fresh and Hardened Concrete Tests
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/material-testing"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Bitumen and Asphalt Mix Tests
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/material-testing"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Water Drainage and Permeability Tests
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          to="/material-testing"
+                          className="hover:text-yellow-400 block"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          Environmental Sampling and Tests
                         </Link>
                       </li>
                     </ul>

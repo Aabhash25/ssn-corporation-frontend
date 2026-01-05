@@ -42,17 +42,16 @@ const Hero = () => {
       image: "/MorissvileGarden3.webp",
       headline: (
         <>
-          <span className="inline-block whitespace-nowrap">
-            ENGINEERING <span className="text-yellow-500">EXCELLENCE</span>
+          <span>
+            Engineering <span className="text-yellow-500">Excellence</span>
           </span>
-          <span className="inline-block mt-2 whitespace-nowrap">
-            CONSTRUCTION <span className="text-yellow-500">EXPERTISE</span>
+          <span className="mt-2 block">
+            Construction <span className="text-yellow-500">Expertise</span>
           </span>
         </>
       ),
-
       subheadline:
-        "Registered Professional Engineering Firm & Licensed Unlimited General Contractor",
+        "Registered Professional Engineering • Unlimited General Contracting • Specialty Engineering Services",
     },
     // {
     //   image: "/14.webp",

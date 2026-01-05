@@ -507,81 +507,165 @@ const MasonryPortfolio = () => {
         </div>
 
         {/* Filters */}
-        <div className="bg-white border-b border-gray-100 py-3 sm:py-4 shadow-sm">
-          <div className="max-w-[90vw] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-3 sm:gap-4 justify-start sm:justify-between">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-              <label className="text-xs sm:text-sm font-medium text-gray-700">
-                Search:
-              </label>
+        <div className="bg-white border-b border-gray-100 py-4 sm:py-6 shadow-sm">
+          <div className="max-w-[95vw] sm:max-w-[90vw] mx-auto px-4 sm:px-6">
+            {/* Mobile: Search at top */}
+            <div className="block sm:hidden mb-4">
               <input
                 type="text"
                 value={searchKeyword}
                 onChange={(e) => setSearchKeyword(e.target.value)}
-                placeholder="Search by keyword..."
-                className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[150px]"
+                placeholder="Search projects..."
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-              <label className="text-xs sm:text-sm font-medium text-gray-700">
-                Category:
-              </label>
-              <select
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[120px]"
-              >
-                <option value="All">All</option>
-                {allCategories.map((catName) => (
-                  <option key={catName} value={catName}>
-                    {catName}
-                  </option>
-                ))}
-              </select>
+            {/* Desktop: All filters in row */}
+            <div className="hidden sm:flex flex-wrap items-center gap-4 lg:gap-6 justify-center lg:justify-start">
+              <div className="flex items-center space-x-3">
+                <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                  Search:
+                </label>
+                <input
+                  type="text"
+                  value={searchKeyword}
+                  onChange={(e) => setSearchKeyword(e.target.value)}
+                  placeholder="Search by keyword..."
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[200px]"
+                />
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                  Category:
+                </label>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[140px]"
+                >
+                  <option value="All">All Categories</option>
+                  {allCategories.map((catName) => (
+                    <option key={catName} value={catName}>
+                      {catName}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                  Status:
+                </label>
+                <select
+                  value={selectedStatus}
+                  onChange={(e) => setSelectedStatus(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[120px]"
+                >
+                  <option value="All">All Status</option>
+                  {allStatuses.map((status) => (
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center space-x-3">
+                <label className="text-sm font-medium text-gray-700 whitespace-nowrap">
+                  Year:
+                </label>
+                <select
+                  value={selectedYear}
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent min-w-[100px]"
+                >
+                  <option value="All">All Years</option>
+                  {allYears.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="flex items-center ml-2 lg:ml-4">
+                <button
+                  onClick={handleReset}
+                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-2 rounded-lg text-sm transition-colors duration-200 whitespace-nowrap"
+                >
+                  Reset Filters
+                </button>
+              </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-              <label className="text-xs sm:text-sm font-medium text-gray-700">
-                Status:
-              </label>
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[120px]"
-              >
-                <option value="All">All</option>
-                {allStatuses.map((status) => (
-                  <option key={status} value={status}>
-                    {status}
-                  </option>
-                ))}
-              </select>
-            </div>
+            {/* Mobile: Filters in vertical stack */}
+            <div className="space-y-4 sm:hidden">
+              <div className="grid grid-cols-1 gap-4">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Category
+                  </label>
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-3 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  >
+                    <option value="All">All Categories</option>
+                    {allCategories.map((catName) => (
+                      <option key={catName} value={catName}>
+                        {catName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-1 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
-              <label className="text-xs sm:text-sm font-medium text-gray-700">
-                Year:
-              </label>
-              <select
-                value={selectedYear}
-                onChange={(e) => setSelectedYear(e.target.value)}
-                className="border border-gray-300 rounded-lg px-2 sm:px-3 py-1 text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 flex-1 sm:flex-none min-w-[120px]"
-              >
-                <option value="All">All</option>
-                {allYears.map((year) => (
-                  <option key={year} value={year}>
-                    {year}
-                  </option>
-                ))}
-              </select>
-            </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Status
+                  </label>
+                  <select
+                    value={selectedStatus}
+                    onChange={(e) => setSelectedStatus(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-3 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  >
+                    <option value="All">All Status</option>
+                    {allStatuses.map((status) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-            <button
-              onClick={handleReset}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-3 sm:px-4 py-1 rounded-lg text-xs sm:text-sm w-full sm:w-auto"
-            >
-              Reset
-            </button>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Year
+                  </label>
+                  <select
+                    value={selectedYear}
+                    onChange={(e) => setSelectedYear(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-3 py-3 text-base focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                  >
+                    <option value="All">All Years</option>
+                    {allYears.map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    onClick={handleReset}
+                    className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium px-4 py-3 rounded-lg text-base transition-colors duration-200"
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

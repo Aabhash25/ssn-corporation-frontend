@@ -63,8 +63,11 @@ export default function ProjectDescription() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-yellow-500 border-t-transparent mb-4"></div>
+          <p className="text-gray-600 font-medium">Loading project details...</p>
+        </div>
       </div>
     );
   }
@@ -113,14 +116,21 @@ export default function ProjectDescription() {
 
   return (
     <>
-      {/* Back to Projects Button (always visible, below navbar) */}
-      <div className="fixed top-20 sm:top-24 left-4 z-50">
+      {/* Back to Projects Button */}
+      <div className="fixed top-16 sm:top-20 md:top-24 left-2 sm:left-4 lg:left-6 z-50">
         <button
-          onClick={() => navigate("/portfolio")}
-          className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-4 py-2 rounded-lg shadow-lg transition-transform hover:scale-105"
+          onClick={() => {
+            navigate("/portfolio");
+            // Small delay to ensure navigation completes
+            setTimeout(() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }, 100);
+          }}
+          className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm sm:text-base"
         >
-          <ArrowLeft className="w-5 h-5" />
-          Back to Projects
+          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+          <span className="hidden sm:inline">Back to Projects</span>
+          <span className="sm:hidden">Back</span>
         </button>
       </div>
 
