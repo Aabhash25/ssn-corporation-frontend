@@ -28,7 +28,7 @@ const Hero = () => {
       headline: (
         <>
           <span>
-            Open <span className="text-yellow-500">Company</span>
+            One <span className="text-yellow-500">Company</span>
           </span>
           <span className="mt-2 block">
             Complete <span className="text-yellow-500">Solutions</span>
@@ -43,10 +43,10 @@ const Hero = () => {
       headline: (
         <>
           <span>
-            Engineering <span className="text-yellow-500">Excellence</span>
+            Smart <span className="text-yellow-500">Engineering</span>
           </span>
           <span className="mt-2 block">
-            Construction <span className="text-yellow-500">Expertise</span>
+            Strong <span className="text-yellow-500">Construction</span>
           </span>
         </>
       ),

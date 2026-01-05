@@ -249,7 +249,7 @@ const ModernNavbar = () => {
 
               {isServicesOpen && (
                 <div
-                  className="fixed left-0 right-0 mx-auto max-w-7xl shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
+                  className="fixed left-0 right-0 mx-auto max-w-6xl md:max-w-7xl shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
                   style={{
                     top: isDesktop
                       ? isLandingPage && !scrolled
@@ -258,17 +258,17 @@ const ModernNavbar = () => {
                       : "96px",
                   }}
                 >
-                  <div className="grid grid-cols-1 lg:grid-cols-5 gap-0 py-4 px-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0 py-2 md:py-3 px-3 md:px-4">
                     {/* Left Column - Company Motto */}
-                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 flex flex-col justify-center">
-                      <div className="border-l-4 border-yellow-500 pl-6">
-                        <p className="text-yellow-500 text-xs font-semibold mb-2 tracking-wider">
+                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-3 md:p-4 flex flex-col justify-center">
+                      <div className="border-l-4 border-yellow-500 pl-4 md:pl-6">
+                        <p className="text-yellow-500 text-xs font-semibold mb-1 md:mb-2 tracking-wider">
                           OUR COMMITMENT
                         </p>
-                        <h3 className="text-white text-lg font-bold font-oswald leading-tight mb-3">
+                        <h3 className="text-white text-sm md:text-base font-bold font-oswald leading-tight mb-2 md:mb-3">
                           Building Excellence, Engineering Innovation
                         </h3>
-                        <p className="text-gray-300 text-base font-oswald leading-relaxed">
+                        <p className="text-gray-300 text-xs md:text-sm font-oswald leading-tight">
                           From first sketches to final construction, SSN
                           Corporation offers integrated engineering, specialty
                           technical services, and complete design-build delivery
@@ -278,13 +278,13 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Engineering Services */}
-                    <div className="p-5 border-r border-gray-200">
-                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                    <div className="p-2 md:p-3 border-r border-gray-200">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-sm md:text-lg mb-2 md:mb-3 pb-1 md:pb-2 border-b-2 border-yellow-500 flex items-center gap-1 md:gap-2">
                         {/* <FaHardHat className="text-xl" /> */}
                         Engineering Services
                       </h4>
 
-                      <ul className="space-y-2 text-base font-oswald">
+                      <ul className="space-y-1 md:space-y-2 text-xs md:text-sm font-oswald">
                         <li>
                           <Link
                             to="/design-engineering"
@@ -355,12 +355,12 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Specialty Engineering Services */}
-                    <div className="p-5 border-r border-gray-200">
-                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                    <div className="p-2 md:p-3 border-r border-gray-200">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-sm md:text-lg mb-2 md:mb-3 pb-1 md:pb-2 border-b-2 border-yellow-500 flex items-center gap-1 md:gap-2">
                         {/* <FaTools className="text-xl" /> */}
                         Specialty Engineering Services
                       </h4>
-                      <ul className="space-y-2 text-base font-oswald">
+                      <ul className="space-y-1 md:space-y-2 text-xs md:text-sm font-oswald">
                         {[
                           "Mechanical, Electrical, and Plumbing Design",
                           "Pavement Design",
@@ -387,12 +387,12 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Construction Services */}
-                    <div className="p-5">
-                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                    <div className="p-2 md:p-3">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-sm md:text-lg mb-2 md:mb-3 pb-1 md:pb-2 border-b-2 border-yellow-500 flex items-center gap-1 md:gap-2">
                         {/* <FaFlask className="text-xl" /> */}
                         Construction Services
                       </h4>
-                      <ul className="space-y-2 text-base font-oswald">
+                      <ul className="space-y-1 md:space-y-2 text-xs md:text-sm font-oswald">
                         <li>
                           <Link
                             to="/pre-construction"
@@ -431,12 +431,12 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Material Testing Services */}
-                    <div className="p-5">
-                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500 flex items-center gap-2">
+                    <div className="p-2 md:p-3">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-sm md:text-lg mb-2 md:mb-3 pb-1 md:pb-2 border-b-2 border-yellow-500 flex items-center gap-1 md:gap-2">
                         {/* <FaFlask className="text-xl" /> */}
                         Material Testing Services
                       </h4>
-                      <ul className="space-y-2 text-base font-oswald">
+                      <ul className="space-y-1 md:space-y-2 text-xs md:text-sm font-oswald">
                         <li>
                           <Link
                             to="/material-testing"
@@ -512,7 +512,7 @@ const ModernNavbar = () => {
 
               {isRnDOpen && (
                 <div
-                  className="fixed left-0 right-0 mx-auto max-w-7xl shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
+                  className="fixed left-0 right-0 mx-auto max-w-6xl md:max-w-7xl shadow-2xl border-t-4 border-yellow-500 bg-white text-gray-800 z-50 rounded-lg overflow-hidden"
                   style={{
                     top: isDesktop
                       ? isLandingPage && !scrolled
@@ -521,17 +521,17 @@ const ModernNavbar = () => {
                       : "96px",
                   }}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-0 py-4 px-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-0 py-2 md:py-3 px-3 md:px-4">
                     {/* Left Column - Motto */}
-                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-6 flex flex-col justify-center">
-                      <div className="border-l-4 border-yellow-500 pl-6">
-                        <p className="text-yellow-500 text-xs font-semibold mb-2 tracking-wider">
+                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 p-3 md:p-4 flex flex-col justify-center">
+                      <div className="border-l-4 border-yellow-500 pl-4 md:pl-6">
+                        <p className="text-yellow-500 text-xs font-semibold mb-1 md:mb-2 tracking-wider">
                           INNOVATION
                         </p>
-                        <h3 className="text-white text-lg font-bold font-oswald leading-tight mb-3">
+                        <h3 className="text-white text-sm md:text-base font-bold font-oswald leading-tight mb-2 md:mb-3">
                           Intelligence that Builds the Future
                         </h3>
-                        <p className="text-gray-300 text-base font-oswald leading-relaxed">
+                        <p className="text-gray-300 text-xs md:text-sm font-oswald leading-tight">
                           We build AI technology our clients can trust. Our
                           commitment is to deliver consistent accuracy and
                           exceptional performance.
@@ -540,11 +540,11 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Our Team */}
-                    <div className="p-5 border-r border-gray-200">
-                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500">
+                    <div className="p-2 md:p-3 border-r border-gray-200">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-sm md:text-lg mb-2 md:mb-3 pb-1 md:pb-2 border-b-2 border-yellow-500">
                         Our Team
                       </h4>
-                      <p className="text-gray-800 text-base font-oswald leading-relaxed">
+                      <p className="text-gray-800 text-xs md:text-sm font-oswald leading-tight">
                         With over 20 years of combined experience, our
                         leadership team brings expertise in civil engineering
                         and AI. Supported by seven skilled engineers, we drive
@@ -555,22 +555,22 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Our Products */}
-                    <div className="p-5">
-                      <h4 className="text-yellow-600 font-oswald font-bold text-xl mb-3 pb-2 border-b-2 border-yellow-500">
+                    <div className="p-2 md:p-3">
+                      <h4 className="text-yellow-600 font-oswald font-bold text-sm md:text-lg mb-2 md:mb-3 pb-1 md:pb-2 border-b-2 border-yellow-500">
                         Our Products
                       </h4>
 
-                      <div className="space-y-4">
+                      <div className="space-y-3 md:space-y-4">
                         {/* QTakeoff */}
                         <div>
                           <Link
                             to="/qtakeoff-ai"
-                            className="text-lg font-bold text-gray-900 hover:text-yellow-600 font-oswald block mb-2 transition-colors"
+                            className="text-sm md:text-base font-bold text-gray-900 hover:text-yellow-600 font-oswald block mb-1 md:mb-2 transition-colors"
                             onClick={() => setIsRnDOpen(false)}
                           >
                             QTakeoff
                           </Link>
-                          <p className="text-sm text-gray-700 font-oswald leading-snug">
+                          <p className="text-xs md:text-sm text-gray-700 font-oswald leading-tight">
                             Our AI technology delivers measurable improvements
                             with industry-leading accuracy and speed. Users
                             experience higher efficiency, lower costs, and
@@ -579,15 +579,15 @@ const ModernNavbar = () => {
                         </div>
 
                         {/* Real Estate Site Map */}
-                        <div className="pt-3 border-t border-gray-200">
+                        <div className="pt-2 md:pt-3 border-t border-gray-200">
                           <Link
                             to="/real-estate-site-analysis"
-                            className="text-lg font-bold text-gray-900 hover:text-yellow-600 font-oswald block mb-2 transition-colors"
+                            className="text-sm md:text-base font-bold text-gray-900 hover:text-yellow-600 font-oswald block mb-1 md:mb-2 transition-colors"
                             onClick={() => setIsRnDOpen(false)}
                           >
                             Real Estate Site Map
                           </Link>
-                          <p className="text-sm text-gray-700 font-oswald leading-snug">
+                          <p className="text-xs md:text-sm text-gray-700 font-oswald leading-tight">
                             Analyze any location with AI-driven insights on
                             nearby amenities and infrastructure. Generate
                             interactive results and professional reports in
