@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X, Grid3x3, ArrowLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, Grid3x3 } from "lucide-react";
 
 export default function ProjectDescription() {
   const { id } = useParams();
@@ -66,7 +66,9 @@ export default function ProjectDescription() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-yellow-500 border-t-transparent mb-4"></div>
-          <p className="text-gray-600 font-medium">Loading project details...</p>
+          <p className="text-gray-600 font-medium">
+            Loading project details...
+          </p>
         </div>
       </div>
     );
@@ -116,27 +118,9 @@ export default function ProjectDescription() {
 
   return (
     <>
-      {/* Back to Projects Button */}
-      <div className="fixed top-16 sm:top-20 md:top-24 left-2 sm:left-4 lg:left-6 z-50">
-        <button
-          onClick={() => {
-            navigate("/portfolio");
-            // Small delay to ensure navigation completes
-            setTimeout(() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }, 100);
-          }}
-          className="flex items-center gap-2 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700 text-white font-semibold px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm sm:text-base"
-        >
-          <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-          <span className="hidden sm:inline">Back to Projects</span>
-          <span className="sm:hidden">Back</span>
-        </button>
-      </div>
-
       {/* HERO / IMAGE SLIDER */}
       {images.length > 0 && (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16">
           <div className="relative overflow-hidden rounded-2xl shadow-2xl">
             <div className="w-full aspect-[16/9] relative">
               <AnimatePresence initial={false} mode="wait">

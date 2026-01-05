@@ -8,7 +8,7 @@ const GeotechnicalStudiesSection = ({
   getTextColor,
 }) => {
   const renderServiceRow = (servicesData) => (
-    <div className="relative h-[450px] sm:h-[550px] lg:h-[600px] bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
+    <div className="relative h-[380px] sm:h-[450px] lg:h-[480px] bg-gray-900 rounded-xl overflow-hidden shadow-2xl">
       <div className="absolute inset-0 flex flex-col lg:flex-row">
         {servicesData.map((service, index) => (
           <div
