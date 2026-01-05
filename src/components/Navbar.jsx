@@ -27,7 +27,7 @@ const ModernNavbar = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
-  const [isXlScreen, setIsXlScreen] = useState(window.innerWidth >= 1280);
+  const [isXlScreen, setIsXlScreen] = useState(window.innerWidth >= 1440);
   const [isRnDOpen, setIsRnDOpen] = useState(false);
   const rndDropdownTimeout = useRef(null);
   const location = useLocation();
@@ -58,7 +58,7 @@ const ModernNavbar = () => {
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
-      setIsXlScreen(window.innerWidth >= 1280);
+      setIsXlScreen(window.innerWidth >= 1440);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -266,13 +266,13 @@ const ModernNavbar = () => {
                     {/* Left Column - Company Motto */}
                     <div className="bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col justify-center" style={{ padding: isXlScreen ? "0.75rem" : "0.5rem" }}>
                       <div className="border-l-4 border-yellow-500" style={{ paddingLeft: isXlScreen ? "1rem" : "0.75rem" }}>
-                        <p className="text-yellow-500 font-semibold tracking-wider" style={{ fontSize: isXlScreen ? "0.625rem" : "0.5625rem", marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <p className="text-yellow-500 font-semibold tracking-wider" style={{ fontSize: isXlScreen ? "0.75rem" : "0.5625rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
                           OUR COMMITMENT
                         </p>
-                        <h3 className="text-white font-bold font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.8125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem" }}>
+                        <h3 className="text-white font-bold font-oswald leading-tight" style={{ fontSize: isXlScreen ? "1.125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem" }}>
                           Building Excellence, Engineering Innovation
                         </h3>
-                        <p className="text-gray-300 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem" }}>
+                        <p className="text-gray-300 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
                           From first sketches to final construction, SSN
                           Corporation offers integrated engineering, specialty
                           technical services, and complete design-build delivery
@@ -283,12 +283,12 @@ const ModernNavbar = () => {
 
                     {/* Engineering Services */}
                     <div className="border-r border-gray-200" style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "0.875rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem", paddingBottom: isXlScreen ? "0.375rem" : "0.25rem", gap: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
                         {/* <FaHardHat className="text-xl" /> */}
                         Engineering Services
                       </h4>
 
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem", lineHeight: "1.35" }}>
+                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
                         <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
                           <Link
                             to="/design-engineering"
@@ -360,11 +360,11 @@ const ModernNavbar = () => {
 
                     {/* Specialty Engineering Services */}
                     <div className="border-r border-gray-200" style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "0.875rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem", paddingBottom: isXlScreen ? "0.375rem" : "0.25rem", gap: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
                         {/* <FaTools className="text-xl" /> */}
                         Specialty Engineering Services
                       </h4>
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem", lineHeight: "1.35" }}>
+                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
                         {[
                           "Mechanical, Electrical, and Plumbing Design",
                           "Pavement Design",
@@ -392,11 +392,11 @@ const ModernNavbar = () => {
 
                     {/* Construction Services */}
                     <div style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "0.875rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem", paddingBottom: isXlScreen ? "0.375rem" : "0.25rem", gap: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
                         {/* <FaFlask className="text-xl" /> */}
                         Construction Services
                       </h4>
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem", lineHeight: "1.35" }}>
+                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
                         <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
                           <Link
                             to="/pre-construction"
@@ -436,11 +436,11 @@ const ModernNavbar = () => {
 
                     {/* Material Testing Services */}
                     <div style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "0.875rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem", paddingBottom: isXlScreen ? "0.375rem" : "0.25rem", gap: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
                         {/* <FaFlask className="text-xl" /> */}
                         Material Testing Services
                       </h4>
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem", lineHeight: "1.35" }}>
+                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
                         <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
                           <Link
                             to="/material-testing"
@@ -531,13 +531,13 @@ const ModernNavbar = () => {
                     {/* Left Column - Motto */}
                     <div className="bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col justify-center" style={{ padding: isXlScreen ? "0.75rem" : "0.5rem" }}>
                       <div className="border-l-4 border-yellow-500" style={{ paddingLeft: isXlScreen ? "1rem" : "0.75rem" }}>
-                        <p className="text-yellow-500 font-semibold tracking-wider" style={{ fontSize: isXlScreen ? "0.625rem" : "0.5625rem", marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <p className="text-yellow-500 font-semibold tracking-wider" style={{ fontSize: isXlScreen ? "0.75rem" : "0.5625rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
                           INNOVATION
                         </p>
-                        <h3 className="text-white font-bold font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.8125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem" }}>
+                        <h3 className="text-white font-bold font-oswald leading-tight" style={{ fontSize: isXlScreen ? "1.125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem" }}>
                           Intelligence that Builds the Future
                         </h3>
-                        <p className="text-gray-300 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem" }}>
+                        <p className="text-gray-300 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
                           We build AI technology our clients can trust. Our
                           commitment is to deliver consistent accuracy and
                           exceptional performance.
@@ -547,10 +547,10 @@ const ModernNavbar = () => {
 
                     {/* Our Team */}
                     <div className="border-r border-gray-200" style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500" style={{ fontSize: isXlScreen ? "0.875rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem", paddingBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
                         Our Team
                       </h4>
-                      <p className="text-gray-800 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem" }}>
+                      <p className="text-gray-800 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
                         With over 20 years of combined experience, our
                         leadership team brings expertise in civil engineering
                         and AI. Supported by seven skilled engineers, we drive
@@ -562,22 +562,22 @@ const ModernNavbar = () => {
 
                     {/* Our Products */}
                     <div style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500" style={{ fontSize: isXlScreen ? "0.875rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.375rem", paddingBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
                         Our Products
                       </h4>
 
-                      <div style={{ display: "flex", flexDirection: "column", gap: isXlScreen ? "0.75rem" : "0.5rem" }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: isXlScreen ? "1rem" : "0.5rem" }}>
                         {/* QTakeoff */}
                         <div>
                           <Link
                             to="/qtakeoff-ai"
                             className="font-bold text-gray-900 hover:text-yellow-600 font-oswald block transition-colors"
-                            style={{ fontSize: isXlScreen ? "0.8125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}
+                            style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}
                             onClick={() => setIsRnDOpen(false)}
                           >
                             QTakeoff
                           </Link>
-                          <p className="text-gray-700 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem" }}>
+                          <p className="text-gray-700 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
                             Our AI technology delivers measurable improvements
                             with industry-leading accuracy and speed. Users
                             experience higher efficiency, lower costs, and
@@ -586,16 +586,16 @@ const ModernNavbar = () => {
                         </div>
 
                         {/* Real Estate Site Map */}
-                        <div style={{ paddingTop: isXlScreen ? "0.5rem" : "0.375rem", borderTop: "1px solid #e5e7eb" }}>
+                        <div style={{ paddingTop: isXlScreen ? "0.75rem" : "0.375rem", borderTop: "1px solid #e5e7eb" }}>
                           <Link
                             to="/real-estate-site-analysis"
                             className="font-bold text-gray-900 hover:text-yellow-600 font-oswald block transition-colors"
-                            style={{ fontSize: isXlScreen ? "0.8125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}
+                            style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}
                             onClick={() => setIsRnDOpen(false)}
                           >
                             Real Estate Site Map
                           </Link>
-                          <p className="text-gray-700 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.6875rem" : "0.5625rem" }}>
+                          <p className="text-gray-700 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
                             Analyze any location with AI-driven insights on
                             nearby amenities and infrastructure. Generate
                             interactive results and professional reports in
