@@ -15,7 +15,7 @@ const Hero = () => {
           <span>
             BUILDING <span className="text-yellow-500">FUTURE</span>
           </span>
-          <span className="mt-2 block">
+          <span className="block mt-[0.5rem]">
             WITH <span className="text-yellow-500">PRECISION</span>
           </span>
         </>
@@ -30,7 +30,7 @@ const Hero = () => {
           <span>
             One <span className="text-yellow-500">Company</span>
           </span>
-          <span className="mt-2 block">
+          <span className="block mt-[0.5rem]">
             Complete <span className="text-yellow-500">Solutions</span>
           </span>
         </>
@@ -45,7 +45,7 @@ const Hero = () => {
           <span>
             Smart <span className="text-yellow-500">Engineering</span>
           </span>
-          <span className="mt-2 block">
+          <span className="block mt-[0.5rem]">
             Strong <span className="text-yellow-500">Construction</span>
           </span>
         </>
@@ -53,24 +53,8 @@ const Hero = () => {
       subheadline:
         "Registered Professional Engineering • Unlimited General Contracting • Specialty Engineering Services",
     },
-    // {
-    //   image: "/14.webp",
-    //   headline: (
-    //     <>
-    //       <span>
-    //         SPECIALTY <span className="text-yellow-500">ENGINEERING</span>
-    //       </span>
-    //       <span className="mt-2 block">
-    //         <span className="text-yellow-500">SERVICES PROVIDER</span>
-    //       </span>
-    //     </>
-    //   ),
-    //   subheadline:
-    //     "Delivering advanced engineering solutions tailored to complex projects across multiple states.",
-    // },
   ];
 
-  // Auto slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
@@ -81,47 +65,53 @@ const Hero = () => {
   const currentSlide = slides[currentIndex];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between items-center text-white overflow-hidden bg-black pt-16 md:pt-20 pb-6">
+    <section className="relative min-h-screen flex flex-col justify-between items-center text-white overflow-hidden bg-black pt-[4rem] md:pt-[5rem] xl:pt-[6rem] pb-[1.5rem]">
       {/* Background */}
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0">
         {/* Mobile */}
         <img
           src="/30-mobile.webp"
           alt="Hero mobile"
-          className="w-full h-full object-cover brightness-75 md:hidden absolute inset-0 opacity-100 transition-opacity duration-1000"
+          className="absolute inset-0 w-full h-full object-cover brightness-75 md:hidden"
         />
 
-        {/* Desktop/Laptop */}
+        {/* Desktop */}
         <div className="hidden md:block absolute inset-0">
-          {slides.map((slide, index) => {
-            const isCurrent = index === currentIndex;
-            return (
-              <motion.img
-                key={index}
-                src={slide.image}
-                alt="Hero slide"
-                className="w-full h-full object-cover brightness-75 absolute inset-0"
-                initial={false}
-                animate={{ opacity: isCurrent ? 1 : 0 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              />
-            );
-          })}
+          {slides.map((slide, index) => (
+            <motion.img
+              key={index}
+              src={slide.image}
+              alt="Hero slide"
+              className="absolute inset-0 w-full h-full object-cover brightness-75"
+              initial={false}
+              animate={{ opacity: index === currentIndex ? 1 : 0 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+            />
+          ))}
         </div>
       </div>
 
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none"></div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
 
-      {/* Text Content */}
-      <div className="relative z-10 text-center max-w-5xl px-6 flex-1 flex flex-col justify-center">
+      {/* Content */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center text-center max-w-[70rem] px-[1.5rem]">
         {/* Headline */}
         <motion.h1
           key={`headline-${currentIndex}`}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold uppercase font-playfair leading-snug sm:leading-tight md:leading-tight mb-6"
+          className="
+            uppercase font-extrabold font-playfair
+            text-[2rem]
+            sm:text-[2.4rem]
+            md:text-[2.8rem]
+            lg:text-[2.6rem]
+            xl:text-[3.5rem]
+            2xl:text-[4.2rem]
+            leading-[1.15]
+            mb-[1rem]
+          "
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -40 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {currentSlide.headline}
@@ -130,35 +120,65 @@ const Hero = () => {
         {/* Subheadline */}
         <motion.p
           key={`sub-${currentIndex}`}
-          className="text-white text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl max-w-3xl mx-auto leading-relaxed mb-8 opacity-90"
+          className="
+            mx-auto max-w-[48rem] text-white/90
+            text-[0.9rem]
+            sm:text-[1rem]
+            md:text-[1.05rem]
+            lg:text-[1rem]
+            xl:text-[1.25rem]
+            leading-[1.7]
+            mb-[2rem]
+          "
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.2 }}
         >
           {currentSlide.subheadline}
         </motion.p>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
+        <div className="flex flex-col sm:flex-row justify-center gap-[1rem]">
           <Link
             to="/portfolio"
-            className="px-6 sm:px-8 py-3 sm:py-4 bg-yellow-500 text-gray-900 hover:bg-yellow-600 rounded-3xl shadow-lg font-bold text-base sm:text-lg transition hover:scale-105"
+            className="
+              px-[2rem] py-[0.75rem]
+              text-[0.95rem] sm:text-[1rem]
+              font-bold rounded-full
+              bg-yellow-500 text-gray-900
+              hover:bg-yellow-600 transition hover:scale-105
+            "
           >
             Explore Our Work
           </Link>
+
           <Link
             to="/contact"
-            className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 rounded-3xl shadow-lg font-bold text-base sm:text-lg transition hover:scale-105"
+            className="
+              px-[2rem] py-[0.75rem]
+              text-[0.95rem] sm:text-[1rem]
+              font-bold rounded-full
+              border-2 border-yellow-500 text-yellow-500
+              hover:bg-yellow-500 hover:text-gray-900
+              transition hover:scale-105
+            "
           >
             Get In Touch
           </Link>
         </div>
       </div>
 
-      {/* Bottom tagline */}
+      {/* Bottom Tagline */}
       <motion.h2
-        className="relative z-10 text-yellow-500 font-roboto text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl pb-6 px-4 text-center whitespace-normal sm:whitespace-nowrap leading-snug"
+        className="
+          relative z-10 text-yellow-500 text-center
+          text-[0.85rem]
+          sm:text-[0.95rem]
+          md:text-[1.05rem]
+          xl:text-[1.3rem]
+          pb-[1rem]
+          px-[1rem]
+        "
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}
