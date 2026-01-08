@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { MapPin, Calendar } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 const ProjectsSection = () => {
   const [projects, setProjects] = useState([]);
@@ -8,7 +8,7 @@ const ProjectsSection = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const projectPromises = [17, 23, 9].map((id) =>
+        const projectPromises = [17, 23, 28].map((id) =>
           fetch(`https://api.ssnbuilders.com/api/projects/${id}/`).then((res) =>
             res.json()
           )
@@ -27,18 +27,17 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+    <section className="relative w-full py-8 sm:py-6 px-4 sm:px-8 lg:px-8">
       <div className="max-w-6xl mx-auto">
-      <div className="inline-block mb-4">
-            <span className="text-2xl sm:text-3xl lg:text-4xl font-semibold uppercase  text-blue-600 font-playfair">
-              VIEW RELATED PROJECTS
-            </span>
-          </div>
+        <div>
+          <span className="block mb-6 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#242687] font-playfair text-center">
+            View Related Projects
+          </span>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsLoading
-            ? // Loading state
-              Array.from({ length: 3 }, (_, index) => (
+            ? Array.from({ length: 3 }, (_, index) => (
                 <div
                   key={index}
                   className="bg-white rounded-xl border border-gray-200 overflow-hidden animate-pulse"

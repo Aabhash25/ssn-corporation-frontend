@@ -169,16 +169,19 @@ const Hero = () => {
       </div>
 
       {/* Bottom Tagline */}
+      {/* Bottom Tagline */}
       <motion.h2
         className="
-          relative z-10 text-yellow-500 text-center
-          text-[0.85rem]
-          sm:text-[0.95rem]
-          md:text-[1.05rem]
-          xl:text-[1.3rem]
-          pb-[1rem]
-          px-[1rem]
-        "
+    relative z-10 text-yellow-500 text-center font-semibold
+    text-[1.05rem]
+    sm:text-[1.2rem]
+    md:text-[1.4rem]
+    lg:text-[1.6rem]
+    xl:text-[1.85rem]
+    pb-[1.25rem]
+    px-[1.25rem]
+    tracking-wide
+  "
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}

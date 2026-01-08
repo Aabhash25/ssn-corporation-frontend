@@ -23,6 +23,12 @@ const FontsStyle = () => (
       font-family: "Playfair Display", serif;
     }
 
+    .adjusted-image {
+      object-fit: contain; /* Ensure the image is not cropped */
+      width: 100%; /* Make the image responsive */
+      height: auto; /* Maintain aspect ratio */
+    }
+
     @keyframes float {
       0%,
       100% {
@@ -79,7 +85,6 @@ const FontsStyle = () => (
 
 const GeotechnicalEngineering = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeService, setActiveService] = useState(null);
 
   const servicesDataRow1 = [
     {
@@ -101,8 +106,8 @@ const GeotechnicalEngineering = () => {
     },
     {
       id: 2,
-      title: "Geotechnical Laboratory and Field Testing",
-      image: "/SubSurface4.webp",
+      title: "Geotechnical Laboratory Testing",
+      image: "/geptechServices12.webp",
       description:
         "Our laboratory testing services deliver reliable data on soil behavior under applied loads and environmental conditions.",
       details: [
@@ -134,9 +139,9 @@ const GeotechnicalEngineering = () => {
         "Groundwater flow and dewatering analysis",
         "Vibration and construction impact assessment",
         "Trenchless system (pipe jacking, HDD, micro-tunneling) analysis and design",
-        "Geo-structural design",
-        "Landfill/solid waste containment design",
         "Finite element modeling for geo-structural analysis",
+        "Landfill/solid waste containment design",
+        "Geo-structural design",
         "Geosynthetics related analysis and design",
       ],
       color: "green",
@@ -144,7 +149,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 4,
       title: "Geotechnical Construction Support",
-      image: "woodstock6.webp",
+      image: "/geotechServices8.jpg",
       description:
         "Our geotechnical construction support addresses field conditions and temporary works to ensure safe, efficient, and constructible solutions while minimizing risk and delays.",
       details: [
@@ -168,7 +173,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 5,
       title: "Geotechnical Instrumentation and Field Testing",
-      image: "/21.webp",
+      image: "/geotechService.png",
       description:
         "Our field testing and instrumentation services provide real-time monitoring and verification of subsurface conditions to ensure safe, efficient, and reliable construction.",
       details: [
@@ -181,35 +186,36 @@ const GeotechnicalEngineering = () => {
         "Continuous data logging and automated monitoring",
         "Ground movement and settlement tracking for critical structures",
       ],
-      color: "orange",
+      color: "slate",
     },
     {
       id: 6,
       title: "Construction Materials Testing & Inspection",
-      image:
-        "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200&h=800&fit=crop&q=80",
+      image: "geotechServices9.png",
       description:
         "Our construction materials testing and inspection services verify compliance with project specifications and applicable standards.",
       details: [
         "Soil, aggregate, and fill material testing",
         "Compaction and density verification",
         "Concrete sampling and compressive strength testing",
-        "Asphalt and pavement materials testing",
-        "Retaining wall inspections - footings, backfill, drainage, and reinforcement placement",
         "Retaining wall construction monitoring and documentation",
+        "Retaining wall inspections - footings, backfill, drainage, and reinforcement placement",
+
+        "Asphalt and pavement materials testing",
         "Concrete and asphalt field inspections",
       ],
       color: "teal",
     },
     {
       id: 7,
-      title: "Pavement Engineering",
-      image: "/MorissvileGarden1.webp",
+      title: "Pavement Design and Engineering",
+      image: "geotechServices5.jpg",
       description:
         "Experts in pavement design and rehabilitation programs for durable, safe, and cost-effective roadways and paved surfaces—from evaluation and design to construction support and rehabilitation.",
       details: [
         "Pavement condition assessment and surface distress surveys",
-        "Flexible pavement design using AASHTO, Asphalt Institute, and Mechanistic-Empirical (M-E) methods",
+        "Construction quality control and field testing",
+        // "Flexible pavement design using AASHTO, Asphalt Institute, and Mechanistic-Empirical (M-E) methods",
         "Rigid pavement design using PCA, AASHTO, and M-E methods",
         "Flexible and rigid pavement design using Unified Facilities Criteria (UFC)",
         "Subgrade, base, and material evaluation",
@@ -217,8 +223,27 @@ const GeotechnicalEngineering = () => {
         "Pavement drainage design",
         "Pavement rehabilitation and overlay planning",
         "Life-cycle analysis and predictive performance modeling for maintenance and reconstruction",
-        "Construction quality control and field testing",
+        "Flexible pavement design using AASHTO, Asphalt Institute, and Mechanistic-Empirical (M-E) methods",
         "Sustainable pavement solutions",
+      ],
+      color: "slate",
+    },
+    {
+      id: 8,
+      title: "Earthworks & Ground Improvement",
+      image: "/geotechServices10.jpg",
+      description:
+        "We deliver expertise in earthworks and ground improvement, including soil stabilization, replacement, reinforcement, preloading, and safe excavation and embankment design",
+      details: [
+        "Earthworks and ground improvement, including soil treatment, excavation, and embankments",
+        "Soil stabilization design using mechanical, chemical, or biological methods. ",
+        "Ground improvement techniques: grouting, stone columns, and vibro-compaction. ",
+        "Preloading design, instrumentation, and construction support. ",
+        "Soil replacement through over-excavation and replacement. ",
+        "Ground reinforcement: ground anchors, soil nailing, geosynthetic reinforcements, and MSE walls. ",
+        "Ground modification using lime, cement, or other stabilizing materials. ",
+        "Excavation and embankment design with stability and support measures. ",
+        "Monitoring ground behavior to ensure safety and design compliance. ",
       ],
       color: "slate",
     },
@@ -228,7 +253,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 8,
       title: "Preliminary Site Feasibility Assessments Services",
-      image: "22.webp",
+      image: "geotechServices6.jpg",
       description:
         "Early-stage evaluations providing an initial understanding of site conditions to support planning and site selection.",
       details: [
@@ -241,8 +266,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 9,
       title: "Linear Infrastructure & Corridor Geotechnical Services",
-      image:
-        "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=800&fit=crop&q=80",
+      image: "/geotechServices2.jpeg",
       description:
         "Specialized geotechnical services for transportation and utility projects spanning varied terrain and geologic conditions.",
       details: [
@@ -256,8 +280,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 10,
       title: "Project-Specific Geotechnical Studies & Consulting Services",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop&q=80",
+      image: "geotechServices7.jpg",
       description:
         "Comprehensive investigations developed for defined project layouts and structural loading conditions.",
       details: [
@@ -267,13 +290,12 @@ const GeotechnicalEngineering = () => {
         "Geological and groundwater assessments",
         "General construction considerations",
       ],
-      color: "rose",
+      color: "slate",
     },
     {
       id: 11,
       title: "Independent Construction Monitoring & Design Review Services",
-      image:
-        "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&h=800&fit=crop&q=80",
+      image: "/geotechServices11.jpg",
       description:
         "Experts in independent monitoring, verification, and design review of critical geotechnical works, ensuring compliance, safety, and regulatory standards.",
       details: [
@@ -287,40 +309,6 @@ const GeotechnicalEngineering = () => {
       color: "violet",
     },
   ];
-
-  const getColorClasses = (color) => {
-    const colors = {
-      purple: "from-purple-600/80 to-purple-900/80",
-      blue: "from-blue-600/80 to-blue-900/80",
-      green: "from-green-600/80 to-green-900/80",
-      indigo: "from-indigo-600/80 to-indigo-900/80",
-      orange: "from-orange-600/80 to-orange-900/80",
-      teal: "from-teal-600/80 to-teal-900/80",
-      slate: "from-slate-600/80 to-slate-900/80",
-      emerald: "from-emerald-600/80 to-emerald-900/80",
-      cyan: "from-cyan-600/80 to-cyan-900/80",
-      rose: "from-rose-600/80 to-rose-900/80",
-      violet: "from-violet-600/80 to-violet-900/80",
-    };
-    return colors[color] || colors.purple;
-  };
-
-  const getTextColor = (color) => {
-    const colors = {
-      purple: "text-purple-100",
-      blue: "text-blue-100",
-      green: "text-green-100",
-      indigo: "text-indigo-100",
-      orange: "text-orange-100",
-      teal: "text-teal-100",
-      slate: "text-slate-100",
-      emerald: "text-emerald-100",
-      cyan: "text-cyan-100",
-      rose: "text-rose-100",
-      violet: "text-violet-100",
-    };
-    return colors[color] || colors.purple;
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -339,18 +327,14 @@ const GeotechnicalEngineering = () => {
       <div className="min-h-screen bg-white overflow-hidden pt-40">
         <HeroSection />
 
-        <div className="-mt-16">
+        <div className="mt-0 md:-mt-16">
           <AboutSection />
         </div>
 
-        <div className="-mt-20">
+        <div className="mt-0 md:-mt-20">
           <ServicesSection
             servicesDataRow1={servicesDataRow1}
             servicesDataRow2={servicesDataRow2}
-            activeService={activeService}
-            setActiveService={setActiveService}
-            getColorClasses={getColorClasses}
-            getTextColor={getTextColor}
           />
         </div>
 
@@ -363,23 +347,19 @@ const GeotechnicalEngineering = () => {
           />
         </div>
 
-        <div className="-mt-20">
+        <div className="mt-0 md:-mt-20">
           <GeotechnicalStudiesSection
             geotechnicalStudiesData={geotechnicalStudiesData}
-            activeService={activeService}
-            setActiveService={setActiveService}
-            getColorClasses={getColorClasses}
-            getTextColor={getTextColor}
           />
         </div>
 
-        <div className="-mt-16">
+        <div className="mt-0 md:-mt-16">
           <WhySSNSection />
         </div>
 
         {/* <TeamSection /> */}
 
-        <div className="-mt-16">
+        <div className="mt-0 md:-mt-16">
           <ProjectsSection />
         </div>
       </div>
