@@ -8,7 +8,7 @@ const ProjectsSection = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const projectPromises = [17, 23, 28].map((id) =>
+        const projectPromises = [1, 23, 28].map((id) =>
           fetch(`https://api.ssnbuilders.com/api/projects/${id}/`).then((res) =>
             res.json()
           )

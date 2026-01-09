@@ -65,7 +65,7 @@ const GeotechnicalStudiesSection = ({
       <div className="mx-auto w-full sm:w-[90%] lg:w-[80%]">
         <div className="text-center mb-12">
           <div>
-            <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-[#242687] font-playfair">
+            <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
               Our Geotechnical Studies & Engineering Solutions
             </span>
           </div>

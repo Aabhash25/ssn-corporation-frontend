@@ -11,16 +11,20 @@ const AboutSection = () => {
           {/* Content */}
           <div>
             <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-              Engineering the Ground That Supports Your Project
+              Building the Framework That Holds Your Vision{" "}
             </span>
 
             <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
-              We provide comprehensive geotechnical engineering services that
-              address the subsurface conditions that support your project.
-              Through integrated investigation, engineering analysis, and
-              construction-focused recommendations, we help manage risk,
-              optimize design, and support safe, efficient project delivery from
-              planning through construction.
+              We provide professional structural engineering services for
+              buildings, transportation infrastructure, and facilities. Our
+              engineers deliver practical and reliable structural solutions that
+              support safe construction, long-term performance, and regulatory
+              compliance.
+            </p>
+            <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
+              We work collaboratively with owners, architects, civil engineers,
+              and contractors to support projects through planning, design, and
+              construction phases.
             </p>
           </div>
 
@@ -31,8 +35,8 @@ const AboutSection = () => {
 
               <div className="relative w-full h-full rounded-3xl overflow-hidden">
                 <img
-                  src="/geotech.webp"
-                  alt="Geotechnical Engineering"
+                  src="/StructuralEngineer1.jpg"
+                  alt="Structural Engineering"
                   className="w-full h-full object-cover"
                 />
               </div>

@@ -5,10 +5,8 @@ const WhySSNSection = () => {
         {/* Heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <span className="block text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-            Why SSN Corporation?
+            Why SSN Corporation for Structural Engineering?
           </span>
-          {/* Optional divider */}
-          {/* <div className="w-16 h-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mx-auto mt-4"></div> */}
         </div>
 
         {/* Content Grid */}
@@ -20,13 +18,12 @@ const WhySSNSection = () => {
                 <div className="flex-shrink-0 w-1 h-16 bg-gradient-to-b from-gray-300 to-gray-400 rounded-full"></div>
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors duration-300">
-                    Integrated geotechnical, laboratory, and materials testing
-                    services
+                    Qualified and Experienced Engineers
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Comprehensive end-to-end solutions combining field
-                    investigation, laboratory analysis, and material testing
-                    under one roof for seamless project delivery.
+                    Our structural engineering services are provided by
+                    experienced professionals with expertise across building,
+                    transportation, and infrastructure projects.
                   </p>
                 </div>
               </div>
@@ -37,12 +34,12 @@ const WhySSNSection = () => {
                 <div className="flex-shrink-0 w-1 h-16 bg-gradient-to-b from-gray-300 to-gray-400 rounded-full"></div>
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors duration-300">
-                    Experienced engineers and field professionals
+                    Integrated Engineering Services
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Our team brings decades of combined experience in
-                    geotechnical engineering, ensuring reliable expertise for
-                    complex projects across various industries.
+                    We coordinate structural engineering with geotechnical,
+                    civil, and transportation disciplines to provide efficient
+                    and consistent project delivery.
                   </p>
                 </div>
               </div>
@@ -56,12 +53,11 @@ const WhySSNSection = () => {
                 <div className="flex-shrink-0 w-1 h-16 bg-gradient-to-b from-gray-300 to-gray-400 rounded-full"></div>
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors duration-300">
-                    Practical, constructible engineering solutions
+                    Compliance with Codes and Standards
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    We focus on real-world applicability, delivering designs and
-                    recommendations that are not only technically sound but also
-                    practical to implement.
+                    All structural designs are performed in accordance with
+                    applicable local, state, and national codes and standards.
                   </p>
                 </div>
               </div>
@@ -72,12 +68,12 @@ const WhySSNSection = () => {
                 <div className="flex-shrink-0 w-1 h-16 bg-gradient-to-b from-gray-300 to-gray-400 rounded-full"></div>
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors duration-300">
-                    Commitment to safety, quality, and project success
+                    Practical and Project-Focused Solutions
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Safety-first approach with rigorous quality control measures
-                    and dedication to exceeding client expectations on every
-                    project.
+                    SSN Corporation delivers practical structural solutions that
+                    consider constructability, project requirements, and
+                    long-term performance.
                   </p>
                 </div>
               </div>

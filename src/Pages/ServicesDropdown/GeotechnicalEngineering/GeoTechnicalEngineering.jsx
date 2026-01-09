@@ -1,13 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ChevronDown, ChevronUp, X } from "lucide-react";
+
 import ContactCTA from "../../../components/contactCTA";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ServicesSection from "./ServicesSection";
 import GeotechnicalStudiesSection from "./GeotechnicalStudiesSection";
 import WhySSNSection from "./WhySSNSection";
-import TeamSection from "./TeamSection";
 import ProjectsSection from "./ProjectsSection";
 
 const FontsStyle = () => (
@@ -341,7 +340,7 @@ const GeotechnicalEngineering = () => {
         <div className="-mt-16">
           <ContactCTA
             title="Need Expert Engineering Support?"
-            description="Our engineers are ready to assist you with reliable, data-driven solutions."
+            description="We are ready to assist you with reliable, data-driven, and optimized engineering solutions. Our team of experts is dedicated to providing you with the best possible service and support. We are here to help you with your project from start to finish."
             buttonText="Get in Touch"
             link="/contact"
           />

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const ServicesSection = ({ servicesDataRow1, servicesDataRow2 }) => {
+const ServicesSection = ({ servicesData }) => {
   const [expandedCards, setExpandedCards] = useState(new Set());
 
   const toggleCardExpansion = (serviceId) => {
@@ -16,24 +16,19 @@ const ServicesSection = ({ servicesDataRow1, servicesDataRow2 }) => {
       return newSet;
     });
   };
+
   const renderServiceCard = (service) => {
     const isExpanded = expandedCards.has(service.id);
     return (
-      <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 min-h-[350px] md:min-h-[450px]">
+      <div
+        key={service.id}
+        className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 min-h-[350px] md:min-h-[450px]"
+      >
         <div className="relative h-48 md:h-56 overflow-hidden">
           <img
             src={service.image}
             alt={service.title}
-            className={`w-full h-full ${
-              service.image === "/geotechServices10.jpg"
-                ? "object-[center_65%]"
-                : "object-center"
-            } ${
-              service.image === "/geotechService.png" ||
-              service.image === "geotechServices9.png"
-                ? "object-fill"
-                : "object-cover"
-            }`}
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4">
@@ -73,22 +68,20 @@ const ServicesSection = ({ servicesDataRow1, servicesDataRow2 }) => {
     );
   };
 
-  const allServices = [...servicesDataRow1, ...servicesDataRow2];
-
   return (
     <section className="relative w-full py-6 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
       <div className="mx-auto w-full sm:w-[90%] lg:w-[80%]">
         <div className="text-center mb-12">
           <div>
             <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-              Our Geotechnical Services
+              Our Structural Engineering Services
             </span>
           </div>
         </div>
 
         {/* Services Grid - Responsive */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
-          {allServices.map((service) => renderServiceCard(service))}
+          {servicesData.map((service) => renderServiceCard(service))}
         </div>
       </div>
     </section>

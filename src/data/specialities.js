@@ -102,7 +102,7 @@ export const specialities = [
       {
     title: "Pavement Engineering",
     icon: "⚡",
-    image: "/CarolinaMurganTemple3.webp",
+    image: "/geotechServices5.jpg",
     description: [
       "Comprehensive Pavement Engineering design services.",
       [

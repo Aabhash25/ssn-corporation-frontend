@@ -279,6 +279,14 @@ const Contact = () => {
         </div>
       </div>
 
+      <style jsx>{`
+        .font-roboto {
+          font-family: "Roboto", sans-serif;
+        }
+        .font-playfair {
+          font-family: "Playfair Display", serif;
+        }
+      `}</style>
     </>
   );
 };
