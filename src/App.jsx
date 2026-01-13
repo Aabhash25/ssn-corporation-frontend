@@ -52,6 +52,11 @@ const DesignAndEngineering = lazy(() =>
 const LandPlanningAndPermitting = lazy(() =>
   import("./Pages/ServicesDropdown/LandPlanningAndPermitting")
 );
+const ArchitectureAndEngineering = lazy(() =>
+  import(
+    "./Pages/ServicesDropdown/ArchitectureAndEngineering/ArchitectureAndEngineering"
+  )
+);
 const ConstructionAdministration = lazy(() =>
   import("./Pages/ServicesDropdown/ConstructionAdministration")
 );
@@ -138,6 +143,10 @@ function App() {
           <Route
             path="/engineering-architecture"
             element={<EngineeringArchitecture />}
+          />
+          <Route
+            path="/architecture-engineering"
+            element={<ArchitectureAndEngineering />}
           />
           <Route path="/construction" element={<Construction />} />
           <Route

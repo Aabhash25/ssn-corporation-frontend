@@ -181,7 +181,6 @@ export default function ProjectDescription() {
             </motion.div>
           )}
         </div>
-
         {/* Sidebar */}
         <aside className="lg:sticky lg:top-24 h-fit">
           <div className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-xl border border-gray-100">
@@ -208,7 +207,6 @@ export default function ProjectDescription() {
                 </div>
               )}
             </div>
-
             <div className="mt-6 pt-6 border-t border-gray-200">
               <Link
                 to="/portfolio"

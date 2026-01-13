@@ -1,30 +1,13 @@
 "use client";
 
-import { useState } from "react";
-
 const ServicesSection = ({ servicesData }) => {
-  const [expandedCards, setExpandedCards] = useState(new Set());
-
-  const toggleCardExpansion = (serviceId) => {
-    setExpandedCards((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(serviceId)) {
-        newSet.delete(serviceId);
-      } else {
-        newSet.add(serviceId);
-      }
-      return newSet;
-    });
-  };
-
   const renderServiceCard = (service) => {
-    const isExpanded = expandedCards.has(service.id);
     return (
       <div
         key={service.id}
-        className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 min-h-[350px] md:min-h-[450px]"
+        className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200"
       >
-        <div className="relative h-48 md:h-56 overflow-hidden">
+        <div className="relative h-64 md:h-72 lg:h-80 overflow-hidden">
           <img
             src={service.image}
             alt={service.title}
@@ -37,32 +20,11 @@ const ServicesSection = ({ servicesData }) => {
             </h3>
           </div>
         </div>
+
         <div className="p-6">
-          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+          <p className="text-gray-600 text-sm leading-relaxed">
             {service.description}
           </p>
-          <div className="space-y-2 mb-4">
-            {(isExpanded ? service.details : service.details.slice(0, 4)).map(
-              (detail, idx) => (
-                <div key={idx} className="flex items-start space-x-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#242687] mt-2 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 leading-relaxed">
-                    {detail}
-                  </span>
-                </div>
-              )
-            )}
-          </div>
-          {service.details.length > 4 && (
-            <button
-              onClick={() => toggleCardExpansion(service.id)}
-              className="text-[#242687] hover:text-blue-700 text-sm font-medium transition-colors duration-200"
-            >
-              {isExpanded
-                ? "See Less ↑"
-                : `See ${service.details.length - 4} More ↓`}
-            </button>
-          )}
         </div>
       </div>
     );
@@ -72,14 +34,11 @@ const ServicesSection = ({ servicesData }) => {
     <section className="relative w-full py-6 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
       <div className="mx-auto w-full sm:w-[90%] lg:w-[80%]">
         <div className="text-center mb-12">
-          <div>
-            <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-              Our Structural Engineering Services
-            </span>
-          </div>
+          <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
+            Our Structural Engineering Services
+          </span>
         </div>
 
-        {/* Services Grid - Responsive */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
           {servicesData.map((service) => renderServiceCard(service))}
         </div>

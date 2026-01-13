@@ -1,6 +1,6 @@
 "use client";
 
-const StructuralStudiesSection = ({ structuralStudiesData }) => {
+const ServicesSection = ({ servicesData }) => {
   const renderServiceCard = (service) => {
     return (
       <div
@@ -11,7 +11,7 @@ const StructuralStudiesSection = ({ structuralStudiesData }) => {
           <img
             src={service.image}
             alt={service.title}
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4">
@@ -22,7 +22,7 @@ const StructuralStudiesSection = ({ structuralStudiesData }) => {
         </div>
 
         <div className="p-6">
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-gray-600 text-sm leading-snug mb-0">
             {service.description}
           </p>
         </div>
@@ -35,16 +35,16 @@ const StructuralStudiesSection = ({ structuralStudiesData }) => {
       <div className="mx-auto w-full sm:w-[90%] lg:w-[80%]">
         <div className="text-center mb-12">
           <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-            Our Structural Engineering Solutions
+            Our Fit-Outs Engineering Services
           </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8 items-stretch">
-          {structuralStudiesData.map((service) => renderServiceCard(service))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+          {servicesData.map((service) => renderServiceCard(service))}
         </div>
       </div>
     </section>
   );
 };
 
-export default StructuralStudiesSection;
+export default ServicesSection;

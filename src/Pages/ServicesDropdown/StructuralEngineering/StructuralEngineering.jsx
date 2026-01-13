@@ -139,7 +139,7 @@ const StructuralEngineering = () => {
     {
       id: 5,
       title: "Foundation Structural Analysis and Design",
-      image: "/StructuralEngineer1.jpg",
+      image: "/StructuralEngineer4.jpg",
       description:
         "We provide structural analysis and design for shallow and deep foundations, including spread footings, mat foundations, piles, and drilled shafts, based on project loading and site conditions.",
       details: [
@@ -246,17 +246,15 @@ const StructuralEngineering = () => {
   return (
     <>
       <FontsStyle />
-      <div className="min-h-screen bg-white overflow-hidden pt-40">
+      <div className="min-h-screen bg-white overflow-hidden pt-16 sm:pt-24 md:pt-40">
+        {" "}
         <HeroSection />
-
         <div className="mt-0 md:-mt-16">
           <AboutSection />
         </div>
-
         <div className="mt-0 md:-mt-20">
           <ServicesSection servicesData={structuralServicesData} />
         </div>
-
         <div className="-mt-16">
           <ContactCTA
             title="Need Expert Structural Engineering Support?"
@@ -265,17 +263,14 @@ const StructuralEngineering = () => {
             link="/contact"
           />
         </div>
-
         <div className="mt-0 md:-mt-20">
           <StructuralStudiesSection
             structuralStudiesData={structuralStudiesData}
           />
         </div>
-
         <div className="mt-0 md:-mt-16">
           <WhySSNSection />
         </div>
-
         <div className="mt-0 md:-mt-16">
           <ProjectsSection />
         </div>

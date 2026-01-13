@@ -70,7 +70,7 @@ const Hero = () => {
       <div className="absolute inset-0">
         {/* Mobile */}
         <img
-          src="/30-mobile.wep"
+          src="/30-mobile.webp"
           alt="Hero mobile"
           className="absolute inset-0 w-full h-full object-cover brightness-75 md:hidden"
         />

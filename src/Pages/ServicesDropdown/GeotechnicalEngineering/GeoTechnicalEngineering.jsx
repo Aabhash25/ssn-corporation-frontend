@@ -323,7 +323,7 @@ const GeotechnicalEngineering = () => {
   return (
     <>
       <FontsStyle />
-      <div className="min-h-screen bg-white overflow-hidden pt-40">
+      <div className="min-h-screen bg-white overflow-hidden pt-16 sm:pt-24 md:pt-40">
         <HeroSection />
 
         <div className="mt-0 md:-mt-16">

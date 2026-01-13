@@ -124,11 +124,18 @@ const ModernNavbar = () => {
               href="mailto:contact@ssncorporation.com"
               className="flex items-center gap-1.5 lg:gap-2 hover:text-yellow-400 transition-colors"
             >
-              <FaEnvelope className="text-xs lg:text-sm xl:text-base" /> <span className="hidden lg:inline">contact@ssncorporation.com</span><span className="lg:hidden">Email</span>
+              <FaEnvelope className="text-xs lg:text-sm xl:text-base" />{" "}
+              <span className="hidden lg:inline">
+                contact@ssncorporation.com
+              </span>
+              <span className="lg:hidden">Email</span>
             </a>
 
             <span className="flex items-center gap-1.5 lg:gap-2">
-              <FaPhoneAlt className="text-xs lg:text-sm xl:text-base" /> <span className="text-xs lg:text-sm xl:text-base">(919) 703-0222</span>
+              <FaPhoneAlt className="text-xs lg:text-sm xl:text-base" />{" "}
+              <span className="text-xs lg:text-sm xl:text-base">
+                (919) 703-0222
+              </span>
             </span>
           </div>
 
@@ -255,24 +262,54 @@ const ModernNavbar = () => {
                   style={{
                     top: isDesktop
                       ? isLandingPage && !scrolled
-                        ? (isXlScreen ? "152px" : "136px")
-                        : (isXlScreen ? "96px" : "80px")
+                        ? isXlScreen
+                          ? "152px"
+                          : "136px"
+                        : isXlScreen
+                        ? "96px"
+                        : "80px"
                       : "96px",
                     maxWidth: isXlScreen ? "72rem" : "64rem",
                     padding: isXlScreen ? "0.5rem 0.75rem" : "0.375rem 0.5rem",
                   }}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0" style={{ padding: isXlScreen ? "0.375rem 0" : "0.25rem 0" }}>
+                  <div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-0"
+                    style={{ padding: isXlScreen ? "0.375rem 0" : "0.25rem 0" }}
+                  >
                     {/* Left Column - Company Motto */}
-                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col justify-center" style={{ padding: isXlScreen ? "0.75rem" : "0.5rem" }}>
-                      <div className="border-l-4 border-yellow-500" style={{ paddingLeft: isXlScreen ? "1rem" : "0.75rem" }}>
-                        <p className="text-yellow-500 font-semibold tracking-wider" style={{ fontSize: isXlScreen ? "0.75rem" : "0.5625rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      className="bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col justify-center"
+                      style={{ padding: isXlScreen ? "0.75rem" : "0.5rem" }}
+                    >
+                      <div
+                        className="border-l-4 border-yellow-500"
+                        style={{ paddingLeft: isXlScreen ? "1rem" : "0.75rem" }}
+                      >
+                        <p
+                          className="text-yellow-500 font-semibold tracking-wider"
+                          style={{
+                            fontSize: isXlScreen ? "0.75rem" : "0.5625rem",
+                            marginBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                          }}
+                        >
                           OUR COMMITMENT
                         </p>
-                        <h3 className="text-white font-bold font-oswald leading-tight" style={{ fontSize: isXlScreen ? "1.125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem" }}>
+                        <h3
+                          className="text-white font-bold font-oswald leading-tight"
+                          style={{
+                            fontSize: isXlScreen ? "1.125rem" : "0.6875rem",
+                            marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          }}
+                        >
                           Building Excellence, Engineering Innovation
                         </h3>
-                        <p className="text-gray-300 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
+                        <p
+                          className="text-gray-300 font-oswald leading-tight"
+                          style={{
+                            fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                          }}
+                        >
                           From first sketches to final construction, SSN
                           Corporation offers integrated engineering, specialty
                           technical services, and complete design-build delivery
@@ -282,14 +319,35 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Engineering Services */}
-                    <div className="border-r border-gray-200" style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      className="border-r border-gray-200"
+                      style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}
+                    >
+                      <h4
+                        className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center"
+                        style={{
+                          fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                          marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          paddingBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                          gap: isXlScreen ? "0.5rem" : "0.25rem",
+                        }}
+                      >
                         {/* <FaHardHat className="text-xl" /> */}
                         Engineering Services
                       </h4>
 
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <ul
+                        className="font-oswald"
+                        style={{
+                          fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                          lineHeight: "1.4",
+                        }}
+                      >
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/design-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -297,7 +355,11 @@ const ModernNavbar = () => {
                             Building and Building Services System Design
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/land-planning"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -305,7 +367,11 @@ const ModernNavbar = () => {
                             Land Planning, Development, and Permitting
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/structural-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -313,7 +379,11 @@ const ModernNavbar = () => {
                             Structural Engineering
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/water-resources-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -321,7 +391,11 @@ const ModernNavbar = () => {
                             Water Resources Engineering
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/geotechnical-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -338,16 +412,24 @@ const ModernNavbar = () => {
                           </Link>
                         </li> */}
 
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
-                            to="/construction-engineering"
+                            to="/architecture-engineering"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
                           >
                             Architectural and Engineering Services for Tenant
                             Fit-Outs
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/construction-administration"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -359,12 +441,29 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Specialty Engineering Services */}
-                    <div className="border-r border-gray-200" style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      className="border-r border-gray-200"
+                      style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}
+                    >
+                      <h4
+                        className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center"
+                        style={{
+                          fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                          marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          paddingBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                          gap: isXlScreen ? "0.5rem" : "0.25rem",
+                        }}
+                      >
                         {/* <FaTools className="text-xl" /> */}
                         Specialty Engineering Services
                       </h4>
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
+                      <ul
+                        className="font-oswald"
+                        style={{
+                          fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                          lineHeight: "1.4",
+                        }}
+                      >
                         {[
                           "Mechanical, Electrical, and Plumbing Design",
                           "Pavement Design",
@@ -378,7 +477,12 @@ const ModernNavbar = () => {
                           "Stormwater Impact and Erosion Control Analysis",
                           "Hydrology and drainage study",
                         ].map((service, index) => (
-                          <li key={index} style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                          <li
+                            key={index}
+                            style={{
+                              marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                            }}
+                          >
                             <Link
                               to="/specialty-services" // You can change this to separate routes if needed
                               className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -391,13 +495,34 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Material Testing Services */}
-                    <div className="border-r border-gray-200" style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      className="border-r border-gray-200"
+                      style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}
+                    >
+                      <h4
+                        className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center"
+                        style={{
+                          fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                          marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          paddingBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                          gap: isXlScreen ? "0.5rem" : "0.25rem",
+                        }}
+                      >
                         {/* <FaFlask className="text-xl" /> */}
                         Material Testing Services
                       </h4>
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <ul
+                        className="font-oswald"
+                        style={{
+                          fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                          lineHeight: "1.4",
+                        }}
+                      >
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/material-testing"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -405,7 +530,11 @@ const ModernNavbar = () => {
                             Soil and Aggregate Physical and Strength Tests
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/material-testing"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -413,7 +542,11 @@ const ModernNavbar = () => {
                             Fresh and Hardened Concrete Tests
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/material-testing"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -421,7 +554,11 @@ const ModernNavbar = () => {
                             Bitumen and Asphalt Mix Tests
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/material-testing"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -429,7 +566,11 @@ const ModernNavbar = () => {
                             Water Drainage and Permeability Tests
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/material-testing"
                             className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
@@ -441,13 +582,33 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Construction Services */}
-                    <div style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem", gap: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}
+                    >
+                      <h4
+                        className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500 flex items-center"
+                        style={{
+                          fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                          marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          paddingBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                          gap: isXlScreen ? "0.5rem" : "0.25rem",
+                        }}
+                      >
                         {/* <FaFlask className="text-xl" /> */}
                         Construction Services
                       </h4>
-                      <ul className="font-oswald" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem", lineHeight: "1.4" }}>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                      <ul
+                        className="font-oswald"
+                        style={{
+                          fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                          lineHeight: "1.4",
+                        }}
+                      >
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/pre-construction"
                             className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
@@ -456,7 +617,12 @@ const ModernNavbar = () => {
                             Pre Construction
                           </Link>
                         </li>
-                        <li className="transition-colors" style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          className="transition-colors"
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/general-construction"
                             className="block hover:text-yellow-600 cursor-pointer bg-gray-100 px-2 py-1 rounded-md"
@@ -464,7 +630,12 @@ const ModernNavbar = () => {
                             General Construction
                           </Link>
                         </li>
-                        <li className="transition-colors" style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          className="transition-colors"
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/design-plus-build"
                             className="block hover:text-yellow-600 cursor-pointer bg-gray-100 px-2 py-1 rounded-md"
@@ -472,7 +643,11 @@ const ModernNavbar = () => {
                             Design plus Build
                           </Link>
                         </li>
-                        <li style={{ marginBottom: isXlScreen ? "0.375rem" : "0.25rem" }}>
+                        <li
+                          style={{
+                            marginBottom: isXlScreen ? "0.375rem" : "0.25rem",
+                          }}
+                        >
                           <Link
                             to="/construction-management"
                             className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
@@ -520,24 +695,54 @@ const ModernNavbar = () => {
                   style={{
                     top: isDesktop
                       ? isLandingPage && !scrolled
-                        ? (isXlScreen ? "152px" : "136px")
-                        : (isXlScreen ? "96px" : "80px")
+                        ? isXlScreen
+                          ? "152px"
+                          : "136px"
+                        : isXlScreen
+                        ? "96px"
+                        : "80px"
                       : "96px",
                     maxWidth: isXlScreen ? "60rem" : "52rem",
                     padding: isXlScreen ? "0.5rem 0.75rem" : "0.375rem 0.5rem",
                   }}
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-0" style={{ padding: isXlScreen ? "0.375rem 0" : "0.25rem 0" }}>
+                  <div
+                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-0"
+                    style={{ padding: isXlScreen ? "0.375rem 0" : "0.25rem 0" }}
+                  >
                     {/* Left Column - Motto */}
-                    <div className="bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col justify-center" style={{ padding: isXlScreen ? "0.75rem" : "0.5rem" }}>
-                      <div className="border-l-4 border-yellow-500" style={{ paddingLeft: isXlScreen ? "1rem" : "0.75rem" }}>
-                        <p className="text-yellow-500 font-semibold tracking-wider" style={{ fontSize: isXlScreen ? "0.75rem" : "0.5625rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      className="bg-gradient-to-br from-gray-900 to-gray-800 flex flex-col justify-center"
+                      style={{ padding: isXlScreen ? "0.75rem" : "0.5rem" }}
+                    >
+                      <div
+                        className="border-l-4 border-yellow-500"
+                        style={{ paddingLeft: isXlScreen ? "1rem" : "0.75rem" }}
+                      >
+                        <p
+                          className="text-yellow-500 font-semibold tracking-wider"
+                          style={{
+                            fontSize: isXlScreen ? "0.75rem" : "0.5625rem",
+                            marginBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                          }}
+                        >
                           INNOVATION
                         </p>
-                        <h3 className="text-white font-bold font-oswald leading-tight" style={{ fontSize: isXlScreen ? "1.125rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem" }}>
+                        <h3
+                          className="text-white font-bold font-oswald leading-tight"
+                          style={{
+                            fontSize: isXlScreen ? "1.125rem" : "0.6875rem",
+                            marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          }}
+                        >
                           Intelligence that Builds the Future
                         </h3>
-                        <p className="text-gray-300 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
+                        <p
+                          className="text-gray-300 font-oswald leading-tight"
+                          style={{
+                            fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                          }}
+                        >
                           We build AI technology our clients can trust. Our
                           commitment is to deliver consistent accuracy and
                           exceptional performance.
@@ -546,11 +751,26 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Our Team */}
-                    <div className="border-r border-gray-200" style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      className="border-r border-gray-200"
+                      style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}
+                    >
+                      <h4
+                        className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500"
+                        style={{
+                          fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                          marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          paddingBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                        }}
+                      >
                         Our Team
                       </h4>
-                      <p className="text-gray-800 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
+                      <p
+                        className="text-gray-800 font-oswald leading-tight"
+                        style={{
+                          fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                        }}
+                      >
                         With over 20 years of combined experience, our
                         leadership team brings expertise in civil engineering
                         and AI. Supported by seven skilled engineers, we drive
@@ -561,23 +781,46 @@ const ModernNavbar = () => {
                     </div>
 
                     {/* Our Products */}
-                    <div style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-                      <h4 className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500" style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.75rem" : "0.375rem", paddingBottom: isXlScreen ? "0.5rem" : "0.25rem" }}>
+                    <div
+                      style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}
+                    >
+                      <h4
+                        className="text-yellow-600 font-oswald font-bold border-b-2 border-yellow-500"
+                        style={{
+                          fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                          marginBottom: isXlScreen ? "0.75rem" : "0.375rem",
+                          paddingBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                        }}
+                      >
                         Our Products
                       </h4>
 
-                      <div style={{ display: "flex", flexDirection: "column", gap: isXlScreen ? "1rem" : "0.5rem" }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: isXlScreen ? "1rem" : "0.5rem",
+                        }}
+                      >
                         {/* QTakeoff */}
                         <div>
                           <Link
                             to="/qtakeoff-ai"
                             className="font-bold text-gray-900 hover:text-yellow-600 font-oswald block transition-colors"
-                            style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}
+                            style={{
+                              fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                              marginBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                            }}
                             onClick={() => setIsRnDOpen(false)}
                           >
                             QTakeoff
                           </Link>
-                          <p className="text-gray-700 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
+                          <p
+                            className="text-gray-700 font-oswald leading-tight"
+                            style={{
+                              fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                            }}
+                          >
                             Our AI technology delivers measurable improvements
                             with industry-leading accuracy and speed. Users
                             experience higher efficiency, lower costs, and
@@ -586,16 +829,29 @@ const ModernNavbar = () => {
                         </div>
 
                         {/* Real Estate Site Map */}
-                        <div style={{ paddingTop: isXlScreen ? "0.75rem" : "0.375rem", borderTop: "1px solid #e5e7eb" }}>
+                        <div
+                          style={{
+                            paddingTop: isXlScreen ? "0.75rem" : "0.375rem",
+                            borderTop: "1px solid #e5e7eb",
+                          }}
+                        >
                           <Link
                             to="/real-estate-site-analysis"
                             className="font-bold text-gray-900 hover:text-yellow-600 font-oswald block transition-colors"
-                            style={{ fontSize: isXlScreen ? "1rem" : "0.6875rem", marginBottom: isXlScreen ? "0.5rem" : "0.25rem" }}
+                            style={{
+                              fontSize: isXlScreen ? "1rem" : "0.6875rem",
+                              marginBottom: isXlScreen ? "0.5rem" : "0.25rem",
+                            }}
                             onClick={() => setIsRnDOpen(false)}
                           >
                             Real Estate Site Map
                           </Link>
-                          <p className="text-gray-700 font-oswald leading-tight" style={{ fontSize: isXlScreen ? "0.875rem" : "0.5625rem" }}>
+                          <p
+                            className="text-gray-700 font-oswald leading-tight"
+                            style={{
+                              fontSize: isXlScreen ? "0.875rem" : "0.5625rem",
+                            }}
+                          >
                             Analyze any location with AI-driven insights on
                             nearby amenities and infrastructure. Generate
                             interactive results and professional reports in
@@ -737,7 +993,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/design-engineering"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Building and Building Services System
@@ -746,7 +1002,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/land-planning"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Land Planning, Development, and Permitting
@@ -755,7 +1011,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/structural-engineering"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Structural Engineering
@@ -764,7 +1020,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/water-resources-engineering"
-                          className="hover:text-yellow-600 cursor-pointer transition-colors block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                         >
                           Water Resources Engineering
                         </Link>
@@ -772,7 +1028,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/geotechnical-engineering"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Geotechnical Engineering
@@ -789,8 +1045,8 @@ const ModernNavbar = () => {
                       </li> */}
                       <li>
                         <Link
-                          to="/construction-engineering"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          to="/architecture-engineering"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Architectural and Engineering Services for Tenant
@@ -800,7 +1056,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/construction-administration"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Construction Administration
@@ -831,7 +1087,7 @@ const ModernNavbar = () => {
                         <li key={index}>
                           <Link
                             to="/specialty-services"
-                            className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                            className="block hover:text-yellow-400 bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md transition-colors"
                             onClick={() => setIsOpen(false)}
                           >
                             {service}
@@ -850,7 +1106,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/pre-construction"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Pre Construction
@@ -859,7 +1115,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/general-construction"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           General Construction
@@ -868,7 +1124,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/design-plus-build"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Design plus Build
@@ -877,7 +1133,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/construction-management"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Construction Management
@@ -895,7 +1151,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/material-testing"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Soil and Aggregate Physical and Strength Tests
@@ -904,7 +1160,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/material-testing"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Fresh and Hardened Concrete Tests
@@ -913,7 +1169,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/material-testing"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Bitumen and Asphalt Mix Tests
@@ -922,7 +1178,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/material-testing"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Water Drainage and Permeability Tests
@@ -931,7 +1187,7 @@ const ModernNavbar = () => {
                       <li>
                         <Link
                           to="/material-testing"
-                          className="hover:text-yellow-400 block bg-gray-100 px-2 py-1 rounded-md"
+                          className="hover:text-yellow-400 block bg-transparent lg:bg-gray-100 px-0 lg:px-2 py-1 rounded-none lg:rounded-md"
                           onClick={() => setIsOpen(false)}
                         >
                           Environmental Sampling and Tests

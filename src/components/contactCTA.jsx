@@ -6,7 +6,7 @@ const ContactCTA = ({
 }) => {
   return (
     <section className="py-12 px-4">
-      <div className="max-w-screen-xl mx-auto bg-yellow-200 rounded-lg p-10">
+      <div className="max-w-screen-xl mx-auto bg-yellow-400 rounded-lg p-10">
         <div className="text-center">
           {/* Text Content */}
           <div className="mb-6">
