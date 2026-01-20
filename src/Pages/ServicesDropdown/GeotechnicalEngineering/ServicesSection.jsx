@@ -16,11 +16,13 @@ const ServicesSection = ({ servicesDataRow1, servicesDataRow2 }) => {
       return newSet;
     });
   };
+
   const renderServiceCard = (service) => {
     const isExpanded = expandedCards.has(service.id);
     return (
       <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 min-h-[350px] md:min-h-[450px]">
-        <div className="relative h-48 md:h-56 overflow-hidden">
+        {/* Image Section */}
+        <div className="relative h-64 md:h-80 overflow-hidden">
           <img
             src={service.image}
             alt={service.title}
@@ -42,6 +44,8 @@ const ServicesSection = ({ servicesDataRow1, servicesDataRow2 }) => {
             </h3>
           </div>
         </div>
+
+        {/* Description and Details */}
         <div className="p-6">
           <p className="text-gray-600 text-sm leading-relaxed mb-4">
             {service.description}
@@ -55,9 +59,11 @@ const ServicesSection = ({ servicesDataRow1, servicesDataRow2 }) => {
                     {detail}
                   </span>
                 </div>
-              )
+              ),
             )}
           </div>
+
+          {/* Toggle Button */}
           {service.details.length > 4 && (
             <button
               onClick={() => toggleCardExpansion(service.id)}

@@ -26,6 +26,8 @@ Use the following command to resize and compress a single image:
 mkdir optimized
 
 # Compress and resize
+sharp -i "22.jpg" -o "./22.webp" --resize 1920 --quality 60
+
 sharp -i 22.jpg -o ./optimized/22.webp resize 1920 -q 60
 
 

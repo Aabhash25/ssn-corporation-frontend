@@ -34,63 +34,67 @@ const Business = lazy(() => import("./FooterPages/Business"));
 const ProposalPage = lazy(() => import("./FooterPages/ProposalPage"));
 const NewsDetail = lazy(() => import("./FooterPages/NewsDetail"));
 
-const EngineeringArchitecture = lazy(() =>
-  import("./Pages/EngineeringArchitecture")
+const EngineeringArchitecture = lazy(
+  () => import("./Pages/EngineeringArchitecture"),
 );
 const Construction = lazy(() => import("./Pages/Construction"));
-const ResearchAndDevelopment = lazy(() =>
-  import("./Pages/ResearchAndDevelopment")
+const ResearchAndDevelopment = lazy(
+  () => import("./Pages/ResearchAndDevelopment"),
 );
-const ConstructionMaterialTesting = lazy(() =>
-  import("./Pages/ConstructionMaterialTesting")
+const ConstructionMaterialTesting = lazy(
+  () => import("./Pages/ConstructionMaterialTesting"),
 );
 
 // Services Dropdown Pages
-const DesignAndEngineering = lazy(() =>
-  import("./Pages/ServicesDropdown/DesignAndEngineering")
+const BuildingServiceDesign = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/BuildingServiceDesign/BuildingServiceDesign"),
 );
-const LandPlanningAndPermitting = lazy(() =>
-  import("./Pages/ServicesDropdown/LandPlanningAndPermitting")
+const LandPlanningAndPermitting = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/LandPlanningAndPermitting/LandPlanningAndPermitting"),
 );
-const ArchitectureAndEngineering = lazy(() =>
-  import(
-    "./Pages/ServicesDropdown/ArchitectureAndEngineering/ArchitectureAndEngineering"
-  )
+const ArchitectureAndEngineering = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/ArchitectureAndEngineering/ArchitectureAndEngineering"),
 );
-const ConstructionAdministration = lazy(() =>
-  import("./Pages/ServicesDropdown/ConstructionAdministration")
+const ConstructionAdministration = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/ConstructionAdministration/ConstructionAdministration"),
 );
-const StructuralEngineering = lazy(() =>
-  import("./Pages/ServicesDropdown/StructuralEngineering/StructuralEngineering")
+const StructuralEngineering = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/StructuralEngineering/StructuralEngineering"),
 );
-const ConstructionMaterialSurveyAndTesting = lazy(() =>
-  import("./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting")
+const ConstructionMaterialSurveyAndTesting = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting/ConstructionMaterialSurveyAndTesting"),
 );
-const GeoTechnicalEngineering = lazy(() =>
-  import(
-    "./Pages/ServicesDropdown/GeotechnicalEngineering/GeoTechnicalEngineering"
-  )
+const GeoTechnicalEngineering = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/GeotechnicalEngineering/GeoTechnicalEngineering"),
 );
-const ConstructionEngineeringAndManagement = lazy(() =>
-  import("./Pages/ServicesDropdown/ConstructionEngineering")
+const ConstructionEngineeringAndManagement = lazy(
+  () => import("./Pages/ServicesDropdown/ConstructionEngineering"),
 );
-const GeneralConstruction = lazy(() =>
-  import("./Pages/ServicesDropdown/GeneralConstruction")
+const GeneralConstruction = lazy(
+  () => import("./Pages/ServicesDropdown/GeneralConstruction"),
 );
-const DesignPlusBuild = lazy(() =>
-  import("./Pages/ServicesDropdown/DesignPlusBuild")
+const DesignPlusBuild = lazy(
+  () => import("./Pages/ServicesDropdown/DesignPlusBuild"),
 );
-const PreConstruction = lazy(() =>
-  import("./Pages/ServicesDropdown/PreConstruction")
+const PreConstruction = lazy(
+  () => import("./Pages/ServicesDropdown/PreConstruction"),
 );
-const ConstructionManagement = lazy(() =>
-  import("./Pages/ServicesDropdown/ConstructionManagement")
+const ConstructionManagement = lazy(
+  () => import("./Pages/ServicesDropdown/ConstructionManagement"),
 );
-const SpecialtyEngineeringServices = lazy(() =>
-  import("./Pages/ServicesDropdown/SpecialtyEngineeringServices")
+const SpecialtyEngineeringServices = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/SpecialtyEngineeringServices/SpecialtyEngineeringServices"),
 );
-const WaterResourcesEngineering = lazy(() =>
-  import("./Pages/ServicesDropdown/WaterResources")
+const WaterResourcesEngineering = lazy(
+  () => import("./Pages/ServicesDropdown/WaterResources"),
 );
 
 function App() {
@@ -153,15 +157,15 @@ function App() {
             path="/research-and-development"
             element={<ResearchAndDevelopment />}
           />
-          <Route
-            path="/construction-material-testing"
+          {/* <Route
+            path="/material-testing"
             element={<ConstructionMaterialTesting />}
-          />
+          /> */}
 
           {/* Dropdown Services */}
           <Route
-            path="/design-engineering"
-            element={<DesignAndEngineering />}
+            path="/building-service-design"
+            element={<BuildingServiceDesign />}
           />
           <Route
             path="/land-planning"

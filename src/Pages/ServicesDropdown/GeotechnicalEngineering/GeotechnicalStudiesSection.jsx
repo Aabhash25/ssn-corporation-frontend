@@ -2,13 +2,11 @@
 
 import { useState } from "react";
 
-const GeotechnicalStudiesSection = ({
-  geotechnicalStudiesData,
-}) => {
+const GeotechnicalStudiesSection = ({ geotechnicalStudiesData }) => {
   const [expandedCards, setExpandedCards] = useState(new Set());
 
   const toggleCardExpansion = (serviceId) => {
-    setExpandedCards(prev => {
+    setExpandedCards((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(serviceId)) {
         newSet.delete(serviceId);
@@ -18,11 +16,13 @@ const GeotechnicalStudiesSection = ({
       return newSet;
     });
   };
+
   const renderServiceCard = (service) => {
     const isExpanded = expandedCards.has(service.id);
     return (
       <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-gray-200 min-h-[350px] md:min-h-[450px]">
-        <div className="relative h-48 md:h-56 overflow-hidden">
+        {/* Image Section */}
+        <div className="relative h-64 md:h-80 overflow-hidden">
           <img
             src={service.image}
             alt={service.title}
@@ -35,24 +35,34 @@ const GeotechnicalStudiesSection = ({
             </h3>
           </div>
         </div>
+
+        {/* Description and Details */}
         <div className="p-6">
           <p className="text-gray-600 text-sm leading-relaxed mb-4">
             {service.description}
           </p>
           <div className="space-y-2 mb-4">
-            {(isExpanded ? service.details : service.details.slice(0, 4)).map((detail, idx) => (
-              <div key={idx} className="flex items-start space-x-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[#242687] mt-2 flex-shrink-0" />
-                <span className="text-sm text-gray-700 leading-relaxed">{detail}</span>
-              </div>
-            ))}
+            {(isExpanded ? service.details : service.details.slice(0, 4)).map(
+              (detail, idx) => (
+                <div key={idx} className="flex items-start space-x-2">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#242687] mt-2 flex-shrink-0" />
+                  <span className="text-sm text-gray-700 leading-relaxed">
+                    {detail}
+                  </span>
+                </div>
+              )
+            )}
           </div>
+
+          {/* Toggle Button */}
           {service.details.length > 4 && (
             <button
               onClick={() => toggleCardExpansion(service.id)}
               className="text-[#242687] hover:text-blue-700 text-sm font-medium transition-colors duration-200"
             >
-              {isExpanded ? 'See Less ↑' : `See ${service.details.length - 4} More ↓`}
+              {isExpanded
+                ? "See Less ↑"
+                : `See ${service.details.length - 4} More ↓`}
             </button>
           )}
         </div>

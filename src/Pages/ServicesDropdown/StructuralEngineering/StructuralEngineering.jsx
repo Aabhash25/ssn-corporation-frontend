@@ -100,7 +100,7 @@ const StructuralEngineering = () => {
     {
       id: 2,
       title: "Bridge, Tank, and Tower Structural Design",
-      image: "/ai-placeholder/bridge-tank-tower.jpg",
+      image: "/BridgeTankandTowerStructuralDesign.jpeg",
       description:
         "We offer structural engineering services for bridges, tanks, towers, and similar structures. Designs consider applicable loading conditions, serviceability requirements, and long-term durability.",
       details: [
@@ -113,7 +113,7 @@ const StructuralEngineering = () => {
     {
       id: 3,
       title: "Roadway and Transportation Structure Engineering",
-      image: "/ai-placeholder/roadway-transportation.jpg",
+      image: "/RoadwayandTransportationStructureEngineering.png",
       description:
         "Our structural services support roadway and transportation projects, including culverts, underpasses, retaining systems, and ancillary roadway structures. Designs comply with applicable transportation standards and project requirements.",
       details: [
@@ -126,7 +126,7 @@ const StructuralEngineering = () => {
     {
       id: 4,
       title: "Retaining Wall and Site Structure Design",
-      image: "/ai-placeholder/retaining-wall.jpg",
+      image: "/RetainingWallandSiteStructureDesign.jpg",
       description:
         "SSN Corporation designs retaining walls, sound walls, and other site structures. Our designs address earth pressures, drainage considerations, and constructability.",
       details: [
@@ -152,7 +152,7 @@ const StructuralEngineering = () => {
     {
       id: 6,
       title: "Structural Evaluation, Retrofitting, and Rehabilitation",
-      image: "/ai-placeholder/structural-evaluation.jpg",
+      image: "/StructuralEvaluationRetrofittingandRehabilitation.jpeg",
       description:
         "Our engineers evaluate existing structures and develop retrofit or rehabilitation solutions to address structural deficiencies, increased loading, or updated code requirements.",
       details: [

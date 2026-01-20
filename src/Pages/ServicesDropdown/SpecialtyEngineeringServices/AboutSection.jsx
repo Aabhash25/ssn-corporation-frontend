@@ -1,6 +1,6 @@
 const AboutSection = () => {
   return (
-    <section className="relative w-full pt-4 pb-24 sm:pt-6 sm:pb-32 px-2 sm:px-4 lg:px-6 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
+    <section className="relative w-full pt-4 pb-8 sm:pt-6 sm:pb-12 px-2 sm:px-4 lg:px-6 bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
       <div className="relative w-full max-w-[90rem] mx-auto">
         {/* Background decorative elements */}
         <div className="absolute top-10 left-5 w-40 h-40 bg-blue-200/50 rounded-full blur-3xl animate-pulse z-0" />
@@ -11,21 +11,16 @@ const AboutSection = () => {
           {/* Content */}
           <div>
             <span className="block mb-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-              Building the Framework That Holds Your Vision
+              Specialized Engineering Solutions for Complex Infrastructure
             </span>
 
-            <p className="text-lg sm:text-xl text-gray-700 leading-relaxed mb-4">
-              We provide professional structural engineering services for
-              buildings, transportation infrastructure, and facilities. Our
-              engineers deliver practical and reliable structural solutions that
-              support safe construction, long-term performance, and regulatory
-              compliance.
-            </p>
-
             <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
-              We work collaboratively with owners, architects, civil engineers,
-              and contractors to support projects through planning, design, and
-              construction phases.
+              We offer a comprehensive suite of specialty engineering services
+              that fit complex infrastructure, land development, commercial, and
+              institutional projects. Leveraging multidisciplinary expertise,
+              advanced analytical tools, and industry best practices, our team
+              delivers solutions that are code-compliant, constructible, and
+              optimized for performance.
             </p>
           </div>
 
@@ -34,8 +29,8 @@ const AboutSection = () => {
             <div className="relative h-80 lg:h-[480px] rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-700">
               <div className="relative w-full h-full rounded-3xl overflow-hidden">
                 <img
-                  src="/BuildingtheFrameworkThat HoldsYourVision.jpeg"
-                  alt="Structural Engineering"
+                  src="/SpecialtyAbout.jpg"
+                  alt="Geotechnical Engineering"
                   className="w-full h-full object-cover"
                 />
               </div>

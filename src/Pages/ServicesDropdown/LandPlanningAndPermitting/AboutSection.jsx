@@ -11,21 +11,25 @@ const AboutSection = () => {
           {/* Content */}
           <div>
             <span className="block mb-4 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-              Building the Framework That Holds Your Vision
+              Turning Land Potential into Approved, Buildable Projects
             </span>
 
             <p className="text-lg sm:text-xl text-gray-700 leading-relaxed mb-4">
-              We provide professional structural engineering services for
-              buildings, transportation infrastructure, and facilities. Our
-              engineers deliver practical and reliable structural solutions that
-              support safe construction, long-term performance, and regulatory
-              compliance.
+              We provide comprehensive land planning and permitting services
+              that support successful project delivery from concept through
+              approval. Our team combines technical expertise, regulatory
+              knowledge, and disciplined project management to streamline the
+              approval process, reduce risk, and keep developments moving
+              forward efficiently.
             </p>
 
             <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
-              We work collaboratively with owners, architects, civil engineers,
-              and contractors to support projects through planning, design, and
-              construction phases.
+              We partner with owners and developers, mobilizing our architects
+              and engineers to deliver practical, compliant, and constructible
+              solutions for projects of all sizes and complexities. We serve
+              projects ranging from single-lot residential developments to
+              large, multi-phase commercial developments—no matter the scale,
+              our commitment to quality and performance remains the same.
             </p>
           </div>
 
@@ -34,8 +38,8 @@ const AboutSection = () => {
             <div className="relative h-80 lg:h-[480px] rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-700">
               <div className="relative w-full h-full rounded-3xl overflow-hidden">
                 <img
-                  src="/BuildingtheFrameworkThat HoldsYourVision.jpeg"
-                  alt="Structural Engineering"
+                  src="/"
+                  alt="Land Planning And Permitting Engineering"
                   className="w-full h-full object-cover"
                 />
               </div>
