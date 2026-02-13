@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
 
@@ -10,8 +12,8 @@ const ProjectsSection = () => {
       try {
         const projectPromises = [17, 23, 28].map((id) =>
           fetch(`https://api.ssnbuilders.com/api/projects/${id}/`).then((res) =>
-            res.json()
-          )
+            res.json(),
+          ),
         );
 
         const projectData = await Promise.all(projectPromises);
@@ -27,8 +29,8 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full py-8 sm:py-6 px-4 sm:px-8 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative w-full py-8 sm:py-10 lg:py-16 px-4 sm:px-6 lg:px-12">
+      <div className="max-w-[90rem] mx-auto">
         <div>
           <span className="block mb-6 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair text-center">
             View Related Projects

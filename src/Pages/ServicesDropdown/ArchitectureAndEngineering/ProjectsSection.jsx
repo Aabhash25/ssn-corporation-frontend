@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { MapPin } from "lucide-react";
 
@@ -8,10 +10,11 @@ const ProjectsSection = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const projectPromises = [4, 14, 8].map((id) =>
+        // Replace IDs with the projects you want to fetch
+        const projectPromises = [4, 14, 6].map((id) =>
           fetch(`https://api.ssnbuilders.com/api/projects/${id}/`).then((res) =>
-            res.json()
-          )
+            res.json(),
+          ),
         );
 
         const projectData = await Promise.all(projectPromises);
@@ -27,13 +30,11 @@ const ProjectsSection = () => {
   }, []);
 
   return (
-    <section className="relative w-full py-8 sm:py-6 px-4 sm:px-8 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div>
-          <span className="block mb-6 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair text-center">
-            View Related Projects
-          </span>
-        </div>
+    <section className="relative w-full py-16 px-4 sm:px-6 lg:px-12 bg-white">
+      <div className="max-w-[90rem] mx-auto text-center">
+        <span className="block mb-8 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
+          View Related Projects
+        </span>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsLoading
@@ -58,7 +59,6 @@ const ProjectsSection = () => {
                   }
                   className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 hover:-translate-y-2 cursor-pointer"
                 >
-                  {/* Project Image */}
                   {project.images && project.images.length > 0 && (
                     <div className="relative h-48 overflow-hidden">
                       <img

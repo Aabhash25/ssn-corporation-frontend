@@ -21,15 +21,15 @@ const ServicesSection = ({ servicesData }) => {
           </div>
         </div>
 
-        <div className="p-6">
-          <p className="text-gray-600 text-sm leading-snug mb-4">
+        <div className="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
             {service.description}
           </p>
           {service.details && (
-            <ul className="text-gray-600 text-sm leading-relaxed space-y-1">
+            <ul className="text-gray-700 text-base md:text-lg leading-relaxed space-y-2 list-inside">
               {service.details.map((detail, index) => (
                 <li key={index} className="flex items-start">
-                  <span className="text-yellow-500 mr-2">•</span>
+                  <span className="text-yellow-500 mr-3 mt-1">•</span>
                   <span>{detail}</span>
                 </li>
               ))}

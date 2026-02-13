@@ -16,15 +16,28 @@ function Career() {
   const [searchTerm, setSearchTerm] = useState("");
   const [buttonLoading, setButtonLoading] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
+  // Add this helper at the top of Career.jsx
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "N/A";
+    const date = new Date(dateStr);
+    if (isNaN(date)) return "N/A";
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
 
+  // Inside your component, replace job card rendering with this:
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}jobs/`)
       .then((res) => res.json())
       .then((data) => {
-        setJobs(data);
-        setFilteredJobs(data);
+        const jobsArray = data.results || data; // for DRF pagination
+        setJobs(jobsArray);
+        setFilteredJobs(jobsArray);
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -34,7 +47,7 @@ function Career() {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);
     const filtered = jobs.filter((job) =>
-      job.title.toLowerCase().includes(term)
+      job.title.toLowerCase().includes(term),
     );
     setFilteredJobs(filtered);
   };
@@ -52,8 +65,17 @@ function Career() {
     navigate(`/jobs/${jobId}`);
   };
 
-  const currentOpenings = filteredJobs.filter((job) => !job.is_expired);
-  const pastOpenings = filteredJobs.filter((job) => job.is_expired);
+  const today = new Date();
+
+  const currentOpenings = filteredJobs.filter((job) => {
+    const deadline = new Date(job.deadline);
+    return !deadline || deadline >= today; // if no deadline or deadline in future
+  });
+
+  const pastOpenings = filteredJobs.filter((job) => {
+    const deadline = new Date(job.deadline);
+    return deadline && deadline < today; // deadline passed
+  });
 
   const benefits = [
     {
@@ -143,12 +165,21 @@ function Career() {
                   <h3 className="text-xl font-playfair font-bold mb-2 text-gray-900 flex items-center gap-2">
                     <FaBriefcase /> {job.title}
                   </h3>
-                  <p className="text-gray-500 mb-2 text-sm">
-                    Posted: {job.posted_date}
+
+                  <p className="text-gray-500 mb-1 text-sm">
+                    <strong>Posted:</strong> {formatDate(job.posted_date)}
                   </p>
-                  <p className="text-gray-700 text-sm line-clamp-4 font-roboto">
-                    {job.description}
-                  </p>
+
+                  {job.deadline && (
+                    <p className="text-gray-500 mb-2 text-sm">
+                      <strong>Deadline:</strong> {formatDate(job.deadline)}
+                    </p>
+                  )}
+
+                  <div
+                    className="text-gray-700 text-sm line-clamp-4 font-roboto"
+                    dangerouslySetInnerHTML={{ __html: job.description }}
+                  />
                 </div>
 
                 <button
@@ -217,9 +248,10 @@ function Career() {
                   <p className="text-gray-500 mb-2 text-sm">
                     Closed: {job.deadline}
                   </p>
-                  <p className="text-gray-600 text-sm line-clamp-4 font-roboto">
-                    {job.description}
-                  </p>
+                  <div
+                    className="text-gray-600 text-sm line-clamp-4 font-roboto"
+                    dangerouslySetInnerHTML={{ __html: job.description }}
+                  />
                 </div>
 
                 <button

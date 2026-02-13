@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { FaCalendarAlt, FaMoneyBillWave, FaUsers } from "react-icons/fa";
 
 function JobDetail() {
   const { id } = useParams();
@@ -18,12 +17,9 @@ function JobDetail() {
     coverLetter: "",
   });
 
-  const [modalMessage, setModalMessage] = useState(""); // modal message
-  const [modalType, setModalType] = useState("success"); // success or error
-  const [showModal, setShowModal] = useState(false); // modal visibility
-
-  const interviewNotice =
-    "This position requires two levels of interview (Initial Scanning and Technical Interview). Selected candidates will be called for interview.";
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalType, setModalType] = useState("success");
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`)
@@ -49,12 +45,11 @@ function JobDetail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!job || job.is_expired) {
-      showModalMessage("Applications are closed for this job.", "error");
+    if (!job) {
+      showModalMessage("Job not found.", "error");
       return;
     }
 
-    // Check required fields
     if (
       !formData.name ||
       !formData.email ||
@@ -72,7 +67,6 @@ function JobDetail() {
 
     setSubmitting(true);
 
-    // Prepare FormData
     const fd = new FormData();
     fd.append("job", job.id);
     fd.append("name", formData.name);
@@ -81,12 +75,6 @@ function JobDetail() {
     fd.append("address", formData.address);
     fd.append("cover_letter", formData.coverLetter || "Applied via website");
     fd.append("resume", formData.resume);
-
-    // Debug: log FormData entries
-    console.log("Submitting application:");
-    for (let pair of fd.entries()) {
-      console.log(pair[0], pair[1]);
-    }
 
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}applications/`, {
@@ -99,10 +87,8 @@ function JobDetail() {
       if (res.ok) {
         showModalMessage(
           `Application submitted successfully for ${job.title}!`,
-          "success"
+          "success",
         );
-
-        // Reset form
         setFormData({
           name: "",
           email: "",
@@ -112,31 +98,13 @@ function JobDetail() {
           coverLetter: "",
         });
       } else {
-        // Display field-specific errors in the modal
-        let errorMsg = "";
-
-        if (data) {
-          if (data.message) {
-            errorMsg = data.message;
-          } else {
-            // Join all field errors
-            errorMsg = Object.entries(data)
-              .map(([field, errors]) => `${field}: ${errors.join(", ")}`)
-              .join("\n");
-          }
-        } else {
-          errorMsg = "Failed to submit application. Please try again.";
-        }
-
-        console.error("Backend validation errors:", data);
+        let errorMsg =
+          data?.message || "Failed to submit application. Please try again.";
         showModalMessage(errorMsg, "error");
       }
     } catch (err) {
-      console.error("Network or server error:", err);
-      showModalMessage(
-        "Failed to submit application. Please try again.",
-        "error"
-      );
+      console.error(err);
+      showModalMessage("Network error. Please try again.", "error");
     } finally {
       setSubmitting(false);
     }
@@ -148,206 +116,195 @@ function JobDetail() {
     setShowModal(true);
   };
 
-  const expired = job?.is_expired;
+  // Function to render bullet points for plain text
+  const renderBullets = (text) => {
+    if (!text) return null;
+
+    const lines = text
+      .split("\n")
+      .map((line) => line.trim())
+      .filter((line) => line);
+
+    return (
+      <ul className="list-disc pl-6 space-y-1">
+        {lines.map((line, idx) => (
+          <li key={idx}>{line}</li>
+        ))}
+      </ul>
+    );
+  };
 
   return (
     <div className="relative min-h-screen">
-      {/* Full-page loader overlay */}
       {loading && (
         <div className="fixed inset-0 z-50 flex flex-col justify-center items-center bg-white">
-          <svg
-            className="animate-spin h-12 w-12 text-orange-500"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            ></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
-            ></path>
-          </svg>
-          <span className="mt-3 text-gray-500 text-lg">
-            Loading job details...
-          </span>
+          <span className="text-gray-500 text-lg">Loading job details...</span>
         </div>
       )}
 
-      {/* Job Details & Form */}
-      <div
-        className={`max-w-7xl mx-auto px-6 py-10 pt-40 grid lg:grid-cols-2 gap-12 transition-opacity duration-500 ${
-          loading ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        {/* Left column: Job Details */}
-        {/* Left column: Job Details */}
-        <div className="space-y-6">
-          <div className="bg-white p-8 rounded-2xl shadow-md">
-            <h2 className="text-3xl font-bold mb-2">{job?.title}</h2>
-            <div className="flex flex-wrap items-center text-gray-500 mb-4 gap-4">
-              <div className="flex items-center gap-1">
-                <FaCalendarAlt /> <span>{job?.posted_date}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <FaMoneyBillWave /> <span>{job?.salary}</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <FaUsers /> <span>Vacancies: {job?.vacancies}</span>
-              </div>
+      {!loading && job && (
+        <div className="max-w-7xl mx-auto px-6 py-10 pt-40 grid lg:grid-cols-2 gap-12">
+          {/* Left column: Job Details */}
+          <div className="space-y-6">
+            <div className="bg-white p-8 rounded-2xl shadow-md">
+              <h2 className="text-3xl font-bold mb-4">{job.title}</h2>
+
+              {job.company_description && (
+                <>
+                  <h3 className="font-semibold text-lg">Company Description</h3>
+                  <p className="text-gray-700">{job.company_description}</p>
+                </>
+              )}
+
+              {job.role_description && (
+                <>
+                  <h3 className="font-semibold text-lg mt-4">
+                    Role Description
+                  </h3>
+                  <p className="text-gray-700">{job.role_description}</p>
+                </>
+              )}
+
+              {job.key_responsibilities && (
+                <>
+                  <h3 className="font-semibold text-lg mt-4">
+                    Key Responsibilities
+                  </h3>
+                  {renderBullets(job.key_responsibilities)}
+                </>
+              )}
+
+              {job.requirements && (
+                <>
+                  <h3 className="font-semibold text-lg mt-4">Requirements</h3>
+                  {renderBullets(job.requirements)}
+                </>
+              )}
+
+              {job.qualification_experience && (
+                <>
+                  <h3 className="font-semibold text-lg mt-4">
+                    Qualification & Experience
+                  </h3>
+                  {renderBullets(job.qualification_experience)}
+                </>
+              )}
+
+              {job.physical_requirements && (
+                <>
+                  <h3 className="font-semibold text-lg mt-4">
+                    Physical Requirements
+                  </h3>
+                  {renderBullets(job.physical_requirements)}
+                </>
+              )}
+
+              {job.perks_benefits && (
+                <>
+                  <h3 className="font-semibold text-lg mt-4">
+                    Perks & Benefits
+                  </h3>
+                  {renderBullets(job.perks_benefits)}
+                </>
+              )}
+
+              {job.equal_opportunity_employer && (
+                <>
+                  <h3 className="font-semibold text-lg mt-4">
+                    Equal Opportunity Employer
+                  </h3>
+                  <p className="text-gray-700">
+                    {job.equal_opportunity_employer}
+                  </p>
+                </>
+              )}
+
+              <Link
+                to="/career"
+                className="mt-6 inline-block bg-gray-200 hover:bg-gray-300 py-2 px-5 rounded-lg font-medium transition"
+              >
+                Back to Jobs
+              </Link>
             </div>
-            {expired && (
-              <p className="text-red-500 font-semibold mb-2">
-                🚫 This job posting has expired
-              </p>
-            )}
-            <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
-              Company Description
-            </h3>
-            <p className="text-gray-700">{job?.description}</p>
+          </div>
 
-            {/* Role Description as list */}
-            <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
-              Role Description
-            </h3>
-            <ul className="list-disc ml-6 text-gray-700">
-              {job?.key_responsibilities.map((resp, idx) => (
-                <li key={idx}>{resp}</li>
-              ))}
-            </ul>
-
-            {/* Qualification / Requirements */}
-            <h3 className="text-xl font-semibold mt-4 mb-2 text-gray-800">
-              Qualification
-            </h3>
-            <ul className="list-disc ml-6 text-gray-700">
-              {job?.requirements.map((req, idx) => (
-                <li key={idx}>{req}</li>
-              ))}
-            </ul>
-
-            <Link
-              to="/career"
-              className="mt-6 inline-block bg-gray-200 hover:bg-gray-300 py-2 px-5 rounded-lg font-medium transition"
+          {/* Right column: Application Form */}
+          <div className="space-y-4">
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-4 bg-white p-8 rounded-2xl shadow-md"
             >
-              Back to Jobs
-            </Link>
+              <h3 className="text-2xl font-bold mb-4 text-gray-900">
+                Apply for this Job
+              </h3>
+
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              />
+              <input
+                type="text"
+                name="phone"
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={handleInputChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              />
+              <input
+                type="text"
+                name="address"
+                placeholder="Address"
+                value={formData.address}
+                onChange={handleInputChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
+              />
+              <input
+                type="file"
+                name="resume"
+                accept=".pdf,.doc,.docx"
+                onChange={handleInputChange}
+                required
+                className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              />
+              <textarea
+                name="coverLetter"
+                placeholder="Cover Letter"
+                value={formData.coverLetter}
+                onChange={handleInputChange}
+                rows="5"
+                className="w-full border border-gray-300 rounded-lg px-4 py-2"
+              ></textarea>
+
+              <button
+                type="submit"
+                disabled={submitting}
+                className={`w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium transition ${
+                  submitting ? "opacity-70 cursor-not-allowed" : ""
+                }`}
+              >
+                {submitting ? "Submitting..." : "Submit Application"}
+              </button>
+            </form>
           </div>
         </div>
+      )}
 
-        {/* Right column: Application Form */}
-        <div className="space-y-4">
-          <form
-            onSubmit={handleSubmit}
-            className={`space-y-4 bg-white p-8 rounded-2xl shadow-md ${
-              expired ? "opacity-50 pointer-events-none" : ""
-            }`}
-          >
-            <h3 className="text-2xl font-bold mb-2 text-gray-900">
-              Apply for this Job
-            </h3>
-
-            {/* Interview Notice */}
-            <p className="text-gray-700 mb-4 bg-yellow-100 p-3 rounded-lg border-l-4 border-yellow-400">
-              {interviewNotice}
-            </p>
-
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
-            />
-            <input
-              type="text"
-              name="phone"
-              placeholder="Phone Number"
-              value={formData.phone}
-              onChange={handleInputChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
-            />
-            <input
-              type="text"
-              name="address"
-              placeholder="Address"
-              value={formData.address}
-              onChange={handleInputChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-400 focus:outline-none"
-            />
-            <input
-              type="file"
-              name="resume"
-              accept=".pdf,.doc,.docx"
-              onChange={handleInputChange}
-              required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
-            />
-            <textarea
-              name="coverLetter"
-              placeholder="Cover Letter"
-              value={formData.coverLetter}
-              onChange={handleInputChange}
-              rows="5"
-              className="w-full border border-gray-300 rounded-lg px-4 py-2"
-            ></textarea>
-
-            <button
-              type="submit"
-              disabled={submitting}
-              className={`w-full flex justify-center items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-lg font-medium transition ${
-                submitting ? "opacity-70 cursor-not-allowed" : ""
-              }`}
-            >
-              {submitting && (
-                <svg
-                  className="animate-spin h-5 w-5 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 00-8 8z"
-                  ></path>
-                </svg>
-              )}
-              {submitting ? "Submitting..." : "Submit Application"}
-            </button>
-          </form>
-        </div>
-      </div>
-
-      {/* Modal */}
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">

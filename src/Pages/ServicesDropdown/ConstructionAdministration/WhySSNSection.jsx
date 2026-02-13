@@ -23,7 +23,8 @@ const WhySSNSection = () => {
                     Proven Expertise
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Our experienced professionals bring deep technical knowledge and real-world construction insight to every project.
+                    Our experienced professionals bring deep technical knowledge
+                    and real-world construction insight to every project.
                   </p>
                 </div>
               </div>
@@ -37,7 +38,8 @@ const WhySSNSection = () => {
                     Client-Focused Approach
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    We prioritize clear communication, responsiveness, and solutions tailored to our clients' goals.
+                    We prioritize clear communication, responsiveness, and
+                    solutions tailored to our clients' goals.
                   </p>
                 </div>
               </div>
@@ -54,7 +56,8 @@ const WhySSNSection = () => {
                     Commitment to Quality
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    From planning through closeout, we maintain rigorous quality standards to protect the integrity of your investment.
+                    From planning through closeout, we maintain rigorous quality
+                    standards to protect the integrity of your investment.
                   </p>
                 </div>
               </div>
@@ -68,7 +71,8 @@ const WhySSNSection = () => {
                     End-to-End Support
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    With comprehensive services under one roof, we streamline project delivery and add value at every stage.
+                    With comprehensive services under one roof, we streamline
+                    project delivery and add value at every stage.
                   </p>
                 </div>
               </div>

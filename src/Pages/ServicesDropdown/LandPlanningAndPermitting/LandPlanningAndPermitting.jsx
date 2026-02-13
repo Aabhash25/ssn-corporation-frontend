@@ -102,7 +102,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 2,
       title: "Zoning & Entitlements Support",
-      image: "/ai-placeholder/bridge-tank-tower.jpg",
+      image: "/ZoningEntitlementsSupport.jpg",
       description:
         "Strategic support for zoning changes, variances, and special permits with comprehensive technical documentation.",
       details: [
@@ -116,7 +116,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 3,
       title: "Conceptual Site Planning",
-      image: "/ai-placeholder/roadway-transportation.jpg",
+      image: "/ConceptualSitePlanning.jpeg",
       description:
         "Development of conceptual site layouts and planning strategies that optimize land use and meet project objectives.",
       details: [

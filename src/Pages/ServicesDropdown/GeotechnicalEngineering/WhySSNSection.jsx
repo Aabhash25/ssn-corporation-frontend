@@ -1,14 +1,14 @@
+"use client";
+
 const WhySSNSection = () => {
   return (
-    <section className="relative w-full pt-6 sm:pt-8 md:pt-10 lg:pt-12 pb-12 sm:pb-16 md:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-6xl mx-auto">
+    <section className="relative w-full pt-6 sm:pt-8 md:pt-10 lg:pt-12 pb-12 sm:pb-16 md:pb-20 lg:pb-24 px-4 sm:px-6 lg:px-12 bg-white">
+      <div className="max-w-[90rem] mx-auto">
         {/* Heading */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
           <span className="block text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
             Why SSN Corporation?
           </span>
-          {/* Optional divider */}
-          {/* <div className="w-16 h-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mx-auto mt-4"></div> */}
         </div>
 
         {/* Content Grid */}

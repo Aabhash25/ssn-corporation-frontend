@@ -22,7 +22,7 @@ const ServicesSection = ({ servicesData }) => {
         </div>
 
         <div className="p-6">
-          <p className="text-gray-600 text-sm leading-snug mb-0">
+          <p className="text-gray-600 text-base leading-relaxed mb-0">
             {service.description}
           </p>
         </div>

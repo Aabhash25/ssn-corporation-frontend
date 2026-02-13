@@ -3,9 +3,6 @@ import { motion } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { PortfolioMapView } from "./MapComponents";
 
-// ============================================
-// GLOBAL CACHE (persists across component remounts)
-// ============================================
 const globalCache = {
   projects: new Map(),
   filterOptions: null,
@@ -43,10 +40,6 @@ const PortfolioLoader = () => {
     </div>
   );
 };
-
-// ============================================
-// PROJECT CARD COMPONENT
-// ============================================
 
 const ProjectCard = React.memo(({ project, index, onClick }) => {
   return (
@@ -97,10 +90,6 @@ const ProjectCard = React.memo(({ project, index, onClick }) => {
     </motion.div>
   );
 });
-
-// ============================================
-// PAGINATION COMPONENT
-// ============================================
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const getPageNumbers = () => {
@@ -192,10 +181,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   );
 };
 
-// ============================================
-// MAIN COMPONENT
-// ============================================
-
 const MasonryPortfolio = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -204,7 +189,7 @@ const MasonryPortfolio = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(
-    globalCache.filters.currentPage
+    globalCache.filters.currentPage,
   );
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
@@ -215,16 +200,16 @@ const MasonryPortfolio = () => {
   const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
 
   const [selectedCategory, setSelectedCategory] = useState(
-    globalCache.filters.selectedCategory
+    globalCache.filters.selectedCategory,
   );
   const [selectedStatus, setSelectedStatus] = useState(
-    globalCache.filters.selectedStatus
+    globalCache.filters.selectedStatus,
   );
   const [selectedYear, setSelectedYear] = useState(
-    globalCache.filters.selectedYear
+    globalCache.filters.selectedYear,
   );
   const [searchKeyword, setSearchKeyword] = useState(
-    globalCache.filters.searchKeyword
+    globalCache.filters.searchKeyword,
   );
 
   const [allCategories, setAllCategories] = useState([]);
@@ -270,7 +255,6 @@ const MasonryPortfolio = () => {
   // Fetch filter options once
   useEffect(() => {
     const fetchFilterOptions = async () => {
-      // Check if we already have filter options cached
       if (globalCache.filterOptions) {
         setAllCategories(globalCache.filterOptions.categories);
         setAllStatuses(globalCache.filterOptions.statuses);
@@ -281,34 +265,13 @@ const MasonryPortfolio = () => {
       const apiUrl = import.meta.env.VITE_API_URL || "";
 
       try {
-        let allProjects = [];
-        let page = 1;
-        let hasMore = true;
+        const response = await fetch(`${apiUrl}projects/filter_options/`);
+        const data = await response.json();
 
-        while (hasMore) {
-          const response = await fetch(`${apiUrl}projects/?page=${page}`);
-          const data = await response.json();
-          allProjects = [...allProjects, ...(data.results || [])];
-          hasMore = data.next !== null;
-          page++;
-        }
-
-        const categories = [
-          ...new Set(allProjects.map((p) => p.category).filter(Boolean)),
-        ];
-        const statuses = [
-          ...new Set(allProjects.map((p) => p.status).filter(Boolean)),
-        ];
-        const years = [
-          ...new Set(allProjects.map((p) => p.year).filter(Boolean)),
-        ].sort((a, b) => b - a);
-
-        // Cache filter options globally
-        globalCache.filterOptions = { categories, statuses, years };
-
-        setAllCategories(categories);
-        setAllStatuses(statuses);
-        setAllYears(years);
+        globalCache.filterOptions = data;
+        setAllCategories(data.categories);
+        setAllStatuses(data.statuses);
+        setAllYears(data.years);
       } catch (err) {
         console.error("Error fetching filter options:", err);
       }
@@ -417,7 +380,7 @@ const MasonryPortfolio = () => {
           .toLowerCase()
           .includes(searchKeyword.toLowerCase()) ||
         keywordList.some((k) =>
-          k.toLowerCase().includes(searchKeyword.toLowerCase())
+          k.toLowerCase().includes(searchKeyword.toLowerCase()),
         );
 
       return matchesCategory && matchesStatus && matchesYear && matchesKeyword;
@@ -428,7 +391,7 @@ const MasonryPortfolio = () => {
     (p) => {
       navigate(`/project-description/${p.id}`);
     },
-    [navigate]
+    [navigate],
   );
 
   const handleMarkerHover = useCallback((p, pos) => {
@@ -445,7 +408,7 @@ const MasonryPortfolio = () => {
       setZoomProject(p);
       setTimeout(() => navigate(`/project-description/${p.id}`), 1800);
     },
-    [navigate]
+    [navigate],
   );
 
   const handleReset = useCallback(() => {

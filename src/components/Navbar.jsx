@@ -677,12 +677,251 @@ const ModernNavbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu - Simplified version, you can apply similar patterns */}
+      {/* Mobile Menu */}
       <div
         className={`fixed top-0 right-0 h-full w-11/12 max-w-md bg-gray-900/95 backdrop-blur-md shadow-xl z-50 transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "translate-x-full"} rounded-l-3xl`}
       >
-        {/* Mobile menu content - Apply similar refactoring patterns here */}
-        {/* I'll leave the mobile menu as-is for brevity, but you can apply the same patterns */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className="absolute top-6 right-6 text-white hover:text-yellow-400 p-2"
+        >
+          <svg
+            className="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            strokeWidth={2.5}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <div className="h-full overflow-y-auto px-6 py-8 flex flex-col justify-start space-y-6">
+          {/* Contact Info */}
+          <div className="flex flex-col space-y-2 text-white">
+            <a
+              href="mailto:contact@ssncorporation.com"
+              className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors"
+            >
+              <FaEnvelope /> contact@ssncorporation.com
+            </a>
+            <span className="flex items-center gap-2 text-white">
+              <FaPhoneAlt /> (919) 703-0222
+            </span>
+          </div>
+
+          {/* Main Navigation */}
+          <div className="flex flex-col space-y-4">
+            <Link
+              to="/about"
+              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
+              onClick={closeAllMenus}
+            >
+              About Us
+            </Link>
+            <Link
+              to="/portfolio"
+              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
+              onClick={closeAllMenus}
+            >
+              Portfolio
+            </Link>
+
+            {/* Services Dropdown */}
+            <div className="flex flex-col">
+              <button
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                className="flex items-center justify-between w-full py-2 text-lg md:text-xl text-white hover:text-yellow-400 font-semibold gap-2"
+              >
+                Services
+                <svg
+                  className={`w-5 h-5 transition-transform duration-300 ${isServicesOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {isServicesOpen && (
+                <div className="flex flex-col mt-2 space-y-4 pl-4 border-l-2 border-yellow-500">
+                  {/* Engineering Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald">
+                      Engineering Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      {ENGINEERING_SERVICES.map((service, idx) => (
+                        <li key={idx}>
+                          <Link
+                            to={service.to}
+                            className="hover:text-yellow-400 block"
+                            onClick={closeAllMenus}
+                          >
+                            {service.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Specialty Engineering Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald">
+                      Specialty Engineering Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      {SPECIALTY_SERVICES.map((service, idx) => (
+                        <li key={idx}>
+                          <Link
+                            to={`/specialty-services#${service.slug}`}
+                            className="hover:text-yellow-400 block"
+                            onClick={closeAllMenus}
+                          >
+                            {service.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Material Testing Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald">
+                      Material Testing Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      {MATERIAL_TESTING_SERVICES.map((service, idx) => (
+                        <li key={idx}>
+                          <Link
+                            to={`/material-testing#${service.slug}`}
+                            className="hover:text-yellow-400 block"
+                            onClick={closeAllMenus}
+                          >
+                            {service.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Construction Services */}
+                  <div className="flex flex-col space-y-2">
+                    <h4 className="text-yellow-500 font-bold text-lg font-oswald">
+                      Construction Services
+                    </h4>
+                    <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
+                      {CONSTRUCTION_SERVICES.map((service, idx) => (
+                        <li key={idx}>
+                          <Link
+                            to={service.to}
+                            className="hover:text-yellow-400 block"
+                            onClick={closeAllMenus}
+                          >
+                            {service.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Research & Development Dropdown */}
+            <div className="flex flex-col">
+              <button
+                onClick={() => setIsRnDOpen(!isRnDOpen)}
+                className="flex items-center justify-between w-full py-2 text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
+              >
+                Research & Development
+                <svg
+                  className={`w-5 h-5 transition-transform duration-300 ${isRnDOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </button>
+
+              {isRnDOpen && (
+                <div className="flex flex-col mt-2 space-y-3 pl-4 border-l-2 border-yellow-500">
+                  {RND_PRODUCTS.map((product, idx) => (
+                    <Link
+                      key={idx}
+                      to={product.to}
+                      className="text-white hover:text-yellow-400 text-base"
+                      onClick={closeAllMenus}
+                    >
+                      {product.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              to="/career"
+              className="text-lg md:text-xl text-white hover:text-yellow-400 font-semibold"
+              onClick={closeAllMenus}
+            >
+              Careers
+            </Link>
+            <Link
+              to="/contact"
+              className="text-lg md:text-xl text-yellow-500 font-bold hover:text-yellow-400"
+              onClick={closeAllMenus}
+            >
+              Contact Us
+            </Link>
+          </div>
+
+          {/* Quick Links */}
+          <div className="flex flex-col space-y-2 border-t border-gray-700 pt-4">
+            <p className="text-sm text-gray-400 font-semibold">Quick Links</p>
+            {TOP_LINKS.map((link) => (
+              <Link
+                key={link.name}
+                to={link.to}
+                className="text-sm text-white hover:text-yellow-400"
+                onClick={closeAllMenus}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Social Icons */}
+          <div className="flex space-x-6 mt-auto text-xl">
+            {SOCIAL_LINKS.map((social, idx) => (
+              <a
+                key={idx}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-yellow-400"
+              >
+                <social.icon />
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );

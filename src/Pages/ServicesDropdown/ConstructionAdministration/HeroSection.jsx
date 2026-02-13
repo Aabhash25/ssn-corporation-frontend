@@ -2,7 +2,7 @@ const HeroSection = () => {
   return (
     <section className="relative w-full h-72 sm:h-80 flex items-center justify-center overflow-hidden bg-amber-50">
       <img
-        src="/"
+        src="/ConstructionAdminHero.png"
         alt="Construction Administration Hero"
         className="absolute inset-0 w-full h-full object-cover"
       />

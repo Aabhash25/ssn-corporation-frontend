@@ -138,7 +138,7 @@ const BuildingServiceDesign = () => {
     {
       id: 6,
       title: "Electrical Power & Lighting Design",
-      image: "/ai-placeholder/retaining-wall.jpg",
+      image: "/IntegratedSystemCoordination.jpeg",
       description:
         "We provide comprehensive electrical system planning, including service entrance, distribution, lighting design, and power quality solutions. Our designs prioritize efficiency, reliability, and long-term adaptability.",
       details: [

@@ -37,20 +37,23 @@ const GeotechnicalStudiesSection = ({ geotechnicalStudiesData }) => {
         </div>
 
         {/* Description and Details */}
-        <div className="p-6">
-          <p className="text-gray-600 text-sm leading-relaxed mb-4">
+        <div className="p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+          {/* Description */}
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed mb-4">
             {service.description}
           </p>
-          <div className="space-y-2 mb-4">
+
+          {/* Details */}
+          <div className="space-y-3 mb-4">
             {(isExpanded ? service.details : service.details.slice(0, 4)).map(
               (detail, idx) => (
-                <div key={idx} className="flex items-start space-x-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#242687] mt-2 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 leading-relaxed">
+                <div key={idx} className="flex items-start space-x-3">
+                  <div className="w-2 h-2 rounded-full bg-[#242687] mt-2 flex-shrink-0" />
+                  <span className="text-gray-700 text-base md:text-lg leading-relaxed">
                     {detail}
                   </span>
                 </div>
-              )
+              ),
             )}
           </div>
 
@@ -58,7 +61,7 @@ const GeotechnicalStudiesSection = ({ geotechnicalStudiesData }) => {
           {service.details.length > 4 && (
             <button
               onClick={() => toggleCardExpansion(service.id)}
-              className="text-[#242687] hover:text-blue-700 text-sm font-medium transition-colors duration-200"
+              className="text-[#242687] hover:text-blue-600 text-sm font-medium transition-colors duration-200"
             >
               {isExpanded
                 ? "See Less ↑"
