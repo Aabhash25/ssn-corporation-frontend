@@ -238,10 +238,9 @@ const ModernNavbar = () => {
 
   const getDropdownTop = () => {
     if (!isDesktop) return "96px";
-    if (isLandingPage && !scrolled) {
-      return isXlScreen ? "152px" : "136px";
-    }
-    return isXlScreen ? "96px" : "80px";
+    const topBarHeight = isXlScreen ? 56 : 48; // h-14 : h-12
+    const navHeight = isXlScreen ? 96 : 80; // h-24 : h-20
+    return `${topBarHeight + navHeight}px`;
   };
 
   // Render Services Dropdown Content
