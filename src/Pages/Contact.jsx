@@ -17,8 +17,8 @@ const Contact = () => {
   const [country, setCountry] = useState("");
   const [zipCode, setZipCode] = useState("");
 
-  const [loading, setLoading] = useState(false); // NEW
-  const [showSuccessModal, setShowSuccessModal] = useState(false); // NEW
+  const [loading, setLoading] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,7 +45,6 @@ const Contact = () => {
       if (res.ok) {
         setShowSuccessModal(true);
 
-        // Reset form
         setName("");
         setEmail("");
         setSubject("");
@@ -55,7 +54,6 @@ const Contact = () => {
         setCountry("");
         setZipCode("");
 
-        // Auto close modal
         setTimeout(() => setShowSuccessModal(false), 3500);
       } else {
         alert("Failed to send message.");
@@ -83,7 +81,7 @@ const Contact = () => {
     },
     {
       title: "Georgia Office",
-      location: "1982 Side Branch Way,\n Lawrenceville, GA 30045",
+      location: "6500 McDonough Dr, Ste E-04\nNorcross, GA 30093",
       phone: "(919) 703-0222",
       email: "contact@ssncorporation.com",
     },
@@ -96,7 +94,6 @@ const Contact = () => {
 
   return (
     <>
-      {/* SUCCESS MODAL */}
       {showSuccessModal && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-sm text-center">
@@ -118,7 +115,6 @@ const Contact = () => {
       )}
 
       <div className="max-w-7xl mx-auto px-6 sm:px-12 py-18 pt-42">
-        {/* Hero Section */}
         <motion.div
           className="text-center mb-12"
           initial="hidden"
@@ -136,9 +132,7 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        {/* Form + Offices */}
         <div className="grid md:grid-cols-2 gap-10">
-          {/* Form */}
           <motion.div
             className="bg-white rounded-3xl shadow-xl p-8 sm:p-12"
             initial="hidden"
@@ -150,7 +144,6 @@ const Contact = () => {
               Send Us a Message
             </h2>
 
-            {/* FORM START */}
             <form className="space-y-6" onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -224,7 +217,6 @@ const Contact = () => {
                 required
               />
 
-              {/* BUTTON WITH LOADING SPINNER */}
               <button
                 type="submit"
                 disabled={loading}
@@ -239,10 +231,8 @@ const Contact = () => {
                 )}
               </button>
             </form>
-            {/* FORM END */}
           </motion.div>
 
-          {/* Offices */}
           <motion.div
             className="space-y-6"
             initial="hidden"

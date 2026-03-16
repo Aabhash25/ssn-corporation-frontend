@@ -159,7 +159,76 @@ function JobDetail() {
     }
   };
 
-  // Tab content map
+  // All content as a single vertical stack (used on mobile)
+  const MobileContent = () =>
+    job ? (
+      <>
+        {job.company_description && (
+          <SectionBlock title="About the Company">
+            <p className="text-gray-700 text-sm leading-relaxed">
+              {job.company_description}
+            </p>
+          </SectionBlock>
+        )}
+        {job.role_description && (
+          <SectionBlock title="Role Overview">
+            <p className="text-gray-700 text-sm leading-relaxed">
+              {job.role_description}
+            </p>
+          </SectionBlock>
+        )}
+        {job.deadline && (
+          <SectionBlock title="Application Deadline">
+            <p className="text-gray-700 text-sm">
+              {new Date(job.deadline).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+          </SectionBlock>
+        )}
+        {job.key_responsibilities && (
+          <SectionBlock title="Key Responsibilities">
+            {renderBullets(job.key_responsibilities)}
+          </SectionBlock>
+        )}
+        {job.physical_requirements && (
+          <SectionBlock title="Physical Requirements">
+            {renderBullets(job.physical_requirements)}
+          </SectionBlock>
+        )}
+        {job.requirements && (
+          <SectionBlock title="Requirements">
+            {renderBullets(job.requirements)}
+          </SectionBlock>
+        )}
+        {job.qualification_experience && (
+          <SectionBlock title="Qualifications & Experience">
+            {renderBullets(job.qualification_experience)}
+          </SectionBlock>
+        )}
+        {job.perks_benefits && (
+          <SectionBlock title="Perks & Benefits">
+            {renderBullets(job.perks_benefits)}
+          </SectionBlock>
+        )}
+        {job.others && renderOthers(job.others) && (
+          <SectionBlock title="Additional Info">
+            {renderOthers(job.others)}
+          </SectionBlock>
+        )}
+        {job.equal_opportunity_employer && (
+          <SectionBlock title="Equal Opportunity Employer">
+            <p className="text-gray-700 text-sm leading-relaxed">
+              {job.equal_opportunity_employer}
+            </p>
+          </SectionBlock>
+        )}
+      </>
+    ) : null;
+
+  // Tab content map (desktop only)
   const tabContent = job
     ? {
         overview: (
@@ -247,14 +316,104 @@ function JobDetail() {
       }
     : {};
 
+  const ApplyForm = () => (
+    <div className="space-y-3">
+      <input
+        type="text"
+        name="name"
+        placeholder="Full Name *"
+        value={formData.name}
+        onChange={handleInputChange}
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email Address *"
+        value={formData.email}
+        onChange={handleInputChange}
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+      />
+      <input
+        type="text"
+        name="phone"
+        placeholder="Phone Number *"
+        value={formData.phone}
+        onChange={handleInputChange}
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+      />
+      <input
+        type="text"
+        name="address"
+        placeholder="Address *"
+        value={formData.address}
+        onChange={handleInputChange}
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+      />
+      <label className="block w-full border-2 border-dashed border-gray-200 rounded-xl px-4 py-4 text-center cursor-pointer hover:border-orange-300 transition group">
+        <input
+          type="file"
+          name="resume"
+          accept=".pdf,.doc,.docx"
+          onChange={handleInputChange}
+          className="hidden"
+        />
+        <div className="flex flex-col items-center gap-1">
+          <svg
+            className="w-6 h-6 text-gray-300 group-hover:text-orange-400 transition"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
+          </svg>
+          <span className="text-xs text-gray-400 group-hover:text-orange-500 transition">
+            {formData.resume
+              ? formData.resume.name
+              : "Upload Resume (PDF, DOC, DOCX) *"}
+          </span>
+        </div>
+      </label>
+      <textarea
+        name="coverLetter"
+        placeholder="Cover Letter (optional)"
+        value={formData.coverLetter}
+        onChange={handleInputChange}
+        rows={4}
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition resize-none"
+      />
+      <button
+        onClick={handleSubmit}
+        disabled={submitting}
+        className={`w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${submitting ? "opacity-70 cursor-not-allowed" : ""}`}
+      >
+        {submitting ? (
+          <>
+            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            Submitting...
+          </>
+        ) : (
+          "Submit Application"
+        )}
+      </button>
+      <p className="text-xs text-gray-400 text-center">
+        By submitting, you agree to our privacy policy.
+      </p>
+    </div>
+  );
+
   return (
-    <div className="relative min-h-screen bg-gray-50 font-roboto pt-25">
+    <div className="relative min-h-screen bg-gray-50 font-roboto pt-20">
       <style>{`
         .font-roboto { font-family: 'Roboto', sans-serif; }
         .font-playfair { font-family: 'Playfair Display', serif; }
       `}</style>
 
-      {/* Loading */}
       {loading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
           <div className="flex flex-col items-center gap-3">
@@ -268,12 +427,12 @@ function JobDetail() {
 
       {!loading && job && (
         <>
-          {/* Sticky Header Bar */}
-          <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm">
-            <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          {/* Sticky Header — desktop only */}
+          <div className="hidden lg:block fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+            <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-3">
               <Link
                 to="/career"
-                className="flex items-center gap-2 text-gray-500 hover:text-orange-500 transition text-sm font-medium"
+                className="flex items-center gap-1.5 text-gray-500 hover:text-orange-500 transition text-sm font-medium shrink-0"
               >
                 <svg
                   className="w-4 h-4"
@@ -290,23 +449,111 @@ function JobDetail() {
                 </svg>
                 Back to Jobs
               </Link>
-              <span className="text-gray-800 font-semibold text-sm truncate max-w-xs hidden sm:block font-playfair">
+              <span className="text-gray-800 font-semibold text-sm truncate font-playfair flex-1 text-center">
                 {job.title}
               </span>
-              <a
-                href="#apply-form"
-                className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-full transition"
-              >
-                Apply Now
-              </a>
+              {!isPastDeadline && (
+                <a
+                  href="#apply-form"
+                  className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-full transition shrink-0"
+                >
+                  Apply Now
+                </a>
+              )}
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className="max-w-6xl mx-auto px-6 pt-24 pb-16 grid lg:grid-cols-[1fr_420px] gap-8 items-start">
-            {/* LEFT: Job Info with Tabs */}
+          {/* ── MOBILE (hidden on lg+): simple stacked layout ── */}
+          <div className="lg:hidden max-w-2xl mx-auto px-4 pt-6 pb-10 space-y-4">
+            {/* Title */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <h1 className="text-2xl font-playfair font-bold text-gray-900 leading-tight mb-2">
+                {job.title}
+              </h1>
+              <div className="flex flex-wrap gap-2">
+                <span className="text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full font-medium">
+                  SSN Corporation
+                </span>
+                {job.posted_date && (
+                  <span className="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full">
+                    Posted{" "}
+                    {new Date(job.posted_date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
+                )}
+                {job.deadline && (
+                  <span
+                    className={`text-xs px-3 py-1 rounded-full ${isPastDeadline ? "bg-red-50 text-red-400" : "bg-orange-50 text-orange-500"}`}
+                  >
+                    {isPastDeadline
+                      ? "Closed"
+                      : `Deadline ${new Date(job.deadline).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* All sections stacked in one card */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <MobileContent />
+            </div>
+
+            {/* Apply form or closed notice */}
+            {isPastDeadline ? (
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center">
+                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
+                  <svg
+                    className="w-5 h-5 text-gray-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.8}
+                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h2 className="text-lg font-playfair font-bold text-gray-700 mb-1">
+                  Applications Closed
+                </h2>
+                <p className="text-gray-500 text-sm mb-4">
+                  Deadline was{" "}
+                  {new Date(job.deadline).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                  .
+                </p>
+                <Link
+                  to="/career"
+                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition"
+                >
+                  View Open Positions
+                </Link>
+              </div>
+            ) : (
+              <div
+                id="apply-form"
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5"
+              >
+                <h2 className="text-xl font-playfair font-bold text-gray-900 mb-4">
+                  Apply for this Position
+                </h2>
+                <ApplyForm />
+              </div>
+            )}
+          </div>
+
+          {/* ── DESKTOP (lg+): two-column with tabs ── */}
+          <div className="hidden lg:grid max-w-6xl mx-auto px-6 pt-24 pb-16 grid-cols-[1fr_420px] gap-8 items-start">
             <div>
-              {/* Job Title Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -360,15 +607,13 @@ function JobDetail() {
                 </div>
               </motion.div>
 
-              {/* Tabs */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
                 className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
               >
-                {/* Tab Nav */}
-                <div className="flex border-b border-gray-100 overflow-x-auto">
+                <div className="flex border-b border-gray-100">
                   {TABS.map((tab) => (
                     <button
                       key={tab.key}
@@ -383,8 +628,6 @@ function JobDetail() {
                     </button>
                   ))}
                 </div>
-
-                {/* Tab Content */}
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeTab}
@@ -400,7 +643,6 @@ function JobDetail() {
               </motion.div>
             </div>
 
-            {/* RIGHT: Sticky Application Form */}
             <motion.div
               id="apply-form"
               initial={{ opacity: 0, x: 20 }}
@@ -409,7 +651,6 @@ function JobDetail() {
               className="lg:sticky lg:top-24"
             >
               {isPastDeadline ? (
-                /* Closed notice */
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 text-center">
                   <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
                     <svg
@@ -451,101 +692,11 @@ function JobDetail() {
                   </Link>
                 </div>
               ) : (
-                /* Application form */
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7">
                   <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-5">
                     Apply for this Position
                   </h2>
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="Full Name *"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
-                    />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email Address *"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
-                    />
-                    <input
-                      type="text"
-                      name="phone"
-                      placeholder="Phone Number *"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
-                    />
-                    <input
-                      type="text"
-                      name="address"
-                      placeholder="Address *"
-                      value={formData.address}
-                      onChange={handleInputChange}
-                      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
-                    />
-                    <label className="block w-full border-2 border-dashed border-gray-200 rounded-xl px-4 py-4 text-center cursor-pointer hover:border-orange-300 transition group">
-                      <input
-                        type="file"
-                        name="resume"
-                        accept=".pdf,.doc,.docx"
-                        onChange={handleInputChange}
-                        className="hidden"
-                      />
-                      <div className="flex flex-col items-center gap-1">
-                        <svg
-                          className="w-6 h-6 text-gray-300 group-hover:text-orange-400 transition"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                          />
-                        </svg>
-                        <span className="text-xs text-gray-400 group-hover:text-orange-500 transition">
-                          {formData.resume
-                            ? formData.resume.name
-                            : "Upload Resume (PDF, DOC, DOCX) *"}
-                        </span>
-                      </div>
-                    </label>
-                    <textarea
-                      name="coverLetter"
-                      placeholder="Cover Letter (optional)"
-                      value={formData.coverLetter}
-                      onChange={handleInputChange}
-                      rows={4}
-                      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition resize-none"
-                    />
-                    <button
-                      onClick={handleSubmit}
-                      disabled={submitting}
-                      className={`w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${
-                        submitting ? "opacity-70 cursor-not-allowed" : ""
-                      }`}
-                    >
-                      {submitting ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        "Submit Application"
-                      )}
-                    </button>
-                    <p className="text-xs text-gray-400 text-center">
-                      By submitting, you agree to our privacy policy.
-                    </p>
-                  </div>
+                  <ApplyForm />
                 </div>
               )}
             </motion.div>
@@ -554,7 +705,7 @@ function JobDetail() {
       )}
 
       {!loading && !job && (
-        <div className="flex flex-col items-center justify-center min-h-screen gap-4">
+        <div className="flex flex-col items-center justify-center min-h-screen gap-4 px-4">
           <p className="text-gray-500 text-lg">Job not found.</p>
           <Link
             to="/career"
@@ -572,18 +723,16 @@ function JobDetail() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20"
+            className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/20 px-4"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-xl border border-gray-100 mx-4"
+              className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-xl border border-gray-100"
             >
               <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${
-                  modalType === "success" ? "bg-green-100" : "bg-red-100"
-                }`}
+                className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${modalType === "success" ? "bg-green-100" : "bg-red-100"}`}
               >
                 {modalType === "success" ? (
                   <svg
