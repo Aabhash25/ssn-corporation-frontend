@@ -10,50 +10,79 @@ const TABS = [
   { key: "perks", label: "Perks & More" },
 ];
 
-const renderBullets = (text) => {
-  if (!text) return null;
+// ─── Render helpers ───────────────────────────────────────────────────────────
+
+const isBullet = (line) => /^[-•]/.test(line.trim());
+
+const renderList = (lines) => (
+  <ul className="space-y-2 mt-2">
+    {lines.map((line, i) => (
+      <li
+        key={i}
+        className="flex items-start gap-2 text-gray-700 text-sm leading-relaxed"
+      >
+        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0" />
+        {line.replace(/^[-•]\s*/, "")}
+      </li>
+    ))}
+  </ul>
+);
+
+const renderField = (text) => {
+  if (!text?.trim()) return null;
   const lines = text
     .split("\n")
     .map((l) => l.trim())
     .filter(Boolean);
+
+  const allBullets = lines.every(isBullet);
+  const noBullets = lines.every((l) => !isBullet(l));
+
+  if (allBullets) return renderList(lines);
+
+  if (noBullets)
+    return (
+      <div className="space-y-3">
+        {lines.map((line, i) => (
+          <p key={i} className="text-gray-700 text-sm leading-relaxed">
+            {line}
+          </p>
+        ))}
+      </div>
+    );
+
+  // mixed — group consecutive lines of the same type into segments
+  const segments = [];
+  let current = null;
+  for (const line of lines) {
+    const type = isBullet(line) ? "list" : "paragraph";
+    if (!current || current.type !== type) {
+      current = { type, lines: [] };
+      segments.push(current);
+    }
+    current.lines.push(line);
+  }
+
   return (
-    <ul className="space-y-2 mt-2">
-      {lines.map((line, i) => (
-        <li
-          key={i}
-          className="flex items-start gap-2 text-gray-700 text-sm leading-relaxed"
-        >
-          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0" />
-          {line}
-        </li>
-      ))}
-    </ul>
+    <div className="space-y-2">
+      {segments.map((seg, i) =>
+        seg.type === "list" ? (
+          <div key={i}>{renderList(seg.lines)}</div>
+        ) : (
+          <div key={i} className="space-y-3">
+            {seg.lines.map((line, j) => (
+              <p key={j} className="text-gray-700 text-sm leading-relaxed">
+                {line}
+              </p>
+            ))}
+          </div>
+        ),
+      )}
+    </div>
   );
 };
 
-const renderOthers = (others) => {
-  if (!others) return null;
-  const items = Array.isArray(others)
-    ? others
-    : others
-        .split(/\r?\n/)
-        .map((s) => s.trim())
-        .filter(Boolean);
-  if (!items.length) return null;
-  return (
-    <ul className="space-y-2 mt-2">
-      {items.map((item, i) => (
-        <li
-          key={i}
-          className="flex items-start gap-2 text-gray-700 text-sm leading-relaxed"
-        >
-          <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0" />
-          {item}
-        </li>
-      ))}
-    </ul>
-  );
-};
+// ─── Section wrapper ──────────────────────────────────────────────────────────
 
 const SectionBlock = ({ title, children }) => (
   <div className="mb-6">
@@ -63,6 +92,8 @@ const SectionBlock = ({ title, children }) => (
     {children}
   </div>
 );
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 function JobDetail() {
   const { id } = useParams();
@@ -81,6 +112,7 @@ function JobDetail() {
   const [modalMessage, setModalMessage] = useState("");
   const [modalType, setModalType] = useState("success");
   const [showModal, setShowModal] = useState(false);
+
   const isPastDeadline = job?.deadline && new Date(job.deadline) < new Date();
 
   useEffect(() => {
@@ -159,22 +191,18 @@ function JobDetail() {
     }
   };
 
-  // All content as a single vertical stack (used on mobile)
+  // ── Mobile: all sections stacked ────────────────────────────────────────────
   const MobileContent = () =>
     job ? (
       <>
         {job.company_description && (
           <SectionBlock title="About the Company">
-            <p className="text-gray-700 text-sm leading-relaxed">
-              {job.company_description}
-            </p>
+            {renderField(job.company_description)}
           </SectionBlock>
         )}
         {job.role_description && (
           <SectionBlock title="Role Overview">
-            <p className="text-gray-700 text-sm leading-relaxed">
-              {job.role_description}
-            </p>
+            {renderField(job.role_description)}
           </SectionBlock>
         )}
         {job.deadline && (
@@ -190,61 +218,61 @@ function JobDetail() {
         )}
         {job.key_responsibilities && (
           <SectionBlock title="Key Responsibilities">
-            {renderBullets(job.key_responsibilities)}
+            {renderField(job.key_responsibilities)}
           </SectionBlock>
         )}
         {job.physical_requirements && (
           <SectionBlock title="Physical Requirements">
-            {renderBullets(job.physical_requirements)}
+            {renderField(job.physical_requirements)}
           </SectionBlock>
         )}
         {job.requirements && (
           <SectionBlock title="Requirements">
-            {renderBullets(job.requirements)}
+            {renderField(job.requirements)}
           </SectionBlock>
         )}
         {job.qualification_experience && (
           <SectionBlock title="Qualifications & Experience">
-            {renderBullets(job.qualification_experience)}
+            {renderField(job.qualification_experience)}
           </SectionBlock>
         )}
         {job.perks_benefits && (
           <SectionBlock title="Perks & Benefits">
-            {renderBullets(job.perks_benefits)}
+            {renderField(job.perks_benefits)}
           </SectionBlock>
         )}
-        {job.others && renderOthers(job.others) && (
+        {job.others && (
           <SectionBlock title="Additional Info">
-            {renderOthers(job.others)}
+            {renderField(job.others)}
           </SectionBlock>
         )}
         {job.equal_opportunity_employer && (
           <SectionBlock title="Equal Opportunity Employer">
-            <p className="text-gray-700 text-sm leading-relaxed">
-              {job.equal_opportunity_employer}
-            </p>
+            {renderField(job.equal_opportunity_employer)}
           </SectionBlock>
         )}
+        {job.sections?.length > 0 &&
+          job.sections.map((section) => (
+            <SectionBlock key={section.id} title={section.title}>
+              {renderField(section.content)}
+            </SectionBlock>
+          ))}
       </>
     ) : null;
 
-  // Tab content map (desktop only)
+  // ── Desktop: tab content map ─────────────────────────────────────────────────
   const tabContent = job
     ? {
         overview: (
           <div>
             {job.company_description && (
               <SectionBlock title="About the Company">
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  {job.company_description}
-                </p>
+                {renderField(job.company_description)}
               </SectionBlock>
             )}
             {job.role_description && (
               <SectionBlock title="Role Overview">
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  {job.role_description}
-                </p>
+                {renderField(job.role_description)}
               </SectionBlock>
             )}
             {job.deadline && (
@@ -264,7 +292,7 @@ function JobDetail() {
           <div>
             {job.key_responsibilities ? (
               <SectionBlock title="Key Responsibilities">
-                {renderBullets(job.key_responsibilities)}
+                {renderField(job.key_responsibilities)}
               </SectionBlock>
             ) : (
               <p className="text-gray-400 text-sm">
@@ -273,7 +301,7 @@ function JobDetail() {
             )}
             {job.physical_requirements && (
               <SectionBlock title="Physical Requirements">
-                {renderBullets(job.physical_requirements)}
+                {renderField(job.physical_requirements)}
               </SectionBlock>
             )}
           </div>
@@ -282,12 +310,12 @@ function JobDetail() {
           <div>
             {job.requirements && (
               <SectionBlock title="Requirements">
-                {renderBullets(job.requirements)}
+                {renderField(job.requirements)}
               </SectionBlock>
             )}
             {job.qualification_experience && (
               <SectionBlock title="Qualifications & Experience">
-                {renderBullets(job.qualification_experience)}
+                {renderField(job.qualification_experience)}
               </SectionBlock>
             )}
           </div>
@@ -296,26 +324,31 @@ function JobDetail() {
           <div>
             {job.perks_benefits && (
               <SectionBlock title="Perks & Benefits">
-                {renderBullets(job.perks_benefits)}
+                {renderField(job.perks_benefits)}
               </SectionBlock>
             )}
-            {job.others && renderOthers(job.others) && (
+            {job.others && (
               <SectionBlock title="Additional Info">
-                {renderOthers(job.others)}
+                {renderField(job.others)}
               </SectionBlock>
             )}
             {job.equal_opportunity_employer && (
               <SectionBlock title="Equal Opportunity Employer">
-                <p className="text-gray-700 text-sm leading-relaxed">
-                  {job.equal_opportunity_employer}
-                </p>
+                {renderField(job.equal_opportunity_employer)}
               </SectionBlock>
             )}
+            {job.sections?.length > 0 &&
+              job.sections.map((section) => (
+                <SectionBlock key={section.id} title={section.title}>
+                  {renderField(section.content)}
+                </SectionBlock>
+              ))}
           </div>
         ),
       }
     : {};
 
+  // ── Apply form ───────────────────────────────────────────────────────────────
   const ApplyForm = () => (
     <div className="space-y-3">
       <input
@@ -390,7 +423,9 @@ function JobDetail() {
       <button
         onClick={handleSubmit}
         disabled={submitting}
-        className={`w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${submitting ? "opacity-70 cursor-not-allowed" : ""}`}
+        className={`w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${
+          submitting ? "opacity-70 cursor-not-allowed" : ""
+        }`}
       >
         {submitting ? (
           <>
@@ -407,6 +442,7 @@ function JobDetail() {
     </div>
   );
 
+  // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <div className="relative min-h-screen bg-gray-50 font-roboto pt-20">
       <style>{`
@@ -427,7 +463,7 @@ function JobDetail() {
 
       {!loading && job && (
         <>
-          {/* Sticky Header — desktop only */}
+          {/* Sticky header — desktop only */}
           <div className="hidden lg:block fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm">
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-3">
               <Link
@@ -463,9 +499,8 @@ function JobDetail() {
             </div>
           </div>
 
-          {/* ── MOBILE (hidden on lg+): simple stacked layout ── */}
+          {/* ── Mobile layout ── */}
           <div className="lg:hidden max-w-2xl mx-auto px-4 pt-6 pb-10 space-y-4">
-            {/* Title */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
               <h1 className="text-2xl font-playfair font-bold text-gray-900 leading-tight mb-2">
                 {job.title}
@@ -486,22 +521,27 @@ function JobDetail() {
                 )}
                 {job.deadline && (
                   <span
-                    className={`text-xs px-3 py-1 rounded-full ${isPastDeadline ? "bg-red-50 text-red-400" : "bg-orange-50 text-orange-500"}`}
+                    className={`text-xs px-3 py-1 rounded-full ${
+                      isPastDeadline
+                        ? "bg-red-50 text-red-400"
+                        : "bg-orange-50 text-orange-500"
+                    }`}
                   >
                     {isPastDeadline
                       ? "Closed"
-                      : `Deadline ${new Date(job.deadline).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}`}
+                      : `Deadline ${new Date(job.deadline).toLocaleDateString(
+                          "en-US",
+                          { month: "short", day: "numeric", year: "numeric" },
+                        )}`}
                   </span>
                 )}
               </div>
             </div>
 
-            {/* All sections stacked in one card */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
               <MobileContent />
             </div>
 
-            {/* Apply form or closed notice */}
             {isPastDeadline ? (
               <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center">
                 <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
@@ -551,7 +591,7 @@ function JobDetail() {
             )}
           </div>
 
-          {/* ── DESKTOP (lg+): two-column with tabs ── */}
+          {/* ── Desktop layout ── */}
           <div className="hidden lg:grid max-w-6xl mx-auto px-6 pt-24 pb-16 grid-cols-[1fr_420px] gap-8 items-start">
             <div>
               <motion.div
@@ -732,7 +772,9 @@ function JobDetail() {
               className="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-xl border border-gray-100"
             >
               <div
-                className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${modalType === "success" ? "bg-green-100" : "bg-red-100"}`}
+                className={`w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 ${
+                  modalType === "success" ? "bg-green-100" : "bg-red-100"
+                }`}
               >
                 {modalType === "success" ? (
                   <svg
@@ -765,7 +807,9 @@ function JobDetail() {
                 )}
               </div>
               <h3
-                className={`text-xl font-playfair font-bold mb-2 ${modalType === "success" ? "text-green-600" : "text-red-600"}`}
+                className={`text-xl font-playfair font-bold mb-2 ${
+                  modalType === "success" ? "text-green-600" : "text-red-600"
+                }`}
               >
                 {modalType === "success"
                   ? "Application Sent!"
