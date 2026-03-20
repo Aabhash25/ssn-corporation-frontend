@@ -55,6 +55,13 @@ const Hero = () => {
     },
   ];
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Detect mobile once on mount
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
@@ -68,27 +75,43 @@ const Hero = () => {
     <section className="relative min-h-screen flex flex-col justify-between items-center text-white overflow-hidden bg-black pt-[4rem] md:pt-[5rem] xl:pt-[6rem] pb-[1.5rem]">
       {/* Background */}
       <div className="absolute inset-0">
-        {/* Mobile */}
-        <img
-          src="/30-mobile.webp"
-          alt="Hero mobile"
-          className="absolute inset-0 w-full h-full object-cover brightness-75 md:hidden"
-        />
+        {/* ✅ Mobile — only renders the ONE mobile image, conditionally */}
+        {isMobile ? (
+          <img
+            src="/30-mobile.webp"
+            alt="Hero"
+            fetchPriority="high" // ← loads first
+            loading="eager"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover brightness-75"
+          />
+        ) : (
+          // ✅ Desktop — only render CURRENT slide image + next one (preload)
+          <div className="absolute inset-0">
+            {slides.map((slide, index) => {
+              const isCurrent = index === currentIndex;
+              const isNext = index === (currentIndex + 1) % slides.length;
 
-        {/* Desktop */}
-        <div className="hidden md:block absolute inset-0">
-          {slides.map((slide, index) => (
-            <motion.img
-              key={index}
-              src={slide.image}
-              alt="Hero slide"
-              className="absolute inset-0 w-full h-full object-cover brightness-75"
-              initial={false}
-              animate={{ opacity: index === currentIndex ? 1 : 0 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-            />
-          ))}
-        </div>
+              // ✅ Only mount current + next slide — not all 3 at once
+              if (!isCurrent && !isNext) return null;
+
+              return (
+                <motion.img
+                  key={slide.image}
+                  src={slide.image}
+                  alt="Hero slide"
+                  fetchPriority={index === 0 ? "high" : "low"} // ← first image = high priority
+                  loading={index === 0 ? "eager" : "lazy"} // ← rest = lazy
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover brightness-75"
+                  initial={false}
+                  animate={{ opacity: isCurrent ? 1 : 0 }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Overlay */}
@@ -96,20 +119,9 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-center text-center max-w-[70rem] px-[1.5rem]">
-        {/* Headline */}
         <motion.h1
           key={`headline-${currentIndex}`}
-          className="
-            uppercase font-extrabold font-playfair
-            text-[2rem]
-            sm:text-[2.4rem]
-            md:text-[2.8rem]
-            lg:text-[2.6rem]
-            xl:text-[3.5rem]
-            2xl:text-[4.2rem]
-            leading-[1.15]
-            mb-[1rem]
-          "
+          className="uppercase font-extrabold font-playfair text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[2.6rem] xl:text-[3.5rem] 2xl:text-[4.2rem] leading-[1.15] mb-[1rem]"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -117,19 +129,9 @@ const Hero = () => {
           {currentSlide.headline}
         </motion.h1>
 
-        {/* Subheadline */}
         <motion.p
           key={`sub-${currentIndex}`}
-          className="
-            mx-auto max-w-[48rem] text-white/90
-            text-[0.9rem]
-            sm:text-[1rem]
-            md:text-[1.05rem]
-            lg:text-[1rem]
-            xl:text-[1.25rem]
-            leading-[1.7]
-            mb-[2rem]
-          "
+          className="mx-auto max-w-[48rem] text-white/90 text-[0.9rem] sm:text-[1rem] md:text-[1.05rem] lg:text-[1rem] xl:text-[1.25rem] leading-[1.7] mb-[2rem]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -137,51 +139,24 @@ const Hero = () => {
           {currentSlide.subheadline}
         </motion.p>
 
-        {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-[1rem]">
           <Link
             to="/portfolio"
-            className="
-              px-[2rem] py-[0.75rem]
-              text-[0.95rem] sm:text-[1rem]
-              font-bold rounded-full
-              bg-yellow-500 text-gray-900
-              hover:bg-yellow-600 transition hover:scale-105
-            "
+            className="px-[2rem] py-[0.75rem] text-[0.95rem] sm:text-[1rem] font-bold rounded-full bg-yellow-500 text-gray-900 hover:bg-yellow-600 transition hover:scale-105"
           >
             Explore Our Work
           </Link>
-
           <Link
             to="/contact"
-            className="
-              px-[2rem] py-[0.75rem]
-              text-[0.95rem] sm:text-[1rem]
-              font-bold rounded-full
-              border-2 border-yellow-500 text-yellow-500
-              hover:bg-yellow-500 hover:text-gray-900
-              transition hover:scale-105
-            "
+            className="px-[2rem] py-[0.75rem] text-[0.95rem] sm:text-[1rem] font-bold rounded-full border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 transition hover:scale-105"
           >
             Get In Touch
           </Link>
         </div>
       </div>
 
-      {/* Bottom Tagline */}
-      {/* Bottom Tagline */}
       <motion.h2
-        className="
-    relative z-10 text-yellow-500 text-center font-semibold
-    text-[1.05rem]
-    sm:text-[1.2rem]
-    md:text-[1.4rem]
-    lg:text-[1.6rem]
-    xl:text-[1.85rem]
-    pb-[1.25rem]
-    px-[1.25rem]
-    tracking-wide
-  "
+        className="relative z-10 text-yellow-500 text-center font-semibold text-[1.05rem] sm:text-[1.2rem] md:text-[1.4rem] lg:text-[1.6rem] xl:text-[1.85rem] pb-[1.25rem] px-[1.25rem] tracking-wide"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.5 }}

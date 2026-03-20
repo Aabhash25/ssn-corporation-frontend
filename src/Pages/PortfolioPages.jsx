@@ -34,49 +34,71 @@ const PortfolioLoader = () => (
   </div>
 );
 
-const ProjectCard = React.memo(({ project, index, onClick }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.03, duration: 0.4, ease: "easeOut" }}
-    className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg aspect-[3/4] sm:aspect-square"
-    onClick={onClick}
-  >
-    {project.image && (
-      <img
-        src={project.image}
-        alt={project.name}
-        loading="lazy"
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-      />
-    )}
-    <div className="absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur-md rounded-t-2xl shadow-md px-2 sm:px-3 py-1 sm:py-2 transition-transform duration-300 group-hover:translate-y-[-5px]">
-      <h3
-        className="text-gray-900 font-semibold text-center truncate text-xs sm:text-sm"
-        style={{ fontFamily: "Playfair Display, serif" }}
-        title={project.name}
-      >
-        {project.name}
-      </h3>
-    </div>
-    <motion.div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-2 sm:p-4">
-      <h3
-        className="text-base sm:text-lg font-bold mb-1 sm:mb-2 text-center"
-        style={{ fontFamily: "Playfair Display, serif" }}
-      >
-        {project.name}
-      </h3>
-      <p className="text-xs sm:text-sm text-gray-200 mb-1 sm:mb-2 text-center">
-        {project.category || "Uncategorized"}
-      </p>
-      <div className="flex items-center gap-1 sm:gap-2 text-xs text-gray-300 justify-center">
-        <span>{project.status}</span>
-        <span>•</span>
-        <span>{project.year}</span>
+const ProjectCard = React.memo(({ project, index, onClick }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: Math.min(index * 0.03, 0.3),
+        duration: 0.4,
+        ease: "easeOut",
+      }}
+      className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg aspect-[3/4] sm:aspect-square bg-gray-200"
+      onClick={onClick}
+    >
+      {/* ✅ Skeleton shimmer shown while image loads */}
+      {!loaded && (
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
+      )}
+
+      {project.image && (
+        <img
+          src={project.image}
+          alt={project.name}
+          loading={index < 4 ? "eager" : "lazy"} // ← first 4 load immediately
+          fetchPriority={index < 4 ? "high" : "auto"} // ← browser prioritizes them
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 ${
+            loaded ? "opacity-100 blur-0" : "opacity-0 blur-sm"
+          }`}
+        />
+      )}
+
+      {/* Name bar — always visible */}
+      <div className="absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur-md rounded-t-2xl shadow-md px-2 sm:px-3 py-1 sm:py-2 transition-transform duration-300 group-hover:translate-y-[-5px]">
+        <h3
+          className="text-gray-900 font-semibold text-center truncate text-xs sm:text-sm"
+          style={{ fontFamily: "Playfair Display, serif" }}
+          title={project.name}
+        >
+          {project.name}
+        </h3>
       </div>
+
+      {/* Hover overlay */}
+      <motion.div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col justify-center items-center text-white p-2 sm:p-4">
+        <h3
+          className="text-base sm:text-lg font-bold mb-1 sm:mb-2 text-center"
+          style={{ fontFamily: "Playfair Display, serif" }}
+        >
+          {project.name}
+        </h3>
+        <p className="text-xs sm:text-sm text-gray-200 mb-1 sm:mb-2 text-center">
+          {project.category || "Uncategorized"}
+        </p>
+        <div className="flex items-center gap-1 sm:gap-2 text-xs text-gray-300 justify-center">
+          <span>{project.status}</span>
+          <span>•</span>
+          <span>{project.year}</span>
+        </div>
+      </motion.div>
     </motion.div>
-  </motion.div>
-));
+  );
+});
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const getPageNumbers = () => {

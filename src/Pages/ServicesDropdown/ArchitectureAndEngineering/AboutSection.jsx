@@ -38,6 +38,8 @@ const AboutSection = () => {
                 <img
                   src="/DesigningSpacesThatInspireandPerform.webp"
                   alt="Architectural & Engineering Services"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover"
                 />
               </div>

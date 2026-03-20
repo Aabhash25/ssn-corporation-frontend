@@ -52,14 +52,38 @@ export default function ProjectDescription() {
     setIsImageModalOpen(false);
   }, [project]);
 
-  // Auto slider for gallery
+  // Auto slider with tab visibility pause
   useEffect(() => {
     if (!project?.images || project.images.length <= 1) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
-    }, 5000);
-    return () => clearInterval(interval);
+
+    let interval;
+
+    const start = () => {
+      interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % project.images.length);
+      }, 5000);
+    };
+
+    const stop = () => clearInterval(interval);
+
+    const onVisibility = () => (document.hidden ? stop() : start());
+
+    document.addEventListener("visibilitychange", onVisibility);
+    start();
+
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, [project]);
+
+  // Preload next hero image before it's needed
+  useEffect(() => {
+    if (!project?.images?.length) return;
+    const nextIdx = (currentImageIndex + 1) % project.images.length;
+    const img = new Image();
+    img.src = project.images[nextIdx];
+  }, [currentImageIndex, project]);
 
   if (loading) {
     return (
@@ -128,6 +152,8 @@ export default function ProjectDescription() {
                   key={currentImageIndex}
                   src={images[currentImageIndex]}
                   alt={project.description || "Project image"}
+                  fetchPriority={currentImageIndex === 0 ? "high" : "low"}
+                  decoding="async"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -181,6 +207,7 @@ export default function ProjectDescription() {
             </motion.div>
           )}
         </div>
+
         {/* Sidebar */}
         <aside className="lg:sticky lg:top-24 h-fit">
           <div className="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-xl border border-gray-100">
@@ -240,6 +267,8 @@ export default function ProjectDescription() {
                   <img
                     src={src}
                     alt={project.description || `Image ${idx + 1}`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -286,6 +315,7 @@ export default function ProjectDescription() {
               key={currentImageIndex}
               src={images[currentImageIndex]}
               alt={project.description || "Project image"}
+              decoding="async"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}

@@ -4,6 +4,8 @@ const HeroSection = () => {
       <img
         src="/DesignBuildCollaborationSupport.webp"
         alt="Geotechnical Engineering Hero"
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover"
       />
       <div className="absolute inset-0 bg-black/50"></div>

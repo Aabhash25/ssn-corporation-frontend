@@ -1,7 +1,7 @@
 "use client";
 
 const ServicesSection = ({ servicesData }) => {
-  const renderServiceCard = (service) => {
+  const renderServiceCard = (service, index) => {
     return (
       <div
         key={service.id}
@@ -11,6 +11,8 @@ const ServicesSection = ({ servicesData }) => {
           <img
             src={service.image}
             alt={service.title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
@@ -40,7 +42,9 @@ const ServicesSection = ({ servicesData }) => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
-          {servicesData.map((service) => renderServiceCard(service))}
+          {servicesData.map((service, index) =>
+            renderServiceCard(service, index),
+          )}
         </div>
       </div>
     </section>
