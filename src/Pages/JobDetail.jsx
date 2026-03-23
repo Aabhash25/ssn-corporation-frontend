@@ -3,16 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
-const TABS = [
-  { key: "overview", label: "Overview" },
-  { key: "responsibilities", label: "Responsibilities" },
-  { key: "requirements", label: "Requirements" },
-  { key: "perks", label: "Perks & More" },
-];
-
 // ─── Render helpers ───────────────────────────────────────────────────────────
 
 const isBullet = (line) => /^[-•]/.test(line.trim());
+const isHeading = (line) => /^##\s+/.test(line.trim());
 
 const renderList = (lines) => (
   <ul className="space-y-2 mt-2">
@@ -21,7 +15,7 @@ const renderList = (lines) => (
         key={i}
         className="flex items-start gap-2 text-gray-700 text-sm leading-relaxed"
       >
-        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0" />
+        <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-yellow-500 shrink-0" />
         {line.replace(/^[-•]\s*/, "")}
       </li>
     ))}
@@ -35,27 +29,20 @@ const renderField = (text) => {
     .map((l) => l.trim())
     .filter(Boolean);
 
-  const allBullets = lines.every(isBullet);
-  const noBullets = lines.every((l) => !isBullet(l));
-
-  if (allBullets) return renderList(lines);
-
-  if (noBullets)
-    return (
-      <div className="space-y-3">
-        {lines.map((line, i) => (
-          <p key={i} className="text-gray-700 text-sm leading-relaxed">
-            {line}
-          </p>
-        ))}
-      </div>
-    );
-
-  // mixed — group consecutive lines of the same type into segments
+  // Group lines into typed segments; headings always get their own segment
   const segments = [];
   let current = null;
   for (const line of lines) {
-    const type = isBullet(line) ? "list" : "paragraph";
+    const type = isHeading(line)
+      ? "heading"
+      : isBullet(line)
+        ? "list"
+        : "paragraph";
+    if (type === "heading") {
+      segments.push({ type: "heading", lines: [line] });
+      current = null;
+      continue;
+    }
     if (!current || current.type !== type) {
       current = { type, lines: [] };
       segments.push(current);
@@ -65,10 +52,21 @@ const renderField = (text) => {
 
   return (
     <div className="space-y-2">
-      {segments.map((seg, i) =>
-        seg.type === "list" ? (
-          <div key={i}>{renderList(seg.lines)}</div>
-        ) : (
+      {segments.map((seg, i) => {
+        if (seg.type === "heading") {
+          return (
+            <h4
+              key={i}
+              className="text-sm font-semibold text-gray-800 mt-4 mb-1 first:mt-0"
+            >
+              {seg.lines[0].replace(/^##\s*/, "")}
+            </h4>
+          );
+        }
+        if (seg.type === "list") {
+          return <div key={i}>{renderList(seg.lines)}</div>;
+        }
+        return (
           <div key={i} className="space-y-3">
             {seg.lines.map((line, j) => (
               <p key={j} className="text-gray-700 text-sm leading-relaxed">
@@ -76,8 +74,8 @@ const renderField = (text) => {
               </p>
             ))}
           </div>
-        ),
-      )}
+        );
+      })}
     </div>
   );
 };
@@ -85,12 +83,70 @@ const renderField = (text) => {
 // ─── Section wrapper ──────────────────────────────────────────────────────────
 
 const SectionBlock = ({ title, children }) => (
-  <div className="mb-6">
+  <div className="mb-6 last:mb-0">
     <h3 className="text-base font-playfair font-bold text-gray-900 mb-2">
       {title}
     </h3>
     {children}
   </div>
+);
+
+// ─── All Job Content (shared between mobile & desktop) ────────────────────────
+
+const JobContent = ({ job }) => (
+  <>
+    {job.company_description && (
+      <SectionBlock title="About the Company">
+        {renderField(job.company_description)}
+      </SectionBlock>
+    )}
+    {job.role_description && (
+      <SectionBlock title="Role Overview">
+        {renderField(job.role_description)}
+      </SectionBlock>
+    )}
+    {job.key_responsibilities && (
+      <SectionBlock title="Key Responsibilities">
+        {renderField(job.key_responsibilities)}
+      </SectionBlock>
+    )}
+    {job.physical_requirements && (
+      <SectionBlock title="Physical Requirements">
+        {renderField(job.physical_requirements)}
+      </SectionBlock>
+    )}
+    {job.requirements && (
+      <SectionBlock title="Requirements">
+        {renderField(job.requirements)}
+      </SectionBlock>
+    )}
+    {job.qualification_experience && (
+      <SectionBlock title="Qualifications & Experience">
+        {renderField(job.qualification_experience)}
+      </SectionBlock>
+    )}
+    {job.perks_benefits && (
+      <SectionBlock title="Perks & Benefits">
+        {renderField(job.perks_benefits)}
+      </SectionBlock>
+    )}
+    {job.others && (
+      <SectionBlock title="Additional Info">
+        {renderField(job.others)}
+      </SectionBlock>
+    )}
+    {job.equal_opportunity_employer && (
+      <SectionBlock title="Equal Opportunity Employer">
+        {renderField(job.equal_opportunity_employer)}
+      </SectionBlock>
+    )}
+    {job.sections?.length > 0 &&
+      job.sections.map((section) => (
+        <SectionBlock key={section.id} title={section.title}>
+          {renderField(section.content)}
+        </SectionBlock>
+      ))}
+  </>
 );
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -99,7 +155,6 @@ function JobDetail() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("overview");
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -113,7 +168,7 @@ function JobDetail() {
   const [modalType, setModalType] = useState("success");
   const [showModal, setShowModal] = useState(false);
 
-  const isPastDeadline = job?.deadline && new Date(job.deadline) < new Date();
+  const isClosed = job?.role_filled === true;
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`)
@@ -191,163 +246,6 @@ function JobDetail() {
     }
   };
 
-  // ── Mobile: all sections stacked ────────────────────────────────────────────
-  const MobileContent = () =>
-    job ? (
-      <>
-        {job.company_description && (
-          <SectionBlock title="About the Company">
-            {renderField(job.company_description)}
-          </SectionBlock>
-        )}
-        {job.role_description && (
-          <SectionBlock title="Role Overview">
-            {renderField(job.role_description)}
-          </SectionBlock>
-        )}
-        {job.deadline && (
-          <SectionBlock title="Application Deadline">
-            <p className="text-gray-700 text-sm">
-              {new Date(job.deadline).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </p>
-          </SectionBlock>
-        )}
-        {job.key_responsibilities && (
-          <SectionBlock title="Key Responsibilities">
-            {renderField(job.key_responsibilities)}
-          </SectionBlock>
-        )}
-        {job.physical_requirements && (
-          <SectionBlock title="Physical Requirements">
-            {renderField(job.physical_requirements)}
-          </SectionBlock>
-        )}
-        {job.requirements && (
-          <SectionBlock title="Requirements">
-            {renderField(job.requirements)}
-          </SectionBlock>
-        )}
-        {job.qualification_experience && (
-          <SectionBlock title="Qualifications & Experience">
-            {renderField(job.qualification_experience)}
-          </SectionBlock>
-        )}
-        {job.perks_benefits && (
-          <SectionBlock title="Perks & Benefits">
-            {renderField(job.perks_benefits)}
-          </SectionBlock>
-        )}
-        {job.others && (
-          <SectionBlock title="Additional Info">
-            {renderField(job.others)}
-          </SectionBlock>
-        )}
-        {job.equal_opportunity_employer && (
-          <SectionBlock title="Equal Opportunity Employer">
-            {renderField(job.equal_opportunity_employer)}
-          </SectionBlock>
-        )}
-        {job.sections?.length > 0 &&
-          job.sections.map((section) => (
-            <SectionBlock key={section.id} title={section.title}>
-              {renderField(section.content)}
-            </SectionBlock>
-          ))}
-      </>
-    ) : null;
-
-  // ── Desktop: tab content map ─────────────────────────────────────────────────
-  const tabContent = job
-    ? {
-        overview: (
-          <div>
-            {job.company_description && (
-              <SectionBlock title="About the Company">
-                {renderField(job.company_description)}
-              </SectionBlock>
-            )}
-            {job.role_description && (
-              <SectionBlock title="Role Overview">
-                {renderField(job.role_description)}
-              </SectionBlock>
-            )}
-            {job.deadline && (
-              <SectionBlock title="Application Deadline">
-                <p className="text-gray-700 text-sm">
-                  {new Date(job.deadline).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-              </SectionBlock>
-            )}
-          </div>
-        ),
-        responsibilities: (
-          <div>
-            {job.key_responsibilities ? (
-              <SectionBlock title="Key Responsibilities">
-                {renderField(job.key_responsibilities)}
-              </SectionBlock>
-            ) : (
-              <p className="text-gray-400 text-sm">
-                No responsibilities listed.
-              </p>
-            )}
-            {job.physical_requirements && (
-              <SectionBlock title="Physical Requirements">
-                {renderField(job.physical_requirements)}
-              </SectionBlock>
-            )}
-          </div>
-        ),
-        requirements: (
-          <div>
-            {job.requirements && (
-              <SectionBlock title="Requirements">
-                {renderField(job.requirements)}
-              </SectionBlock>
-            )}
-            {job.qualification_experience && (
-              <SectionBlock title="Qualifications & Experience">
-                {renderField(job.qualification_experience)}
-              </SectionBlock>
-            )}
-          </div>
-        ),
-        perks: (
-          <div>
-            {job.perks_benefits && (
-              <SectionBlock title="Perks & Benefits">
-                {renderField(job.perks_benefits)}
-              </SectionBlock>
-            )}
-            {job.others && (
-              <SectionBlock title="Additional Info">
-                {renderField(job.others)}
-              </SectionBlock>
-            )}
-            {job.equal_opportunity_employer && (
-              <SectionBlock title="Equal Opportunity Employer">
-                {renderField(job.equal_opportunity_employer)}
-              </SectionBlock>
-            )}
-            {job.sections?.length > 0 &&
-              job.sections.map((section) => (
-                <SectionBlock key={section.id} title={section.title}>
-                  {renderField(section.content)}
-                </SectionBlock>
-              ))}
-          </div>
-        ),
-      }
-    : {};
-
   // ── Apply form ───────────────────────────────────────────────────────────────
   const ApplyForm = () => (
     <div className="space-y-3">
@@ -357,7 +255,7 @@ function JobDetail() {
         placeholder="Full Name *"
         value={formData.name}
         onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
       />
       <input
         type="email"
@@ -365,7 +263,7 @@ function JobDetail() {
         placeholder="Email Address *"
         value={formData.email}
         onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
       />
       <input
         type="text"
@@ -373,7 +271,7 @@ function JobDetail() {
         placeholder="Phone Number *"
         value={formData.phone}
         onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
       />
       <input
         type="text"
@@ -381,9 +279,9 @@ function JobDetail() {
         placeholder="Address *"
         value={formData.address}
         onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition"
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
       />
-      <label className="block w-full border-2 border-dashed border-gray-200 rounded-xl px-4 py-4 text-center cursor-pointer hover:border-orange-300 transition group">
+      <label className="block w-full border-2 border-dashed border-gray-200 rounded-xl px-4 py-4 text-center cursor-pointer hover:border-yellow-300 transition group">
         <input
           type="file"
           name="resume"
@@ -393,7 +291,7 @@ function JobDetail() {
         />
         <div className="flex flex-col items-center gap-1">
           <svg
-            className="w-6 h-6 text-gray-300 group-hover:text-orange-400 transition"
+            className="w-6 h-6 text-gray-300 group-hover:text-yellow-400 transition"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -405,7 +303,7 @@ function JobDetail() {
               d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
             />
           </svg>
-          <span className="text-xs text-gray-400 group-hover:text-orange-500 transition">
+          <span className="text-xs text-gray-400 group-hover:text-yellow-500 transition">
             {formData.resume
               ? formData.resume.name
               : "Upload Resume (PDF, DOC, DOCX) *"}
@@ -418,12 +316,12 @@ function JobDetail() {
         value={formData.coverLetter}
         onChange={handleInputChange}
         rows={4}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-orange-300 focus:border-orange-400 focus:outline-none transition resize-none"
+        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition resize-none"
       />
       <button
         onClick={handleSubmit}
         disabled={submitting}
-        className={`w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${
+        className={`w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${
           submitting ? "opacity-70 cursor-not-allowed" : ""
         }`}
       >
@@ -442,18 +340,52 @@ function JobDetail() {
     </div>
   );
 
+  // ── Closed panel (shared) ────────────────────────────────────────────────────
+  const ClosedPanel = ({ compact = false }) => (
+    <div
+      className={`bg-white rounded-2xl border border-gray-100 shadow-sm text-center ${compact ? "p-6" : "p-7"}`}
+    >
+      <div
+        className={`rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3 ${compact ? "w-10 h-10" : "w-14 h-14"}`}
+      >
+        <svg
+          className={`text-gray-400 ${compact ? "w-5 h-5" : "w-7 h-7"}`}
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.8}
+            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+      </div>
+      <h2
+        className={`font-playfair font-bold text-gray-700 mb-1 ${compact ? "text-lg" : "text-2xl"}`}
+      >
+        Position Filled
+      </h2>
+      <p className="text-gray-500 text-sm mb-4">
+        This role is no longer accepting applications.
+      </p>
+      <Link
+        to="/career"
+        className="inline-block bg-yellow-500 hover:bg-yellow-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition"
+      >
+        View Open Positions
+      </Link>
+    </div>
+  );
+
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
-    <div className="relative min-h-screen bg-gray-50 font-roboto pt-20">
-      <style>{`
-        .font-roboto { font-family: 'Roboto', sans-serif; }
-        .font-playfair { font-family: 'Playfair Display', serif; }
-      `}</style>
-
+    <div className="relative min-h-screen bg-gray-50 pt-20">
       {loading && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
           <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 border-4 border-orange-400 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin" />
             <span className="text-gray-500 text-sm">
               Loading job details...
             </span>
@@ -468,7 +400,7 @@ function JobDetail() {
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-3">
               <Link
                 to="/career"
-                className="flex items-center gap-1.5 text-gray-500 hover:text-orange-500 transition text-sm font-medium shrink-0"
+                className="flex items-center gap-1.5 text-gray-500 hover:text-yellow-500 transition text-sm font-medium shrink-0"
               >
                 <svg
                   className="w-4 h-4"
@@ -488,25 +420,31 @@ function JobDetail() {
               <span className="text-gray-800 font-semibold text-sm truncate font-playfair flex-1 text-center">
                 {job.title}
               </span>
-              {!isPastDeadline && (
+              {!isClosed && (
                 <a
                   href="#apply-form"
-                  className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-4 py-2 rounded-full transition shrink-0"
+                  className="bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold px-4 py-2 rounded-full transition shrink-0"
                 >
                   Apply Now
                 </a>
+              )}
+              {isClosed && (
+                <span className="text-xs bg-red-50 text-red-400 px-3 py-1.5 rounded-full font-medium shrink-0">
+                  Position Filled
+                </span>
               )}
             </div>
           </div>
 
           {/* ── Mobile layout ── */}
           <div className="lg:hidden max-w-2xl mx-auto px-4 pt-6 pb-10 space-y-4">
+            {/* Title card */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
               <h1 className="text-2xl font-playfair font-bold text-gray-900 leading-tight mb-2">
                 {job.title}
               </h1>
               <div className="flex flex-wrap gap-2">
-                <span className="text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full font-medium">
+                <span className="text-xs bg-yellow-50 text-yellow-600 px-3 py-1 rounded-full font-medium">
                   SSN Corporation
                 </span>
                 {job.posted_date && (
@@ -519,65 +457,26 @@ function JobDetail() {
                     })}
                   </span>
                 )}
-                {job.deadline && (
-                  <span
-                    className={`text-xs px-3 py-1 rounded-full ${
-                      isPastDeadline
-                        ? "bg-red-50 text-red-400"
-                        : "bg-orange-50 text-orange-500"
-                    }`}
-                  >
-                    {isPastDeadline
-                      ? "Closed"
-                      : `Deadline ${new Date(job.deadline).toLocaleDateString(
-                          "en-US",
-                          { month: "short", day: "numeric", year: "numeric" },
-                        )}`}
-                  </span>
-                )}
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
-              <MobileContent />
-            </div>
-
-            {isPastDeadline ? (
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center">
-                <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3">
-                  <svg
-                    className="w-5 h-5 text-gray-400"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.8}
-                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                </div>
-                <h2 className="text-lg font-playfair font-bold text-gray-700 mb-1">
-                  Applications Closed
-                </h2>
-                <p className="text-gray-500 text-sm mb-4">
-                  Deadline was{" "}
-                  {new Date(job.deadline).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                  .
-                </p>
-                <Link
-                  to="/career"
-                  className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition"
+                <span
+                  className={`text-xs px-3 py-1 rounded-full font-medium ${
+                    isClosed
+                      ? "bg-red-50 text-red-400"
+                      : "bg-green-50 text-green-600"
+                  }`}
                 >
-                  View Open Positions
-                </Link>
+                  {isClosed ? "Position Filled" : "Open"}
+                </span>
               </div>
+            </div>
+
+            {/* Content */}
+            <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+              <JobContent job={job} />
+            </div>
+
+            {/* Apply / Closed */}
+            {isClosed ? (
+              <ClosedPanel compact />
             ) : (
               <div
                 id="apply-form"
@@ -593,6 +492,7 @@ function JobDetail() {
 
           {/* ── Desktop layout ── */}
           <div className="hidden lg:grid max-w-6xl mx-auto px-6 pt-24 pb-16 grid-cols-[1fr_420px] gap-8 items-start">
+            {/* Left column */}
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -600,9 +500,9 @@ function JobDetail() {
                 className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 mb-5"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center shrink-0">
                     <svg
-                      className="w-6 h-6 text-orange-500"
+                      className="w-6 h-6 text-yellow-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -620,7 +520,7 @@ function JobDetail() {
                       {job.title}
                     </h1>
                     <div className="flex flex-wrap gap-3 mt-2">
-                      <span className="text-xs bg-orange-50 text-orange-600 px-3 py-1 rounded-full font-medium">
+                      <span className="text-xs bg-yellow-50 text-yellow-600 px-3 py-1 rounded-full font-medium">
                         SSN Corporation
                       </span>
                       {job.posted_date && (
@@ -628,61 +528,40 @@ function JobDetail() {
                           Posted{" "}
                           {new Date(job.posted_date).toLocaleDateString(
                             "en-US",
-                            { month: "short", day: "numeric", year: "numeric" },
+                            {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                            },
                           )}
                         </span>
                       )}
-                      {job.deadline && (
-                        <span className="text-xs bg-orange-50 text-orange-500 px-3 py-1 rounded-full">
-                          Deadline{" "}
-                          {new Date(job.deadline).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                          })}
-                        </span>
-                      )}
+                      <span
+                        className={`text-xs px-3 py-1 rounded-full font-medium ${
+                          isClosed
+                            ? "bg-red-50 text-red-400"
+                            : "bg-green-50 text-green-600"
+                        }`}
+                      >
+                        {isClosed ? "Position Filled" : "Open"}
+                      </span>
                     </div>
                   </div>
                 </div>
               </motion.div>
 
+              {/* All sections — no tabs */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+                className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7"
               >
-                <div className="flex border-b border-gray-100">
-                  {TABS.map((tab) => (
-                    <button
-                      key={tab.key}
-                      onClick={() => setActiveTab(tab.key)}
-                      className={`px-5 py-3.5 text-sm font-playfair font-bold whitespace-nowrap transition-colors border-b-2 ${
-                        activeTab === tab.key
-                          ? "border-orange-500 text-orange-500 bg-orange-50"
-                          : "border-transparent text-gray-500 hover:text-gray-800"
-                      }`}
-                    >
-                      {tab.label}
-                    </button>
-                  ))}
-                </div>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeTab}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.18 }}
-                    className="p-7 min-h-[260px]"
-                  >
-                    {tabContent[activeTab]}
-                  </motion.div>
-                </AnimatePresence>
+                <JobContent job={job} />
               </motion.div>
             </div>
 
+            {/* Right column — sticky apply form or closed panel */}
             <motion.div
               id="apply-form"
               initial={{ opacity: 0, x: 20 }}
@@ -690,47 +569,8 @@ function JobDetail() {
               transition={{ delay: 0.15 }}
               className="lg:sticky lg:top-24"
             >
-              {isPastDeadline ? (
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7 text-center">
-                  <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-                    <svg
-                      className="w-7 h-7 text-gray-400"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.8}
-                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <h2 className="text-2xl font-playfair font-bold text-gray-700 mb-2">
-                    Applications Closed
-                  </h2>
-                  <p className="text-gray-500 text-sm mb-2">
-                    The deadline for this position was{" "}
-                    <span className="font-semibold text-gray-700">
-                      {new Date(job.deadline).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </span>
-                    .
-                  </p>
-                  <p className="text-gray-400 text-xs mb-6">
-                    This position is no longer accepting applications.
-                  </p>
-                  <Link
-                    to="/career"
-                    className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-xl font-semibold text-sm transition"
-                  >
-                    View Open Positions
-                  </Link>
-                </div>
+              {isClosed ? (
+                <ClosedPanel />
               ) : (
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-7">
                   <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-5">
@@ -749,7 +589,7 @@ function JobDetail() {
           <p className="text-gray-500 text-lg">Job not found.</p>
           <Link
             to="/career"
-            className="text-orange-500 hover:underline text-sm"
+            className="text-yellow-500 hover:underline text-sm"
           >
             Back to Jobs
           </Link>
@@ -818,7 +658,7 @@ function JobDetail() {
               <p className="text-gray-600 text-sm mb-6">{modalMessage}</p>
               <button
                 onClick={() => setShowModal(false)}
-                className="px-6 py-2.5 bg-orange-500 text-white rounded-xl hover:bg-orange-600 transition text-sm font-semibold"
+                className="px-6 py-2.5 bg-yellow-500 text-white rounded-xl hover:bg-yellow-600 transition text-sm font-semibold"
               >
                 Close
               </button>

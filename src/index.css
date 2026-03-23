@@ -1,4 +1,10 @@
 @import "tailwindcss";
+
+@theme {
+  --font-playfair: "Playfair Display", Georgia, serif;
+  --font-roboto: "Roboto", sans-serif;
+}
+
 html, body {
   overflow-x: hidden;
   overflow-y: scroll;
@@ -12,8 +18,7 @@ html, body {
   @apply text-black underline font-bold;
 }
 
-/* index.css or global.css */
 .paragraph-indent p {
-  text-indent: 4rem; /* first-line indent */
-  margin-bottom: 1.5rem; /* optional spacing between paragraphs */
+  text-indent: 4rem;
+  margin-bottom: 1.5rem;
 }
