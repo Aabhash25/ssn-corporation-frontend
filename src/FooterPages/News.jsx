@@ -27,22 +27,19 @@ const News = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_API_URL}news/?page=${currentPage}`
+          `${import.meta.env.VITE_API_URL}news/?page=${currentPage}&page_size=12`,
         );
         if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-        const data = await res.json();
 
-        console.log("News API response:", data);
+        const json = await res.json(); // rename to avoid any collision
 
-        // Handle paginated response
-        if (data.results) {
-          setNewsData(data.results);
-          setTotalCount(data.count || 0);
-          setTotalPages(Math.ceil((data.count || 0) / 12));
+        if (json.results) {
+          setNewsData(json.results);
+          setTotalCount(json.count || 0);
+          setTotalPages(Math.ceil((json.count || 0) / 12));
         } else {
-          // Fallback for non-paginated response
-          setNewsData(Array.isArray(data) ? data : []);
-          setTotalCount(Array.isArray(data) ? data.length : 0);
+          setNewsData(Array.isArray(json) ? json : []);
+          setTotalCount(Array.isArray(json) ? json.length : 0);
           setTotalPages(1);
         }
       } catch (err) {
@@ -164,32 +161,9 @@ const News = () => {
     return (
       <>
         <FontsStyle />
-        <section className="py-10 sm:py-16 bg-gray-50 w-full px-4 sm:px-6 lg:px-12 min-h-[80vh]">
-          {/* Header skeleton */}
-          <div className="text-center mb-12 sm:mb-16 pt-30">
-            <div className="h-10 sm:h-12 bg-gray-300 rounded w-1/3 mx-auto mb-4 animate-pulse"></div>
-            <div className="h-4 sm:h-5 bg-gray-300 rounded w-2/3 mx-auto animate-pulse"></div>
-          </div>
-
-          {/* News cards skeleton */}
-          <div className="flex flex-wrap justify-start gap-8">
-            {[...Array(6)].map((_, index) => (
-              <div
-                key={index}
-                className="w-full sm:w-[48%] lg:w-[31%] bg-white rounded-2xl shadow-lg overflow-hidden"
-              >
-                <div className="w-full h-52 sm:h-60 bg-gray-300 animate-pulse" />
-                <div className="p-5 sm:p-6">
-                  <div className="h-6 bg-gray-300 rounded w-3/4 mb-3 animate-pulse"></div>
-                  <div className="h-4 bg-gray-300 rounded w-1/2 mb-3 animate-pulse"></div>
-                  <div className="h-3 bg-gray-300 rounded w-full mb-2 animate-pulse"></div>
-                  <div className="h-3 bg-gray-300 rounded w-full mb-2 animate-pulse"></div>
-                  <div className="h-3 bg-gray-300 rounded w-5/6 animate-pulse"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+        <div className="flex justify-center items-center min-h-[80vh]">
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
       </>
     );
   }
@@ -226,6 +200,7 @@ const News = () => {
                   {/* Only first image */}
                   {news.image1 && (
                     <img
+                      loading="lazy"
                       src={news.image1}
                       alt={news.title}
                       className="w-full h-52 sm:h-60 object-cover"

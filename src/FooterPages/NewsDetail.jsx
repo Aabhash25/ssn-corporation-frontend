@@ -50,7 +50,7 @@ const linkKeywords = (text) => {
     const regex = new RegExp(`\\b${key}\\b`, "gi");
     linkedText = linkedText.replace(
       regex,
-      `<a href="${links[key]}" class="news-link" target="_blank" rel="noopener noreferrer">${key}</a>`
+      `<a href="${links[key]}" class="news-link" target="_blank" rel="noopener noreferrer">${key}</a>`,
     );
   });
 
@@ -64,50 +64,69 @@ const NewsDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch current news by ID
-    fetch(`${import.meta.env.VITE_API_URL}news/${id}/`)
-      .then((res) => res.json())
-      .then((data) => setNews(data))
-      .catch((err) => console.error("Error fetching news:", err));
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // Fetch all news for "More News" section
-    fetch(`${import.meta.env.VITE_API_URL}news/`)
-      .then((res) => res.json())
-      .then((data) => {
-        // Handle both array and paginated object responses
-        const newsArray = Array.isArray(data) ? data : data.results || [];
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // Fetch current news by ID
+        const newsRes = await fetch(
+          `${import.meta.env.VITE_API_URL}news/${id}/`,
+        );
+        if (!newsRes.ok)
+          throw new Error(`HTTP error! status: ${newsRes.status}`);
+        const newsData = await newsRes.json();
+        setNews(newsData);
 
+        // Fetch all news for "More News"
+        const moreRes = await fetch(`${import.meta.env.VITE_API_URL}news/`);
+        if (!moreRes.ok)
+          throw new Error(`HTTP error! status: ${moreRes.status}`);
+        const moreData = await moreRes.json();
+        const newsArray = Array.isArray(moreData)
+          ? moreData
+          : moreData.results || [];
         const others = newsArray
           .filter((item) => item.id !== parseInt(id))
           .slice(0, 3);
         setMoreNews(others);
+      } catch (err) {
+        console.error("Error fetching news:", err);
+        setNews(null);
+        setMoreNews([]);
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching more news:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, [id]);
 
+  // Loading spinner
   if (loading) {
     return (
       <>
         <FontsStyle />
-        <div className="min-h-[80vh] flex items-center justify-center">
+        <div className="min-h-[80vh] flex flex-col items-center justify-center gap-4">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
           <p className="text-gray-500 text-lg font-roboto">Loading news...</p>
         </div>
       </>
     );
   }
 
+  // News not found
   if (!news) {
     return (
       <>
         <FontsStyle />
-        <div className="text-center py-20">
+        <div className="min-h-[80vh] flex flex-col items-center justify-center gap-4 text-center">
           <h2 className="text-3xl font-playfair font-bold text-gray-800">
-            News Not Found
+            😞 News Not Found
           </h2>
+          <p className="text-gray-500 font-roboto">
+            The news article you are looking for does not exist.
+          </p>
           <Link
             to="/news"
             className="mt-4 inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
@@ -130,7 +149,6 @@ const NewsDetail = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-playfair font-bold text-gray-900 mb-3">
             {news.title}
           </h1>
-
           <p className="text-sm sm:text-base text-gray-500 mb-8 sm:mb-10">
             {new Date(news.published_date).toLocaleDateString()}
           </p>
@@ -145,7 +163,7 @@ const NewsDetail = () => {
               />
             </div>
 
-            {/* IMAGE COLUMN - Fixed to scale with zoom */}
+            {/* IMAGE COLUMN */}
             <div className="flex flex-col gap-4 sm:gap-6 lg:sticky lg:top-28 w-full">
               {news.image1 && (
                 <div className="w-full overflow-hidden rounded-xl shadow-lg">
@@ -182,7 +200,7 @@ const NewsDetail = () => {
               <Link
                 key={item.id}
                 to={`/news/${item.id}`}
-                className="group bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+                className="group bg-gray-50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
               >
                 {/* IMAGE */}
                 {item.image1 && (
@@ -200,7 +218,6 @@ const NewsDetail = () => {
                   <h3 className="font-playfair text-lg sm:text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
                     {item.title}
                   </h3>
-
                   <p className="text-gray-500 text-xs sm:text-sm">
                     {new Date(item.published_date).toLocaleDateString()}
                   </p>

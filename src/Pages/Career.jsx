@@ -34,7 +34,9 @@ function Career() {
     fetch(`${import.meta.env.VITE_API_URL}jobs/`)
       .then((res) => res.json())
       .then((data) => {
-        const jobsArray = data.results || data;
+        const jobsArray = (data.results || data).sort(
+          (a, b) => new Date(b.posted_date) - new Date(a.posted_date),
+        );
         setJobs(jobsArray);
         setFilteredJobs(jobsArray);
         setLoading(false);

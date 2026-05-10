@@ -1,21 +1,23 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const slides = [
     {
       image: "/30.webp",
+      mobileImage: "/30-mobile.webp",
       headline: (
         <>
           <span>
             BUILDING <span className="text-yellow-500">FUTURE</span>
           </span>
-          <span className="block mt-[0.5rem]">
+          <span className="block mt-1 sm:mt-[0.5rem]">
             WITH <span className="text-yellow-500">PRECISION</span>
           </span>
         </>
@@ -25,12 +27,13 @@ const Hero = () => {
     },
     {
       image: "/21.webp",
+      mobileImage: "/21-mobile.webp", // Add mobile-optimized image
       headline: (
         <>
           <span>
             One <span className="text-yellow-500">Company</span>
           </span>
-          <span className="block mt-[0.5rem]">
+          <span className="block mt-1 sm:mt-[0.5rem]">
             Complete <span className="text-yellow-500">Solutions</span>
           </span>
         </>
@@ -40,12 +43,13 @@ const Hero = () => {
     },
     {
       image: "/MorissvileGarden3.webp",
+      mobileImage: "/MorissvileGarden3-mobile.webp", // Add mobile-optimized image
       headline: (
         <>
           <span>
             Smart <span className="text-yellow-500">Engineering</span>
           </span>
-          <span className="block mt-[0.5rem]">
+          <span className="block mt-1 sm:mt-[0.5rem]">
             Strong <span className="text-yellow-500">Construction</span>
           </span>
         </>
@@ -55,11 +59,11 @@ const Hero = () => {
     },
   ];
 
-  const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
-    // Detect mobile once on mount
-    setIsMobile(window.innerWidth < 768);
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
@@ -67,99 +71,115 @@ const Hero = () => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   const currentSlide = slides[currentIndex];
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-between items-center text-white overflow-hidden bg-black pt-[4rem] md:pt-[5rem] xl:pt-[6rem] pb-[1.5rem]">
+    <section className="relative min-h-screen flex flex-col justify-between items-center text-white overflow-hidden bg-black pt-16 sm:pt-20 md:pt-24 lg:pt-28 xl:pt-32 pb-6">
       {/* Background */}
       <div className="absolute inset-0">
-        {/* ✅ Mobile — only renders the ONE mobile image, conditionally */}
-        {isMobile ? (
-          <img
-            src="/30-mobile.webp"
-            alt="Hero"
-            fetchPriority="high" // ← loads first
-            loading="eager"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover brightness-75"
-          />
-        ) : (
-          // ✅ Desktop — only render CURRENT slide image + next one (preload)
-          <div className="absolute inset-0">
-            {slides.map((slide, index) => {
-              const isCurrent = index === currentIndex;
-              const isNext = index === (currentIndex + 1) % slides.length;
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <img
+              src={isMobile ? currentSlide.mobileImage : currentSlide.image}
+              alt="Hero"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover brightness-75"
+            />
+          </motion.div>
+        </AnimatePresence>
 
-              // ✅ Only mount current + next slide — not all 3 at once
-              if (!isCurrent && !isNext) return null;
-
-              return (
-                <motion.img
-                  key={slide.image}
-                  src={slide.image}
-                  alt="Hero slide"
-                  fetchPriority={index === 0 ? "high" : "low"} // ← first image = high priority
-                  loading={index === 0 ? "eager" : "lazy"} // ← rest = lazy
-                  decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover brightness-75"
-                  initial={false}
-                  animate={{ opacity: isCurrent ? 1 : 0 }}
-                  transition={{ duration: 1.5, ease: "easeInOut" }}
-                />
-              );
-            })}
-          </div>
-        )}
+        {/* Preload next image */}
+        <img
+          src={
+            isMobile
+              ? slides[(currentIndex + 1) % slides.length].mobileImage
+              : slides[(currentIndex + 1) % slides.length].image
+          }
+          alt=""
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover opacity-0 pointer-events-none"
+          aria-hidden="true"
+        />
       </div>
 
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
 
       {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center text-center max-w-[70rem] px-[1.5rem]">
+      <div className="relative z-10 flex-1 flex flex-col justify-center text-center max-w-5xl px-4 sm:px-6 lg:px-8 py-8">
         <motion.h1
           key={`headline-${currentIndex}`}
-          className="uppercase font-extrabold font-playfair text-[2rem] sm:text-[2.4rem] md:text-[2.8rem] lg:text-[2.6rem] xl:text-[3.5rem] 2xl:text-[4.2rem] leading-[1.15] mb-[1rem]"
-          initial={{ opacity: 0, y: 40 }}
+          className="uppercase font-extrabold font-playfair text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl leading-tight mb-4 sm:mb-6"
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
           {currentSlide.headline}
         </motion.h1>
 
         <motion.p
           key={`sub-${currentIndex}`}
-          className="mx-auto max-w-[48rem] text-white/90 text-[0.9rem] sm:text-[1rem] md:text-[1.05rem] lg:text-[1rem] xl:text-[1.25rem] leading-[1.7] mb-[2rem]"
-          initial={{ opacity: 0, y: 30 }}
+          className="mx-auto max-w-2xl text-white/90 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 px-2 sm:px-0"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
           {currentSlide.subheadline}
         </motion.p>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-[1rem]">
+        <motion.div
+          className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <Link
             to="/portfolio"
-            className="px-[2rem] py-[0.75rem] text-[0.95rem] sm:text-[1rem] font-bold rounded-full bg-yellow-500 text-gray-900 hover:bg-yellow-600 transition hover:scale-105"
+            className="px-6 sm:px-8 py-3 text-sm sm:text-base font-bold rounded-full bg-yellow-500 text-gray-900 hover:bg-yellow-600 transition-all duration-300 hover:scale-105 active:scale-95"
           >
             Explore Our Work
           </Link>
           <Link
             to="/contact"
-            className="px-[2rem] py-[0.75rem] text-[0.95rem] sm:text-[1rem] font-bold rounded-full border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 transition hover:scale-105"
+            className="px-6 sm:px-8 py-3 text-sm sm:text-base font-bold rounded-full border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-gray-900 transition-all duration-300 hover:scale-105 active:scale-95"
           >
             Get In Touch
           </Link>
+        </motion.div>
+
+        {/* Slide indicators */}
+        <div className="flex justify-center gap-2 mt-6 sm:mt-8">
+          {slides.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 ${
+                index === currentIndex
+                  ? "bg-yellow-500 w-6 sm:w-8"
+                  : "bg-white/50 hover:bg-white/80"
+              }`}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
 
       <motion.h2
-        className="relative z-10 text-yellow-500 text-center font-semibold text-[1.05rem] sm:text-[1.2rem] md:text-[1.4rem] lg:text-[1.6rem] xl:text-[1.85rem] pb-[1.25rem] px-[1.25rem] tracking-wide"
-        initial={{ opacity: 0, y: 20 }}
+        className="relative z-10 text-yellow-500 text-center font-semibold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl pb-4 sm:pb-6 px-4 tracking-wide"
+        initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
       >
         Proudly Serving in Georgia, North Carolina, and Virginia
       </motion.h2>

@@ -263,7 +263,7 @@ const StructuralEngineering = () => {
             link="/contact"
           />
         </div>
-        <div className="mt-0 md:-mt-20">
+        <div className="mt-0 md:-mt-12">
           <StructuralStudiesSection
             structuralStudiesData={structuralStudiesData}
           />

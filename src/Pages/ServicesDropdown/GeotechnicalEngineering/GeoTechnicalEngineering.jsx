@@ -346,7 +346,7 @@ const GeotechnicalEngineering = () => {
           />
         </div>
 
-        <div className="mt-0 md:-mt-20">
+        <div className="mt-0 md:-mt-12">
           <GeotechnicalStudiesSection
             geotechnicalStudiesData={geotechnicalStudiesData}
           />

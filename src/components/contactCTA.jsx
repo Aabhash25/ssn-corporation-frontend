@@ -1,29 +1,35 @@
 const ContactCTA = ({
   title = "Ready to Start Your Project?",
-  description = "We are ready to assist you with reliable, data-driven, and optimized engineering solutions. Our team of experts is dedicated to providing you with the best possible service and support. We are here to help you with your project from start to finish. We are here to help you with your project from start to finish.",
+  description = "We are ready to assist you with reliable, data-driven, and optimized engineering solutions. Our team of experts is dedicated to providing you with the best possible service and support from concept to completion.",
   buttonText = "Contact Us",
   link = "/contact",
 }) => {
   return (
-    <section className="py-12 px-4">
-      <div className="max-w-screen-xl mx-auto bg-yellow-400 rounded-lg p-10">
-        <div className="text-center">
-          {/* Text Content */}
-          <div className="mb-6">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4 mb-4">
-              <h3 className="text-2xl md:text-3xl font-bold text-[#242687] font-playfair">
+    <section className="px-4 py-10 sm:py-14 md:py-16">
+      <div className="max-w-7xl mx-auto">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-yellow-50 to-white px-6 py-10 sm:px-10 sm:py-12 md:px-16 md:py-14 shadow-lg border border-yellow-400">
+          <div className="relative flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 text-center lg:text-left">
+            {/* Text Section */}
+            <div className="max-w-2xl">
+              <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-500 font-playfair leading-tight">
                 {title}
               </h3>
+
+              {/* Paragraph hidden on mobile */}
+              <p className="mt-4 text-gray-700 text-base sm:text-lg leading-relaxed hidden sm:block">
+                {description}
+              </p>
+            </div>
+
+            {/* Button */}
+            <div className="flex-shrink-0 w-full sm:w-auto">
               <button
                 onClick={() => (window.location.href = link)}
-                className="px-10 py-3 bg-[#242687] text-white font-semibold rounded-lg hover:bg-blue-800 hover:shadow-lg transition-all duration-300 whitespace-nowrap transform hover:scale-105"
+                className="px-8 sm:px-10 py-3 sm:py-4 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-600 hover:shadow-xl transition-all duration-300 transform hover:scale-105 w-full sm:w-auto"
               >
                 {buttonText}
               </button>
             </div>
-            <p className="text-[#242687] text-lg max-w-2xl mx-auto">
-              {description}
-            </p>
           </div>
         </div>
       </div>
