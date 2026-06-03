@@ -30,6 +30,7 @@ const JobDetail = lazy(() => import("./Pages/JobDetail"));
 
 const OpenResources = lazy(() => import("./FooterPages/OpenResources"));
 const News = lazy(() => import("./FooterPages/News"));
+const Gallery = lazy(() => import("./FooterPages/Gallery"));
 const Business = lazy(() => import("./FooterPages/Business"));
 const ProposalPage = lazy(() => import("./FooterPages/ProposalPage"));
 const NewsDetail = lazy(() => import("./FooterPages/NewsDetail"));
@@ -123,7 +124,6 @@ function App() {
               </>
             }
           />
-
           {/* Pages */}
           <Route path="/portfolio" element={<PortfolioPages />} />
           <Route path="/about" element={<AboutUs />} />
@@ -137,12 +137,10 @@ function App() {
           <Route path="/quote" element={<Quote />} />
           <Route path="/engineers" element={<Engineers />} />
           <Route path="/contractors" element={<Contractors />} />
-
           <Route
             path="/project-description/:id"
             element={<PortfolioDescription />}
           />
-
           {/* Services */}
           <Route
             path="/engineering-architecture"
@@ -161,7 +159,6 @@ function App() {
             path="/material-testing"
             element={<ConstructionMaterialTesting />}
           /> */}
-
           {/* Dropdown Services */}
           <Route
             path="/building-service-design"
@@ -209,14 +206,13 @@ function App() {
             path="/specialty-services"
             element={<SpecialtyEngineeringServices />}
           />
-
           <Route path="/news/:id" element={<NewsDetail />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/qtakeoff-ai" element={<QTakeoffAI />} />
           <Route
             path="/real-estate-site-analysis"
             element={<RealEstateAnalysis />}
           />
-
           {/* 404 */}
           <Route path="*" element={<NotAvailable />} />
         </Routes>

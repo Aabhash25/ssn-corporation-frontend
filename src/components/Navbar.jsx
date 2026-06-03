@@ -14,6 +14,7 @@ import {
 // Constants moved outside component
 const TOP_LINKS = [
   { name: "News", to: "/news" },
+  { name: "Gallery", to: "/gallery" },
   { name: "Business with Us", to: "/business" },
   { name: "Request a Proposal", to: "/request-proposal" },
   { name: "Open Resources", to: "/open-resources" },
@@ -356,7 +357,7 @@ const ModernNavbar = () => {
             Construction Services
           </SectionHeader>
 
-          {/* ←–– Flashy General Contractor callout ––→ */}
+          {/* Flashy General Contractor callout */}
           <div
             className="mb-3 px-3 py-2 rounded-lg bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-gray-900 font-bold font-oswald tracking-wide shadow-md animate-pulse-slow"
             style={{
@@ -526,13 +527,17 @@ const ModernNavbar = () => {
             </span>
           </div>
 
-          {/* Top Links */}
-          <div className="flex space-x-3 lg:space-x-5 xl:space-x-8 text-xs lg:text-sm xl:text-lg font-semibold">
+          {/* Top Links — scrollable on mid-size screens, all visible on xl */}
+          <div className="flex items-center overflow-x-auto scrollbar-none space-x-3 lg:space-x-4 xl:space-x-8 text-xs lg:text-sm xl:text-lg font-semibold flex-shrink min-w-0 px-2">
             {TOP_LINKS.map((link) => (
               <Link
                 key={link.name}
                 to={link.to}
-                className="hover:text-yellow-400 transition-colors"
+                className={`whitespace-nowrap hover:text-yellow-400 transition-colors ${
+                  link.name === "Gallery"
+                    ? "text-yellow-400 border border-yellow-500/50 px-2 lg:px-3 py-0.5 rounded-full hover:bg-yellow-500/10 hover:text-yellow-300"
+                    : ""
+                }`}
               >
                 {link.name}
               </Link>
@@ -540,7 +545,7 @@ const ModernNavbar = () => {
           </div>
 
           {/* Social */}
-          <div className="flex space-x-3 lg:space-x-4 xl:space-x-6 text-base lg:text-lg xl:text-xl">
+          <div className="flex flex-shrink-0 space-x-3 lg:space-x-4 xl:space-x-6 text-base lg:text-lg xl:text-xl">
             {SOCIAL_LINKS.map((social, idx) => (
               <a
                 key={idx}
@@ -654,7 +659,7 @@ const ModernNavbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="xl:hidden flex items-center">
+          <div className="lg:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`focus:outline-none p-3 rounded-md transition-all duration-300 ${linkStyle}`}
@@ -892,17 +897,21 @@ const ModernNavbar = () => {
             </Link>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links — includes Gallery */}
           <div className="flex flex-col space-y-2 border-t border-gray-700 pt-4">
             <p className="text-sm text-gray-400 font-semibold">Quick Links</p>
             {TOP_LINKS.map((link) => (
               <Link
                 key={link.name}
                 to={link.to}
-                className="text-sm text-white hover:text-yellow-400"
+                className={`text-sm hover:text-yellow-400 transition-colors ${
+                  link.name === "Gallery"
+                    ? "text-yellow-400 font-semibold"
+                    : "text-white"
+                }`}
                 onClick={closeAllMenus}
               >
-                {link.name}
+                {link.name === "Gallery" ? "📷 " + link.name : link.name}
               </Link>
             ))}
           </div>
