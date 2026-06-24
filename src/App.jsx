@@ -15,8 +15,8 @@ import Licenses from "./components/Licenses";
 import AffiliationRibbon from "./components/AffiliationRibbon";
 import Quote from "./components/Quote";
 import NotAvailable from "./components/NotAvailable";
-import QTakeoffAI from "./pages/QTakeoffAI";
-import RealEstateAnalysis from "./pages/RealEstateAnalysis";
+import QTakeoffAI from "./Pages/QTakeoffAI";
+import RealEstateAnalysis from "./Pages/RealEstateAnalysis";
 
 // ⭐ Lazy-loaded pages — these will split into separate JS files
 const AboutUs = lazy(() => import("./Pages/AboutUs"));
