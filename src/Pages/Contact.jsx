@@ -69,19 +69,29 @@ const Contact = () => {
   const offices = [
     {
       title: "Corporate Office",
+      code: "NC",
       location: "5540 Centerview Dr, Ste 304 \n Raleigh, NC 27606",
       phone: "(919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
       title: "Virginia Office",
+      code: "VA",
       location: "8401 Mayland Dr, Ste A,\n Richmond, VA 23294",
       phone: "(919) 703-0222",
       email: "contact@ssncorporation.com",
     },
     {
       title: "Georgia Office",
+      code: "GA",
       location: "6500 McDonough Dr, Ste E-04\nNorcross, GA 30093",
+      phone: "(919) 703-0222",
+      email: "contact@ssncorporation.com",
+    },
+    {
+      title: "Florida Office",
+      code: "FL",
+      location: "7901 4th St N, Ste 300\nSt. Petersburg, FL 33702",
       phone: "(919) 703-0222",
       email: "contact@ssncorporation.com",
     },
@@ -132,7 +142,7 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-10 items-start">
           <motion.div
             className="bg-white rounded-3xl shadow-xl p-8 sm:p-12"
             initial="hidden"
