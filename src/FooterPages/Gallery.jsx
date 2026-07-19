@@ -130,7 +130,7 @@ const GalleryItem = ({ item, index }) => {
                       <line x1="2" y1="12" x2="22" y2="12" />
                       <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
                     </svg>
-                    www.qtakeoff.ai
+                    {item.website_url.replace(/^https?:\/\//, "")}
                   </a>
                 )}
               </div>
@@ -206,7 +206,10 @@ export default function Gallery() {
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    setItems(galleryItems);
+    const sorted = [...galleryItems].sort(
+      (a, b) => new Date(b.date) - new Date(a.date),
+    );
+    setItems(sorted);
     setCategories(galleryCategories);
     setLoading(false);
   }, []);
@@ -260,7 +263,7 @@ export default function Gallery() {
             ...categories.map((c) => ({
               slug: c.slug,
               name: c.name,
-              count: c.item_count,
+              count: items.filter((i) => i.category_slug === c.slug).length,
             })),
           ].map((tab) => {
             const active = filter === tab.slug;
