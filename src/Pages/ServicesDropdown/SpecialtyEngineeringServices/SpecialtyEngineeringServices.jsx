@@ -73,7 +73,7 @@ These methods reduce environmental impact, improve safety, and preserve existing
 - Signing, striping, and pavement marking plans
 - Parking analysis and circulation planning
 - Access management & site driveway evaluations`,
-      image: "/TrafficEngineeringServices.png",
+      image: "/TrafficEngineeringServices.webp",
     },
     {
       title: "Mechanical, Electrical, and Plumbing (MEP) Design",

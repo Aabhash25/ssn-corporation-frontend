@@ -2,7 +2,7 @@ const projects = [
   {
     id: 1,
     name: "Empire Tower",
-    image: "/CustomVacationHome.jpg",
+    image: "/CustomVacationHome.webp",
     description: "High-rise commercial building in New York.",
     year: 2022,
     lat: 40.748817,
@@ -11,7 +11,7 @@ const projects = [
   {
     id: 2,
     name: "Silicon Valley Hub",
-    image: "/GamesDayMensHealthConstruction.jpg",
+    image: "/GamesDayMensHealthConstruction.webp",
     description: "Modern tech campus in California.",
     year: 2023,
     lat: 37.387474,
@@ -20,7 +20,7 @@ const projects = [
   {
     id: 3,
     name: "Chicago Industrial Park",
-    image: "/ParkRestRoomBuilding.jpg",
+    image: "/ParkRestRoomBuilding.webp",
     description: "Large industrial facility in Chicago.",
     year: 2024,
     lat: 41.878113,

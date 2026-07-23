@@ -10,7 +10,7 @@ const SRC_DIR = path.join(__dirname, "src");
 const INDEX_HTML = path.join(__dirname, "public/index.html");
 
 // extensions to detect
-const MEDIA_EXTENSIONS = [".png", ".jpg", ".jpeg", ".gif", ".svg", ".mp4", ".webm"];
+const MEDIA_EXTENSIONS = [".webp", ".webp", ".webp", ".gif", ".svg", ".mp4", ".webm"];
 
 // Recursively get all media files in public
 function getAllMediaFiles(dir) {

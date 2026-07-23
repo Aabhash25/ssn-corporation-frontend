@@ -59,7 +59,7 @@ const MaterialTesting = () => {
         "Relative Density and Consolidation Tests",
         "Aggregate Gradation, Abrasion, and Soundness",
       ],
-      image: "/Soil.jpg",
+      image: "/Soil.webp",
     },
     {
       id: "concrete-testing",
@@ -79,7 +79,7 @@ const MaterialTesting = () => {
         "Density and Absorption",
         "Rapid Chloride Permeability (RCPT)",
       ],
-      image: "/concreteTesting.jpg",
+      image: "/concreteTesting.webp",
     },
     {
       id: "rock-testing",
@@ -96,7 +96,7 @@ const MaterialTesting = () => {
         "Direct Shear Strength Testing of Rock Joints",
         "Modulus of Elasticity and Deformation Testing",
       ],
-      image: "/Rock.jpg",
+      image: "/Rock.webp",
     },
     {
       id: "bitumen-asphalt-testing",
@@ -113,7 +113,7 @@ const MaterialTesting = () => {
         "Indirect Tensile Strength",
         "Moisture Susceptibility Testing",
       ],
-      image: "/asphaltTesting.jpg",
+      image: "/asphaltTesting.webp",
     },
     {
       id: "water-drainage-testing",
@@ -128,7 +128,7 @@ const MaterialTesting = () => {
         "Filter Media Testing",
         "Permeable Pavement Testing",
       ],
-      image: "/permeabilityTesting.jpg",
+      image: "/permeabilityTesting.webp",
     },
     {
       id: "environmental-testing",
@@ -143,7 +143,7 @@ const MaterialTesting = () => {
         "Compaction Moisture and Volatile Content Testing",
         "Construction Debris Characterization",
       ],
-      image: "/environmentalTesting.jpg",
+      image: "/environmentalTesting.webp",
     },
   ];
 

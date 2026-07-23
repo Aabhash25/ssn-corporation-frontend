@@ -87,7 +87,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 1,
       title: "Site Feasibility, Due Diligence",
-      image: "/StructuralEngineer3.jpg",
+      image: "/StructuralEngineer3.webp",
       description:
         "Comprehensive site analysis including zoning, constraints, utilities, and environmental factors to identify risks and opportunities.",
       details: [
@@ -102,7 +102,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 2,
       title: "Zoning & Entitlements Support",
-      image: "/ZoningEntitlementsSupport.jpg",
+      image: "/ZoningEntitlementsSupport.webp",
       description:
         "Strategic support for zoning changes, variances, and special permits with comprehensive technical documentation.",
       details: [
@@ -116,7 +116,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 3,
       title: "Conceptual Site Planning",
-      image: "/ConceptualSitePlanning.jpeg",
+      image: "/ConceptualSitePlanning.webp",
       description:
         "Development of conceptual site layouts and planning strategies that optimize land use and meet project objectives.",
       details: [
@@ -132,7 +132,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 5,
       title: "Permitting & Agency Coordination",
-      image: "/StructuralEngineer4.jpg",
+      image: "/StructuralEngineer4.webp",
       description:
         "Complete permitting services including application preparation, agency coordination, and approval management.",
       details: [
@@ -147,7 +147,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 4,
       title: "Civil & Infrastructure Planning",
-      image: "/ai-placeholder/structural-evaluation.jpg",
+      image: "/ai-placeholder/structural-evaluation.webp",
       description:
         "Comprehensive civil engineering and infrastructure planning for site development and utility systems.",
       details: [
@@ -162,7 +162,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 6,
       title: "Construction Drawings and Specification",
-      image: "/ai-placeholder/retaining-wall.jpg",
+      image: "/ai-placeholder/retaining-wall.webp",
       description:
         "Detailed construction-ready documents and specifications compliant with all regulatory requirements.",
       details: [
@@ -180,7 +180,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 8,
       title: "Pre-Development Planning",
-      image: "/ai-placeholder/site-feasibility.jpg", // Placeholder image for now
+      image: "/ai-placeholder/site-feasibility.webp", // Placeholder image for now
       description:
         "Comprehensive pre-development services including site selection, feasibility studies, and early risk identification to ensure project success.",
 
@@ -189,7 +189,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 9,
       title: "Entitlement & Approval Support",
-      image: "/ai-placeholder/structural-studies.jpg", // Placeholder image
+      image: "/ai-placeholder/structural-studies.webp", // Placeholder image
       description:
         "End-to-end entitlement support including zoning strategy development and streamlined approval coordination processes.",
 
@@ -198,7 +198,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 10,
       title: "Design & Technical Coordination",
-      image: "/ai-placeholder/disaster-evaluation.jpg", // Placeholder for now
+      image: "/ai-placeholder/disaster-evaluation.webp", // Placeholder for now
       description:
         "Integrated coordination between planning, engineering, and architecture teams to deliver constructible solutions.",
 
@@ -207,7 +207,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 11,
       title: "Development Execution Support",
-      image: "/ai-placeholder/existing-structure.jpg", // Placeholder image
+      image: "/ai-placeholder/existing-structure.webp", // Placeholder image
       description:
         "Ongoing support throughout the development process including regulatory coordination and construction phase assistance.",
       color: "orange",

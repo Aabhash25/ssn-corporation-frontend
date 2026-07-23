@@ -4,7 +4,7 @@
 //     title:
 //       "SSN Corporation Provides Engineering Support to Mabrey Roofing Company of Durham ",
 //     date: "November 12, 2025",
-//     imageUrls: ["/ResidentialConstruction.webp", "/MabreyRoofing.jpg"],
+//     imageUrls: ["/ResidentialConstruction.webp", "/MabreyRoofing.webp"],
 //     content: [
 //       "SSN Corporation is pleased to announce its continued role in providing engineering support services to Mabrey Roofing Company of Durham, a local residential general contractor known for quality workmanship and customer-focused service. Through this collaboration, SSN Corporation delivers technical expertise that enhances the safety, reliability, and performance of Mabrey Roofing’s projects across the region. ",
 //       "As part of this support, SSN Corporation serves as an engineering resource for Mabrey Roofing, providing a comprehensive range of services throughout the project lifecycle. These include site resolution in engineering to address unforeseen structural or design issues uncovered during construction; structural engineering services such as load analysis, structural assessments, and engineering calculations to ensure full compliance with applicable building codes and safety standards; and design coordination and engineering review to support planning, preparing design for permitting and permitting follow up, material selection, and both on-site and remote technical guidance. This assistance helps Mabrey Roofing crews navigate complex structural conditions with accuracy and confidence.",

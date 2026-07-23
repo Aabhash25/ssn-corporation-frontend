@@ -31,7 +31,7 @@ export const services = [
   {
     title: "Facility Planning and Design",
     icon: "🏭",
-    image: "/seven-eleven.jpg",
+    image: "/seven-eleven.webp",
     description:
       "We provide comprehensive facility planning and design for essential infrastructure and recreation. From water treatment to power generation, we deliver tailored, sustainable solutions. We can help you in the following areas:",
     features: [
@@ -44,7 +44,7 @@ export const services = [
   {
     title: "Specialty Engineering Services",
     icon: "🏗️",
-    image: "/spEnginnering.jpg",
+    image: "/spEnginnering.webp",
     description:
       "We offer specialty design solutions for advanced infrastructure and environmental challenges. From trenchless technology to water resources and acoustic control, we deliver innovative and sustainable results. We can help you with the following:",
     features: [
@@ -60,7 +60,7 @@ export const services = [
   {
     title: "Subsurface Investigation and Geotechnical Engineering",
     icon: "🌍",
-    image: "/image.jpg",
+    image: "/image.webp",
     description:
       "We offer field investigation services to assess subsurface conditions for construction and engineering projects.",
     features: [

@@ -52,7 +52,7 @@
 "At SSN Corporation , we specialize in creating commercial spaces that are not only visually stunning but also highly functional and aligned with your business goals. Whether you’re planning an office complex, retail store, hospitality facility, or industrial building, our team of experts ensures that every project is executed with precision, efficiency, and innovation. From concept to completion, we deliver spaces that enhance productivity, attract customers, and elevate your brand.",
 
       image:
-        "/GamesDayMensHealth9.jpg",
+        "/GamesDayMensHealth9.webp",
       icon: "🏢",
       features: [
         "Office Buildings Design & Construction",
@@ -68,7 +68,7 @@
       description:
 "At SSN Corporation , we specialize in transforming tired, outdated, or inefficient commercial spaces into dynamic environments that drive business success. Whether you’re looking to modernize an office, revamp a retail store, or upgrade an industrial facility, our Commercial Space Uplift Services are designed to breathe new life into your property. From aesthetic enhancements to operational improvements, we deliver solutions that align with your business goals and elevate your brand.",
       image:
-        "/commUpfit.jpg",
+        "/commUpfit.webp",
       icon: "🔄",
       features: [
         "Interior Renovations",

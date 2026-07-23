@@ -2,7 +2,7 @@ const HeroSection = () => {
   return (
     <section className="relative w-full h-72 sm:h-80 flex items-center justify-center overflow-hidden bg-amber-50">
       <img
-        src="/k.jpg"
+        src="/k.webp"
         alt="Structural Engineering Hero"
         className="absolute inset-0 w-full h-full object-cover"
       />

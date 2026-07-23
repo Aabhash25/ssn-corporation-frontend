@@ -86,7 +86,7 @@ const StructuralEngineering = () => {
     {
       id: 1,
       title: "Building Structural Analysis and Design",
-      image: "/StructuralEngineer3.jpg",
+      image: "/StructuralEngineer3.webp",
       description:
         "We provide structural analysis and design for residential, commercial, industrial, and institutional buildings. Services include gravity and lateral load analysis, framing design, and preparation of structural construction documents.",
       details: [
@@ -100,7 +100,7 @@ const StructuralEngineering = () => {
     {
       id: 2,
       title: "Bridge, Tank, and Tower Structural Design",
-      image: "/BridgeTankandTowerStructuralDesign.jpeg",
+      image: "/BridgeTankandTowerStructuralDesign.webp",
       description:
         "We offer structural engineering services for bridges, tanks, towers, and similar structures. Designs consider applicable loading conditions, serviceability requirements, and long-term durability.",
       details: [
@@ -113,7 +113,7 @@ const StructuralEngineering = () => {
     {
       id: 3,
       title: "Roadway and Transportation Structure Engineering",
-      image: "/RoadwayandTransportationStructureEngineering.png",
+      image: "/RoadwayandTransportationStructureEngineering.webp",
       description:
         "Our structural services support roadway and transportation projects, including culverts, underpasses, retaining systems, and ancillary roadway structures. Designs comply with applicable transportation standards and project requirements.",
       details: [
@@ -126,7 +126,7 @@ const StructuralEngineering = () => {
     {
       id: 4,
       title: "Retaining Wall and Site Structure Design",
-      image: "/RetainingWallandSiteStructureDesign.jpg",
+      image: "/RetainingWallandSiteStructureDesign.webp",
       description:
         "SSN Corporation designs retaining walls, sound walls, and other site structures. Our designs address earth pressures, drainage considerations, and constructability.",
       details: [
@@ -139,7 +139,7 @@ const StructuralEngineering = () => {
     {
       id: 5,
       title: "Foundation Structural Analysis and Design",
-      image: "/StructuralEngineer4.jpg",
+      image: "/StructuralEngineer4.webp",
       description:
         "We provide structural analysis and design for shallow and deep foundations, including spread footings, mat foundations, piles, and drilled shafts, based on project loading and site conditions.",
       details: [
@@ -152,7 +152,7 @@ const StructuralEngineering = () => {
     {
       id: 6,
       title: "Structural Evaluation, Retrofitting, and Rehabilitation",
-      image: "/StructuralEvaluationRetrofittingandRehabilitation.jpeg",
+      image: "/StructuralEvaluationRetrofittingandRehabilitation.webp",
       description:
         "Our engineers evaluate existing structures and develop retrofit or rehabilitation solutions to address structural deficiencies, increased loading, or updated code requirements.",
       details: [
@@ -165,7 +165,7 @@ const StructuralEngineering = () => {
     {
       id: 7,
       title: "Post-Tensioned Slab Design",
-      image: "/StructuralEngineer2.png",
+      image: "/StructuralEngineer2.webp",
       description:
         "We design post-tensioned slab-on-grade and elevated slab systems to improve structural performance, reduce cracking, and optimize material use.",
       details: [
@@ -181,7 +181,7 @@ const StructuralEngineering = () => {
     {
       id: 8,
       title: "Structural Design for New Construction",
-      image: "/ai-placeholder/site-feasibility.jpg", // Placeholder image for now
+      image: "/ai-placeholder/site-feasibility.webp", // Placeholder image for now
       description:
         "SSN Corporation provides structural engineering solutions for new buildings, facilities, and infrastructure projects from concept through construction.",
       details: [
@@ -196,7 +196,7 @@ const StructuralEngineering = () => {
     {
       id: 9,
       title: "Transportation and Facility Infrastructure Structures",
-      image: "/ai-placeholder/structural-studies.jpg", // Placeholder image
+      image: "/ai-placeholder/structural-studies.webp", // Placeholder image
       description:
         "We deliver structural solutions for transportation-related and facility support structures, including foundations, culverts, retaining systems, and equipment support structures.",
       details: [
@@ -210,7 +210,7 @@ const StructuralEngineering = () => {
     {
       id: 10,
       title: "Structural Evaluation of Disaster-Damaged Structures",
-      image: "/ai-placeholder/disaster-evaluation.jpg", // Placeholder for now
+      image: "/ai-placeholder/disaster-evaluation.webp", // Placeholder for now
       description:
         "Our engineers perform structural evaluations of buildings and infrastructure affected by fire, earthquake, flood, wind, or other natural or man-made disasters. Services include condition assessments, damage documentation, and repair or retrofit recommendations.",
       details: [
@@ -224,7 +224,7 @@ const StructuralEngineering = () => {
     {
       id: 11,
       title: "Existing Structure Improvements",
-      image: "/ai-placeholder/existing-structure.jpg", // Placeholder image
+      image: "/ai-placeholder/existing-structure.webp", // Placeholder image
       description:
         "We support rehabilitation, strengthening, and adaptive reuse of existing structures to extend service life and improve performance.",
       details: [

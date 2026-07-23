@@ -19,7 +19,7 @@ const AboutSection = () => {
         </div>
         <div className="relative h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-700">
           <img
-            src="/DesigningBuildingsThatPerformEndureandInspire.jpg"
+            src="/DesigningBuildingsThatPerformEndureandInspire.webp"
             alt="Building Systems Design Engineering"
             className="w-full h-full object-cover"
           />

@@ -7,7 +7,7 @@ const initialProjects = [
   {
     id: 1,
     name: "Custom Vacation Home",
-    image: "/CustomVacationHome.jpg",
+    image: "/CustomVacationHome.webp",
     description: "A modern commercial skyscraper with cutting-edge design.",
     startedYear: 2022,
     status: "Completed",
@@ -16,7 +16,7 @@ const initialProjects = [
   {
     id: 2,
     name: "Games Day Mens Health Construction",
-    image: "/GamesDayMensHealthConstruction.jpg",
+    image: "/GamesDayMensHealthConstruction.webp",
     description:
       "Luxury residential villa emphasizing sustainable architecture.",
     startedYear: 2023,
@@ -26,7 +26,7 @@ const initialProjects = [
   {
     id: 3,
     name: "Park Rest Room Building",
-    image: "/ParkRestRoomBuilding.jpg",
+    image: "/ParkRestRoomBuilding.webp",
     description:
       "Luxury residential villa emphasizing sustainable architecture.",
     startedYear: 2023,
@@ -41,8 +41,8 @@ const Portfolio = () => {
   const handleUpdate = (id, field, value) => {
     setProjects((prev) =>
       prev.map((project) =>
-        project.id === id ? { ...project, [field]: value } : project
-      )
+        project.id === id ? { ...project, [field]: value } : project,
+      ),
     );
   };
 

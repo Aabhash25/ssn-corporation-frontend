@@ -85,7 +85,7 @@ const Contact = () => {
       title: "Georgia Office",
       code: "GA",
       location: "6500 McDonough Dr, Ste E-04\nNorcross, GA 30093",
-      phone: "(919) 703-0222",
+      phone: "(470) 504-5962",
       email: "contact@ssncorporation.com",
     },
     {

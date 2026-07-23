@@ -2,7 +2,7 @@ const HeroSection = () => {
   return (
     <section className="relative w-full h-72 sm:h-80 flex items-center justify-center overflow-hidden bg-white">
       <img
-        src="/geotech-hero.jpg"
+        src="/geotech-hero.webp"
         alt="Building Systems Design Hero"
         className="absolute inset-0 w-full h-full object-cover"
       />

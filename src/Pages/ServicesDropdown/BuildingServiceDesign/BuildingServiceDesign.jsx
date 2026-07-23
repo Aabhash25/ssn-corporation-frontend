@@ -87,7 +87,7 @@ const BuildingServiceDesign = () => {
     {
       id: 1,
       title: "MEP (Mechanical, Electrical & Plumbing) Design",
-      image: "/MEPDesign.jpeg",
+      image: "/MEPDesign.webp",
       description:
         "We develop fully coordinated MEP systems that enhance building comfort, energy efficiency, and operational reliability. Our designs integrate seamlessly with architectural and structural plans, ensuring constructability and minimal conflicts during construction.",
       color: "purple",
@@ -95,7 +95,7 @@ const BuildingServiceDesign = () => {
     {
       id: 2,
       title: "Fire Alarm System Design",
-      image: "/FireAlarmSystemDesign.png",
+      image: "/FireAlarmSystemDesign.webp",
       description:
         "Our team designs fire alarm systems that meet all local, state, and national codes, providing early detection and reliable notification in emergency scenarios. We focus on optimal device placement, zoning, and system redundancy to protect occupants and property.",
       details: [
@@ -108,7 +108,7 @@ const BuildingServiceDesign = () => {
     {
       id: 3,
       title: "Automatic Sprinkler & Fire Suppression Design",
-      image: "/AutomaticSprinklerFireSuppressionDesign.jpeg",
+      image: "/AutomaticSprinklerFireSuppressionDesign.webp",
       description:
         "From wet pipe to pre-action and special hazard systems, we provide sprinkler and fire suppression designs tailored to your building's use, occupancy classification, and code requirements. Our systems are engineered for efficiency, reliability, and safety.",
       color: "green",
@@ -117,7 +117,7 @@ const BuildingServiceDesign = () => {
     {
       id: 5,
       title: "Life Safety & Egress Planning",
-      image: "/StructuralEngineer4.jpg",
+      image: "/StructuralEngineer4.webp",
       description:
         "We integrate life safety strategies into every design, including emergency egress paths, fire-rated construction, and alarm placement. Our planning ensures occupant safety and compliance with all relevant regulations.",
       details: [
@@ -130,7 +130,7 @@ const BuildingServiceDesign = () => {
     {
       id: 4,
       title: "HVAC System Engineering",
-      image: "/HVACBuildingServiceDesign.png",
+      image: "/HVACBuildingServiceDesign.webp",
       description:
         "We design heating, ventilation, and air conditioning systems that deliver comfort, promote indoor air quality, and optimize energy use. Our HVAC solutions are sustainable, scalable, and tailored to your building's specific requirements.",
       color: "violet",
@@ -138,7 +138,7 @@ const BuildingServiceDesign = () => {
     {
       id: 6,
       title: "Electrical Power & Lighting Design",
-      image: "/IntegratedSystemCoordination.jpeg",
+      image: "/IntegratedSystemCoordination.webp",
       description:
         "We provide comprehensive electrical system planning, including service entrance, distribution, lighting design, and power quality solutions. Our designs prioritize efficiency, reliability, and long-term adaptability.",
       details: [
@@ -154,7 +154,7 @@ const BuildingServiceDesign = () => {
     {
       id: 8,
       title: "Integrated System Coordination",
-      image: "/IntegratedSystemCoordination.jpeg", // Placeholder image for now
+      image: "/IntegratedSystemCoordination.webp", // Placeholder image for now
       description:
         "We ensure that every building system — from electrical and plumbing to fire protection — works together seamlessly. Our approach reduces design conflicts, construction delays, and budget overruns.",
 
@@ -163,7 +163,7 @@ const BuildingServiceDesign = () => {
     {
       id: 9,
       title: "Code Compliance & Submission Ready Plans",
-      image: "/ai-placeholder/structural-studies.jpg", // Placeholder image
+      image: "/ai-placeholder/structural-studies.webp", // Placeholder image
       description:
         "Our deliverables are fully compliant with national and local codes, including NFPA and building code requirements. We provide clear, detailed, and submission-ready plans to streamline approvals and inspections.",
 
@@ -172,7 +172,7 @@ const BuildingServiceDesign = () => {
     {
       id: 10,
       title: "Risk Assessment & Performance Optimization",
-      image: "/RiskAssessment&PerformanceOptimization.jpeg",
+      image: "/RiskAssessment&PerformanceOptimization.webp",
       description:
         "We evaluate building performance, fire risk, and operational efficiency to design systems that balance safety, cost, and long-term functionality.",
 
@@ -181,7 +181,7 @@ const BuildingServiceDesign = () => {
     {
       id: 11,
       title: "Sustainable & Energy-Efficient Design",
-      image: "/ai-placeholder/existing-structure.jpg", // Placeholder image
+      image: "/ai-placeholder/existing-structure.webp", // Placeholder image
       description:
         "Our designs focus on reducing energy consumption, minimizing environmental impact, and maximizing occupant comfort. We incorporate energy-efficient systems and sustainable practices into every project.",
       color: "orange",

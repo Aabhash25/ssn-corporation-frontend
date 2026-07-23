@@ -5,9 +5,9 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 // Fix leaflet default markers
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.webp";
+import markerIcon from "leaflet/dist/images/marker-icon.webp";
+import markerShadow from "leaflet/dist/images/marker-shadow.webp";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -76,7 +76,7 @@ export const HoverMarker = React.memo(
         }}
       />
     );
-  }
+  },
 );
 
 // ============================================
@@ -130,7 +130,7 @@ export const PortfolioMapView = React.memo(
     hoverPosition,
   }) => {
     const validProjects = projects.filter(
-      (p) => p.lat && p.lng && !isNaN(p.lat) && !isNaN(p.lng)
+      (p) => p.lat && p.lng && !isNaN(p.lat) && !isNaN(p.lng),
     );
 
     return (
@@ -142,7 +142,7 @@ export const PortfolioMapView = React.memo(
           style={{ height: "100%", width: "100%", borderRadius: "16px" }}
         >
           <TileLayer
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.webp"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           />
           <MapController zoomProject={zoomProject} />
@@ -160,5 +160,5 @@ export const PortfolioMapView = React.memo(
         <MapHoverTooltip project={hoveredProject} position={hoverPosition} />
       </div>
     );
-  }
+  },
 );

@@ -57,7 +57,7 @@ const MaterialTesting = () => {
 - Specific Gravity and Moisture Content
 - Relative Density and Consolidation Tests
 - Aggregate Gradation, Abrasion, and Soundness`,
-      image: "/Soil.jpg",
+      image: "/Soil.webp",
     },
     {
       title: "Fresh and Hardened Concrete Testing",
@@ -75,7 +75,7 @@ const MaterialTesting = () => {
 - Modulus of Elasticity
 - Density and Absorption
 - Rapid Chloride Permeability (RCPT)`,
-      image: "/concreteTesting.jpg",
+      image: "/concreteTesting.webp",
     },
     {
       title: "Rock Testing",
@@ -90,7 +90,7 @@ const MaterialTesting = () => {
 - Porosity and Absorption Testing
 - Direct Shear Strength Testing of Rock Joints
 - Modulus of Elasticity and Deformation Testing`,
-      image: "/Rock.jpg",
+      image: "/Rock.webp",
     },
     {
       title: "Bitumen and Asphalt Mix Testing",
@@ -105,7 +105,7 @@ const MaterialTesting = () => {
 - Bulk Specific Gravity and Density
 - Indirect Tensile Strength
 - Moisture Susceptibility Testing`,
-      image: "/asphaltTesting.jpg",
+      image: "/asphaltTesting.webp",
     },
     {
       title: "Water Drainage & Permeability Testing",
@@ -118,7 +118,7 @@ const MaterialTesting = () => {
 - Porosity and Void Ratio Evaluation
 - Filter Media Testing
 - Permeable Pavement Testing`,
-      image: "/permeabilityTesting.jpg",
+      image: "/permeabilityTesting.webp",
     },
     {
       title: "Environmental Sampling & Testing",
@@ -131,7 +131,7 @@ const MaterialTesting = () => {
 - Heavy Metals and Hydrocarbon Screening
 - Compaction Moisture and Volatile Content Testing
 - Construction Debris Characterization`,
-      image: "/environmentalTesting.jpg",
+      image: "/environmentalTesting.webp",
     },
   ];
 

@@ -6,7 +6,7 @@ const services = [
     description:
       "Our pavement engineering services support new construction and rehabilitation of roadways, parking areas, and paved surfaces. We assess traffic loading, subgrade conditions, and environmental factors to recommend appropriate pavement structures — including flexible (asphalt), rigid (concrete), or composite systems — with optimized layer thickness, materials specification, and construction guidance that extend service life and minimize maintenance costs.",
     bullets: [],
-    image: "/images/services/pavement.jpg",
+    image: "/images/services/pavement.webp",
   },
   {
     title: "Trenchless Design (HDD, Pipe Jacking, Microtunneling)",
@@ -20,7 +20,7 @@ const services = [
     ],
     footer:
       "These methods reduce environmental impact, improve safety, and preserve existing site conditions when installing water, sewer, storm, telecommunications, and other utilities.",
-    image: "/images/services/trenchless.jpg",
+    image: "/images/services/trenchless.webp",
   },
   {
     title: "Traffic Engineering Services",
@@ -34,7 +34,7 @@ const services = [
     ],
     footer:
       "We coordinate with municipalities and DOT agencies to ensure designs align with local standards and improve overall project function.",
-    image: "/TrafficEngineeringServices.png",
+    image: "/TrafficEngineeringServices.webp",
   },
   {
     title: "Mechanical, Electrical, and Plumbing (MEP) Design",
@@ -47,7 +47,7 @@ const services = [
     ],
     footer:
       "MEP design services include detailed drawings, specifications, equipment sizing, and coordination with architectural and structural disciplines.",
-    image: "/images/services/mep.jpg",
+    image: "/images/services/mep.webp",
   },
   {
     title: "Special Inspections Services (IBC Chapter 17)",
@@ -61,7 +61,7 @@ const services = [
     ],
     footer:
       "These services help verify that construction conforms to approved plans and applicable codes, enhancing safety and reducing construction risk.",
-    image: "/images/services/inspections.jpg",
+    image: "/images/services/inspections.webp",
   },
   {
     title: "Instrumentation and Monitoring Services",
@@ -75,7 +75,7 @@ const services = [
     ],
     footer:
       "We collect and interpret performance metrics that inform design decisions, risk mitigation, and construction sequencing.",
-    image: "/images/services/monitoring.jpg",
+    image: "/images/services/monitoring.webp",
   },
   {
     title: "Hydrology and Drainage Studies",
@@ -88,7 +88,7 @@ const services = [
       "Detention and retention recommendations",
       "Erosion and sediment control planning",
     ],
-    image: "/images/services/hydrology.jpg",
+    image: "/images/services/hydrology.webp",
   },
 ];
 

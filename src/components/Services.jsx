@@ -51,7 +51,7 @@ const services2 = [
     description: "Residential, Commercial, and Institutional Building Design",
   },
   {
-    image: "/seven-eleven.jpg",
+    image: "/seven-eleven.webp",
     title: "Facility Planning and Design",
     description:
       "Efficient facility planning and design tailored to your operational needs",

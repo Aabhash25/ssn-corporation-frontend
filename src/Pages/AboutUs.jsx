@@ -53,7 +53,7 @@ const AboutUs = () => {
           }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     if (videoRef.current) observer.observe(videoRef.current);
@@ -78,7 +78,7 @@ const AboutUs = () => {
                   playsInline
                   className="absolute inset-0 w-full h-full object-cover"
                   preload="metadata"
-                  poster="/poster-image.jpg"
+                  poster="/poster-image.webp"
                 >
                   <source src="/constructionvideo1.mp4" type="video/mp4" />
                 </video>
@@ -351,11 +351,11 @@ const AboutUs = () => {
                   // title: "Luxury Homes",
                 },
                 {
-                  img: "./commUpfit.jpg",
+                  img: "./commUpfit.webp",
                   // title: "Modern Offices",
                 },
                 {
-                  img: "./seven-eleven.jpg",
+                  img: "./seven-eleven.webp",
                   // title: "Industrial",
                 },
                 {

@@ -40,7 +40,7 @@ const AboutSection = () => {
         {/* Visual Image */}
         <div className="relative w-full h-80 sm:h-[32rem] rounded-3xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-700">
           <img
-            src="/BuildingtheFrameworkThat HoldsYourVision.jpeg"
+            src="/BuildingtheFrameworkThat HoldsYourVision.webp"
             alt="Structural Engineering"
             className="w-full h-full object-cover"
           />

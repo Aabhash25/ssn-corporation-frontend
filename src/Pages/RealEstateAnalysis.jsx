@@ -94,7 +94,7 @@ const RealEstateAnalysis = () => {
       {/* Placeholder Image Section */}
       <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
         <img
-          src="/report.png"
+          src="/report.webp"
           alt="Interactive map analysis"
           className="rounded-lg shadow-lg w-full object-cover"
         />

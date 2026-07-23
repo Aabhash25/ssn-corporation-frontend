@@ -95,7 +95,7 @@ const ConstructionAdministration = () => {
     {
       id: 2,
       title: "Construction Materials Sampling and Testing",
-      image: "/ai-placeholder/bridge-tank-tower.jpg",
+      image: "/ai-placeholder/bridge-tank-tower.webp",
       description:
         "Comprehensive testing services to confirm material quality, performance, and compliance with project specifications.",
       color: "blue",
@@ -103,7 +103,7 @@ const ConstructionAdministration = () => {
     {
       id: 3,
       title: "Contract Administration",
-      image: "/ai-placeholder/roadway-transportation.jpg",
+      image: "/ai-placeholder/roadway-transportation.webp",
       description:
         "Professional management of contracts, documentation, change orders, and communication between all project stakeholders.",
       color: "green",
@@ -120,7 +120,7 @@ const ConstructionAdministration = () => {
     {
       id: 4,
       title: "Project Closeout",
-      image: "/ai-placeholder/structural-evaluation.jpg",
+      image: "/ai-placeholder/structural-evaluation.webp",
       description:
         "Organized completion of all documentation, certifications, and final deliverables to ensure a smooth handover.",
       color: "violet",
@@ -128,7 +128,7 @@ const ConstructionAdministration = () => {
     {
       id: 6,
       title: "Working Drawing Reviews",
-      image: "/ai-placeholder/retaining-wall.jpg",
+      image: "/ai-placeholder/retaining-wall.webp",
       description:
         "Detailed evaluation of shop drawings and construction documents to ensure alignment with design intent.",
       color: "indigo",
@@ -136,7 +136,7 @@ const ConstructionAdministration = () => {
     {
       id: 7,
       title: "Cost Estimates",
-      image: "/ai-placeholder/site-feasibility.jpg",
+      image: "/ai-placeholder/site-feasibility.webp",
       description:
         "Accurate and reliable cost opinions to support budgeting, planning, and informed decision-making.",
       color: "emerald",
@@ -144,7 +144,7 @@ const ConstructionAdministration = () => {
     {
       id: 8,
       title: "Construction Coordination",
-      image: "/ai-placeholder/existing-structure.jpg",
+      image: "/ai-placeholder/existing-structure.webp",
       description:
         "Ongoing collaboration with owners, contractors, and consultants to resolve issues efficiently and keep projects moving forward.",
       color: "orange",
@@ -155,7 +155,7 @@ const ConstructionAdministration = () => {
     {
       id: 8,
       title: "Quality Assurance & Compliance",
-      image: "/ai-placeholder/site-feasibility.jpg", // Placeholder image for now
+      image: "/ai-placeholder/site-feasibility.webp", // Placeholder image for now
       description:
         "We help ensure every project meets applicable codes, standards, and regulatory requirements.",
 
@@ -164,7 +164,7 @@ const ConstructionAdministration = () => {
     {
       id: 9,
       title: "Risk Mitigation",
-      image: "/ai-placeholder/structural-studies.jpg", // Placeholder image
+      image: "/ai-placeholder/structural-studies.webp", // Placeholder image
       description:
         "Early identification of potential issues reduces delays, rework, and unexpected costs.",
 
@@ -173,7 +173,7 @@ const ConstructionAdministration = () => {
     {
       id: 10,
       title: "Schedule & Budget Control",
-      image: "/ai-placeholder/disaster-evaluation.jpg", // Placeholder for now
+      image: "/ai-placeholder/disaster-evaluation.webp", // Placeholder for now
       description:
         "Proactive oversight supports on-time delivery and cost-effective project execution.",
 
@@ -182,7 +182,7 @@ const ConstructionAdministration = () => {
     {
       id: 11,
       title: "Integrated Project Delivery",
-      image: "/ai-placeholder/existing-structure.jpg", // Placeholder image
+      image: "/ai-placeholder/existing-structure.webp", // Placeholder image
       description:
         "Our multidisciplinary coordination approach improves communication and enhances overall project outcomes.",
       color: "orange",

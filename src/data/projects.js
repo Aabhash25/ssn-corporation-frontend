@@ -3,7 +3,7 @@ export const projects = [
     {
     id:1,
     name:"Miscellaneous Residential Projects ",
-    images:["/MabreyRoofing.jpg"],
+    images:["/MabreyRoofing.webp"],
     description:"Construction Support Services",
     longDescription:`
     SSN Corporation was engaged by Mabrey Roofing & Construction to provide site visit inspections, construction support, and preparation of signed and sealed letters for the Authority Having Jurisdiction (AHJ) for various residential deck, porch, and patio projects. Each engagement focused on addressing a single construction issue per site, including deck framing, footing excavation, lateral load verification, and girder span changes.
@@ -298,7 +298,7 @@ The study assessed both natural and engineered slope conditions to provide recom
   {
     id: 20,
     name: "Game Day Mens Health",
-    images: ["/GamesDayMensHealth1.webp", "/GamesDayMensHealth2.webp", "/GamesDayMensHealth3.webp", "/GamesDayMensHealth4.webp", "/GamesDayMensHealth5.webp", "/GamesDayMensHealth6.webp", "/GamesDayMensHealth7.webp", "/GamesDayMensHealth8.jpg", "/GamesDayMensHealth9.jpg", "/GamesDayMensHealth10.jpg", "/GamesDayMensHealth11.jpg", "/GamesDayMensHealth12.jpg"],
+    images: ["/GamesDayMensHealth1.webp", "/GamesDayMensHealth2.webp", "/GamesDayMensHealth3.webp", "/GamesDayMensHealth4.webp", "/GamesDayMensHealth5.webp", "/GamesDayMensHealth6.webp", "/GamesDayMensHealth7.webp", "/GamesDayMensHealth8.webp", "/GamesDayMensHealth9.webp", "/GamesDayMensHealth10.webp", "/GamesDayMensHealth11.webp", "/GamesDayMensHealth12.webp"],
     description: "Design and Build Services - Game Day Men’s Health Medical Clinic",
     longDescription: `SSN Corporation completed the upfit of a medical clinic in Burlington, North Carolina, transforming an open shell space into a fully functional healthcare facility. Our scope included architectural and MEP permit-ready design for patient exam rooms, provider offices, a laboratory, breakroom, and reception/waiting areas, along with full construction coordination through SSN Builders.
     In this design and build project, we prepared a complete permit set that aligned with the Gameday Men's Health brand standards while ensuring compliance with North Carolina building codes and jurisdictional requirements. As the design and build contractor, SSN Corporation engaged preparing the permit-ready construction drawings, and supervised all construction trades—including building, plumbing, mechanical, electrical, and fire protection—while integrating specialized medical systems and planning every detail to support efficient workflows and patient comfort.

@@ -30,7 +30,7 @@ const AboutSection = () => {
         <div className="relative">
           <div className="relative h-80 lg:h-[480px] rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-700">
             <img
-              src="/TurningLandPotentialintoApprovedBuildableProjects1.jpg"
+              src="/TurningLandPotentialintoApprovedBuildableProjects1.webp"
               alt="Land Planning And Permitting Engineering"
               className="w-full h-full object-cover rounded-2xl"
             />

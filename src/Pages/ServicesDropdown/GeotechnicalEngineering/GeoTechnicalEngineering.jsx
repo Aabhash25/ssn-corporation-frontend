@@ -123,7 +123,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 3,
       title: "Geotechnical Engineering & Design",
-      image: "/spEnginnering.jpg",
+      image: "/spEnginnering.webp",
       description:
         "Our engineering services translate subsurface data into practical, constructible design solutions tailored to project requirements.",
       details: [
@@ -148,7 +148,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 4,
       title: "Geotechnical Construction Support",
-      image: "/geotechServices8.jpg",
+      image: "/geotechServices8.webp",
       description:
         "Our geotechnical construction support addresses field conditions and temporary works to ensure safe, efficient, and constructible solutions while minimizing risk and delays.",
       details: [
@@ -172,7 +172,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 5,
       title: "Geotechnical Instrumentation and Field Testing",
-      image: "/geotechService.png",
+      image: "/geotechService.webp",
       description:
         "Our field testing and instrumentation services provide real-time monitoring and verification of subsurface conditions to ensure safe, efficient, and reliable construction.",
       details: [
@@ -190,7 +190,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 6,
       title: "Construction Materials Testing & Inspection",
-      image: "geotechServices9.png",
+      image: "geotechServices9.webp",
       description:
         "Our construction materials testing and inspection services verify compliance with project specifications and applicable standards.",
       details: [
@@ -208,7 +208,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 7,
       title: "Pavement Design and Engineering",
-      image: "geotechServices5.jpg",
+      image: "geotechServices5.webp",
       description:
         "Experts in pavement design and rehabilitation programs for durable, safe, and cost-effective roadways and paved surfaces—from evaluation and design to construction support and rehabilitation.",
       details: [
@@ -230,7 +230,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 8,
       title: "Earthworks & Ground Improvement",
-      image: "/geotechServices10.jpg",
+      image: "/geotechServices10.webp",
       description:
         "We deliver expertise in earthworks and ground improvement, including soil stabilization, replacement, reinforcement, preloading, and safe excavation and embankment design",
       details: [
@@ -252,7 +252,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 8,
       title: "Preliminary Site Feasibility Assessments Services",
-      image: "geotechServices6.jpg",
+      image: "geotechServices6.webp",
       description:
         "Early-stage evaluations providing an initial understanding of site conditions to support planning and site selection.",
       details: [
@@ -265,7 +265,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 9,
       title: "Linear Infrastructure & Corridor Geotechnical Services",
-      image: "/geotechServices2.jpeg",
+      image: "/geotechServices2.webp",
       description:
         "Specialized geotechnical services for transportation and utility projects spanning varied terrain and geologic conditions.",
       details: [
@@ -279,7 +279,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 10,
       title: "Project-Specific Geotechnical Studies & Consulting Services",
-      image: "geotechServices7.jpg",
+      image: "geotechServices7.webp",
       description:
         "Comprehensive investigations developed for defined project layouts and structural loading conditions.",
       details: [
@@ -294,7 +294,7 @@ const GeotechnicalEngineering = () => {
     {
       id: 11,
       title: "Independent Construction Monitoring & Design Review Services",
-      image: "/geotechServices11.jpg",
+      image: "/geotechServices11.webp",
       description:
         "Experts in independent monitoring, verification, and design review of critical geotechnical works, ensuring compliance, safety, and regulatory standards.",
       details: [
