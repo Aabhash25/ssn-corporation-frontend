@@ -361,7 +361,7 @@ const MasonryPortfolio = () => {
   ]);
 
   const handleProjectClick = useCallback(
-    (p) => navigate(`/project-description/${p.id}`),
+    (p) => navigate(`/project-description/${p.id}-${p.slug}`),
     [navigate],
   );
   const handleMarkerHover = useCallback((p, pos) => {
@@ -372,7 +372,10 @@ const MasonryPortfolio = () => {
   const handleMarkerClick = useCallback(
     (p) => {
       setZoomProject(p);
-      setTimeout(() => navigate(`/project-description/${p.id}`), 1800);
+      setTimeout(
+        () => navigate(`/project-description/${p.id}-${p.slug}`),
+        1800,
+      );
     },
     [navigate],
   );
