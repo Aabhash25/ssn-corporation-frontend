@@ -144,7 +144,8 @@ export default function ProjectDescription() {
     <>
       {/* HERO / IMAGE SLIDER */}
       {images.length > 0 && (
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-12 lg:pt-16">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-42">
+          {" "}
           <div className="relative overflow-hidden rounded-2xl shadow-2xl">
             <div className="w-full aspect-[16/9] relative">
               <AnimatePresence initial={false} mode="wait">
