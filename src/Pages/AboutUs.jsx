@@ -165,8 +165,9 @@ const AboutUs = () => {
                 <span className="font-semibold text-orange-400">precision</span>
                 , and{" "}
                 <span className="font-semibold text-orange-400">integrity</span>
-                , we unite planners, architects, engineers, and construction
-                experts to transform ideas into enduring construction solutions.
+                , we collabrate with planners, architects, engineers, and
+                construction experts to transform ideas into enduring
+                construction solutions.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
@@ -309,10 +310,9 @@ const AboutUs = () => {
               <p className="text-xl md:text-2xl leading-relaxed mb-8 text-gray-800">
                 From concept to completion, we deliver comprehensive engineering
                 and construction solutions tailored to your needs. Our expertise
-                spans architectural design, structural, geotechnical, water
-                resources, elecctrical, mechanical, plumbing, and construction
-                management engineering, project management, and sustainable
-                construction solutions.
+                spans structural, geotechnical, water resources, elecctrical,
+                mechanical, plumbing, and construction management engineering,
+                project management, and sustainable construction solutions.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[

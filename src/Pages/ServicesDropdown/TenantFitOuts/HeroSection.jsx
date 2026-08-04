@@ -13,9 +13,7 @@ const HeroSection = () => {
         <div className="space-y-4">
           <div className="inline-block"></div>
           <h1 className="text-4xl sm:text-5xl font-bold leading-tight font-playfair drop-shadow-lg">
-            <span className="text-yellow-400">
-              Architecture and Engineering
-            </span>
+            <span className="text-yellow-400">Engineering Solutions</span>
             <br />
             <span className="text-yellow-400 drop-shadow-md">
               For Tenant Fit-Outs

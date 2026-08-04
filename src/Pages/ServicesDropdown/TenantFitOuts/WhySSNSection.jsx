@@ -23,11 +23,11 @@ const WhySSNSection = () => {
                     Comprehensive, End-to-End Capabilities
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    SSN Corporation offers a full spectrum of architectural and
-                    engineering services tied to tenant fit-outs — from initial
-                    planning and design through engineering, permitting, and
-                    construction support — so your project is streamlined under
-                    one expert team.
+                    SSN Corporation offers a full spectrum of interior designing
+                    and engineering services tied to tenant fit-outs — from
+                    initial planning and design through engineering, permitting,
+                    and construction support — so your project is streamlined
+                    under one expert team.
                   </p>
                 </div>
               </div>
@@ -62,9 +62,9 @@ const WhySSNSection = () => {
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                     Our professionals bring diverse expertise across
-                    architecture, engineering, construction, and project
-                    coordination — ensuring well-rounded solutions that balance
-                    aesthetics, function, safety, and compliance.
+                    engineering, construction, and project coordination —
+                    ensuring well-rounded solutions that balance aesthetics,
+                    function, safety, and compliance.
                   </p>
                 </div>
               </div>

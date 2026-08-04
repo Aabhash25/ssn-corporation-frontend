@@ -86,8 +86,8 @@ const ArchitectureAndEngineering = () => {
   const architecturalServicesData = [
     {
       id: 1,
-      title: " Architectural Design & Space Planning",
-      image: "/ArchitecturalDesignSpacePlanning.webp",
+      title: " Interior Design & Space Planning",
+      image: "/DesignSpacePlanning.webp",
       description:
         "We develop intelligent layouts and design concepts that enhance functionality, optimize flow, and reflect your brand identity. Our services include programming, test fits, interior layouts, and finish selections. ",
       color: "purple",
@@ -165,7 +165,7 @@ const ArchitectureAndEngineering = () => {
       title: "Design-Build Collaboration Support ",
       image: "/DesignBuildCollaborationSupport.webp", // Placeholder image
       description:
-        "We partner with contractors and internal client teams to provide architectural leadership, engineering coordination, and technical documentation throughout the project lifecycle. ",
+        "We partner with contractors and internal client teams to provide engineering coordination, and technical documentation throughout the project lifecycle. ",
 
       color: "cyan",
     },

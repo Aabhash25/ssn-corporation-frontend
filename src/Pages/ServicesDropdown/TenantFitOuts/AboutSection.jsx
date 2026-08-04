@@ -17,19 +17,19 @@ const AboutSection = () => {
             </span>
 
             <p className="text-gray-700 text-lg sm:text-xl leading-relaxed mb-4">
-              We provide integrated architectural and engineering services for
-              tenant fit-out projects, guiding clients from concept to
+              We provide integrated interior designing and engineering services
+              for tenant fit-out projects, guiding clients from concept to
               completion. Our team transforms interior spaces into functional,
               compliant, and inspiring environments with proven experience
-              across branded commercial and large-scale retail projects.
+              across branded commercial and retail projects.
             </p>
 
             <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
               We combine creative design with engineering expertise to deliver
               efficient, adaptable spaces aligned with operational goals.
               Serving offices, retail, healthcare, hospitality, and
-              institutional sectors, we deliver solutions that balance
-              aesthetics, performance, and long-term value.
+              institutional sectors, we deliver the engineering solutions that
+              balance aesthetics, performance, and long-term value.
             </p>
           </div>
 

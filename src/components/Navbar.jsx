@@ -43,8 +43,8 @@ const ENGINEERING_SERVICES = [
   { name: "Water Resources Engineering", to: "/water-resources-engineering" },
   { name: "Geotechnical Engineering", to: "/geotechnical-engineering" },
   {
-    name: "Architectural and Engineering Services for Tenant Fit-Outs",
-    to: "/architecture-engineering",
+    name: "Engineering Solutions for Tenant Fit-Outs",
+    to: "/tenant-fit-outs",
   },
   { name: "Construction Administration", to: "/construction-administration" },
 ];
