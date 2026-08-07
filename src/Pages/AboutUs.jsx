@@ -156,7 +156,7 @@ const AboutUs = () => {
                 <span className="font-semibold text-orange-400">
                   SSN Corporation
                 </span>{" "}
-                is a visionary design and construction firm led by professionals
+                is a professional engineering and construction services firm
                 with over decades of excellence. Founded on principles of{" "}
                 <span className="font-semibold text-orange-400">
                   innovation
@@ -226,11 +226,9 @@ const AboutUs = () => {
                 </h2>
               </div>
               <p className="text-xl md:text-2xl leading-relaxed mb-8 text-gray-800">
-                We envision a future where design and construction redefine
-                possibilities—creating spaces that inspire, sustain, and stand
-                the test of time. Our foundation of innovation, precision, and
-                integrity shaped by decades of expertise—guides every project as
-                we transform ideas into purposeful, high-quality spaces.
+                We envision a future where engineering and construction redefine
+                possibilities—delivering infrastructure and facilities that
+                perform reliably and stand the test of time.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
@@ -281,7 +279,7 @@ const AboutUs = () => {
             >
               <img
                 src="/about8.webp"
-                alt="Modern Architecture Vision"
+                alt="Modern Vision"
                 className="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
@@ -316,7 +314,7 @@ const AboutUs = () => {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
                 {[
-                  "Residential and Commercial Building Design and Construction",
+                  "Residential and Commercial Engineering and Construction Support",
                   "Land Planning, Permitting, and Site Development",
                   "Infrastructure and Facility Planning and Design",
                   "Commercial Renovation,Fit-out, and Maintenance",

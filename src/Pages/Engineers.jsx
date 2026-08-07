@@ -162,7 +162,7 @@ const Engineers = () => {
         <div className="absolute inset-0 z-0">
           <img
             src="/22.webp"
-            alt="Modern Architecture"
+            alt="Modern"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-gray-900/50"></div>
@@ -301,7 +301,7 @@ const Engineers = () => {
             </motion.span>
 
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4 pt-4">
-              Design Capabilities
+              Engineering Capabilities
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               As a multidisciplinary engineering firm, we can connect you to the
@@ -382,11 +382,11 @@ const Engineers = () => {
               Our Expertise
             </motion.span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4">
-              Design Expertise
+              Engineering Expertise
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We Have the Expert In-House Team Specializing in Architecture,
-              Engineering, and Comprehensive Design Solutions
+              We Have an Expert In-House Team Specializing in Structural, Civil,
+              and Multidisciplinary Engineering Solutions
             </p>
           </motion.div>
 

@@ -71,11 +71,10 @@ const GeneralConstruction = () => {
             </p>
             <p>
               <strong>Construction Management:</strong> Acting as your
-              representative, SSN oversees architects, engineers, and trade
-              partners to ensure the project stays aligned with your goals,
-              scope, schedule, and budget. We provide leadership and
-              communication so you maintain visibility without handling daily
-              coordination.
+              representative, SSN oversees engineers, and trade partners to
+              ensure the project stays aligned with your goals, scope, schedule,
+              and budget. We provide leadership and communication so you
+              maintain visibility without handling daily coordination.
             </p>
             <p>
               <strong>Pre-Construction Services:</strong> We establish project

@@ -23,7 +23,7 @@ const testimonials = [
     name: "Bhoj Raj G",
     title: "Restaurant Owner",
     message:
-      "SSN Builders delivered our restaurant project in under five months with professionalism, great communication, and quality work. Their 3D design matched the final build perfectly. Highly recommended for construction excellence.",
+      "SSN Engineering delivered our restaurant project in under five months with professionalism, great communication, and quality work. Their site/civil engineering and structural work matched the final build perfectly. Highly recommended for engineering excellence.",
     avatar:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face",
     rating: 5,

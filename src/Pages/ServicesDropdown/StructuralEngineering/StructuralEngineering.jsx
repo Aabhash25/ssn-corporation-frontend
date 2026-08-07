@@ -188,7 +188,7 @@ const StructuralEngineering = () => {
         "Design and analysis of new buildings and facilities",
         "Development of construction documents and drawings",
         "Integration of structural systems for safety and efficiency",
-        "Coordination with architectural and MEP designs",
+        "Coordination with MEP designs",
         // "(We can use a building design structure set – may be Catana construction)",
       ],
       color: "emerald",

@@ -35,10 +35,6 @@ const Business = lazy(() => import("./FooterPages/Business"));
 const ProposalPage = lazy(() => import("./FooterPages/ProposalPage"));
 const NewsDetail = lazy(() => import("./FooterPages/NewsDetail"));
 
-const EngineeringArchitecture = lazy(
-  () => import("./Pages/EngineeringArchitecture"),
-);
-const Construction = lazy(() => import("./Pages/Construction"));
 const ResearchAndDevelopment = lazy(
   () => import("./Pages/ResearchAndDevelopment"),
 );
@@ -141,12 +137,8 @@ function App() {
             element={<PortfolioDescription />}
           />
           {/* Services */}
-          <Route
-            path="/engineering-architecture"
-            element={<EngineeringArchitecture />}
-          />
+
           <Route path="/tenant-fit-outs" element={<TenantFitOuts />} />
-          <Route path="/construction" element={<Construction />} />
           <Route
             path="/research-and-development"
             element={<ResearchAndDevelopment />}

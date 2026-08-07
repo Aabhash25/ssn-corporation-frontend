@@ -113,7 +113,7 @@ const Footer = () => {
           </h3>
           <ul className="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-[15px] leading-relaxed">
             {[
-              "Architectural Design",
+              // "Interior Design",
               "Structural Design",
               "Site Civil Design",
               "Geotechnical Evaluation & Design",

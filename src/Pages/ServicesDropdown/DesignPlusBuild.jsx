@@ -58,10 +58,10 @@ const DesignPlusBuild = () => {
             <p className="text-lg font-roboto text-gray-700 leading-relaxed">
               Rather than navigating a maze of subcontractors and consultants,
               we provide a single dedicated partner from concept to completion.
-              In-house architects, engineers, planners, and construction
-              specialists all operate within one coordinated team. This
-              eliminates communication gaps, reduces delays, and ensures that
-              every detail stays aligned with the goals you set from day one.
+              Our engineers, planners, and construction specialists operate
+              within one coordinated team. This eliminates communication gaps,
+              reduces delays, and ensures that every detail stays aligned with
+              the goals you set from day one.
             </p>
           </div>
 
@@ -70,12 +70,12 @@ const DesignPlusBuild = () => {
               Where Vision Takes Shape
             </h2>
             <p className="text-lg font-roboto text-gray-700 leading-relaxed">
-              Before introducing design concepts, our integrated team of
-              architects, engineers, planners, and construction specialists
-              engages with you in a focused collaborative session to refine
-              objectives, explore possibilities, and define the foundation for a
-              successful project. This session serves as the launching point for
-              creativity, feasibility, and strategic alignment.
+              Before introducing engineering concepts, our team of engineers,
+              planners, and construction specialists engages with you in a
+              focused collaborative session to refine objectives, explore
+              possibilities, and define the foundation for a successful project.
+              This session serves as the launching point for creativity,
+              feasibility, and strategic alignment.
             </p>
           </div>
 

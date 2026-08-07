@@ -1,6 +1,6 @@
 export const specialities = [
   {
-    title: "Architectural Design",
+    title: "Interior Design",
     icon: "🏛️",
     image: "/GamesDayMensHealth7.webp",
     description: [
