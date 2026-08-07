@@ -149,6 +149,101 @@ const JobContent = ({ job }) => (
   </>
 );
 
+// ─── Apply form (Defined Outside) ─────────────────────────────────────────────
+
+const ApplyForm = ({ formData, handleInputChange, handleSubmit, submitting }) => (
+  <div className="space-y-3">
+    <input
+      type="text"
+      name="name"
+      placeholder="Full Name *"
+      value={formData.name}
+      onChange={handleInputChange}
+      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
+    />
+    <input
+      type="email"
+      name="email"
+      placeholder="Email Address *"
+      value={formData.email}
+      onChange={handleInputChange}
+      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
+    />
+    <input
+      type="text"
+      name="phone"
+      placeholder="Phone Number *"
+      value={formData.phone}
+      onChange={handleInputChange}
+      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
+    />
+    <input
+      type="text"
+      name="address"
+      placeholder="Address *"
+      value={formData.address}
+      onChange={handleInputChange}
+      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
+    />
+    <label className="block w-full border-2 border-dashed border-gray-200 rounded-xl px-4 py-4 text-center cursor-pointer hover:border-yellow-300 transition group">
+      <input
+        type="file"
+        name="resume"
+        accept=".pdf,.doc,.docx"
+        onChange={handleInputChange}
+        className="hidden"
+      />
+      <div className="flex flex-col items-center gap-1">
+        <svg
+          className="w-6 h-6 text-gray-300 group-hover:text-yellow-400 transition"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={1.5}
+            d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+          />
+        </svg>
+        <span className="text-xs text-gray-400 group-hover:text-yellow-500 transition">
+          {formData.resume
+            ? formData.resume.name
+            : "Upload Resume (PDF, DOC, DOCX) *"}
+        </span>
+      </div>
+    </label>
+    <textarea
+      name="coverLetter"
+      placeholder="Cover Letter (optional)"
+      value={formData.coverLetter}
+      onChange={handleInputChange}
+      rows={4}
+      className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition resize-none"
+    />
+    <button
+      onClick={handleSubmit}
+      disabled={submitting}
+      className={`w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${
+        submitting ? "opacity-70 cursor-not-allowed" : ""
+      }`}
+    >
+      {submitting ? (
+        <>
+          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          Submitting...
+        </>
+      ) : (
+        "Submit Application"
+      )}
+    </button>
+    <p className="text-xs text-gray-400 text-center">
+      By submitting, you agree to our privacy policy.
+    </p>
+  </div>
+);
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 function JobDetail() {
@@ -245,100 +340,6 @@ function JobDetail() {
       setSubmitting(false);
     }
   };
-
-  // ── Apply form ───────────────────────────────────────────────────────────────
-  const ApplyForm = () => (
-    <div className="space-y-3">
-      <input
-        type="text"
-        name="name"
-        placeholder="Full Name *"
-        value={formData.name}
-        onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email Address *"
-        value={formData.email}
-        onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
-      />
-      <input
-        type="text"
-        name="phone"
-        placeholder="Phone Number *"
-        value={formData.phone}
-        onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
-      />
-      <input
-        type="text"
-        name="address"
-        placeholder="Address *"
-        value={formData.address}
-        onChange={handleInputChange}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition"
-      />
-      <label className="block w-full border-2 border-dashed border-gray-200 rounded-xl px-4 py-4 text-center cursor-pointer hover:border-yellow-300 transition group">
-        <input
-          type="file"
-          name="resume"
-          accept=".pdf,.doc,.docx"
-          onChange={handleInputChange}
-          className="hidden"
-        />
-        <div className="flex flex-col items-center gap-1">
-          <svg
-            className="w-6 h-6 text-gray-300 group-hover:text-yellow-400 transition"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
-          <span className="text-xs text-gray-400 group-hover:text-yellow-500 transition">
-            {formData.resume
-              ? formData.resume.name
-              : "Upload Resume (PDF, DOC, DOCX) *"}
-          </span>
-        </div>
-      </label>
-      <textarea
-        name="coverLetter"
-        placeholder="Cover Letter (optional)"
-        value={formData.coverLetter}
-        onChange={handleInputChange}
-        rows={4}
-        className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-yellow-300 focus:border-yellow-400 focus:outline-none transition resize-none"
-      />
-      <button
-        onClick={handleSubmit}
-        disabled={submitting}
-        className={`w-full bg-yellow-500 hover:bg-yellow-600 text-white py-3 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2 ${
-          submitting ? "opacity-70 cursor-not-allowed" : ""
-        }`}
-      >
-        {submitting ? (
-          <>
-            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            Submitting...
-          </>
-        ) : (
-          "Submit Application"
-        )}
-      </button>
-      <p className="text-xs text-gray-400 text-center">
-        By submitting, you agree to our privacy policy.
-      </p>
-    </div>
-  );
 
   // ── Closed panel (shared) ────────────────────────────────────────────────────
   const ClosedPanel = ({ compact = false }) => (
@@ -485,7 +486,12 @@ function JobDetail() {
                 <h2 className="text-xl font-playfair font-bold text-gray-900 mb-4">
                   Apply for this Position
                 </h2>
-                <ApplyForm />
+                <ApplyForm
+                  formData={formData}
+                  handleInputChange={handleInputChange}
+                  handleSubmit={handleSubmit}
+                  submitting={submitting}
+                />
               </div>
             )}
           </div>
@@ -576,7 +582,12 @@ function JobDetail() {
                   <h2 className="text-2xl font-playfair font-bold text-gray-900 mb-5">
                     Apply for this Position
                   </h2>
-                  <ApplyForm />
+                  <ApplyForm
+                    formData={formData}
+                    handleInputChange={handleInputChange}
+                    handleSubmit={handleSubmit}
+                    submitting={submitting}
+                  />
                 </div>
               )}
             </motion.div>
