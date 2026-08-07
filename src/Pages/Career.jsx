@@ -30,19 +30,37 @@ function Career() {
     });
   };
 
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}jobs/`)
-      .then((res) => res.json())
-      .then((data) => {
-        const jobsArray = (data.results || data).sort(
-          (a, b) => new Date(b.posted_date) - new Date(a.posted_date),
-        );
-        setJobs(jobsArray);
-        setFilteredJobs(jobsArray);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+useEffect(() => {
+  const fetchAllJobs = async () => {
+    try {
+      let allJobs = [];
+      let url = `${import.meta.env.VITE_API_URL}jobs/`;
+
+      while (url) {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        allJobs = [...allJobs, ...(data.results || [])];
+
+        // Django REST Framework pagination
+        url = data.next;
+      }
+
+      allJobs.sort(
+        (a, b) => new Date(b.posted_date) - new Date(a.posted_date)
+      );
+
+      setJobs(allJobs);
+      setFilteredJobs(allJobs);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchAllJobs();
+}, []);
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();
