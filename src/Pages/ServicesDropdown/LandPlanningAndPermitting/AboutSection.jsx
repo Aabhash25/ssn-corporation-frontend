@@ -17,7 +17,7 @@ const AboutSection = () => {
           </p>
 
           <p className="text-lg sm:text-xl text-gray-700 leading-relaxed">
-            We partner with owners and developers, mobilizing our architects and
+            We partner with owners and developers, mobilizing our designers and
             engineers to deliver practical, compliant, and constructible
             solutions for projects of all sizes and complexities. From
             single-lot residential developments to large multi-phase commercial

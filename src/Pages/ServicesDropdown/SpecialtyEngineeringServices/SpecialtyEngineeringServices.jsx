@@ -96,7 +96,7 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
 - Masonry, wood, and load-bearing frame inspection
 - Soils and compaction verification
 - Fire-resistance system inspections`,
-      image: "/SpecialInspectionsServices(IBCChapter17).webp",
+      image: "/LaQuinta.jpg",
     },
     {
       title: "Instrumentation and Monitoring Services",

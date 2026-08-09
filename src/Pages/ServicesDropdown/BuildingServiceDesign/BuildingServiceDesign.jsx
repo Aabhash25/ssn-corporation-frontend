@@ -89,7 +89,7 @@ const BuildingServiceDesign = () => {
       title: "MEP (Mechanical, Electrical & Plumbing) Design",
       image: "/MEPDesign.webp",
       description:
-        "We develop fully coordinated MEP systems that enhance building comfort, energy efficiency, and operational reliability. Our designs integrate seamlessly with structural plans, ensuring constructability and minimal conflicts during construction.",
+        "We develop fully coordinated MEP systems that enhance building comfort, energy efficiency, and operational reliability. Our designs integrate seamlessly with architectural and structural plans, ensuring constructability and minimal conflicts during construction.",
       color: "purple",
     },
     {

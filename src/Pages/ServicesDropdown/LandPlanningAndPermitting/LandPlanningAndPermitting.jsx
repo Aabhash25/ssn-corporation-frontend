@@ -200,7 +200,7 @@ const LandPlanningAndPermitting = () => {
       title: "Design & Technical Coordination",
       image: "/ai-placeholder/disaster-evaluation.webp", // Placeholder for now
       description:
-        "Integrated coordination between planning, engineering, and architecture teams to deliver constructible solutions.",
+        "Integrated coordination between plsnning, designing, and engineering teams to deliver constructible solutions.",
 
       color: "violet",
     },

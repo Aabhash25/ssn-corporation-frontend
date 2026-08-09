@@ -382,11 +382,11 @@ const Engineers = () => {
               Our Expertise
             </motion.span>
             <h2 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-4">
-              Engineering Expertise
+              Design Expertise
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We Have an Expert In-House Team Specializing in Structural, Civil,
-              and Multidisciplinary Engineering Solutions
+              We have an expert in-house engineering team specializing in
+              comprehensive building and land development solutions.
             </p>
           </motion.div>
 

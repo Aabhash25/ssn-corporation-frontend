@@ -110,7 +110,7 @@ const ArchitectureAndEngineering = () => {
       title: " Structural Evaluation & Modifications",
       image: "/StructuralEvaluationModifications.webp",
       description:
-        "We assess existing building conditions and design structural modifications when required to support new layouts, equipment, or architectural features. ",
+        "We assess existing building conditions and design structural modifications when required to support new layouts, equipment, or interior design features. ",
       color: "green",
     },
 

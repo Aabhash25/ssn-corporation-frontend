@@ -9,7 +9,7 @@ export const services = [
       "Site selection and feasibility analysis",
       "Zoning and land use regulations",
       "Infrastructure and utility planning",
-      "Site and land use planning",
+      "Urban Design",
       "Regulatory compliance and permitting process",
       "Development phasing and project timeline",
     ],
