@@ -1,6 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useState } from "react";
+import { useLoaderData, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
 // ─── Render helpers ───────────────────────────────────────────────────────────
@@ -151,7 +150,12 @@ const JobContent = ({ job }) => (
 
 // ─── Apply form (Defined Outside) ─────────────────────────────────────────────
 
-const ApplyForm = ({ formData, handleInputChange, handleSubmit, submitting }) => (
+const ApplyForm = ({
+  formData,
+  handleInputChange,
+  handleSubmit,
+  submitting,
+}) => (
   <div className="space-y-3">
     <input
       type="text"
@@ -247,9 +251,8 @@ const ApplyForm = ({ formData, handleInputChange, handleSubmit, submitting }) =>
 // ─── Component ────────────────────────────────────────────────────────────────
 
 function JobDetail() {
-  const { id } = useParams();
-  const [job, setJob] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const job = useLoaderData();
+
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -264,16 +267,6 @@ function JobDetail() {
   const [showModal, setShowModal] = useState(false);
 
   const isClosed = job?.role_filled === true;
-
-  useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}jobs/${id}/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setJob(data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
@@ -383,18 +376,7 @@ function JobDetail() {
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <div className="relative min-h-screen bg-gray-50 pt-20">
-      {loading && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-8 h-8 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin" />
-            <span className="text-gray-500 text-sm">
-              Loading job details...
-            </span>
-          </div>
-        </div>
-      )}
-
-      {!loading && job && (
+      {job && (
         <>
           {/* Sticky header — desktop only */}
           <div className="hidden lg:block fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm">
@@ -595,7 +577,7 @@ function JobDetail() {
         </>
       )}
 
-      {!loading && !job && (
+      {!job && (
         <div className="flex flex-col items-center justify-center min-h-screen gap-4 px-4">
           <p className="text-gray-500 text-lg">Job not found.</p>
           <Link

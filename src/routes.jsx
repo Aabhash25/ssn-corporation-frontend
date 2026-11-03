@@ -52,6 +52,26 @@ const fetchAllProjects = async () => {
   }
   return all;
 };
+// Fetch every job so each job gets its own pre-rendered HTML page.
+const fetchAllJobs = async () => {
+  let allJobs = [];
+  let url = `${API_URL}jobs/`;
+
+  while (url) {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Jobs API request failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    allJobs.push(...(data.results || []));
+    url = data.next;
+  }
+
+  return allJobs;
+};
 
 const projectLoader = async ({ params }) => {
   const res = await fetch(`${API_URL}projects/${params.id}/`);
@@ -83,6 +103,21 @@ const careerLoader = async () => {
   return {
     jobs: allJobs,
   };
+};
+const jobDetailLoader = async ({ params }) => {
+  const API_URL = import.meta.env.VITE_API_URL || "";
+
+  const response = await fetch(`${API_URL}jobs/${params.id}/`);
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      return null;
+    }
+
+    throw new Error(`Failed to fetch job: ${response.status}`);
+  }
+
+  return await response.json();
 };
 
 export const routes = [
@@ -381,10 +416,19 @@ export const routes = [
       },
       {
         path: "jobs/:id",
+        loader: jobDetailLoader,
+
+        // Generate a static HTML page for every job.
+        getStaticPaths: async () => {
+          const jobs = await fetchAllJobs();
+
+          return jobs.map((job) => `jobs/${job.id}`);
+        },
+
         ...page(() => import("./Pages/JobDetail")),
         ...seo(
           "Job Opening | SSN Corporation",
-          "Job opening at SSN Corporation.",
+          "Explore job opportunities and career openings at SSN Corporation.",
         ),
       },
       {
