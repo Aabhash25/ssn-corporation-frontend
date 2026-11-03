@@ -1,11 +1,13 @@
 // Runs after `vite-react-ssg build`.
-// Creates dist/app-shell.html: the site's HTML with no pre-rendered page inside.
+// Creates <outDir>/app-shell.html: the site's HTML with no pre-rendered page inside.
 // The web server uses it as the fallback for URLs that were NOT pre-rendered
 // (e.g. /news/12, /jobs/3, or a mistyped URL), so the app renders them
 // client-side instead of hydrating the homepage's HTML.
 import { readFileSync, writeFileSync } from "node:fs";
 
-const source = readFileSync("dist/index.html", "utf8");
+const outDir = process.env.BUILD_DIR || "dist";
+
+const source = readFileSync(`${outDir}/index.html`, "utf8");
 
 const html = source
   // empty the pre-rendered page (and its hydration data) out of #root
@@ -20,9 +22,9 @@ const html = source
 
 if (!html.includes('<div id="root"></div>') || html.includes("data-server-rendered")) {
   throw new Error(
-    "make-app-shell: could not empty #root in dist/index.html. Not writing app-shell.html.",
+    `make-app-shell: could not empty #root in ${outDir}/index.html. Not writing app-shell.html.`,
   );
 }
 
-writeFileSync("dist/app-shell.html", html);
-console.log("Created dist/app-shell.html");
+writeFileSync(`${outDir}/app-shell.html`, html);
+console.log(`Created ${outDir}/app-shell.html`);
