@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLoaderData, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { Head } from "vite-react-ssg";
+import { buildJobSeo } from "../utils/jobSeo";
 
 // ─── Render helpers ───────────────────────────────────────────────────────────
 
@@ -252,6 +254,7 @@ const ApplyForm = ({
 
 function JobDetail() {
   const job = useLoaderData();
+  const seo = job ? buildJobSeo(job) : null;
 
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -376,6 +379,30 @@ function JobDetail() {
   // ── Render ───────────────────────────────────────────────────────────────────
   return (
     <div className="relative min-h-screen bg-gray-50 pt-20">
+      {seo ? (
+        <Head>
+          <title>{seo.title}</title>
+          <meta name="description" content={seo.description} />
+          <link rel="canonical" href={seo.url} />
+          {seo.noindex && <meta name="robots" content="noindex, follow" />}
+          <meta property="og:type" content="article" />
+          <meta property="og:site_name" content="SSN Corporation" />
+          <meta property="og:title" content={seo.title} />
+          <meta property="og:description" content={seo.description} />
+          <meta property="og:url" content={seo.url} />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content={seo.title} />
+          <meta name="twitter:description" content={seo.description} />
+          <script type="application/ld+json">
+            {JSON.stringify(seo.jsonLd)}
+          </script>
+        </Head>
+      ) : (
+        <Head>
+          <title>Job not found | SSN Corporation</title>
+          <meta name="robots" content="noindex" />
+        </Head>
+      )}
       {job && (
         <>
           {/* Sticky header — desktop only */}

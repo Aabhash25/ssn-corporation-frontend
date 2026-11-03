@@ -242,8 +242,8 @@ export const routes = [
         loader: careerLoader,
         ...page(() => import("./Pages/Career")),
         ...seo(
-          "Careers | SSN Corporation",
-          "Explore open positions and join the SSN Corporation team.",
+          "Careers & Job Openings | SSN Corporation",
+          "Explore current job openings at SSN Corporation, a Raleigh, NC engineering and construction firm. View open positions and apply online.",
         ),
       },
       {

@@ -1,5 +1,6 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useLoaderData, Link } from "react-router-dom";
+import { Head } from "vite-react-ssg";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaSearch, FaBriefcase } from "react-icons/fa";
 import {
@@ -9,17 +10,14 @@ import {
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 
+const BASE_URL = "https://ssncorporation.com";
+
 function Career() {
   const { jobs: loaderJobs } = useLoaderData();
 
-  const [jobs, setJobs] = useState(loaderJobs || []);
-  const [filteredJobs, setFilteredJobs] = useState(loaderJobs || []);
-  const [loading, setLoading] = useState(false);
+  const jobs = loaderJobs || [];
+  const [filteredJobs, setFilteredJobs] = useState(jobs);
   const [searchTerm, setSearchTerm] = useState("");
-  const [buttonLoading, setButtonLoading] = useState(false);
-  const [selectedJob, setSelectedJob] = useState(null);
-
-  const navigate = useNavigate();
 
   const formatDate = (dateStr) => {
     if (!dateStr) return "N/A";
@@ -40,21 +38,49 @@ function Career() {
     );
   };
 
-  const handleViewApply = (jobId) => {
-    setButtonLoading(true);
-    setSelectedJob(jobId);
-    setTimeout(() => {
-      setButtonLoading(false);
-      navigate(`/jobs/${jobId}`);
-    }, 1000);
-  };
-
-  const handleView = (jobId) => navigate(`/jobs/${jobId}`);
-
   const currentOpenings = filteredJobs.filter(
     (job) => job.role_filled === false,
   );
   const pastOpenings = filteredJobs.filter((job) => job.role_filled === true);
+
+  // Structured data: list of all open jobs (not affected by search box)
+  const openJobs = jobs.filter((job) => job.role_filled === false);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        name: "Careers & Job Openings | SSN Corporation",
+        url: `${BASE_URL}/career`,
+        isPartOf: {
+          "@type": "WebSite",
+          name: "SSN Corporation",
+          url: BASE_URL,
+        },
+      },
+      {
+        "@type": "ItemList",
+        itemListElement: openJobs.map((job, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `${BASE_URL}/jobs/${job.id}`,
+          name: job.title,
+        })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Careers",
+            item: `${BASE_URL}/career`,
+          },
+        ],
+      },
+    ],
+  };
 
   const benefits = [
     {
@@ -99,6 +125,27 @@ function Career() {
 
   return (
     <section className="w-full bg-gray-50">
+      <Head>
+        <title>Careers & Job Openings | SSN Corporation</title>
+        <meta
+          name="description"
+          content="Explore current job openings at SSN Corporation, a Raleigh, NC engineering and construction firm. View open positions and apply online."
+        />
+        <link rel="canonical" href={`${BASE_URL}/career`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="SSN Corporation" />
+        <meta
+          property="og:title"
+          content="Careers & Job Openings | SSN Corporation"
+        />
+        <meta
+          property="og:description"
+          content="Explore current job openings at SSN Corporation, a Raleigh, NC engineering and construction firm. View open positions and apply online."
+        />
+        <meta property="og:url" content={`${BASE_URL}/career`} />
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Head>
+
       {/* ── Hero ── */}
       <div className="relative w-full bg-gray-100 pt-40 pb-12 px-6 overflow-hidden">
         <div className="max-w-5xl mx-auto">
@@ -149,16 +196,12 @@ function Career() {
             value={searchTerm}
             onChange={handleSearch}
             placeholder="Search positions..."
+            aria-label="Search positions"
             className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl text-sm bg-white text-gray-700 placeholder-gray-400 outline-none focus:border-yellow-400 focus:ring-2 focus:ring-yellow-100 transition"
           />
         </div>
 
-        {loading ? (
-          <div className="flex flex-col items-center py-16 gap-3">
-            <div className="w-7 h-7 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin" />
-            <p className="text-gray-400 text-sm">Loading positions...</p>
-          </div>
-        ) : currentOpenings.length > 0 ? (
+        {currentOpenings.length > 0 ? (
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -180,7 +223,12 @@ function Career() {
                 </div>
 
                 <h3 className="font-playfair font-bold text-gray-900 text-lg leading-snug mb-1">
-                  {job.title}
+                  <Link
+                    to={`/jobs/${job.id}`}
+                    className="hover:text-yellow-600 transition-colors"
+                  >
+                    {job.title}
+                  </Link>
                 </h3>
 
                 <p className="text-xs text-gray-400 mb-2">
@@ -200,17 +248,12 @@ function Career() {
                     .replace(/^[-•]\s*/gm, "") || ""}
                 </p>
 
-                <button
-                  onClick={() => handleViewApply(job.id)}
-                  disabled={buttonLoading && selectedJob === job.id}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 bg-gray-900 hover:bg-yellow-500 text-white text-sm font-semibold rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                <Link
+                  to={`/jobs/${job.id}`}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 bg-gray-900 hover:bg-yellow-500 text-white text-sm font-semibold rounded-xl transition-colors duration-200"
                 >
-                  {buttonLoading && selectedJob === job.id ? (
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    "View & Apply →"
-                  )}
-                </button>
+                  View &amp; Apply →
+                </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -255,12 +298,12 @@ function Career() {
                     ● Position Filled
                   </p>
                 </div>
-                <button
-                  onClick={() => handleView(job.id)}
+                <Link
+                  to={`/jobs/${job.id}`}
                   className="shrink-0 px-4 py-2 border border-gray-200 rounded-lg text-xs font-semibold text-gray-500 hover:border-gray-400 hover:text-gray-700 transition"
                 >
                   View Details
-                </button>
+                </Link>
               </motion.div>
             ))}
           </motion.div>

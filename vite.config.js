@@ -68,7 +68,8 @@ export default defineConfig(async ({ command, mode }) => {
       ...staticRoutes,
       ...projects.map((p) => `/project-description/${p.id}-${p.slug}`),
       ...news.map((n) => `/news/${n.id}`),
-      ...jobs.map((j) => `/jobs/${j.id}`),
+      // ...jobs.map((j) => `/jobs/${j.id}`),
+      ...jobs.filter((j) => !j.role_filled).map((j) => `/jobs/${j.id}`),
     ];
   }
 
