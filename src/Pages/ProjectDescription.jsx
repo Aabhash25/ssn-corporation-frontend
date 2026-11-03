@@ -1,19 +1,52 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { useParams, Link, useNavigate, useLoaderData } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, Grid3x3 } from "lucide-react";
+
+// Turns the raw API project into the shape this page uses
+// (absolute image URLs, default category).
+const formatProject = (data) => {
+  const apiUrl = import.meta.env.VITE_API_URL || "";
+  const imageUrls =
+    data.images && Array.isArray(data.images)
+      ? data.images.map((img) => {
+          const imgUrl = img.image || img;
+          return imgUrl.startsWith("http")
+            ? imgUrl
+            : `${apiUrl.replace("/api/", "")}${imgUrl}`;
+        })
+      : [];
+
+  return {
+    ...data,
+    images: imageUrls,
+    category: data.category || { name: "Uncategorized" },
+  };
+};
 
 export default function ProjectDescription() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [project, setProject] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // Data fetched at build time by the route loader (see routes.jsx).
+  // Empty for projects added after the last build; then we fetch in the browser.
+  const loaderData = useLoaderData();
+  const loaderProject = useMemo(
+    () => (loaderData ? formatProject(loaderData) : null),
+    [loaderData],
+  );
+
+  const [fetchedProject, setFetchedProject] = useState(null);
+  const [loading, setLoading] = useState(!loaderProject);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
-  // Fetch project by ID from API
+  const project = loaderProject || fetchedProject;
+
+  // Browser fallback: only runs when there is no build-time data
   useEffect(() => {
+    if (loaderProject) return;
+
     const apiUrl = import.meta.env.VITE_API_URL || "";
     setLoading(true);
 
@@ -23,28 +56,14 @@ export default function ProjectDescription() {
         return res.json();
       })
       .then((data) => {
-        const imageUrls =
-          data.images && Array.isArray(data.images)
-            ? data.images.map((img) => {
-                const imgUrl = img.image || img;
-                return imgUrl.startsWith("http")
-                  ? imgUrl
-                  : `${apiUrl.replace("/api/", "")}${imgUrl}`;
-              })
-            : [];
-
-        setProject({
-          ...data,
-          images: imageUrls,
-          category: data.category || { name: "Uncategorized" },
-        });
+        setFetchedProject(formatProject(data));
         setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching project:", err);
         setLoading(false);
       });
-  }, [id]);
+  }, [id, loaderProject]);
 
   // Reset image slider when project changes
   useEffect(() => {
@@ -85,7 +104,7 @@ export default function ProjectDescription() {
     img.src = project.images[nextIdx];
   }, [currentImageIndex, project]);
 
-  if (loading) {
+  if (loading && !project) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
@@ -153,7 +172,7 @@ export default function ProjectDescription() {
                   key={currentImageIndex}
                   src={images[currentImageIndex]}
                   alt={project.description || "Project image"}
-                  fetchpriority={currentImageIndex === 0 ? "high" : "low"}
+                  fetchPriority={currentImageIndex === 0 ? "high" : "low"}
                   decoding="async"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

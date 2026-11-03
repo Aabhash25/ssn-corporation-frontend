@@ -34,6 +34,30 @@ const portfolioLoader = async () => {
     filterOptions: await filtersRes.json(),
   };
 };
+// Fetch every project (all pages) so each gets its own pre-rendered page.
+const fetchAllProjects = async () => {
+  const first = await fetch(`${API_URL}projects/?page=1`);
+  if (!first.ok) throw new Error("Projects API request failed");
+  const firstData = await first.json();
+  const all = [...(firstData.results || [])];
+
+  const pageSize = all.length || 12;
+  const totalPages = Math.ceil((firstData.count || 0) / pageSize);
+
+  for (let page = 2; page <= totalPages; page++) {
+    const res = await fetch(`${API_URL}projects/?page=${page}`);
+    if (!res.ok) throw new Error(`Projects API request failed (page ${page})`);
+    const data = await res.json();
+    all.push(...(data.results || []));
+  }
+  return all;
+};
+
+const projectLoader = async ({ params }) => {
+  const res = await fetch(`${API_URL}projects/${params.id}/`);
+  if (!res.ok) throw new Error(`Project ${params.id} request failed`);
+  return res.json();
+};
 
 export const routes = [
   {
@@ -338,6 +362,11 @@ export const routes = [
       },
       {
         path: "project-description/:id",
+        loader: projectLoader,
+        getStaticPaths: async () => {
+          const projects = await fetchAllProjects();
+          return projects.map((p) => `project-description/${p.id}-${p.slug}`);
+        },
         ...page(() => import("./Pages/ProjectDescription")),
         ...seo(
           "Project | SSN Corporation",
