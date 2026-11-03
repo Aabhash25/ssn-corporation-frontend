@@ -50,6 +50,9 @@ export default defineConfig({
       priority: 0.7,
     })
   ],
+    build: {
+    outDir: process.env.BUILD_DIR || 'dist',
+  },
 
   // Pre-rendering (vite-react-ssg)
   ssgOptions: {
