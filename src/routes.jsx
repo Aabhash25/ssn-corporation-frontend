@@ -4,6 +4,8 @@ import Quote from "./components/Quote";
 import NotAvailable from "./components/NotAvailable";
 import QTakeoffAI from "./Pages/QTakeoffAI";
 import RealEstateAnalysis from "./Pages/RealEstateAnalysis";
+import AboutUs from "./Pages/AboutUs"; // add
+import Contact from "./Pages/Contact"; // add
 
 // Code-split a page: loads its default export when the route is visited.
 // (Replaces React.lazy + <Suspense>; works with pre-rendering.)
@@ -223,7 +225,7 @@ export const routes = [
       },
       {
         path: "about",
-        ...page(() => import("./Pages/AboutUs")),
+        Component: AboutUs,
         ...seo(
           "About Us | SSN Corporation",
           "Learn about SSN Corporation, our team and our work.",
@@ -231,7 +233,7 @@ export const routes = [
       },
       {
         path: "contact",
-        ...page(() => import("./Pages/Contact")),
+        Component: Contact,
         ...seo(
           "Contact Us | SSN Corporation",
           "Get in touch with SSN Corporation.",

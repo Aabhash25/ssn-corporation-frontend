@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   FaEnvelope,
   FaPhoneAlt,
@@ -10,6 +10,7 @@ import {
   FaLinkedinIn,
   FaInstagram,
 } from "react-icons/fa";
+import { preloadRoute } from "../preload";
 
 // Constants moved outside component
 const TOP_LINKS = [
@@ -107,7 +108,16 @@ const RND_PRODUCTS = [
       "Analyze any location with AI-driven insights on nearby amenities and infrastructure. Generate interactive results and professional reports in seconds.",
   },
 ];
-
+// Preloads a page's JS chunk on hover, keyboard focus, or touch
+const Link = ({ to, ...props }) => (
+  <RouterLink
+    to={to}
+    onMouseEnter={() => preloadRoute(to)}
+    onFocus={() => preloadRoute(to)}
+    onTouchStart={() => preloadRoute(to)}
+    {...props}
+  />
+);
 // Reusable Components
 const ServiceLink = ({ to, children, onClick, isMobile = false }) => (
   <Link
