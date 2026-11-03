@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
-
+import { Head } from "vite-react-ssg";
 // Google Fonts
 const FontsStyle = () => (
   <style
@@ -200,6 +200,22 @@ const News = () => {
     <>
       <FontsStyle />
 
+      <Head>
+        <title>News & Updates | SSN Corporation</title>
+        <meta
+          name="description"
+          content="Latest news, project milestones and corporate updates from SSN Corporation, a Raleigh, NC engineering and construction firm."
+        />
+        <link rel="canonical" href="https://ssncorporation.com/news" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="SSN Corporation" />
+        <meta property="og:title" content="News & Updates | SSN Corporation" />
+        <meta
+          property="og:description"
+          content="Latest news, project milestones and corporate updates from SSN Corporation, a Raleigh, NC engineering and construction firm."
+        />
+        <meta property="og:url" content="https://ssncorporation.com/news" />
+      </Head>
       <section className="py-10 sm:py-16 bg-gray-50 w-full px-4 sm:px-6 lg:px-12">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 pt-30">

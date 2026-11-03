@@ -259,8 +259,8 @@ export const routes = [
         loader: newsLoader,
         ...page(() => import("./FooterPages/News")),
         ...seo(
-          "News | SSN Corporation",
-          "Explore the latest news, projects, milestones, and corporate updates from SSN Corporation.",
+          "News & Updates | SSN Corporation",
+          "Latest news, project milestones and corporate updates from SSN Corporation, a Raleigh, NC engineering and construction firm.",
         ),
       },
       {

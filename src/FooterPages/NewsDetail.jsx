@@ -1,5 +1,7 @@
 import React from "react";
 import { useLoaderData, Link } from "react-router-dom";
+import { Head } from "vite-react-ssg";
+import { buildNewsSeo } from "../utils/newsSeo";
 
 // Google Fonts
 const FontsStyle = () => (
@@ -82,6 +84,11 @@ const NewsDetail = () => {
       <>
         <FontsStyle />
 
+        <Head>
+          <title>News not found | SSN Corporation</title>
+          <meta name="robots" content="noindex" />
+        </Head>
+
         <div className="min-h-[80vh] flex flex-col items-center justify-center gap-4 text-center px-4">
           <h2 className="text-3xl font-playfair font-bold text-gray-800">
             😞 News Not Found
@@ -102,9 +109,31 @@ const NewsDetail = () => {
     );
   }
 
+  const seo = buildNewsSeo(news);
+
   return (
     <>
       <FontsStyle />
+
+      <Head>
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
+        <link rel="canonical" href={seo.url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="SSN Corporation" />
+        <meta property="og:title" content={seo.title} />
+        <meta property="og:description" content={seo.description} />
+        <meta property="og:url" content={seo.url} />
+        {seo.image && <meta property="og:image" content={seo.image} />}
+        <meta
+          name="twitter:card"
+          content={seo.image ? "summary_large_image" : "summary"}
+        />
+        <meta name="twitter:title" content={seo.title} />
+        <meta name="twitter:description" content={seo.description} />
+        {seo.image && <meta name="twitter:image" content={seo.image} />}
+        <script type="application/ld+json">{JSON.stringify(seo.jsonLd)}</script>
+      </Head>
 
       {/* MAIN SECTION */}
       <section className="py-10 sm:py-16 bg-gray-50 w-full">
