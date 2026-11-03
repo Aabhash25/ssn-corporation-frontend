@@ -1,6 +1,13 @@
-import React, { useState, useEffect, useCallback, lazy, Suspense } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  lazy,
+  Suspense,
+} from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 
 // Leaflet needs the browser (window), so the map is loaded only when it is shown.
 const PortfolioMapView = lazy(() =>
@@ -19,6 +26,30 @@ const globalCache = {
     currentPage: 1,
     showMap: false,
   },
+};
+
+// Cache key of the default view (page 1, no filters).
+// Must match the cacheKey built in the fetch effect below.
+const DEFAULT_KEY = "1-All-All-All-";
+
+// Turns API project results into objects with absolute image URLs.
+const formatProjects = (results = []) => {
+  const apiUrl = import.meta.env.VITE_API_URL || "";
+  return results.map((project) => {
+    let imageUrl = "";
+    if (project.image) {
+      if (project.image.startsWith("http")) {
+        imageUrl = project.image;
+      } else {
+        const baseUrl = apiUrl.replace("/api/", "/").replace(/\/$/, "");
+        const imagePath = project.image.startsWith("/")
+          ? project.image
+          : `/${project.image}`;
+        imageUrl = `${baseUrl}${imagePath}`;
+      }
+    }
+    return { ...project, image: imageUrl };
+  });
 };
 
 const PortfolioLoader = () => (
@@ -53,7 +84,7 @@ const ProjectCard = React.memo(({ project, index, onClick }) => {
       className="relative group cursor-pointer overflow-hidden rounded-2xl shadow-lg aspect-[3/4] sm:aspect-square bg-gray-200"
       onClick={onClick}
     >
-      {/* ✅ Skeleton shimmer shown while image loads */}
+      {/* Skeleton shimmer shown while image loads */}
       {!loaded && (
         <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
       )}
@@ -62,8 +93,8 @@ const ProjectCard = React.memo(({ project, index, onClick }) => {
         <img
           src={project.image}
           alt={project.name}
-          loading={index < 4 ? "eager" : "lazy"} // ← first 4 load immediately
-          fetchpriority={index < 4 ? "high" : "auto"} // ← browser prioritizes them
+          loading={index < 4 ? "eager" : "lazy"} // first 4 load immediately
+          fetchpriority={index < 4 ? "high" : "auto"} // browser prioritizes them
           decoding="async"
           onLoad={() => setLoaded(true)}
           className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 ${
@@ -186,14 +217,28 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
 const MasonryPortfolio = () => {
   const navigate = useNavigate();
+  const loaderData = useLoaderData();
+  const firstRun = useRef(true);
 
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Data fetched at build time by the route loader (see routes.jsx)
+  const [initial] = useState(() =>
+    loaderData?.projects
+      ? {
+          projects: formatProjects(loaderData.projects.results),
+          count: loaderData.projects.count || 0,
+        }
+      : null,
+  );
+
+  const [projects, setProjects] = useState(initial?.projects || []);
+  const [loading, setLoading] = useState(!initial);
   const [currentPage, setCurrentPage] = useState(
     globalCache.filters.currentPage,
   );
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalPages, setTotalPages] = useState(
+    initial ? Math.ceil(initial.count / 12) : 1,
+  );
+  const [totalCount, setTotalCount] = useState(initial?.count || 0);
 
   const [showMap, setShowMap] = useState(globalCache.filters.showMap);
   const [zoomProject, setZoomProject] = useState(null);
@@ -213,9 +258,15 @@ const MasonryPortfolio = () => {
     globalCache.filters.searchKeyword,
   );
 
-  const [allCategories, setAllCategories] = useState([]);
-  const [allStatuses, setAllStatuses] = useState([]);
-  const [allYears, setAllYears] = useState([]);
+  const [allCategories, setAllCategories] = useState(
+    loaderData?.filterOptions?.categories || [],
+  );
+  const [allStatuses, setAllStatuses] = useState(
+    loaderData?.filterOptions?.statuses || [],
+  );
+  const [allYears, setAllYears] = useState(
+    loaderData?.filterOptions?.years || [],
+  );
 
   // Save scroll position
   useEffect(() => {
@@ -283,13 +334,19 @@ const MasonryPortfolio = () => {
     fetchFilterOptions();
   }, []);
 
-  // Fetch projects — filters now sent to API, not done in JS
+  // Fetch projects — filters are sent to the API, not done in JS
   useEffect(() => {
     const fetchProjects = async () => {
       const apiUrl = import.meta.env.VITE_API_URL || "";
 
       // Cache key includes all active filters
       const cacheKey = `${currentPage}-${selectedCategory}-${selectedStatus}-${selectedYear}-${searchKeyword}`;
+
+      // First render with build-time data: skip the duplicate fetch
+      if (firstRun.current) {
+        firstRun.current = false;
+        if (initial && cacheKey === DEFAULT_KEY) return;
+      }
 
       if (globalCache.projects.has(cacheKey)) {
         const cachedData = globalCache.projects.get(cacheKey);
@@ -316,21 +373,7 @@ const MasonryPortfolio = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
 
-        const formattedProjects = (data.results || []).map((project) => {
-          let imageUrl = "";
-          if (project.image) {
-            if (project.image.startsWith("http")) {
-              imageUrl = project.image;
-            } else {
-              const baseUrl = apiUrl.replace("/api/", "/").replace(/\/$/, "");
-              const imagePath = project.image.startsWith("/")
-                ? project.image
-                : `/${project.image}`;
-              imageUrl = `${baseUrl}${imagePath}`;
-            }
-          }
-          return { ...project, image: imageUrl };
-        });
+        const formattedProjects = formatProjects(data.results);
 
         const totalPagesCalc = Math.ceil((data.count || 0) / 12);
         const cacheData = {
@@ -356,6 +399,7 @@ const MasonryPortfolio = () => {
     };
 
     fetchProjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     currentPage,
     selectedCategory,

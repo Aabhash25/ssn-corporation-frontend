@@ -17,6 +17,24 @@ const seo = (title, description, extra = {}) => ({
   handle: { seo: { title, description, ...extra } },
 });
 
+const API_URL = import.meta.env.VITE_API_URL || "";
+
+// Runs at build time: fetches page 1 of projects and the filter options.
+// Throws on failure so a bad build never goes live.
+const portfolioLoader = async () => {
+  const [projectsRes, filtersRes] = await Promise.all([
+    fetch(`${API_URL}projects/?page=1`),
+    fetch(`${API_URL}projects/filter_options/`),
+  ]);
+  if (!projectsRes.ok || !filtersRes.ok) {
+    throw new Error("Portfolio API request failed");
+  }
+  return {
+    projects: await projectsRes.json(),
+    filterOptions: await filtersRes.json(),
+  };
+};
+
 export const routes = [
   {
     path: "/",
@@ -35,6 +53,7 @@ export const routes = [
       // Pages
       {
         path: "portfolio",
+        loader: portfolioLoader,
         ...page(() => import("./Pages/PortfolioPages")),
         ...seo(
           "Portfolio | SSN Corporation",
