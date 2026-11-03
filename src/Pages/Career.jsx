@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaSearch, FaBriefcase } from "react-icons/fa";
@@ -10,9 +10,11 @@ import {
 } from "@heroicons/react/24/outline";
 
 function Career() {
-  const [jobs, setJobs] = useState([]);
-  const [filteredJobs, setFilteredJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { jobs: loaderJobs } = useLoaderData();
+
+  const [jobs, setJobs] = useState(loaderJobs || []);
+  const [filteredJobs, setFilteredJobs] = useState(loaderJobs || []);
+  const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [buttonLoading, setButtonLoading] = useState(false);
   const [selectedJob, setSelectedJob] = useState(null);
@@ -29,38 +31,6 @@ function Career() {
       day: "numeric",
     });
   };
-
-useEffect(() => {
-  const fetchAllJobs = async () => {
-    try {
-      let allJobs = [];
-      let url = `${import.meta.env.VITE_API_URL}jobs/`;
-
-      while (url) {
-        const response = await fetch(url);
-        const data = await response.json();
-
-        allJobs = [...allJobs, ...(data.results || [])];
-
-        // Django REST Framework pagination
-        url = data.next;
-      }
-
-      allJobs.sort(
-        (a, b) => new Date(b.posted_date) - new Date(a.posted_date)
-      );
-
-      setJobs(allJobs);
-      setFilteredJobs(allJobs);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchAllJobs();
-}, []);
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();

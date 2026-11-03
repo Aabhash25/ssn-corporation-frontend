@@ -58,6 +58,32 @@ const projectLoader = async ({ params }) => {
   if (!res.ok) throw new Error(`Project ${params.id} request failed`);
   return res.json();
 };
+const careerLoader = async () => {
+  const API_URL = import.meta.env.VITE_API_URL || "";
+
+  let allJobs = [];
+  let url = `${API_URL}jobs/`;
+
+  while (url) {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Jobs API request failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    allJobs = [...allJobs, ...(data.results || [])];
+
+    url = data.next;
+  }
+
+  allJobs.sort((a, b) => new Date(b.posted_date) - new Date(a.posted_date));
+
+  return {
+    jobs: allJobs,
+  };
+};
 
 export const routes = [
   {
@@ -102,6 +128,7 @@ export const routes = [
       },
       {
         path: "career",
+        loader: careerLoader,
         ...page(() => import("./Pages/Career")),
         ...seo(
           "Careers | SSN Corporation",
