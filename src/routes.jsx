@@ -74,13 +74,17 @@ const fetchAllJobs = async () => {
 };
 
 const projectLoader = async ({ params }) => {
-  const res = await fetch(`${API_URL}projects/${params.id}/`);
-  if (!res.ok) throw new Error(`Project ${params.id} request failed`);
+  const projectId = params.id.split("-")[0];
+
+  const res = await fetch(`${API_URL}projects/${projectId}/`);
+
+  if (!res.ok) {
+    throw new Error(`Project ${projectId} request failed`);
+  }
+
   return res.json();
 };
 const careerLoader = async () => {
-  const API_URL = import.meta.env.VITE_API_URL || "";
-
   let allJobs = [];
   let url = `${API_URL}jobs/`;
 
@@ -105,8 +109,6 @@ const careerLoader = async () => {
   };
 };
 const jobDetailLoader = async ({ params }) => {
-  const API_URL = import.meta.env.VITE_API_URL || "";
-
   const response = await fetch(`${API_URL}jobs/${params.id}/`);
 
   if (!response.ok) {
@@ -118,6 +120,80 @@ const jobDetailLoader = async ({ params }) => {
   }
 
   return await response.json();
+};
+const newsLoader = async () => {
+  const response = await fetch(`${API_URL}news/?page=1&page_size=12`);
+
+  if (!response.ok) {
+    throw new Error(`News API request failed: ${response.status}`);
+  }
+
+  const json = await response.json();
+  const newsData = json.results || (Array.isArray(json) ? json : []);
+  const totalCount = json.count ?? newsData.length;
+
+  return {
+    newsData,
+    totalCount,
+    totalPages: Math.max(1, Math.ceil(totalCount / 12)),
+  };
+};
+
+const newsDetailLoader = async ({ params }) => {
+  const newsId = params.id;
+
+  const [newsRes, moreRes] = await Promise.all([
+    fetch(`${API_URL}news/${newsId}/`),
+    fetch(`${API_URL}news/?page=1&page_size=12`),
+  ]);
+
+  if (newsRes.status === 404) {
+    return { news: null, moreNews: [] };
+  }
+
+  if (!newsRes.ok) {
+    throw new Error(`News request failed: ${newsRes.status}`);
+  }
+
+  if (!moreRes.ok) {
+    throw new Error(`More news request failed: ${moreRes.status}`);
+  }
+
+  const news = await newsRes.json();
+  const moreData = await moreRes.json();
+
+  const newsArray =
+    moreData.results || (Array.isArray(moreData) ? moreData : []);
+
+  const moreNews = newsArray
+    .filter((item) => String(item.id) !== String(newsId))
+    .slice(0, 3);
+
+  return {
+    news,
+    moreNews,
+  };
+};
+
+const fetchAllNews = async () => {
+  let allNews = [];
+  let url = `${API_URL}news/?page=1&page_size=100`;
+
+  while (url) {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`News API request failed: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    allNews.push(...(data.results || []));
+
+    url = data.next;
+  }
+
+  return allNews;
 };
 
 export const routes = [
@@ -180,10 +256,11 @@ export const routes = [
       },
       {
         path: "news",
+        loader: newsLoader,
         ...page(() => import("./FooterPages/News")),
         ...seo(
           "News | SSN Corporation",
-          "News and updates from SSN Corporation.",
+          "Explore the latest news, projects, milestones, and corporate updates from SSN Corporation.",
         ),
       },
       {
@@ -408,10 +485,19 @@ export const routes = [
       //   getStaticPaths: () => newsItems.map((n) => `news/${n.id}`),
       {
         path: "news/:id",
+        loader: newsDetailLoader,
+
+        // Generate a static HTML page for every news article.
+        getStaticPaths: async () => {
+          const news = await fetchAllNews();
+
+          return news.map((item) => `news/${item.id}`);
+        },
+
         ...page(() => import("./FooterPages/NewsDetail")),
         ...seo(
           "News | SSN Corporation",
-          "News and updates from SSN Corporation.",
+          "Read the latest news, projects, milestones, and corporate updates from SSN Corporation.",
         ),
       },
       {

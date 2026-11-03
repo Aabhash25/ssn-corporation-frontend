@@ -1,45 +1,63 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 // Google Fonts
 const FontsStyle = () => (
-  <style dangerouslySetInnerHTML={{ __html: `
-    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
+        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
 
-    .font-roboto {
-      font-family: "Roboto", sans-serif !important;
-    }
-    .font-playfair {
-      font-family: "Playfair Display", serif !important;
-    }
-  ` }} />
+        .font-roboto {
+          font-family: "Roboto", sans-serif !important;
+        }
+
+        .font-playfair {
+          font-family: "Playfair Display", serif !important;
+        }
+      `,
+    }}
+  />
 );
 
 const News = () => {
-  const [newsData, setNewsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [totalCount, setTotalCount] = useState(0);
+  // Initial news data is provided by the SSG loader.
+  const initialData = useLoaderData();
 
+  const [newsData, setNewsData] = useState(initialData.newsData || []);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(initialData.totalPages || 1);
+  const [totalCount, setTotalCount] = useState(initialData.totalCount || 0);
+
+  // Fetch additional pages only when the visitor changes the page.
+  // Page 1 is already available from the SSG loader.
   useEffect(() => {
+    if (currentPage === 1) return;
+
     const fetchNews = async () => {
       setLoading(true);
+
       try {
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}news/?page=${currentPage}&page_size=12`,
         );
-        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
-        const json = await res.json(); // rename to avoid any collision
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+
+        const json = await res.json();
 
         if (json.results) {
           setNewsData(json.results);
           setTotalCount(json.count || 0);
           setTotalPages(Math.ceil((json.count || 0) / 12));
         } else {
-          setNewsData(Array.isArray(json) ? json : []);
-          setTotalCount(Array.isArray(json) ? json.length : 0);
+          const results = Array.isArray(json) ? json : [];
+
+          setNewsData(results);
+          setTotalCount(results.length);
           setTotalPages(1);
         }
       } catch (err) {
@@ -54,6 +72,10 @@ const News = () => {
   }, [currentPage]);
 
   const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages || page === currentPage) {
+      return;
+    }
+
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -67,6 +89,7 @@ const News = () => {
       const showPages = 5;
 
       let startPage = Math.max(1, currentPage - Math.floor(showPages / 2));
+
       let endPage = Math.min(totalPages, startPage + showPages - 1);
 
       if (endPage - startPage < showPages - 1) {
@@ -80,14 +103,16 @@ const News = () => {
       return pages;
     };
 
+    const pageNumbers = getPageNumbers();
+
     return (
       <div className="flex items-center justify-center gap-2 py-8 mt-8">
         {/* Previous Button */}
         <button
           onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1 || loading}
           className={`px-4 py-2 rounded-lg font-medium transition ${
-            currentPage === 1
+            currentPage === 1 || loading
               ? "bg-gray-200 text-gray-400 cursor-not-allowed"
               : "bg-blue-600 text-white hover:bg-blue-700"
           }`}
@@ -96,25 +121,26 @@ const News = () => {
         </button>
 
         {/* First Page */}
-        {getPageNumbers()[0] > 1 && (
+        {pageNumbers[0] > 1 && (
           <>
             <button
               onClick={() => handlePageChange(1)}
+              disabled={loading}
               className="px-4 py-2 rounded-lg font-medium bg-gray-100 hover:bg-gray-200 text-gray-700"
             >
               1
             </button>
-            {getPageNumbers()[0] > 2 && (
-              <span className="text-gray-500">...</span>
-            )}
+
+            {pageNumbers[0] > 2 && <span className="text-gray-500">...</span>}
           </>
         )}
 
         {/* Page Numbers */}
-        {getPageNumbers().map((page) => (
+        {pageNumbers.map((page) => (
           <button
             key={page}
             onClick={() => handlePageChange(page)}
+            disabled={loading}
             className={`px-4 py-2 rounded-lg font-medium transition ${
               page === currentPage
                 ? "bg-blue-600 text-white"
@@ -126,13 +152,15 @@ const News = () => {
         ))}
 
         {/* Last Page */}
-        {getPageNumbers()[getPageNumbers().length - 1] < totalPages && (
+        {pageNumbers[pageNumbers.length - 1] < totalPages && (
           <>
-            {getPageNumbers()[getPageNumbers().length - 1] < totalPages - 1 && (
+            {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
               <span className="text-gray-500">...</span>
             )}
+
             <button
               onClick={() => handlePageChange(totalPages)}
+              disabled={loading}
               className="px-4 py-2 rounded-lg font-medium bg-gray-100 hover:bg-gray-200 text-gray-700"
             >
               {totalPages}
@@ -143,9 +171,9 @@ const News = () => {
         {/* Next Button */}
         <button
           onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
+          disabled={currentPage === totalPages || loading}
           className={`px-4 py-2 rounded-lg font-medium transition ${
-            currentPage === totalPages
+            currentPage === totalPages || loading
               ? "bg-gray-200 text-gray-400 cursor-not-allowed"
               : "bg-blue-600 text-white hover:bg-blue-700"
           }`}
@@ -156,13 +184,13 @@ const News = () => {
     );
   };
 
-  // Skeleton loader for the news page
+  // Loading state for subsequent pages.
   if (loading) {
     return (
       <>
         <FontsStyle />
         <div className="flex justify-center items-center min-h-[80vh]">
-          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
         </div>
       </>
     );
@@ -171,19 +199,21 @@ const News = () => {
   return (
     <>
       <FontsStyle />
+
       <section className="py-10 sm:py-16 bg-gray-50 w-full px-4 sm:px-6 lg:px-12">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 pt-30">
-          <h2 className="text-3xl sm:text-5xl font-playfair font-bold text-gray-800 mb-3">
+          <h1 className="text-3xl sm:text-5xl font-playfair font-bold text-gray-800 mb-3">
             Latest News
-          </h2>
+          </h1>
+
           <p className="text-base sm:text-lg md:text-xl font-roboto text-gray-600 max-w-3xl mx-auto">
             Explore our latest projects, milestones, and corporate updates.
             {totalCount > 0 && ` (${totalCount} total articles)`}
           </p>
         </div>
 
-        {/* News cards */}
+        {/* News Cards */}
         {newsData.length === 0 ? (
           <p className="text-center text-gray-500 py-10">
             No news articles found.
@@ -197,24 +227,35 @@ const News = () => {
                   to={`/news/${news.id}`}
                   className="w-full sm:w-[48%] lg:w-[31%] bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300"
                 >
-                  {/* Only first image */}
+                  {/* News Image */}
                   {news.image1 && (
                     <img
                       loading="lazy"
                       src={news.image1}
-                      alt={news.title}
+                      alt={news.title || "SSN Corporation news"}
                       className="w-full h-52 sm:h-60 object-cover"
                     />
                   )}
 
-                  {/* Content */}
+                  {/* News Content */}
                   <div className="p-5 sm:p-6">
-                    <h3 className="font-playfair text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
+                    <h2 className="font-playfair text-xl sm:text-2xl font-semibold text-gray-900 mb-2">
                       {news.title}
-                    </h3>
-                    <p className="text-sm text-gray-500 mb-3">
-                      {new Date(news.published_date).toLocaleDateString()}
-                    </p>
+                    </h2>
+
+                    {news.published_date && (
+                      <p className="text-sm text-gray-500 mb-3">
+                        {new Date(news.published_date).toLocaleDateString(
+                          "en-US",
+                          {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          },
+                        )}
+                      </p>
+                    )}
+
                     <div
                       className="text-gray-700 font-roboto text-sm sm:text-base line-clamp-3"
                       dangerouslySetInnerHTML={{

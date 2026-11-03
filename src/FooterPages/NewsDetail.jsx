@@ -1,34 +1,40 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import React from "react";
+import { useLoaderData, Link } from "react-router-dom";
 
 // Google Fonts
 const FontsStyle = () => (
-  <style dangerouslySetInnerHTML={{ __html: `
-    @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
+        @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
 
-    .font-roboto {
-      font-family: "Roboto", sans-serif !important;
-    }
-    .font-playfair {
-      font-family: "Playfair Display", serif !important;
-    }
+        .font-roboto {
+          font-family: "Roboto", sans-serif !important;
+        }
 
-    /* Style for links inside paragraphs */
-    .news-link {
-      color: #2563eb;
-      font-weight: 600;
-      text-decoration: underline;
-    }
-    .news-link:hover {
-      color: #1d4ed8;
-      text-decoration: underline;
-    }
-  ` }} />
+        .font-playfair {
+          font-family: "Playfair Display", serif !important;
+        }
+
+        .news-link {
+          color: #2563eb;
+          font-weight: 600;
+          text-decoration: underline;
+        }
+
+        .news-link:hover {
+          color: #1d4ed8;
+          text-decoration: underline;
+        }
+      `,
+    }}
+  />
 );
 
 // Utility function to convert keywords to links
 const linkKeywords = (text) => {
+  if (!text || typeof text !== "string") return "";
+
   const links = {
     "SSN Corporation": "https://ssncorporation.com/engineers",
     "SSN Engineers": "https://ssncorporation.com/engineers",
@@ -44,13 +50,19 @@ const linkKeywords = (text) => {
   };
 
   let linkedText = text;
+
   const sortedKeys = Object.keys(links).sort((a, b) => b.length - a.length);
 
   sortedKeys.forEach((key) => {
-    const regex = new RegExp(`\\b${key}\\b`, "gi");
+    const regex = new RegExp(
+      `\\b${key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+      "gi",
+    );
+
     linkedText = linkedText.replace(
       regex,
-      `<a href="${links[key]}" class="news-link" target="_blank" rel="noopener noreferrer">${key}</a>`,
+      (match) =>
+        `<a href="${links[key]}" class="news-link" target="_blank" rel="noopener noreferrer">${match}</a>`,
     );
   });
 
@@ -58,75 +70,27 @@ const linkKeywords = (text) => {
 };
 
 const NewsDetail = () => {
-  const { id } = useParams();
-  const [news, setNews] = useState(null);
-  const [moreNews, setMoreNews] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Article and related articles come from the SSG loader.
+  const loaderData = useLoaderData();
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        // Fetch current news by ID
-        const newsRes = await fetch(
-          `${import.meta.env.VITE_API_URL}news/${id}/`,
-        );
-        if (!newsRes.ok)
-          throw new Error(`HTTP error! status: ${newsRes.status}`);
-        const newsData = await newsRes.json();
-        setNews(newsData);
-
-        // Fetch all news for "More News"
-        const moreRes = await fetch(`${import.meta.env.VITE_API_URL}news/`);
-        if (!moreRes.ok)
-          throw new Error(`HTTP error! status: ${moreRes.status}`);
-        const moreData = await moreRes.json();
-        const newsArray = Array.isArray(moreData)
-          ? moreData
-          : moreData.results || [];
-        const others = newsArray
-          .filter((item) => item.id !== parseInt(id))
-          .slice(0, 3);
-        setMoreNews(others);
-      } catch (err) {
-        console.error("Error fetching news:", err);
-        setNews(null);
-        setMoreNews([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [id]);
-
-  // Loading spinner
-  if (loading) {
-    return (
-      <>
-        <FontsStyle />
-        <div className="min-h-[80vh] flex flex-col items-center justify-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-gray-500 text-lg font-roboto">Loading news...</p>
-        </div>
-      </>
-    );
-  }
+  const news = loaderData?.news || null;
+  const moreNews = loaderData?.moreNews || [];
 
   // News not found
   if (!news) {
     return (
       <>
         <FontsStyle />
-        <div className="min-h-[80vh] flex flex-col items-center justify-center gap-4 text-center">
+
+        <div className="min-h-[80vh] flex flex-col items-center justify-center gap-4 text-center px-4">
           <h2 className="text-3xl font-playfair font-bold text-gray-800">
             😞 News Not Found
           </h2>
+
           <p className="text-gray-500 font-roboto">
             The news article you are looking for does not exist.
           </p>
+
           <Link
             to="/news"
             className="mt-4 inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full transition-all duration-300"
@@ -149,9 +113,12 @@ const NewsDetail = () => {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-playfair font-bold text-gray-900 mb-3">
             {news.title}
           </h1>
-          <p className="text-sm sm:text-base text-gray-500 mb-8 sm:mb-10">
-            {new Date(news.published_date).toLocaleDateString()}
-          </p>
+
+          {news.published_date && (
+            <p className="text-sm sm:text-base text-gray-500 mb-8 sm:mb-10">
+              {new Date(news.published_date).toLocaleDateString()}
+            </p>
+          )}
 
           {/* LAYOUT */}
           <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
@@ -159,7 +126,9 @@ const NewsDetail = () => {
             <div className="lg:col-span-2 leading-relaxed">
               <div
                 className="text-gray-700 font-roboto text-base sm:text-lg mb-6"
-                dangerouslySetInnerHTML={{ __html: linkKeywords(news.content) }}
+                dangerouslySetInnerHTML={{
+                  __html: linkKeywords(news.content),
+                }}
               />
             </div>
 
@@ -174,6 +143,7 @@ const NewsDetail = () => {
                   />
                 </div>
               )}
+
               {news.image2 && (
                 <div className="w-full overflow-hidden rounded-xl shadow-lg">
                   <img
@@ -208,6 +178,7 @@ const NewsDetail = () => {
                     <img
                       src={item.image1}
                       alt={item.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
@@ -218,9 +189,12 @@ const NewsDetail = () => {
                   <h3 className="font-playfair text-lg sm:text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
                     {item.title}
                   </h3>
-                  <p className="text-gray-500 text-xs sm:text-sm">
-                    {new Date(item.published_date).toLocaleDateString()}
-                  </p>
+
+                  {item.published_date && (
+                    <p className="text-gray-500 text-xs sm:text-sm">
+                      {new Date(item.published_date).toLocaleDateString()}
+                    </p>
+                  )}
                 </div>
               </Link>
             ))}
