@@ -158,7 +158,7 @@ const ResearchAndDevelopment = () => {
       </div>
 
       {/* Fonts */}
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap");
         .font-playfair {
           font-family: "Playfair Display", serif;
@@ -166,7 +166,7 @@ const ResearchAndDevelopment = () => {
         .font-roboto {
           font-family: "Roboto", sans-serif;
         }
-      `}</style>
+      ` }} />
     </div>
   );
 };

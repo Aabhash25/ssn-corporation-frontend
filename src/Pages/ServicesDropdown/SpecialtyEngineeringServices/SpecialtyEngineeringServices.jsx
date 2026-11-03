@@ -242,7 +242,7 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
         </div>
       </div>
 
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .font-roboto {
           font-family: "Roboto", sans-serif;
           font-feature-settings:
@@ -255,7 +255,7 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
             "kern" 1,
             "liga" 1;
         }
-      `}</style>
+      ` }} />
     </>
   );
 };

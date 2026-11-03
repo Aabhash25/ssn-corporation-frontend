@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 // Google Fonts
 const FontsStyle = () => (
-  <style>{`
+  <style dangerouslySetInnerHTML={{ __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
 
     .font-roboto {
@@ -24,7 +24,7 @@ const FontsStyle = () => (
       color: #1d4ed8;
       text-decoration: underline;
     }
-  `}</style>
+  ` }} />
 );
 
 // Utility function to convert keywords to links

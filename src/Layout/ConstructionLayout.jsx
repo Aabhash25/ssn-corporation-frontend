@@ -83,7 +83,7 @@ const ConstructionLayout = ({
       {/* Content Wrapper */}
       <div className="relative z-10">{children}</div>
 
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes dustFloat {
           0%,
           100% {
@@ -131,7 +131,7 @@ const ConstructionLayout = ({
         .animate-iconFloat-slow {
           animation: iconFloat 10s ease-in-out infinite;
         }
-      `}</style>
+      ` }} />
     </section>
   );
 };

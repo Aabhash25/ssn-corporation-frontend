@@ -251,7 +251,7 @@ const MaterialTesting = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .font-roboto {
           font-family: "Roboto", sans-serif;
           font-feature-settings:
@@ -264,7 +264,7 @@ const MaterialTesting = () => {
             "kern" 1,
             "liga" 1;
         }
-      `}</style>
+      ` }} />
     </>
   );
 };

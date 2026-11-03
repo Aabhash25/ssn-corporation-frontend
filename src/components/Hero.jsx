@@ -91,7 +91,7 @@ const Hero = () => {
             <img
               src={isMobile ? currentSlide.mobileImage : currentSlide.image}
               alt="Hero"
-              fetchPriority="high"
+              fetchpriority="high"
               loading="eager"
               decoding="async"
               className="absolute inset-0 w-full h-full object-cover brightness-75"

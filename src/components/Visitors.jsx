@@ -111,14 +111,14 @@ const Visitors = () => {
       </div>
 
       {/* Fonts */}
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .font-roboto {
           font-family: "Roboto", sans-serif;
         }
         .font-playfair {
           font-family: "Playfair Display", serif;
         }
-      `}</style>
+      ` }} />
     </section>
   );
 };

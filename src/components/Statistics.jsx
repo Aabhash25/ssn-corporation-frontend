@@ -3,7 +3,7 @@ import React from "react";
 
 // Fonts
 const FontsStyle = () => (
-  <style jsx global>{`
+  <style dangerouslySetInnerHTML={{ __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
 
     .font-roboto {
@@ -24,7 +24,7 @@ const FontsStyle = () => (
     span {
       font-style: normal !important;
     }
-  `}</style>
+  ` }} />
 );
 
 const statsData = [

@@ -10,7 +10,7 @@ import WhySSNSection from "./WhySSNSection";
 import ProjectsSection from "./ProjectsSection";
 
 const FontsStyle = () => (
-  <style jsx global>{`
+  <style dangerouslySetInnerHTML={{ __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 
     body {
@@ -79,7 +79,7 @@ const FontsStyle = () => (
     .content-transition {
       transition: all 0.3s ease-out;
     }
-  `}</style>
+  ` }} />
 );
 
 const GeotechnicalEngineering = () => {

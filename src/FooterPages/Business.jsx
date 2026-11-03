@@ -289,14 +289,14 @@ const Business = () => {
       )}
 
       {/* FONTS */}
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .font-playfair {
           font-family: "Playfair Display", serif;
         }
         .font-roboto {
           font-family: "Roboto", sans-serif;
         }
-      `}</style>
+      ` }} />
     </div>
   );
 };

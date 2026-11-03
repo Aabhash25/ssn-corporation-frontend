@@ -153,7 +153,7 @@ export default function ProjectDescription() {
                   key={currentImageIndex}
                   src={images[currentImageIndex]}
                   alt={project.description || "Project image"}
-                  fetchPriority={currentImageIndex === 0 ? "high" : "low"}
+                  fetchpriority={currentImageIndex === 0 ? "high" : "low"}
                   decoding="async"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}

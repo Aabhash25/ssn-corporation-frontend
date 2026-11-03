@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 // Fonts Component
 const FontsStyle = () => (
-  <style jsx global>{`
+  <style dangerouslySetInnerHTML={{ __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
 
     .font-playfair {
@@ -13,7 +13,7 @@ const FontsStyle = () => (
     .font-roboto {
       font-family: "Roboto", sans-serif;
     }
-  `}</style>
+  ` }} />
 );
 
 // Motion Variants

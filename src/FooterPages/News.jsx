@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 // Google Fonts
 const FontsStyle = () => (
-  <style>{`
+  <style dangerouslySetInnerHTML={{ __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
 
     .font-roboto {
@@ -12,7 +12,7 @@ const FontsStyle = () => (
     .font-playfair {
       font-family: "Playfair Display", serif !important;
     }
-  `}</style>
+  ` }} />
 );
 
 const News = () => {

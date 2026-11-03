@@ -49,5 +49,12 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
     })
-  ]
+  ],
+
+  // Pre-rendering (vite-react-ssg)
+  ssgOptions: {
+    dirStyle: 'nested',   // /about -> dist/about/index.html
+    script: 'async',
+    formatting: 'minify',
+  },
 });

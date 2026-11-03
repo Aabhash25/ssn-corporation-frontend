@@ -561,7 +561,7 @@ const Engineers = () => {
       </AnimatePresence>
 
       {/* Fonts */}
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         .font-roboto {
           font-family: "Roboto", sans-serif;
         }
@@ -579,7 +579,7 @@ const Engineers = () => {
           box-shadow: 0 0 0 4px rgba(251, 146, 60, 0.8), 0 0 20px rgba(251, 146, 60, 0.6);
           transition: box-shadow 0.5s ease-in-out;
         }
-      `}</style>
+      ` }} />
     </div>
   );
 };

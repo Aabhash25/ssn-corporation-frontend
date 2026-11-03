@@ -3,7 +3,7 @@ import React from "react";
 
 // Google Fonts
 const FontsStyle = () => (
-  <style jsx global>{`
+  <style dangerouslySetInnerHTML={{ __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Roboto:wght@300;400;500;600;700&display=swap");
     .font-roboto {
       font-family: "Roboto", sans-serif;
@@ -11,7 +11,7 @@ const FontsStyle = () => (
     .font-playfair {
       font-family: "Playfair Display", serif;
     }
-  `}</style>
+  ` }} />
 );
 
 const ConstructionManagement = () => {

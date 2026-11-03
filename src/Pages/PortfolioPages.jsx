@@ -1,7 +1,11 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { PortfolioMapView } from "./MapComponents";
+
+// Leaflet needs the browser (window), so the map is loaded only when it is shown.
+const PortfolioMapView = lazy(() =>
+  import("./MapComponents").then((m) => ({ default: m.PortfolioMapView })),
+);
 
 const globalCache = {
   projects: new Map(),
@@ -59,7 +63,7 @@ const ProjectCard = React.memo(({ project, index, onClick }) => {
           src={project.image}
           alt={project.name}
           loading={index < 4 ? "eager" : "lazy"} // ← first 4 load immediately
-          fetchPriority={index < 4 ? "high" : "auto"} // ← browser prioritizes them
+          fetchpriority={index < 4 ? "high" : "auto"} // ← browser prioritizes them
           decoding="async"
           onLoad={() => setLoaded(true)}
           className={`w-full h-full object-cover transition-all duration-500 group-hover:scale-110 ${
@@ -565,15 +569,19 @@ const MasonryPortfolio = () => {
 
         {/* Main Content */}
         {showMap ? (
-          <PortfolioMapView
-            projects={projects}
-            zoomProject={zoomProject}
-            onMarkerClick={handleMarkerClick}
-            onMarkerHover={handleMarkerHover}
-            onMarkerOut={handleMarkerOut}
-            hoveredProject={hoveredMapProject}
-            hoverPosition={hoverPosition}
-          />
+          <Suspense
+            fallback={<div className="w-full" style={{ height: "60vh" }} />}
+          >
+            <PortfolioMapView
+              projects={projects}
+              zoomProject={zoomProject}
+              onMarkerClick={handleMarkerClick}
+              onMarkerHover={handleMarkerHover}
+              onMarkerOut={handleMarkerOut}
+              hoveredProject={hoveredMapProject}
+              hoverPosition={hoverPosition}
+            />
+          </Suspense>
         ) : (
           <>
             <div className="py-6 sm:py-10 max-w-[90vw] mx-auto px-2 sm:px-4 lg:px-6">

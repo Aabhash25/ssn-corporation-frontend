@@ -160,8 +160,8 @@ const ModernNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
-  const [isXlScreen, setIsXlScreen] = useState(window.innerWidth >= 1440);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isXlScreen, setIsXlScreen] = useState(false);
   const [isRnDOpen, setIsRnDOpen] = useState(false);
 
   const rndDropdownTimeout = useRef(null);
@@ -198,6 +198,7 @@ const ModernNavbar = () => {
       setIsDesktop(window.innerWidth >= 1024);
       setIsXlScreen(window.innerWidth >= 1440);
     };
+    handleResize(); // read the real window size once the page is in the browser
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -505,66 +506,61 @@ const ModernNavbar = () => {
   return (
     <>
       {/* Top Bar */}
-      {isDesktop && (
-        <div className="fixed top-0 left-0 w-full flex justify-between items-center h-12 xl:h-14 px-4 lg:px-6 xl:px-8 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm lg:text-base xl:text-lg font-sans z-50">
-          {/* Contact */}
-          <div className="flex space-x-3 lg:space-x-4 xl:space-x-6">
-            <a
-              href="mailto:contact@ssncorporation.com"
-              className="flex items-center gap-1.5 lg:gap-2 hover:text-yellow-400 transition-colors"
-            >
-              <FaEnvelope className="text-xs lg:text-sm xl:text-base" />
-              <span className="hidden lg:inline">
-                contact@ssncorporation.com
-              </span>
-              <span className="lg:hidden">Email</span>
-            </a>
-            <span className="flex items-center gap-1.5 lg:gap-2">
-              <FaPhoneAlt className="text-xs lg:text-sm xl:text-base" />
-              <span className="text-xs lg:text-sm xl:text-base">
-                (919) 703-0222
-              </span>
+      <div className="fixed top-0 left-0 w-full hidden lg:flex justify-between items-center h-12 xl:h-14 px-4 lg:px-6 xl:px-8 bg-gradient-to-r from-gray-900 to-gray-800 text-white text-sm lg:text-base xl:text-lg font-sans z-50">
+        {/* Contact */}
+        <div className="flex space-x-3 lg:space-x-4 xl:space-x-6">
+          <a
+            href="mailto:contact@ssncorporation.com"
+            className="flex items-center gap-1.5 lg:gap-2 hover:text-yellow-400 transition-colors"
+          >
+            <FaEnvelope className="text-xs lg:text-sm xl:text-base" />
+            <span className="hidden lg:inline">contact@ssncorporation.com</span>
+            <span className="lg:hidden">Email</span>
+          </a>
+          <span className="flex items-center gap-1.5 lg:gap-2">
+            <FaPhoneAlt className="text-xs lg:text-sm xl:text-base" />
+            <span className="text-xs lg:text-sm xl:text-base">
+              (919) 703-0222
             </span>
-          </div>
-
-          {/* Top Links — scrollable on mid-size screens, all visible on xl */}
-          <div className="flex items-center overflow-x-auto scrollbar-none space-x-3 lg:space-x-4 xl:space-x-8 text-xs lg:text-sm xl:text-lg font-semibold flex-shrink min-w-0 px-2">
-            {TOP_LINKS.map((link) => (
-              <Link
-                key={link.name}
-                to={link.to}
-                className={`whitespace-nowrap hover:text-yellow-400 transition-colors ${
-                  link.name === "Gallery"
-                    ? "text-yellow-400 border border-yellow-500/50 px-2 lg:px-3 py-0.5 rounded-full hover:bg-yellow-500/10 hover:text-yellow-300"
-                    : ""
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Social */}
-          <div className="flex flex-shrink-0 space-x-3 lg:space-x-4 xl:space-x-6 text-base lg:text-lg xl:text-xl">
-            {SOCIAL_LINKS.map((social, idx) => (
-              <a
-                key={idx}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-yellow-400 transition-colors"
-              >
-                <social.icon />
-              </a>
-            ))}
-          </div>
+          </span>
         </div>
-      )}
+
+        {/* Top Links — scrollable on mid-size screens, all visible on xl */}
+        <div className="flex items-center overflow-x-auto scrollbar-none space-x-3 lg:space-x-4 xl:space-x-8 text-xs lg:text-sm xl:text-lg font-semibold flex-shrink min-w-0 px-2">
+          {TOP_LINKS.map((link) => (
+            <Link
+              key={link.name}
+              to={link.to}
+              className={`whitespace-nowrap hover:text-yellow-400 transition-colors ${
+                link.name === "Gallery"
+                  ? "text-yellow-400 border border-yellow-500/50 px-2 lg:px-3 py-0.5 rounded-full hover:bg-yellow-500/10 hover:text-yellow-300"
+                  : ""
+              }`}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+
+        {/* Social */}
+        <div className="flex flex-shrink-0 space-x-3 lg:space-x-4 xl:space-x-6 text-base lg:text-lg xl:text-xl">
+          {SOCIAL_LINKS.map((social, idx) => (
+            <a
+              key={idx}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-yellow-400 transition-colors"
+            >
+              <social.icon />
+            </a>
+          ))}
+        </div>
+      </div>
 
       {/* Main Navbar */}
       <nav
-        className={`fixed w-full transition-all duration-500 ${navBg} z-40`}
-        style={{ top: isDesktop ? (isXlScreen ? "56px" : "48px") : "0px" }}
+        className={`fixed top-0 lg:max-[1440px]:top-12 min-[1440px]:top-14 w-full transition-all duration-500 ${navBg} z-40`}
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center h-16 lg:h-20 xl:h-24 px-4 md:px-6 xl:px-8">
           {/* Logo */}

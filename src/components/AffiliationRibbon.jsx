@@ -22,7 +22,7 @@ const logos = [
 const AffiliationRibbon = () => {
   return (
     <div className="w-full bg-white py-6 relative">
-      <style>{`
+      <style dangerouslySetInnerHTML={{ __html: `
     @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
@@ -33,7 +33,7 @@ const AffiliationRibbon = () => {
     .animate-scroll:hover {
       animation-play-state: paused;
     }
-  `}</style>
+  ` }} />
 
       <div className="flex animate-scroll overflow-visible">
         {[...logos, ...logos, ...logos].map((logo, idx) => (

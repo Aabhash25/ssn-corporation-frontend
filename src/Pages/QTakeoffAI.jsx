@@ -4,7 +4,7 @@ const QTakeoffAI = () => {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 md:px-16 font-roboto pt-45">
       {/* Fonts */}
-      <style jsx global>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap");
         .font-playfair {
           font-family: "Playfair Display", serif;
@@ -12,7 +12,7 @@ const QTakeoffAI = () => {
         .font-roboto {
           font-family: "Roboto", sans-serif;
         }
-      `}</style>
+      ` }} />
 
       {/* Hero Section */}
       <section className="text-center max-w-4xl mx-auto mb-16">
