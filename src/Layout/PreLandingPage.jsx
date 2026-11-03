@@ -216,7 +216,7 @@ export default function PreLandingPage({ onFinish }) {
             <motion.img
               src="/logo.webp"
               alt="SSN CORPORATION"
-              fetchPriority="high"
+              fetchpriority="high"
               style={{
                 maxWidth: "100%",
                 maxHeight: "100%",
