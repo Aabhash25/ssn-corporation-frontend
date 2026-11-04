@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-import ContactCTA from "../../../components/contactCTA";
+import ContactFormSection from "../../../components/ContactFormSection";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ServicesSection from "./ServicesSection";
@@ -11,7 +11,9 @@ import ProjectsSection from "./ProjectsSection";
 import MarketWeServe from "./MarketWeServe";
 
 const FontsStyle = () => (
-  <style dangerouslySetInnerHTML={{ __html: `
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 
     body {
@@ -77,7 +79,9 @@ const FontsStyle = () => (
     .content-transition {
       transition: all 0.3s ease-out;
     }
-  ` }} />
+  `,
+    }}
+  />
 );
 
 const LandPlanningAndPermitting = () => {
@@ -232,12 +236,12 @@ const LandPlanningAndPermitting = () => {
         <div className="mt-0 md:-mt-20">
           <ServicesSection servicesData={landPlanningServicesData} />
         </div>
-        <div className="-mt-16">
-          <ContactCTA
+        <div className="mt-0 md:-mt-16">
+          <ContactFormSection
+            layout="split"
+            compact
             title="Need Expert Land Planning & Permitting Support?"
             description="We are ready to provide reliable, data-driven, and optimized land planning and permitting solutions. Our team of experts is committed to delivering precise planning, robust analysis, and practical support to ensure your project stands strong from concept to completion. Let us help you build safely, efficiently, and with confidence."
-            buttonText="Get in Touch"
-            link="/contact"
           />
         </div>
         <div className="mt-0 md:-mt-12">

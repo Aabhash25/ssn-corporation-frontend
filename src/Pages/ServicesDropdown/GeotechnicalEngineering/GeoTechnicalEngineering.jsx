@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-
-import ContactCTA from "../../../components/contactCTA";
+import ContactFormSection from "../../../components/ContactFormSection";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ServicesSection from "./ServicesSection";
@@ -10,7 +9,9 @@ import WhySSNSection from "./WhySSNSection";
 import ProjectsSection from "./ProjectsSection";
 
 const FontsStyle = () => (
-  <style dangerouslySetInnerHTML={{ __html: `
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 
     body {
@@ -79,7 +80,9 @@ const FontsStyle = () => (
     .content-transition {
       transition: all 0.3s ease-out;
     }
-  ` }} />
+  `,
+    }}
+  />
 );
 
 const GeotechnicalEngineering = () => {
@@ -337,12 +340,12 @@ const GeotechnicalEngineering = () => {
           />
         </div>
 
-        <div className="-mt-16">
-          <ContactCTA
+        <div className="mt-0 md:-mt-16">
+          <ContactFormSection
+            layout="split"
+            compact
             title="Need Expert Engineering Support?"
             description="We are ready to assist you with reliable, data-driven, and optimized engineering solutions. Our team of experts is dedicated to providing you with the best possible service and support. We are here to help you with your project from start to finish."
-            buttonText="Get in Touch"
-            link="/contact"
           />
         </div>
 

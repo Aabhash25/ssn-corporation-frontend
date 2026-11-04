@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-import ContactCTA from "../../../components/contactCTA";
+import ContactFormSection from "../../../components/ContactFormSection";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import ServicesSection from "./ServicesSection";
@@ -10,7 +10,9 @@ import WhySSNSection from "./WhySSNSection";
 import ProjectsSection from "./ProjectsSection";
 
 const FontsStyle = () => (
-  <style dangerouslySetInnerHTML={{ __html: `
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 
     body {
@@ -76,7 +78,9 @@ const FontsStyle = () => (
     .content-transition {
       transition: all 0.3s ease-out;
     }
-  ` }} />
+  `,
+    }}
+  />
 );
 
 const StructuralEngineering = () => {
@@ -255,12 +259,12 @@ const StructuralEngineering = () => {
         <div className="mt-0 md:-mt-20">
           <ServicesSection servicesData={structuralServicesData} />
         </div>
-        <div className="-mt-16">
-          <ContactCTA
+        <div className="mt-0 md:-mt-16">
+          <ContactFormSection
+            layout="split"
+            compact
             title="Need Expert Structural Engineering Support?"
             description="We are ready to provide reliable, data-driven, and optimized structural engineering solutions. Our team of experts is committed to delivering precise designs, robust analysis, and practical support to ensure your project stands strong from concept to completion. Let us help you build safely, efficiently, and with confidence."
-            buttonText="Get in Touch"
-            link="/contact"
           />
         </div>
         <div className="mt-0 md:-mt-12">

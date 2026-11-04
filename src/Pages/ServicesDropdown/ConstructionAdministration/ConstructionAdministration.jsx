@@ -9,9 +9,12 @@ import StructuralStudiesSection from "./StructuralStudiesSection"; // Correct im
 import WhySSNSection from "./WhySSNSection";
 import ProjectsSection from "./ProjectsSection";
 // import MarketWeServe from "./MarketWeServe";
+import ContactFormSection from "../../../components/ContactFormSection";
 
 const FontsStyle = () => (
-  <style dangerouslySetInnerHTML={{ __html: `
+  <style
+    dangerouslySetInnerHTML={{
+      __html: `
     @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap");
 
     body {
@@ -77,7 +80,9 @@ const FontsStyle = () => (
     .content-transition {
       transition: all 0.3s ease-out;
     }
-  ` }} />
+  `,
+    }}
+  />
 );
 
 const ConstructionAdministration = () => {
@@ -207,12 +212,12 @@ const ConstructionAdministration = () => {
         <div className="mt-0 md:-mt-20">
           <ServicesSection servicesData={constructionAdminServicesData} />
         </div>
-        <div className="-mt-16">
-          <ContactCTA
+        <div className="mt-0 md:-mt-16">
+          <ContactFormSection
+            layout="split"
+            compact
             title="Need Expert Construction Administration Support?"
             description="We are ready to provide reliable, data-driven, and optimized construction administration solutions. Our team of experts is committed to delivering precise oversight, robust quality control, and practical support to ensure your project stands strong from concept to completion. Let us help you build safely, efficiently, and with confidence."
-            buttonText="Get in Touch"
-            link="/contact"
           />
         </div>
         <div className="mt-0 md:-mt-12">
