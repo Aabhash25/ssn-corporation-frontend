@@ -429,10 +429,13 @@ export const routes = [
       },
       {
         path: "stormwater-management-drainage-engineering",
-        ...page(() => import("./Pages/ServicesDropdown/WaterResources")),
+        ...page(
+          () =>
+            import("./Pages/ServicesDropdown/StormwaterManagement/StormwaterManagement"),
+        ),
         ...seo(
-          "Water Resources Engineering | SSN Corporation",
-          "Water resources engineering services from SSN Corporation.",
+          "Stormwater Management & Drainage Engineering | SSN Corporation",
+          "Stormwater management and drainage engineering services from SSN Corporation, including drainage design, detention and retention systems, and erosion and sediment control.",
         ),
       },
       {

@@ -7,8 +7,6 @@ const WhySSNSection = () => {
           <span className="block text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
             Why Choose SSN Corporation?
           </span>
-          {/* Optional divider */}
-          {/* <div className="w-16 h-1 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full mx-auto mt-4"></div> */}
         </div>
 
         {/* Content Grid */}
@@ -20,11 +18,12 @@ const WhySSNSection = () => {
                 <div className="flex-shrink-0 w-1 h-16 bg-gradient-to-b from-gray-300 to-gray-400 rounded-full"></div>
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors duration-300">
-                    Proven Expertise
+                    Proven Drainage Expertise
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    Our experienced professionals bring deep technical knowledge
-                    and real-world construction insight to every project.
+                    Our engineers bring deep hydrology and hydraulics knowledge,
+                    paired with real-world construction insight, to every
+                    drainage and stormwater project.
                   </p>
                 </div>
               </div>
@@ -39,7 +38,8 @@ const WhySSNSection = () => {
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                     We prioritize clear communication, responsiveness, and
-                    solutions tailored to our clients' goals.
+                    stormwater solutions tailored to your site and project
+                    goals.
                   </p>
                 </div>
               </div>
@@ -53,11 +53,12 @@ const WhySSNSection = () => {
                 <div className="flex-shrink-0 w-1 h-16 bg-gradient-to-b from-gray-300 to-gray-400 rounded-full"></div>
                 <div className="flex-1">
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-700 transition-colors duration-300">
-                    Commitment to Quality
+                    Regulatory Know-How
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    From planning through closeout, we maintain rigorous quality
-                    standards to protect the integrity of your investment.
+                    We prepare the analysis, plans, and reports reviewers
+                    expect, helping projects move smoothly through local and
+                    state stormwater approvals.
                   </p>
                 </div>
               </div>
@@ -71,8 +72,8 @@ const WhySSNSection = () => {
                     End-to-End Support
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
-                    With comprehensive services under one roof, we streamline
-                    project delivery and add value at every stage.
+                    From site planning and design through permitting and
+                    construction support, we handle drainage under one roof.
                   </p>
                 </div>
               </div>

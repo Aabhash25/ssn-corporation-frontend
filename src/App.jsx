@@ -92,6 +92,10 @@ const SpecialtyEngineeringServices = lazy(
 const WaterResourcesEngineering = lazy(
   () => import("./Pages/ServicesDropdown/WaterResources"),
 );
+const StormwaterManagement = lazy(
+  () =>
+    import("./Pages/ServicesDropdown/StormwaterManagement/StormwaterManagement"),
+);
 
 function App() {
   return (
@@ -178,7 +182,7 @@ function App() {
           />
           <Route
             path="/stormwater-management-drainage-engineering"
-            element={<WaterResourcesEngineering />}
+            element={<StormwaterManagement />}
           />
           <Route
             path="/general-construction"

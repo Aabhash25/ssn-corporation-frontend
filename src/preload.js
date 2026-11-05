@@ -20,8 +20,8 @@ const loaders = {
     import("./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting/ConstructionMaterialSurveyAndTesting"),
   "/geotechnical-engineering": () =>
     import("./Pages/ServicesDropdown/GeotechnicalEngineering/GeoTechnicalEngineering"),
-  "/stormwater-management-drainage-engineering": () =>
-    import("./Pages/ServicesDropdown/WaterResources"),
+"/stormwater-management-drainage-engineering": () =>
+  import("./Pages/ServicesDropdown/StormwaterManagement/StormwaterManagement"),
   "/tenant-fit-outs": () =>
     import("./Pages/ServicesDropdown/TenantFitOuts/TenantFitOuts"),
   "/specialty-services": () =>

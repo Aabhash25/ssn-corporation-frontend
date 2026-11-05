@@ -22,7 +22,7 @@ const StructuralStudiesSection = ({ structuralStudiesData }) => {
       <div className="mx-auto w-full sm:w-[90%] lg:w-[80%]">
         <div className="text-center mb-12">
           <span className="block mb-2 text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 font-playfair">
-            Our Construction Administration Solutions
+            Our Stormwater & Drainage Solutions
           </span>
         </div>
 
