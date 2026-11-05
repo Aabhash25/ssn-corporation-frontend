@@ -12,7 +12,7 @@ const HeroSection = () => {
       {/* Text at bottom */}
       <div className="absolute bottom-6 sm:bottom-10 left-20 sm:left-28 lg:left-36 z-10">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-playfair font-bold text-yellow-400 drop-shadow-lg leading-tight">
-          Material Testing Services
+          Construction Material Testing Services
         </h1>
       </div>
     </section>

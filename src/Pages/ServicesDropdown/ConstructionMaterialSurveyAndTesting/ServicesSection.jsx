@@ -156,7 +156,9 @@ const MaterialTesting = () => {
 
       <WhyChooseSSN />
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         .font-roboto {
           font-family: "Roboto", sans-serif;
           font-feature-settings:
@@ -169,7 +171,9 @@ const MaterialTesting = () => {
             "kern" 1,
             "liga" 1;
         }
-      ` }} />
+      `,
+        }}
+      />
     </div>
   );
 };

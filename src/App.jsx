@@ -177,7 +177,7 @@ function App() {
             element={<ConstructionEngineeringAndManagement />}
           />
           <Route
-            path="/water-resources-engineering"
+            path="/stormwater-management-drainage-engineering"
             element={<WaterResourcesEngineering />}
           />
           <Route

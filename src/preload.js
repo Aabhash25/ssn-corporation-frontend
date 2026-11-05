@@ -20,7 +20,7 @@ const loaders = {
     import("./Pages/ServicesDropdown/ConstructionMaterialSurveyAndTesting/ConstructionMaterialSurveyAndTesting"),
   "/geotechnical-engineering": () =>
     import("./Pages/ServicesDropdown/GeotechnicalEngineering/GeoTechnicalEngineering"),
-  "/water-resources-engineering": () =>
+  "/stormwater-management-drainage-engineering": () =>
     import("./Pages/ServicesDropdown/WaterResources"),
   "/tenant-fit-outs": () =>
     import("./Pages/ServicesDropdown/TenantFitOuts/TenantFitOuts"),

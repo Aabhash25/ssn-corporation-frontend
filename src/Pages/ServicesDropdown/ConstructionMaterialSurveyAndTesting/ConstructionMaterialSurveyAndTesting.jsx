@@ -44,8 +44,22 @@ const MaterialTesting = () => {
 
   const services = [
     {
-      title: "Soil and Aggregate Physical & Strength Testing",
-      id: "soil-aggregate-testing",
+      title: "On-Site Construction Materials Testing (CMT)",
+      id: "on-site-construction-materials-testing",
+      content: `Our field technicians test and sample materials directly on your project site, giving you real-time verification that work meets plans and specifications.
+
+- Fresh Concrete Sampling, Slump, Air Content, and Temperature
+- Concrete Cylinder and Beam Casting and Field Curing
+- In-Place Density Testing (Nuclear Gauge, Sand Cone)
+- Asphalt Sampling and Field Density Testing
+- Masonry Grout and Mortar Sampling
+- Soil and Aggregate Field Sampling
+- Daily Field Reports and Test Documentation`,
+      image: "/concreteTesting.webp",
+    },
+    {
+      title: "Soil & Aggregate Laboratory Testing",
+      id: "soil-aggregate-laboratory-testing",
       content: `We evaluate soil and aggregate materials to determine engineering properties essential for foundations, pavements, and earthwork design.
 
 - Grain Size Analysis (Sieve & Hydrometer)
@@ -60,78 +74,61 @@ const MaterialTesting = () => {
       image: "/Soil.webp",
     },
     {
-      title: "Fresh and Hardened Concrete Testing",
-      id: "concrete-testing",
-      content: `Our concrete testing services ensure compliance with mix design specifications, structural performance requirements, and durability standards.
+      title: "Concrete, Masonry & Asphalt Laboratory Testing",
+      id: "concrete-masonry-asphalt-laboratory-testing",
+      content: `Our laboratory verifies concrete, masonry, and asphalt materials against mix design, structural, and durability requirements.
 
-- Slump Test
-- Air Content Test
-- Temperature Measurement
-- Unit Weight and Yield
-- Concrete Sampling and Cylinder Casting
-- Compressive Strength
-- Flexural Strength
-- Splitting Tensile Strength
-- Modulus of Elasticity
-- Density and Absorption
-- Rapid Chloride Permeability (RCPT)`,
-      image: "/concreteTesting.webp",
-    },
-    {
-      title: "Rock Testing",
-      id: "rock-testing",
-      content: `Our rock testing services assess rock strength, durability, and deformation to support engineering decisions for foundations, slopes, excavations, pavements, and underground structures using reliable laboratory data.
-
-- Uniaxial Compressive Strength (UCS) Testing
-- Triaxial Compressive Strength Testing
-- Point Load Strength Index Testing
-- Brazilian Tensile Strength Testing
-- Slake Durability Testing
-- Porosity and Absorption Testing
-- Direct Shear Strength Testing of Rock Joints
-- Modulus of Elasticity and Deformation Testing`,
-      image: "/Rock.webp",
-    },
-    {
-      title: "Bitumen and Asphalt Mix Testing",
-      id: "bitumen-asphalt-testing",
-      content: `We provide comprehensive asphalt and bituminous material testing for pavement design, production control, and performance evaluation.
-
+- Concrete Compressive, Flexural, and Splitting Tensile Strength
+- Concrete Density, Absorption, and Modulus of Elasticity
+- Rapid Chloride Permeability (RCPT)
+- Masonry Unit, Prism, Mortar, and Grout Compressive Strength
 - Asphalt Binder Penetration, Softening Point, and Viscosity
 - Marshall Stability and Flow
-- Superpave Mix Design Testing
-- Asphalt Content by Ignition Method
-- Gradation Analysis of Hot Mix Asphalt
-- Bulk Specific Gravity and Density
-- Indirect Tensile Strength
-- Moisture Susceptibility Testing`,
+- Asphalt Content by Ignition Method and Gradation
+- Bulk Specific Gravity, Density, and Moisture Susceptibility`,
       image: "/asphaltTesting.webp",
     },
     {
-      title: "Water Drainage & Permeability Testing",
-      id: "water-drainage-testing",
-      content: `Our hydraulic and permeability testing services evaluate infiltration, drainage capacity, and water movement through soils and materials.
+      title: "Earthwork Inspection & Compaction Testing",
+      id: "earthwork-inspection-compaction-testing",
+      content: `We inspect and test earthwork operations to confirm that subgrades, fills, and backfills are placed and compacted to project requirements.
 
-- Constant Head and Falling Head Permeability
-- Infiltration Rate Testing
-- Soil Hydraulic Conductivity
-- Porosity and Void Ratio Evaluation
-- Filter Media Testing
-- Permeable Pavement Testing`,
-      image: "/permeabilityTesting.webp",
+- Subgrade and Fill Observation
+- Field Density Testing (Nuclear Gauge, Sand Cone)
+- Proctor Correlation and Percent Compaction Reporting
+- Moisture Content Verification
+- Proofrolling Observation
+- Utility Trench Backfill Testing
+- Lift Thickness and Material Suitability Checks`,
+      image: "/Soil.webp",
     },
     {
-      title: "Environmental Sampling & Testing",
-      id: "environmental-testing",
-      content: `We support environmental compliance and risk assessment through laboratory testing of soil, water, and construction materials.
+      title: "Special Inspections & Structural Testing",
+      id: "special-inspections-structural-testing",
+      content: `Our inspectors provide code-required special inspections and structural testing to verify that critical building elements are built as designed.
 
-- Soil Contamination Analysis
-- Groundwater and Surface Water Sampling
-- pH, Turbidity, and Conductivity Tests
-- Heavy Metals and Hydrocarbon Screening
-- Compaction Moisture and Volatile Content Testing
-- Construction Debris Characterization`,
-      image: "/environmentalTesting.webp",
+- Cast-in-Place Concrete and Reinforcing Steel Inspection
+- Post-Installed and Cast-in-Place Anchor Inspection
+- Structural Steel and Bolting Inspection
+- Masonry Inspection
+- Soils and Foundation Verification
+- Fireproofing and Related Inspections
+- IBC Chapter 17 Reporting and Documentation`,
+      image: "/concreteTesting.webp",
+    },
+    {
+      title: "Retaining Wall, Foundation & Pavement Inspections",
+      id: "retaining-wall-foundation-pavement-inspections",
+      content: `We inspect and test the structural and site elements that carry your project's loads, from walls and footings to the pavement surface.
+
+- Retaining Wall Subgrade, Drainage, and Backfill Inspection
+- Segmental and Cast-in-Place Wall Observation
+- Footing and Foundation Excavation Inspection
+- Reinforcement and Concrete Placement Verification
+- Pavement Subgrade and Base Course Testing
+- Asphalt Placement and Compaction Inspection
+- Concrete Pavement Sampling and Testing`,
+      image: "/asphaltTesting.webp",
     },
   ];
 
@@ -151,7 +148,7 @@ const MaterialTesting = () => {
             <div className="text-center mb-12 relative max-w-6xl mx-auto">
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-60"></div>
               <h2 className="block mb-4 text-3xl sm:text-4xl lg:text-5xl font-bold text-yellow-400 font-playfair tracking-tight">
-                Our Material Testing Engineering Services
+                Our Construction Material Testing Services{" "}
               </h2>
             </div>
           </div>
@@ -251,7 +248,9 @@ const MaterialTesting = () => {
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         .font-roboto {
           font-family: "Roboto", sans-serif;
           font-feature-settings:
@@ -264,7 +263,9 @@ const MaterialTesting = () => {
             "kern" 1,
             "liga" 1;
         }
-      ` }} />
+      `,
+        }}
+      />
     </>
   );
 };

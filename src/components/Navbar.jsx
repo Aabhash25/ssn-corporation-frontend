@@ -39,9 +39,16 @@ const ENGINEERING_SERVICES = [
     name: "Building and Building Services System Design",
     to: "/building-service-design",
   },
-  { name: "Land Planning, Development, and Permitting", to: "/land-planning" },
+  {
+    name: "Site Civil Engineering, Land Planning, Subdivision, and Permitting",
+    to: "/land-planning",
+  },
   { name: "Structural Engineering", to: "/structural-engineering" },
-  { name: "Water Resources Engineering", to: "/water-resources-engineering" },
+  {
+    name: "Stormwater Management & Drainage Engineering",
+    // to: "/water-resources-engineering",
+    to: "/stormwater-management-drainage-engineering",
+  },
   { name: "Geotechnical Engineering", to: "/geotechnical-engineering" },
   {
     name: "Engineering Solutions for Tenant Fit-Outs",
@@ -72,19 +79,34 @@ const SPECIALTY_SERVICES = [
   { name: "Hydrology and Drainage Studies", slug: "hydrology-drainage" },
 ];
 
+const MATERIAL_TESTING_HIGHLIGHT =
+  "In-House AASHTO Certified Laboratory Testing Facility";
+
 const MATERIAL_TESTING_SERVICES = [
   {
-    name: "Soil and Aggregate Physical & Strength Testing",
-    slug: "soil-aggregate-testing",
+    name: "On-Site Construction Materials Testing (CMT)",
+    slug: "on-site-construction-materials-testing",
   },
-  { name: "Fresh and Hardened Concrete Testing", slug: "concrete-testing" },
-  { name: "Rock Testing", slug: "rock-testing" },
-  { name: "Bitumen and Asphalt Mix Testing", slug: "bitumen-asphalt-testing" },
   {
-    name: "Water Drainage & Permeability Testing",
-    slug: "water-drainage-testing",
+    name: "Soil & Aggregate Laboratory Testing",
+    slug: "soil-aggregate-laboratory-testing",
   },
-  { name: "Environmental Sampling & Testing", slug: "environmental-testing" },
+  {
+    name: "Concrete, Masonry & Asphalt Laboratory Testing",
+    slug: "concrete-masonry-asphalt-laboratory-testing",
+  },
+  {
+    name: "Earthwork Inspection & Compaction Testing",
+    slug: "earthwork-inspection-compaction-testing",
+  },
+  {
+    name: "Special Inspections & Structural Testing",
+    slug: "special-inspections-structural-testing",
+  },
+  {
+    name: "Retaining Wall, Foundation & Pavement Inspections",
+    slug: "retaining-wall-foundation-pavement-inspections",
+  },
 ];
 
 const CONSTRUCTION_SERVICES = [
@@ -350,7 +372,7 @@ const ModernNavbar = () => {
           style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}
         >
           <SectionHeader isXlScreen={isXlScreen}>
-            Material Testing Services
+            Construction Material Testing Services
           </SectionHeader>
           <ServiceList
             items={MATERIAL_TESTING_SERVICES}
@@ -361,16 +383,8 @@ const ModernNavbar = () => {
               </ServiceLink>
             )}
           />
-        </div>
-        {/* Construction Services */}
-        <div style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
-          <SectionHeader isXlScreen={isXlScreen}>
-            Construction Services
-          </SectionHeader>
-
-          {/* Flashy General Contractor callout */}
           <div
-            className="mb-3 px-3 py-2 rounded-lg bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-gray-900 font-bold font-oswald tracking-wide shadow-md animate-pulse-slow"
+            className="mt-3 px-3 py-2 rounded-lg bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-gray-900 font-bold font-oswald tracking-wide shadow-md"
             style={{
               fontSize: isXlScreen ? "0.95rem" : "0.65rem",
               lineHeight: "1.3",
@@ -378,11 +392,14 @@ const ModernNavbar = () => {
               boxShadow: "0 4px 15px -3px rgba(234, 179, 8, 0.5)",
             }}
           >
-            <span className="inline-block">★ GENERAL CONTRACTOR ★</span>
-            <br />
-            Unlimited License • Full-service • Design-Build Experts
+            {MATERIAL_TESTING_HIGHLIGHT}
           </div>
-
+        </div>
+        {/* Construction Services */}
+        <div style={{ padding: isXlScreen ? "0.5rem" : "0.375rem" }}>
+          <SectionHeader isXlScreen={isXlScreen}>
+            Construction Services
+          </SectionHeader>
           <ServiceList
             items={CONSTRUCTION_SERVICES}
             isXlScreen={isXlScreen}
@@ -392,6 +409,18 @@ const ModernNavbar = () => {
               </ServiceLink>
             )}
           />
+          {/* Flashy General Contractor callout */}
+          <div
+            className="mt-3 px-3 py-2 rounded-lg bg-gradient-to-r from-yellow-500 via-amber-500 to-yellow-600 text-gray-900 font-bold font-oswald tracking-wide shadow-md animate-pulse-slow"
+            style={{
+              fontSize: isXlScreen ? "0.95rem" : "0.65rem",
+              lineHeight: "1.3",
+              border: "1px solid rgba(255,255,255,0.3)",
+              boxShadow: "0 4px 15px -3px rgba(234, 179, 8, 0.5)",
+            }}
+          >
+            NC Unlimited Commercial General Contractor
+          </div>
         </div>
       </div>
     </div>
@@ -809,7 +838,7 @@ const ModernNavbar = () => {
                   {/* Material Testing Services */}
                   <div className="flex flex-col space-y-2">
                     <h4 className="text-yellow-500 font-bold text-lg font-oswald">
-                      Material Testing Services
+                      Construction Material Testing Services
                     </h4>
                     <ul className="flex flex-col pl-4 space-y-1 text-white font-oswald text-base">
                       {MATERIAL_TESTING_SERVICES.map((service, idx) => (

@@ -428,7 +428,7 @@ export const routes = [
         ),
       },
       {
-        path: "water-resources-engineering",
+        path: "stormwater-management-drainage-engineering",
         ...page(() => import("./Pages/ServicesDropdown/WaterResources")),
         ...seo(
           "Water Resources Engineering | SSN Corporation",

@@ -25,7 +25,7 @@ const staticRoutes = [
   '/material-testing',
   '/geotechnical-engineering',
   '/construction-engineering',
-  '/water-resources-engineering',
+  '/stormwater-management-drainage-engineering',
   '/general-construction',
   '/pre-construction',
   '/construction-management',
