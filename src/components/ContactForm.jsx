@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const initialValues = {
   name: "",
   email: "",
+  phone: "",
   address: "",
   state: "",
   country: "",
@@ -52,6 +53,7 @@ const ContactForm = ({
     const payload = {
       name: values.name,
       email: values.email,
+      phone: values.phone,
       subject: values.subject,
       message: values.message,
       address: values.address,
@@ -139,6 +141,19 @@ const ContactForm = ({
             onChange={handleChange}
             className={inputClass}
             required
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Your Phone Number"
+            value={values.phone}
+            onChange={handleChange}
+            className={inputClass}
+            required
+            minLength={7}
+            maxLength={20}
+            pattern="\+?[\d\s\-().]{7,20}"
+            title="Enter a valid phone number, e.g. +1 (555) 123-4567"
           />
 
           <input
