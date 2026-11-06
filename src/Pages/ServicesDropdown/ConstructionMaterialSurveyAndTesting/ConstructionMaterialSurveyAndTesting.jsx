@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
 import WhyChooseSSN from "./WhyChooseSSN";
+import ContactFormSection from "../../../components/ContactFormSection";
 
 const MaterialTesting = () => {
   const location = useLocation();
@@ -55,7 +56,7 @@ const MaterialTesting = () => {
 - Masonry Grout and Mortar Sampling
 - Soil and Aggregate Field Sampling
 - Daily Field Reports and Test Documentation`,
-      image: "/concreteTesting.webp",
+      image: "/On-Site Construction Materials Testing (CMT).webp",
     },
     {
       title: "Soil & Aggregate Laboratory Testing",
@@ -86,7 +87,7 @@ const MaterialTesting = () => {
 - Marshall Stability and Flow
 - Asphalt Content by Ignition Method and Gradation
 - Bulk Specific Gravity, Density, and Moisture Susceptibility`,
-      image: "/asphaltTesting.webp",
+      image: "/Concrete, Masonry & Asphalt Laboratory Testing.webp",
     },
     {
       title: "Earthwork Inspection & Compaction Testing",
@@ -114,7 +115,7 @@ const MaterialTesting = () => {
 - Soils and Foundation Verification
 - Fireproofing and Related Inspections
 - IBC Chapter 17 Reporting and Documentation`,
-      image: "/concreteTesting.webp",
+      image: "/Special Inspections & Structural Testing.webp",
     },
     {
       title: "Retaining Wall, Foundation & Pavement Inspections",
@@ -128,7 +129,7 @@ const MaterialTesting = () => {
 - Pavement Subgrade and Base Course Testing
 - Asphalt Placement and Compaction Inspection
 - Concrete Pavement Sampling and Testing`,
-      image: "/asphaltTesting.webp",
+      image: "/Retaining Wall, Foundation & Pavement Inspections.webp",
     },
   ];
 
@@ -220,6 +221,13 @@ const MaterialTesting = () => {
             })}
           </div>
         </div>
+
+        <ContactFormSection
+          layout="split"
+          compact
+          title="Need Reliable Construction Materials Testing?"
+          description="We are ready to provide accurate, timely, and code-compliant materials testing and inspection for your project. Our team delivers dependable field and laboratory results so you can build with confidence from start to finish."
+        />
 
         <WhyChooseSSN />
 
