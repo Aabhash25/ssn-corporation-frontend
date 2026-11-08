@@ -27,15 +27,21 @@ const Footer = () => {
           </h2>
 
           <div className="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-[15px]">
-            <div className="flex items-center gap-3">
-              <FaPhoneAlt className="text-orange-400" />
-              <span>(919) 703-0222</span>
-            </div>
+            <a
+  href="tel:+19197030222"
+  className="flex items-center gap-3 hover:text-white transition-colors"
+>
+  <FaPhoneAlt className="text-orange-400" />
+  <span>(919) 703-0222</span>
+</a>
 
-            <div className="flex items-center gap-3">
-              <FaEnvelope className="text-orange-400" />
-              <span>contact@ssncorporation.com</span>
-            </div>
+            <a
+  href="mailto:contact@ssncorporation.com"
+  className="flex items-center gap-3 hover:text-white transition-colors"
+>
+  <FaEnvelope className="text-orange-400" />
+  <span>contact@ssncorporation.com</span>
+</a>
 
             <div className="flex items-start gap-3">
               <FaMapMarkerAlt className="text-orange-400 mt-1" />
