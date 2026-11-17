@@ -12,8 +12,8 @@ const ProjectsSection = () => {
       try {
         const projectIds = [1, 22, 15, 5, 10, 27]; // Your project IDs
         const projectPromises = projectIds.map((id) =>
-          fetch(`https://api.ssnbuilders.com/api/projects/${id}/`).then((res) =>
-            res.json(),
+          fetch(`https://api.ssncorporation.com/api/projects/${id}/`).then(
+            (res) => res.json(),
           ),
         );
 

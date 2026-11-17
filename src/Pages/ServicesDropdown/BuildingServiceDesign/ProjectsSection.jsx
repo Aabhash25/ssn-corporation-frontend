@@ -11,8 +11,8 @@ const ProjectsSection = () => {
     const fetchProjects = async () => {
       try {
         const projectPromises = [1, 15, 6].map((id) =>
-          fetch(`https://api.ssnbuilders.com/api/projects/${id}/`).then((res) =>
-            res.json(),
+          fetch(`https://api.ssncorporation.com/api/projects/${id}/`).then(
+            (res) => res.json(),
           ),
         );
 
