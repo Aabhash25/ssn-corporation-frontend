@@ -50,10 +50,13 @@ const ProposalPage = () => {
         {
           method: "POST",
           body: fd,
-        }
+        },
       );
 
       if (res.ok) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "proposal_submitted" });
+
         setModalMessage("Proposal submitted successfully!");
         setModalOpen(true);
 
@@ -372,14 +375,18 @@ const ProposalPage = () => {
         </div>
       )}
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         .font-playfair {
           font-family: "Playfair Display", serif;
         }
         .font-roboto {
           font-family: "Roboto", sans-serif;
         }
-      ` }} />
+      `,
+        }}
+      />
     </div>
   );
 };

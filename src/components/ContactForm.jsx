@@ -319,6 +319,10 @@ const ContactForm = ({
       });
 
       if (res.ok) {
+        // Google Ads / GTM conversion event (success only)
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: "contact_submitted" });
+
         setShowSuccessModal(true);
         setValues(initialValues);
         setTimeout(() => setShowSuccessModal(false), 3500);
