@@ -3,8 +3,11 @@ import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import HeroSection from "./HeroSection";
 import AboutSection from "./AboutSection";
+import ContactFormSection from "../../../components/ContactFormSection";
+
 const SpecialtyEngineeringServices = () => {
   const location = useLocation();
+
   // Scroll to section when hash changes or component mounts
   useEffect(() => {
     if (location.hash) {
@@ -38,11 +41,11 @@ const SpecialtyEngineeringServices = () => {
             behavior: "smooth",
           });
         }
-      }, 150); // Increased delay
+      }, 150);
     } else {
       window.scrollTo(0, 0);
     }
-  }, [location.hash]); // Changed to only watch hash, not entire location
+  }, [location.hash]);
 
   const services = [
     {
@@ -131,16 +134,8 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
   return (
     <>
       <div className="w-full bg-gradient-to-b from-gray-50 to-gray-100/50">
-        {/* Hero Section - Add your HeroSection component here */}
         <HeroSection />
         <AboutSection />
-        {/* <div className="h-64 bg-gray-800 flex items-center justify-center">
-          <h1 className="text-4xl text-white font-bold">
-            Specialty Engineering Services
-          </h1>
-        </div> */}
-
-        {/* About Section - Add your AboutSection component here */}
 
         <div className="w-full py-12 px-4 sm:px-8 lg:px-16 xl:px-24">
           <div className="text-center mb-12 relative max-w-6xl mx-auto">
@@ -218,6 +213,13 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
           </div>
         </div>
 
+        <ContactFormSection
+          layout="split"
+          compact
+          title="Need Specialty Engineering Support for Your Project?"
+          description="From pavement and traffic engineering to trenchless design, MEP, special inspections, and monitoring, our team delivers practical, code-compliant solutions. Tell us about your project and we'll get back to you with next steps."
+        />
+
         <div className="w-full bg-white pt-10 pb-20 px-4 md:px-8">
           <div className="max-w-[1800px] mx-auto">
             <div className="text-center mb-12">
@@ -229,8 +231,9 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
 
             <div className="font-roboto text-gray-700 text-xl leading-relaxed space-y-6 max-w-4xl mx-auto text-center">
               <p>
-                These studies support compliance with local regulations,
-                minimize flood risk, and ensure sustainable site performance.
+                Our specialty services support compliance with local
+                regulations, reduce project risk, and ensure long-term site
+                performance.
               </p>
               <p>
                 These specialty services are backed by SSN's commitment to
@@ -242,7 +245,9 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
         .font-roboto {
           font-family: "Roboto", sans-serif;
           font-feature-settings:
@@ -255,7 +260,9 @@ Includes detailed drawings, specifications, equipment sizing, and coordination w
             "kern" 1,
             "liga" 1;
         }
-      ` }} />
+      `,
+        }}
+      />
     </>
   );
 };

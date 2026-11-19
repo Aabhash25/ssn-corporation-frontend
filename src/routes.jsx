@@ -439,6 +439,14 @@ export const routes = [
         ),
       },
       {
+        path: "water-resources-engineering",
+        ...page(() => import("./Pages/ServicesDropdown/WaterResources")),
+        ...seo(
+          "Water Resources Engineering | SSN Corporation",
+          "Water resources engineering services from SSN Corporation, including hydrology and hydraulic analysis, watershed studies, floodplain modeling, and water supply and conveyance design.",
+        ),
+      },
+      {
         path: "general-construction",
         ...page(() => import("./Pages/ServicesDropdown/GeneralConstruction")),
         ...seo(

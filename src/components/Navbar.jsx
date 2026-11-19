@@ -36,10 +36,6 @@ const SOCIAL_LINKS = [
 
 const ENGINEERING_SERVICES = [
   {
-    name: "Building and Building Services System Design",
-    to: "/building-service-design",
-  },
-  {
     name: " Land Planning, Subdivision, and Permitting",
     to: "/land-planning",
   },
@@ -55,6 +51,11 @@ const ENGINEERING_SERVICES = [
     to: "/tenant-fit-outs",
   },
   { name: "Construction Administration", to: "/construction-administration" },
+  { name: "Water Resources Engineering", to: "/water-resources-engineering" },
+  {
+    name: "Building and Building Services System Design",
+    to: "/building-service-design",
+  },
 ];
 
 const SPECIALTY_SERVICES = [
