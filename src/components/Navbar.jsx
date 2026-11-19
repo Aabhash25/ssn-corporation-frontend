@@ -40,7 +40,7 @@ const ENGINEERING_SERVICES = [
     to: "/building-service-design",
   },
   {
-    name: "Site Civil Engineering, Land Planning, Subdivision, and Permitting",
+    name: " Land Planning, Subdivision, and Permitting",
     to: "/land-planning",
   },
   { name: "Structural Engineering", to: "/structural-engineering" },
@@ -557,14 +557,14 @@ const ModernNavbar = () => {
             <span className="lg:hidden">Email</span>
           </a>
           <a
-  href="tel:+19197030222"
-  className="flex items-center gap-1.5 lg:gap-2 hover:text-yellow-400 transition-colors"
->
-  <FaPhoneAlt className="text-xs lg:text-sm xl:text-base" />
-  <span className="text-xs lg:text-sm xl:text-base">
-    (919) 703-0222
-  </span>
-</a>
+            href="tel:+19197030222"
+            className="flex items-center gap-1.5 lg:gap-2 hover:text-yellow-400 transition-colors"
+          >
+            <FaPhoneAlt className="text-xs lg:text-sm xl:text-base" />
+            <span className="text-xs lg:text-sm xl:text-base">
+              (919) 703-0222
+            </span>
+          </a>
         </div>
 
         {/* Top Links — scrollable on mid-size screens, all visible on xl */}
@@ -753,11 +753,11 @@ const ModernNavbar = () => {
               <FaEnvelope /> contact@ssncorporation.com
             </a>
             <a
-  href="tel:+19197030222"
-  className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors"
->
-  <FaPhoneAlt /> (919) 703-0222
-</a>
+              href="tel:+19197030222"
+              className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors"
+            >
+              <FaPhoneAlt /> (919) 703-0222
+            </a>
           </div>
 
           {/* Main Navigation */}
