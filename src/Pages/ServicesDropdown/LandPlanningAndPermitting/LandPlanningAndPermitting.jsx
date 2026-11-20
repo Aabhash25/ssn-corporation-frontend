@@ -151,7 +151,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 4,
       title: "Civil & Infrastructure Planning",
-      image: "/ai-placeholder/structural-evaluation.webp",
+      image: "/PreConstructionService.webp",
       description:
         "Comprehensive civil engineering and infrastructure planning for site development and utility systems.",
       details: [
@@ -166,7 +166,7 @@ const LandPlanningAndPermitting = () => {
     {
       id: 6,
       title: "Construction Drawings and Specification",
-      image: "/ai-placeholder/retaining-wall.webp",
+      image: "/SlaughterHouse2.webp",
       description:
         "Detailed construction-ready documents and specifications compliant with all regulatory requirements.",
       details: [
