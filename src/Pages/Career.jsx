@@ -1,6 +1,6 @@
 import { useLoaderData, Link } from "react-router-dom";
 import { Head } from "vite-react-ssg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaSearch, FaBriefcase } from "react-icons/fa";
 import {
@@ -12,12 +12,56 @@ import {
 
 const BASE_URL = "https://ssncorporation.com";
 
-function Career() {
-  const { jobs: loaderJobs } = useLoaderData();
+// Fetch every page of /jobs/ (follows DRF's "next" links).
+// Also works if pagination is turned off and the API returns a plain list.
+async function fetchAllJobs() {
+  let url = `${import.meta.env.VITE_API_URL}jobs/`;
+  const all = [];
+  while (url) {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (Array.isArray(data)) {
+      all.push(...data);
+      url = null;
+    } else {
+      all.push(...(data.results || []));
+      url = data.next || null;
+    }
+  }
+  return all;
+}
 
-  const jobs = loaderJobs || [];
-  const [filteredJobs, setFilteredJobs] = useState(jobs);
+// Newest first, so new postings always appear at the top
+const sortJobs = (list) =>
+  [...list].sort((a, b) => {
+    const da = a.posted_date || "";
+    const db = b.posted_date || "";
+    if (da !== db) return db.localeCompare(da);
+    return b.id - a.id;
+  });
+
+function Career() {
+  const { jobs: loaderJobs } = useLoaderData() || {};
+
+  // Start with the build-time (SSG) jobs, then replace with live data
+  const [jobs, setJobs] = useState(() => sortJobs(loaderJobs || []));
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchAllJobs()
+      .then((live) => {
+        if (!cancelled) setJobs(sortJobs(live));
+      })
+      .catch((err) => {
+        // Keep showing the build-time jobs if the API is unreachable
+        console.error("Failed to load live jobs:", err);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const formatDate = (dateStr) => {
     if (!dateStr) return "N/A";
@@ -31,12 +75,14 @@ function Career() {
   };
 
   const handleSearch = (e) => {
-    const term = e.target.value.toLowerCase();
-    setSearchTerm(term);
-    setFilteredJobs(
-      jobs.filter((job) => job.title.toLowerCase().includes(term)),
-    );
+    setSearchTerm(e.target.value);
   };
+
+  // Derived from jobs + searchTerm, so it updates when live jobs arrive
+  const term = searchTerm.trim().toLowerCase();
+  const filteredJobs = term
+    ? jobs.filter((job) => (job.title || "").toLowerCase().includes(term))
+    : jobs;
 
   const currentOpenings = filteredJobs.filter(
     (job) => job.role_filled === false,
@@ -216,6 +262,8 @@ function Career() {
               <motion.div
                 key={job.id}
                 variants={cardVariants}
+                initial="hidden"
+                animate="visible"
                 className="bg-white border border-gray-200 rounded-2xl p-6 flex flex-col hover:border-yellow-400 hover:shadow-lg transition-all duration-200 group"
               >
                 <div className="w-10 h-10 rounded-xl bg-yellow-50 flex items-center justify-center text-yellow-500 mb-4 group-hover:bg-yellow-100 transition">
@@ -288,6 +336,8 @@ function Career() {
               <motion.div
                 key={job.id}
                 variants={cardVariants}
+                initial="hidden"
+                animate="visible"
                 className="bg-white border border-gray-200 rounded-xl px-5 py-4 flex items-center justify-between gap-4 opacity-75 hover:opacity-100 transition"
               >
                 <div>

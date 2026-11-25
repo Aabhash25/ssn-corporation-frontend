@@ -1,5 +1,5 @@
-import React from "react";
-import { useLoaderData, Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLoaderData, useParams, Link } from "react-router-dom";
 import { Head } from "vite-react-ssg";
 import { buildNewsSeo } from "../utils/newsSeo";
 
@@ -74,9 +74,81 @@ const linkKeywords = (text) => {
 const NewsDetail = () => {
   // Article and related articles come from the SSG loader.
   const loaderData = useLoaderData();
+  const params = useParams();
+  // Article id from the URL (/news/:id). Falls back to the first route param.
+  const id = String(params.id ?? Object.values(params)[0] ?? "").split("-")[0];
 
-  const news = loaderData?.news || null;
-  const moreNews = loaderData?.moreNews || [];
+  const [news, setNews] = useState(loaderData?.news || null);
+  const [moreNews, setMoreNews] = useState(loaderData?.moreNews || []);
+  // Only show a spinner when there is no build-time article (e.g. a new post)
+  const [loading, setLoading] = useState(!loaderData?.news);
+
+  // Fetch the live article and related news in the browser, so new or edited
+  // articles work without rebuilding the site.
+  useEffect(() => {
+    if (!id) {
+      setLoading(false);
+      return;
+    }
+
+    let cancelled = false;
+    const apiUrl = import.meta.env.VITE_API_URL || "";
+    const hasBuildData = Boolean(loaderData?.news);
+
+    setNews(loaderData?.news || null);
+    setMoreNews(loaderData?.moreNews || []);
+    setLoading(!hasBuildData);
+
+    const load = async () => {
+      try {
+        const [articleRes, listRes] = await Promise.all([
+          fetch(`${apiUrl}news/${id}/`, { cache: "no-store" }),
+          fetch(`${apiUrl}news/?page=1&page_size=4`, { cache: "no-store" }),
+        ]);
+        if (cancelled) return;
+
+        if (articleRes.ok) {
+          const article = await articleRes.json();
+          if (!cancelled) setNews(article);
+        } else if (articleRes.status === 404 && !cancelled) {
+          setNews(null); // article really doesn't exist
+        }
+
+        if (listRes.ok) {
+          const json = await listRes.json();
+          const list = Array.isArray(json) ? json : json.results || [];
+          if (!cancelled) {
+            setMoreNews(
+              list.filter((item) => String(item.id) !== id).slice(0, 3),
+            );
+          }
+        }
+      } catch (err) {
+        // Network error: keep whatever build-time data we have
+        console.error("Error fetching news article:", err);
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    };
+
+    load();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
+  // Loading a new article that wasn't part of the build
+  if (loading && !news) {
+    return (
+      <>
+        <FontsStyle />
+        <div className="min-h-[80vh] flex justify-center items-center">
+          <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        </div>
+      </>
+    );
+  }
 
   // News not found
   if (!news) {

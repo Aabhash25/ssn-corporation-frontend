@@ -336,19 +336,21 @@ const MasonryPortfolio = () => {
 
   // Fetch projects — filters are sent to the API, not done in JS
   useEffect(() => {
+    let cancelled = false;
+
     const fetchProjects = async () => {
       const apiUrl = import.meta.env.VITE_API_URL || "";
 
       // Cache key includes all active filters
       const cacheKey = `${currentPage}-${selectedCategory}-${selectedStatus}-${selectedYear}-${searchKeyword}`;
 
-      // First render with build-time data: skip the duplicate fetch
-      if (firstRun.current) {
-        firstRun.current = false;
-        if (initial && cacheKey === DEFAULT_KEY) return;
-      }
+      // First render with build-time data: show it right away,
+      // but still refresh from the API quietly (no spinner)
+      const isFirst = firstRun.current;
+      firstRun.current = false;
+      const silent = isFirst && initial && cacheKey === DEFAULT_KEY;
 
-      if (globalCache.projects.has(cacheKey)) {
+      if (!silent && globalCache.projects.has(cacheKey)) {
         const cachedData = globalCache.projects.get(cacheKey);
         setProjects(cachedData.formattedProjects);
         setTotalCount(cachedData.totalCount);
@@ -357,7 +359,7 @@ const MasonryPortfolio = () => {
         return;
       }
 
-      setLoading(true);
+      if (!silent) setLoading(true);
 
       try {
         // Build params — only add filter if not "All" / empty
@@ -368,10 +370,13 @@ const MasonryPortfolio = () => {
         if (selectedYear !== "All") params.append("year", selectedYear);
         if (searchKeyword.trim()) params.append("search", searchKeyword.trim());
 
-        const response = await fetch(`${apiUrl}projects/?${params}`);
+        const response = await fetch(`${apiUrl}projects/?${params}`, {
+          cache: "no-store",
+        });
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+        if (cancelled) return; // filters changed while this was loading
 
         const formattedProjects = formatProjects(data.results);
 
@@ -392,13 +397,17 @@ const MasonryPortfolio = () => {
         setTotalPages(totalPagesCalc);
       } catch (err) {
         console.error("❌ Error fetching projects:", err);
-        setProjects([]);
+        // On a silent refresh, keep the build-time projects on screen
+        if (!silent && !cancelled) setProjects([]);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     fetchProjects();
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     currentPage,

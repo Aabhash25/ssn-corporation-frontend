@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { Head } from "vite-react-ssg";
 // Google Fonts
@@ -24,23 +24,31 @@ const News = () => {
   // Initial news data is provided by the SSG loader.
   const initialData = useLoaderData();
 
-  const [newsData, setNewsData] = useState(initialData.newsData || []);
+  const [newsData, setNewsData] = useState(initialData?.newsData || []);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(initialData.totalPages || 1);
-  const [totalCount, setTotalCount] = useState(initialData.totalCount || 0);
+  const [totalPages, setTotalPages] = useState(initialData?.totalPages || 1);
+  const [totalCount, setTotalCount] = useState(initialData?.totalCount || 0);
 
-  // Fetch additional pages only when the visitor changes the page.
-  // Page 1 is already available from the SSG loader.
+  const firstRun = useRef(true);
+
+  // Page 1 is shown straight away from the SSG loader, then refreshed quietly
+  // from the API so new articles appear without rebuilding the site.
+  // Other pages are fetched when the visitor changes the page.
   useEffect(() => {
-    if (currentPage === 1) return;
+    let cancelled = false;
+
+    // Quiet refresh only on the very first load of page 1 with build-time data
+    const silent = firstRun.current && currentPage === 1 && newsData.length > 0;
+    firstRun.current = false;
 
     const fetchNews = async () => {
-      setLoading(true);
+      if (!silent) setLoading(true);
 
       try {
         const res = await fetch(
           `${import.meta.env.VITE_API_URL}news/?page=${currentPage}&page_size=12`,
+          { cache: "no-store" },
         );
 
         if (!res.ok) {
@@ -48,6 +56,7 @@ const News = () => {
         }
 
         const json = await res.json();
+        if (cancelled) return; // page changed while this was loading
 
         if (json.results) {
           setNewsData(json.results);
@@ -62,13 +71,18 @@ const News = () => {
         }
       } catch (err) {
         console.error("Error fetching news:", err);
-        setNewsData([]);
+        // On a quiet refresh, keep the build-time articles on screen
+        if (!silent && !cancelled) setNewsData([]);
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     };
 
     fetchNews();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const handlePageChange = (page) => {
