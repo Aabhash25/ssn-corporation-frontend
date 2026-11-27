@@ -2,6 +2,18 @@ const SITE = "SSN Corporation";
 const BASE_URL = "https://ssncorporation.com";
 const SUFFIX = ` | ${SITE}`;
 
+const DEFAULT_LOCATION = "Raleigh, NC"; // used when a job has no location
+
+// Django job_type value -> Google's allowed employmentType values
+const EMPLOYMENT_TYPES = {
+  full_time: "FULL_TIME",
+  part_time: "PART_TIME",
+  contract: "CONTRACTOR",
+  consultant: "CONTRACTOR",
+  on_call: "OTHER",
+  project_based: "OTHER",
+};
+
 const decode = (s = "") => {
   const once = (t) =>
     t.replace(/&nbsp;/g, " ").replace(/&rsquo;|&#39;/g, "’")
@@ -73,16 +85,44 @@ export function buildJobSeo(job) {
   // Long titles: keep the full title, drop the brand and "Job Opening" extras
   if (pageTitle.length > 60) pageTitle = isClosed ? `${title} (Filled)` : title;
   const summary = plain(job.role_description) || plain(job.company_description);
+
+  // Only fully remote jobs count as remote (not hybrid or flexible)
+  const isRemote = job.work_mode === "remote";
+  const typedLocation = decode(job.location || "").trim();
+  // Old jobs (blank) and a typed "Remote" are not a city, so use the default
+  const location =
+    typedLocation && typedLocation.toLowerCase() !== "remote"
+      ? typedLocation
+      : DEFAULT_LOCATION;
+  const employmentType = EMPLOYMENT_TYPES[job.job_type];
   const description = truncate(
     isClosed
       ? `${title} at ${SITE}. This position has been filled. View current openings.`
-      : `${title} at ${SITE}, Raleigh, NC. ${summary}`,
+      : `${title} at ${SITE}, ${isRemote ? "Remote" : location}. ${summary}`,
     155,
   );
 
-  // Edit this if your jobs are not based in Raleigh, or add a `location` field in Django
-  const location = decode(job.location || "Raleigh, NC");
-  const [city, state] = location.split(",").map((s) => s.trim());
+  // Expects "City, ST"; a ZIP code after the state is dropped
+  const [city, region] = location.split(",").map((s) => s.trim());
+  const state = region?.replace(/\s*\d{5}(-\d{4})?$/, "");
+
+  const placement = isRemote
+    ? {
+        jobLocationType: "TELECOMMUTE",
+        // Change this if remote applicants can be outside the US
+        applicantLocationRequirements: { "@type": "Country", name: "USA" },
+      }
+    : {
+        jobLocation: {
+          "@type": "Place",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: city,
+            ...(state && { addressRegion: state }),
+            addressCountry: "US",
+          },
+        },
+      };
 
   const graph = [
     {
@@ -108,15 +148,10 @@ export function buildJobSeo(job) {
         sameAs: BASE_URL,
         logo: `${BASE_URL}/logo.webp`,
       },
-      jobLocation: {
-        "@type": "Place",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: city,
-          ...(state && { addressRegion: state }),
-          addressCountry: "US",
-        },
-      },
+      ...(employmentType && { employmentType }),
+      // Applications are accepted through the end of the deadline date
+      ...(job.deadline && { validThrough: `${job.deadline}T23:59:59` }),
+      ...placement,
       directApply: true,
       url,
     });

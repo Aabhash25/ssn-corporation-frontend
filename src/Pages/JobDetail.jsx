@@ -3,6 +3,7 @@ import { useLoaderData, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Head } from "vite-react-ssg";
 import { buildJobSeo } from "../utils/jobSeo";
+import { getJobTags } from "../utils/jobTags";
 
 // ─── Render helpers ───────────────────────────────────────────────────────────
 
@@ -457,16 +458,14 @@ function JobDetail() {
                 <span className="text-xs bg-yellow-50 text-yellow-600 px-3 py-1 rounded-full font-medium">
                   SSN Corporation
                 </span>
-                {job.posted_date && (
-                  <span className="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full">
-                    Posted{" "}
-                    {new Date(job.posted_date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
+                {getJobTags(job).map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full"
+                  >
+                    {tag}
                   </span>
-                )}
+                ))}
                 <span
                   className={`text-xs px-3 py-1 rounded-full font-medium ${
                     isClosed
@@ -538,19 +537,14 @@ function JobDetail() {
                       <span className="text-xs bg-yellow-50 text-yellow-600 px-3 py-1 rounded-full font-medium">
                         SSN Corporation
                       </span>
-                      {job.posted_date && (
-                        <span className="text-xs bg-gray-100 text-gray-500 px-3 py-1 rounded-full">
-                          Posted{" "}
-                          {new Date(job.posted_date).toLocaleDateString(
-                            "en-US",
-                            {
-                              month: "short",
-                              day: "numeric",
-                              year: "numeric",
-                            },
-                          )}
+                      {getJobTags(job).map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full"
+                        >
+                          {tag}
                         </span>
-                      )}
+                      ))}
                       <span
                         className={`text-xs px-3 py-1 rounded-full font-medium ${
                           isClosed

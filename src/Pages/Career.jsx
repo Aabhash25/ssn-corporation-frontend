@@ -9,6 +9,7 @@ import {
   HandRaisedIcon,
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
+import { getJobTags } from "../utils/jobTags";
 
 const BASE_URL = "https://ssncorporation.com";
 
@@ -62,17 +63,6 @@ function Career() {
       cancelled = true;
     };
   }, []);
-
-  const formatDate = (dateStr) => {
-    if (!dateStr) return "N/A";
-    const date = new Date(dateStr);
-    if (isNaN(date)) return "N/A";
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -270,7 +260,7 @@ function Career() {
                   <FaBriefcase className="text-base" />
                 </div>
 
-                <h3 className="font-playfair font-bold text-gray-900 text-lg leading-snug mb-1">
+                <h3 className="font-playfair font-bold text-gray-900 text-lg leading-snug mb-3">
                   <Link
                     to={`/jobs/${job.id}`}
                     className="hover:text-yellow-600 transition-colors"
@@ -279,9 +269,17 @@ function Career() {
                   </Link>
                 </h3>
 
-                <p className="text-xs text-gray-400 mb-2">
-                  Posted {formatDate(job.posted_date)}
-                </p>
+                {/* Hidden automatically when a job has none of these */}
+                <div className="flex flex-wrap gap-1.5 mb-3 empty:hidden">
+                  {getJobTags(job).map((tag) => (
+                    <span
+                      key={tag}
+                      className="text-xs bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
 
                 <div className="flex items-center gap-1.5 mb-3">
                   <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
@@ -290,15 +288,17 @@ function Career() {
                   </span>
                 </div>
 
-                <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 flex-1 mb-5">
-                  {job.role_description
-                    ?.replace(/^##\s*/gm, "")
-                    .replace(/^[-•]\s*/gm, "") || ""}
-                </p>
+                {job.role_description && (
+                  <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-5">
+                    {job.role_description
+                      .replace(/^##\s*/gm, "")
+                      .replace(/^[-•]\s*/gm, "")}
+                  </p>
+                )}
 
                 <Link
                   to={`/jobs/${job.id}`}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 bg-gray-900 hover:bg-yellow-500 text-white text-sm font-semibold rounded-xl transition-colors duration-200"
+                  className="mt-auto w-full flex items-center justify-center gap-2 py-2.5 bg-gray-900 hover:bg-yellow-500 text-white text-sm font-semibold rounded-xl transition-colors duration-200"
                 >
                   View &amp; Apply →
                 </Link>
